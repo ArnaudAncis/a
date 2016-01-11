@@ -1,0 +1,30 @@
+* Reasoning behind C/C++
+  Single pass
+  Declaration vs Definition
+* Static allocation/stack/heap
+
+C
+* Pointers
+  Output arguments
+* malloc/free
+* Arrays
+* Strings in C
+
+
+C++
+* new/delete
+* References
+* Namespaces
+* class/struct
+  Destructors
+  RAII
+  Inheritance (public/private)
+  Copy constructor
+  Virtual
+* Const
+* Smart pointers
+* IO using standard streams
+* Operator overloading
+* Default argument values
+* Templates
+* STL
