@@ -22,7 +22,7 @@
 % \setbeamertemplate{background canvas}[vertical shading][top=blue!10,bottom=blue!30]
 
 \institute[UCLL]{UC Leuven Limburg}
-\logo{\includegraphics[height=0.5cm]{../ucll-logo.png}}
+% \logo{\includegraphics[height=0.5cm]{../ucll-logo.png}}
 
 
 % Code formatting
