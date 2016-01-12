@@ -2,13 +2,17 @@
   Single pass
   Declaration vs Definition
 * Static allocation/stack/heap
+* Compiling = producing code that behaves the same
 
 C
+* Preprocessor
 * Pointers
   Output arguments
 * malloc/free
 * Arrays
 * Strings in C
+* assertions
+* debug/release build
 
 
 C++
@@ -21,10 +25,11 @@ C++
   Inheritance (public/private)
   Copy constructor
   Virtual
-* Const
+* Const (const int* const stuff)
 * Smart pointers
 * IO using standard streams
 * Operator overloading
 * Default argument values
 * Templates
 * STL
+* nullptr
