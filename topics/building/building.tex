@@ -5,7 +5,7 @@
 
 \usetikzlibrary{shadows}
 
-\title{C/\cpp: Building}
+\title{Declarations and Definitions}
 \author{Fr\'ed\'eric Vogels}
 
 
@@ -145,7 +145,28 @@
     \code[font size=\small]{class-example2.cpp}
     \onslide<3>
     \code[font size=\small]{class-example3.cpp}
+    \onslide<4>
+    \code[font size=\small]{class-example4.cpp}
   \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exceptions}
+  \begin{itemize}
+    \item Member functions can refer to other member functions
+          from the same class that have not been declared yet
+  \end{itemize}
+  \code[width=8cm]{class-no-decl.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exceptions}
+  \begin{itemize}
+    \item Some weird rules
+    \item Code below fails because compiler expects 0 parameters
+    \item Solution: use {\tt ::foo(5);}
+  \end{itemize}
+  \code[width=8cm]{class-weird.cpp}
 \end{frame}
 
 % \begin{frame}
