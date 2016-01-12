@@ -1,5 +1,7 @@
 \documentclass{../ucll-slides}
 \usepackage{../pvm}
+\usepackage{emerald}
+\usepackage[T1]{fontenc}
 
 \title{\cpp: Odi et Amo}
 \author{Fr\'ed\'eric Vogels}
@@ -8,10 +10,9 @@
 
 \begin{document}
 
-
 {
   \setbeamercolor{background canvas}{bg=black}
-
+  \ECFJD
   \begin{frame}[plain]
     \begin{center}
       \begin{tikzpicture}[white]
@@ -50,7 +51,7 @@
       \begin{tikzpicture}[white]
         \node[font=\large] at (0,5) {Bjarne Stroustrup};
         \node at (0,4.5) {presents};
-        \node[scale=10,red] at (0,2) {\cpp};
+        \node[scale=10,red] at (0,2) {C++};
       \end{tikzpicture}
     \end{center}
   \end{frame}
@@ -116,11 +117,6 @@
   \end{itemize}
 \end{frame}
 
-\section{Compilers}
-
-\begin{frame}
-  \tableofcontents[currentsection]
-\end{frame}
 
 \begin{frame}
   \frametitle{Language Versions and Compilers}
@@ -193,13 +189,6 @@
   \end{itemize}
 \end{frame}
 
-
-\section{Obsession With Speed}
-
-\begin{frame}
-  \tableofcontents[currentsection]
-\end{frame}
-
 \begin{frame}
   \frametitle{Efficiency \"Uber Alles!}
   \begin{itemize}
@@ -243,7 +232,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Reasoning}
+  \frametitle{Rationale}
   \begin{itemize}
     \item A 16 bit CPU cannot deal efficiently with 32 bit integers
     \item Java: {\tt int} means ``give me a 32 bit signed integer''
@@ -285,7 +274,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Reasoning}
+  \frametitle{Rationale}
   \begin{itemize}
     \item Many different representations for negative numbers
     \item If \cpp\ standard makes promises regarding internal representation,
@@ -317,6 +306,7 @@
 \begin{frame}
   \frametitle{Quiz}
   \begin{center}
+    {\Large What happens?}\vskip1cm
     \code[width=5cm]{array-out-of-bounds.cpp}
   \end{center}
 \end{frame}
@@ -326,20 +316,20 @@
   \begin{quote}
     If both the pointer operand and the result point to elements of the same array object, or one past
     the last element of the array object, the evaluation shall not produce an overflow; otherwise, the behavior is
-    undefined.
+    undefined.\\
     \hfill \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\cpp11 \S 5.7/6}
   \end{quote}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Reasoning}
+  \frametitle{Rationale}
   \begin{itemize}
     \item Java checks every array indexing and throws an {\tt ArrayIndexOutOfBounds}
           when you reach out of the array's bounds.
     \item This checking requires extra CPU instructions.
     \item \cpp\ does not check at all. You can use negative indices, or indices that
           go beyond the end of the array, but the resulting behaviour is undefined.
-    \item Arrays are not safe, but neither are other collections
+    \item Arrays are not safe, but neither are other containers
   \end{itemize}
 \end{frame}
 
@@ -352,14 +342,135 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Quiz}
+  \begin{center}
+    {\Large What happens?}\vskip2cm
+    \code[width=8cm]{missing-return.cpp}  
+  \end{center}
+\end{frame}
 
-% Array out of bounds
-% Type system
+\begin{frame}
+  \frametitle{Answer}
+  \begin{quote}
+    Flowing off the end of a function is equivalent to a return with no value; this results in undefined
+    behavior in a value-returning function. \\
+    \hfill \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\cpp11 \S6.6.3/2}
+  \end{quote}
+  \begin{itemize}
+    \item Compiler is allowed (but not required!) to complain about missing {\tt return}.
+    \item If it compiles, running it results in undefined behavior.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Rationale}
+  \begin{itemize}
+    \item \cpp\ allows for such complicated constructs
+          that it becomes effectively \emph{impossible}
+          to determine whether every execution path ends in {\tt return}.
+    \item Since it is impossible to determine for \emph{every} program,
+          there is no requirement to detect it for \emph{any} program.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{In Practice}
+  \begin{itemize}
+    \item You \emph{will} encounter this kind of bugs
+    \item Using MSVC, debug mode seems to check more
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quiz}
+  \begin{center}
+    {\Large What happens?}
+    \code[width=8cm]{type-system.cpp}  
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Answer}
+  \begin{quote}
+    A prvalue of type {\tt bool} can be converted to a prvalue of type {\tt int}, with {\tt false} becoming zero and {\tt true}
+    becoming one. \\
+    \hfill \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\cpp11 \S4.5/6}
+  \end{quote}
+  \begin{itemize}
+    \item Passing along {\tt false} where {\tt int[]} is expected is allowed and well defined!
+    \item Function will receive null pointer.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Rationale}
+  \begin{itemize}
+    \item The type system's main purpose is to allow optimisations
+    \item Consider the expression {\tt x + y} 
+          \begin{itemize}
+            \item If you know the types of both {\tt x} and {\tt y}, you know
+                  which assembly instructions to use
+            \item If you don't know the types, you need runtime {\tt if}s that check
+                  the types at runtime ({\tt int}, {\tt double}, {\tt string}, \dots)
+                  and use the appropriate instructions to perform the addition
+          \end{itemize}
+    \item Type system is rather flexible
+    \item Defending against Murphy/Defending against Machiavelli
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quiz}
+  \begin{center}
+    {\Large What happens?}
+    \code[width=8cm]{uninitialized.cpp}  
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Answer}
+  \begin{itemize}
+    \item If you do not initialise variables explicitly, they might contain random values
+    \item Some variables are guaranteed to be initialised to zero if you do not specify an initial value yourself
+    \item Better be safe than sorry: do not forget to initialise all your variables
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Rationale}
+  \begin{itemize}
+    \item Initialisation takes time
+    \item Only those variables that can be initialised for free, are automatically initialised
+    \item All other variables have undefined initial values
+          \begin{itemize}
+            \item Local variables
+            \item Object's member variables
+            \item Arrays
+            \item Allocated memory using {\tt new}
+            \item \dots
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{In Practice}
+  \begin{itemize}
+    \item You \emph{will} encounter this kind of bugs
+    \item MSVC's debug mode uses ``magic numbers''
+          \begin{itemize}
+            \item {\tt CCCCCCCC}: uninitialised stack memory
+            \item {\tt CDCDCDCD}: uninitialised heap memory
+            \item {\tt FDFDFDFD}: around heap allocated memory
+            \item {\tt FEEEFEE}: freed memory
+          \end{itemize}
+    \item If your variables contain one of these values,
+          you know you probably are in trouble
+  \end{itemize}
+\end{frame}
+
+
 % Memory safety (can write anywhere)
-% Speed above everything
 % Manual memory allocation
-% Platforms
-% Machiavelli/Murphy
-% Initialization of locals
 
 \end{document}
