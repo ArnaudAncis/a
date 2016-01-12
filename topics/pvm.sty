@@ -1,0 +1,20 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pvm}[11/1/2016]
+
+\RequirePackage{tikz}
+\RequirePackage{url}
+
+\usetikzlibrary{calc,math}
+
+\ProcessOptions\relax
+
+\newcommand{\cpp}{C{\tt ++}}
+
+\setbeamertemplate{title page}{%
+  \begin{center}
+    PVM \\[5mm]
+    {\sc\Huge \inserttitle}
+  \end{center}
+}
+
+\endinput
