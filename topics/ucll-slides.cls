@@ -32,10 +32,9 @@
   font size/.code=\lstset{basicstyle={\ttfamily #1}},
   width/.initial=.8\linewidth,
   language/.code=\lstset{language=#1},
-  show lines/.code=\lstset{showlines}
+  show lines/.code=\lstset{showlines},
+  title/.code=\lstset{title=#1},
 }
-
-
 
 
 \lstset{language=c++}
@@ -45,8 +44,8 @@
   {
     \pgfkeys{/ucll/code/.cd,#1}
     \begin{center}
-      \pgfkeys{/ucll/code/width/.get=\width}
-      \begin{minipage}{\width}
+      \pgfkeys{/ucll/code/width/.get=\code@width}
+      \begin{minipage}{\code@width}
         \lstinputlisting{#2}
       \end{minipage}
     \end{center}
