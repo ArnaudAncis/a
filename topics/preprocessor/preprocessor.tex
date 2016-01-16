@@ -447,6 +447,21 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Standard Library}
+  \begin{itemize}
+    \item Standard \cpp\ library accessible through header files
+    \item Including using {\tt < >} instead of {\tt " "}
+    \item {\tt < >} looks for header files in different place (\link{http://www.open-std.org/JTC1/SC22/WG14/www/docs/n1256.pdf}{C 6.10.2/2-3})
+    \item C libraries: header files end in {\tt .h}
+    \item \cpp\ libraries: header files without extension
+    \item Strings: {\tt \#include <string>}
+    \item Vector: {\tt \#include <vector>}
+    \item IO streams: {\tt \#include <iostream>}
+    \item \dots
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   \frametitle{New Problem: Multiply Included Header Files}
   \begin{center}
     \begin{tikzpicture}[file/.style={rectangle split,rectangle split parts=2,draw},
@@ -538,6 +553,9 @@
     \item {\tt \#undef {\it IDENTIFIER}}
     \item {\tt \#ifdef {\it IDENTIFIER} ... \#endif}
     \item {\tt \#ifndef {\it IDENTIFIER} ... \#endif}
+    \item {\tt \#ifdef {\it IDENTIFIER} ... \#else ... \#endif}
+    \item {\tt \#ifndef {\it IDENTIFIER} ... \#else ... \#endif}
+    \item {\tt \#if} with simple expressions
   \end{itemize}
 \end{frame}
 
@@ -572,7 +590,22 @@
 \begin{frame}
   \frametitle{More Macros}
   \begin{itemize}
-    \item {\tt #} can be used to stringify tokens
+    \item Can be useful to introduce new syntax
+    \item {\tt for} can be seen as a macro for {\tt while}, etc.
+  \end{itemize}
+  \begin{overprint}
+    \onslide<1>
+    \code[font size=\small,frame=lines,title=Before preprocessing]{forrange.cpp}
+    \onslide<2>
+    \code[font size=\small,frame=lines,title=After preprocessing]{forrange-result.cpp}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{More Macros}
+  \begin{itemize}
+    \item {\tt \#} can be used to stringify tokens
+    \item More robust since less duplication necessary
   \end{itemize}
   \begin{overprint}
     \onslide<1>
@@ -582,17 +615,70 @@
   \end{overprint}
 \end{frame}
 
+\begin{frame}
+  \frametitle{More Macros}
+  \begin{itemize}
+    \item {\tt \#} can be used to stringify tokens
+    \item More robust since less duplication necessary
+  \end{itemize}
+  \begin{overprint}
+    \onslide<1>
+    \code[font size=\small,frame=lines,title=Before preprocessing]{nullcheck2.cpp}
+    \onslide<2>
+    \code[font size=\small,frame=lines,title=After preprocessing]{nullcheck2-result.cpp}
+  \end{overprint}
+\end{frame}
 
-% Multiple definitions
+\begin{frame}
+  \frametitle{More Macros: Predefined Macros}
+  \begin{itemize}
+    \item {\tt \_\_FILE\_\_}: containing file
+    \item {\tt \_\_LINE\_\_}: line number on which this macro appears
+    \item {\tt \_\_DATE\_\_}: date on which the preprocessor is being run
+    \item {\tt \_\_TIME\_\_}: time at which the preprocessor is being run
+  \end{itemize}
+  \begin{overprint}
+    \onslide<1>
+    \code[font size=\small,frame=lines,title=Before preprocessing]{nullcheck3.cpp}
+    \onslide<2>
+    \code[font size=\small,frame=lines,title=After preprocessing]{nullcheck3-result.cpp}
+  \end{overprint}
+\end{frame}
 
-% \begin{frame}
-%   \frametitle{Proposed Solution \#2}
-% \end{frame}
+\begin{frame}
+  \frametitle{More Macros: Dangers}
+  \begin{center}
+    What could possibly go wrong?
+  \end{center}
+  \vskip1cm
+  \begin{overprint}
+    \onslide<1>
+    \code[font size=\small,frame=lines,title=Before preprocessing]{min1.cpp}
+    \onslide<2>
+    \code[font size=\small,frame=lines,title=After preprocessing]{min2.cpp}
+  \end{overprint}
+\end{frame}
 
+\begin{frame}
+  \frametitle{Important Usage: Debug and Release Builds}
+  \code[font size=\small]{assert.cpp}
+  \begin{itemize}
+    \item {\tt assert} macro to check assumptions
+    \item Comes in very handy in  \cpp
+    \item While debugging: define {\tt DEBUGGING}
+    \item For performance: don't define {\tt DEBUGGING}
+    \item Easy way to turn on/off diagnostic code
+  \end{itemize}
+\end{frame}
 
-% header files!
-% include guards
-    % \item Preprocessor works line based
-    % \item Preprocessor directives must appear first on lines
+\begin{frame}
+  \frametitle{Debug and Release Builds}
+  \begin{itemize}
+    \item Debug and Release builds generally known by IDE
+    \item Release build: {\tt NDEBUG} is defined
+    \item {\tt assert} already defined for you
+  \end{itemize}
+  \code[width=5cm]{include-assert.cpp}
+\end{frame}
 
 \end{document}
