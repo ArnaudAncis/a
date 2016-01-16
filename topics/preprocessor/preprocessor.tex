@@ -385,6 +385,153 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Visualisation Solution \#2}
+  \begin{center}
+    \begin{tikzpicture}[file/.style={rectangle split,rectangle split parts=2,draw},
+                        cpp/.style={file,fill=red!50},
+                        h/.style={file,fill=blue!50},
+                        includes/.style={-latex}]
+      \node[cpp] (C cpp) at (0,0) {
+        {\tt C.cpp}
+        \nodepart{two}
+        def.\ class {\tt C}
+      };
+
+      \node[h,anchor=north] (C h) at ($ (C cpp.south) + (0,-.5) $) {
+        {\tt C.h}
+        \nodepart{two}
+        decl.\ class {\tt C}
+      };
+
+      \node[cpp] (foo cpp) at (4,0) {
+        {\tt foo.cpp}
+        \nodepart{two}
+        void foo(C c) { \dots }
+      };
+
+      \node[h,anchor=north] (foo h) at ($ (foo cpp.south) + (0,-.5) $) {
+        {\tt foo.h}
+        \nodepart{two}
+        void foo(C);
+      };
+
+      \node[cpp] (bar cpp) at (8,0) {
+        {\tt bar.cpp}
+        \nodepart{two}
+        uses foo
+      };
+
+      \draw[includes] (C cpp) -- (C h);
+      \draw[includes] (foo cpp) -- (foo h);
+      \draw[includes,thick,red,dashed] (foo cpp) -- (C h);
+      \draw[includes] (bar cpp) -- (foo h);
+      \draw[includes,thick,green!50!black] (foo h) -- (C h);
+    \end{tikzpicture}
+  \end{center}
+  \begin{itemize}
+    \item The green arrow replaces the red one
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Rules of Thumb}
+  \begin{itemize}
+    \item {\tt X.cpp} includes its own header file {\tt X.h} first
+    \item {\tt X.h} includes minimal but sufficient selection of header files
+      \begin{itemize}
+        \item Litmus test: a {\tt cpp} with only {\tt \#include "X.h"} must compile
+      \end{itemize}
+    \item Let {\tt X.cpp} include all extra header files it needs
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{New Problem: Multiply Included Header Files}
+  \begin{center}
+    \begin{tikzpicture}[file/.style={rectangle split,rectangle split parts=2,draw},
+                        cpp/.style={file,fill=red!50},
+                        h/.style={file,fill=blue!50},
+                        includes/.style={-latex}]
+      \node[cpp] (C cpp) at (0,0) {
+        {\tt C.cpp}
+        \nodepart{two}
+        \parbox{3cm}{\tt
+          \#include "C.h" \\
+          \#include "D.h"
+        }
+      };
+
+      \node[h,anchor=north] (C h) at ($ (C cpp.south) + (-2,-1) $) {
+        {\tt C.h}
+        \nodepart{two}
+        {\tt \#include "X.h"}
+      };
+
+      \node[h,anchor=north] (D h) at ($ (C cpp.south) + (2,-1) $) {
+        {\tt D.h}
+        \nodepart{two}
+        {\tt \#include "X.h"}
+      };
+
+      \node[h,anchor=north] (X h) at ($ (C cpp.south) + (0,-3) $) {
+        {\tt X.h}
+        \nodepart{two}
+        {\tt ...}
+      };
+
+      \draw[includes] (C cpp) -- (C h);
+      \draw[includes] (C cpp) -- (D h);
+      \draw[includes] (C h) -- (X h);
+      \draw[includes] (D h) -- (X h);
+    \end{tikzpicture}
+    \vskip5mm
+    {\tt X.h} included twice!
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{New Problem: Multiply Included Header Files}
+  \begin{itemize}
+    \item It's easy for situations to occur where the same header
+          files gets included multiple times (typically with headers from
+          the standard \cpp\ library)
+    \item Is this bad? It depends on what the header file contains
+    \item Multiple declarations in same compilation unit: ok
+    \item Other stuff: only allowed once
+    \item We need a way to prevent multiple includes
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solution: Preprocessor Macros}
+  \code[title=X.h,frame=lines,width=5cm]{include-guard.h}
+  \begin{itemize}
+    \item Initially {\tt X\_H\_INCLUDED} is not defined
+    \item First include: the {\tt \#if} condition is true
+    \item {\tt X\_H\_INCLUDED} gets defined
+    \item Second include: {\tt X\_H\_INCLUDED} is defined
+    \item Preprocessor leaves out contents of header file
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example}
+  \begin{columns}[t]
+    \column{5cm}
+    \begin{center} Before preprocessing \end{center}
+    \code[title=X.h,frame=lines,width=5cm]{include-guard-example.h}
+    \code[title=X.cpp,frame=lines,width=5cm]{include-guard-example2.h}
+    \column{5cm}
+    \begin{center} After preprocessing \\ (what the compiler sees) \end{center}
+    \vskip2cm
+    \code[frame=lines,width=5cm]{include-guard-example3.h}
+  \end{columns}
+\end{frame}
+
+
+% Multiple definitions
+
 % \begin{frame}
 %   \frametitle{Proposed Solution \#2}
 % \end{frame}
