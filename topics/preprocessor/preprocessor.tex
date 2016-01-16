@@ -529,6 +529,59 @@
   \end{columns}
 \end{frame}
 
+\begin{frame}
+  \frametitle{More Macros}
+  \begin{itemize}
+    \item Used like this, a macro is like a variable
+          that can either be defined or undefined
+    \item {\tt \#define {\it IDENTIFIER}}
+    \item {\tt \#undef {\it IDENTIFIER}}
+    \item {\tt \#ifdef {\it IDENTIFIER} ... \#endif}
+    \item {\tt \#ifndef {\it IDENTIFIER} ... \#endif}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{More Macros}
+  \begin{itemize}
+    \item You can also use macros to define constants
+  \end{itemize}
+  \begin{columns}[t]
+    \column{5cm}
+    \begin{center} Before preprocessing \end{center}
+    \code[font size=\small,frame=lines,width=5cm]{constant.cpp}
+    \column{5cm}
+    \begin{center} After preprocessing \\ (what the compiler sees) \end{center}
+    \code[font size=\small,frame=lines,width=5cm]{constant-result.cpp}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{More Macros}
+  \begin{itemize}
+    \item Macros can also behave function-like
+  \end{itemize}
+  \begin{overprint}
+    \onslide<1>
+    \code[font size=\small,frame=lines,title=Before preprocessing]{nullcheck.cpp}
+    \onslide<2>
+    \code[font size=\small,frame=lines,title=After preprocessing]{nullcheck-result.cpp}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{More Macros}
+  \begin{itemize}
+    \item {\tt #} can be used to stringify tokens
+  \end{itemize}
+  \begin{overprint}
+    \onslide<1>
+    \code[font size=\small,frame=lines,title=Before preprocessing]{nullcheck2.cpp}
+    \onslide<2>
+    \code[font size=\small,frame=lines,title=After preprocessing]{nullcheck2-result.cpp}
+  \end{overprint}
+\end{frame}
+
 
 % Multiple definitions
 
