@@ -458,6 +458,7 @@
     \item Vector: {\tt \#include <vector>}
     \item IO streams: {\tt \#include <iostream>}
     \item \dots
+    \item Best to include them last \cake
   \end{itemize}
 \end{frame}
 
@@ -545,9 +546,19 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Summary}
+  \begin{columns}
+    \column{6cm}
+    \code[title=X.cpp,frame=lines,font size=\small]{summary.cpp}
+    \column{6cm}
+    \code[title=X.h,frame=lines,font size=\small]{summary.h}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
   \frametitle{More Macros}
   \begin{itemize}
-    \item Used like this, a macro is like a variable
+    \item A macro is like a variable
           that can either be defined or undefined
     \item {\tt \#define {\it IDENTIFIER}}
     \item {\tt \#undef {\it IDENTIFIER}}
@@ -555,7 +566,6 @@
     \item {\tt \#ifndef {\it IDENTIFIER} ... \#endif}
     \item {\tt \#ifdef {\it IDENTIFIER} ... \#else ... \#endif}
     \item {\tt \#ifndef {\it IDENTIFIER} ... \#else ... \#endif}
-    \item {\tt \#if} with simple expressions
   \end{itemize}
 \end{frame}
 
@@ -657,6 +667,21 @@
     \onslide<2>
     \code[font size=\small,frame=lines,title=After preprocessing]{min2.cpp}
   \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{More Macros: Dangers}
+  \structure{Pros of {\tt min} as macro}
+  \begin{itemize}
+    \item Faster? No function call required!
+    \item<2> Not faster! Functions can be inlined by compiler!
+  \end{itemize}
+  \vskip4mm
+  \structure{Cons of {\tt min} as macro}
+  \begin{itemize}
+    \item Doesn't behave like regular functions
+    \item Surprising behaviour
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
