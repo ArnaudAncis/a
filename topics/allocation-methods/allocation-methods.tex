@@ -1,0 +1,136 @@
+\documentclass{../ucll-slides}
+\usepackage{../pvm}
+\usetikzlibrary{shadows,shapes.multipart}
+
+\title{Allocation Methods}
+\author{Fr\'ed\'eric Vogels}
+
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overview}
+  \begin{itemize}
+    \item Different ways to deal with RAM
+    \item Similar to data structures
+    \item Trade flexibility for speed
+    \item Normally abstracted away as much as possible
+    \item In \cpp: crucial to know about the details
+  \end{itemize}
+\end{frame}
+
+\section{Static Allocation}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Static Allocation}
+  \begin{itemize}
+    \item Simplest allocation mechanism
+    \item Fastest
+    \item Most restrictive
+    \item Used in oldest programming language \\ (Fortran, early 1950s)
+  \end{itemize}
+  \vskip1cm
+  \begin{center}
+    {\color{red}\Huge \textsc{warning}} \\
+    Examples that follow are what-ifs \\
+    They do not show how \cpp\ works
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{How Does It Work?}
+  \notrealcpp
+  \begin{itemize}
+    \item The compiler assigns a fixed address to each variable
+  \end{itemize}
+  \code{allocation.cpp}
+  \begin{tikzpicture}[overlay,remember picture,allocation/.style={-latex,thick}]
+    \coordinate (upperleft) at (6,4);
+
+    \begin{scope}[scale=.5]
+      \coordinate (double) at (upperleft);
+      \coordinate (int) at ($ (upperleft) + (0,-1) $);
+      \coordinate (char) at ($ (upperleft) + (4,-1) $);
+
+      \visible<2->{
+        \draw[fill=red!50] (double) rectangle ++(8,-1);
+      }
+
+      \visible<3->{
+        \draw[fill=green!50] (int) rectangle ++(4,-1);
+      }
+
+      \visible<4->{
+        \draw[fill=blue!50] (char) rectangle ++(1,-1);
+      }
+
+      \draw (upperleft) grid ++(8,-4);
+    \end{scope}
+
+    \visible<2>{
+      \draw[allocation] (global) -- (double);
+    }
+
+    \visible<3>{
+      \draw[allocation] (param) -- ($ (int) + (0,-0.25) $);
+    }
+
+    \visible<4>{
+      \draw[allocation] (local) -- ($ (char) + (0,-0.25) $);
+    }
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Consequences of Static Allocation}
+  \notrealcpp
+  \begin{itemize}
+    \item Compiler needs to have full knowledge at compile-time
+  \end{itemize}
+  \code{array-creation.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Consequences of Static Allocation}
+  \notrealcpp
+  \begin{itemize}
+    \item Local variables ``remember'' their values
+  \end{itemize}
+  \code{static-locals.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Consequences of Static Allocation}
+  \notrealcpp
+  \begin{itemize}
+    \item Recursion not possible
+  \end{itemize}
+  \code{static-recursion.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Consequences of Static Allocation}
+  \begin{itemize}
+    \item No out-of-memory errors possible
+    \item Entire memory footprint known beforehand
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Static Allocation Applied}
+  \begin{itemize}
+    \item Word documents would have a maximum size
+    \item 
+  \end{itemize}
+\end{frame}
+
+\end{document}
