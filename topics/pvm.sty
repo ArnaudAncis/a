@@ -20,4 +20,11 @@
 
 \newcommand{\cake}{\ensuremath{(\pi)}}
 
+\newcommand{\notrealcpp}{
+  \begin{tikzpicture}[overlay,remember picture]
+    \draw[fill=red,opacity=.5] (current page.north east) -- ++(0,-3) -- ++(-3,3) -- cycle;
+    \node[rotate=-45,anchor=south,color=red] at ($ (current page.north east) + (-1.5,-1.5) $) {Not actual \cpp};
+  \end{tikzpicture}
+}
+
 \endinput
