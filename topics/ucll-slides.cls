@@ -37,7 +37,7 @@
 }
 
 
-\lstset{language=c++}
+\lstset{language=c++,escapeinside=\`\`}
 
 % \code[pgfkeys]{filename}
 \newcommand{\code}[2][]{
@@ -66,7 +66,7 @@
 % Tikz related commands
 % \NODE{text}{id}
 \newcommand{\NODE}[3][]{\tikz[baseline,remember picture]{\node[anchor=base,inner sep=0mm,#1] (#3) {{#2}};}}
-\newcommand{\COORD}[1]{\tikz[overlay,baseline,remember picture]{\coordinate (#1);}}
+
 
 
 \newcommand{\toc}{
