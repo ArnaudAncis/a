@@ -1,12 +1,21 @@
 \documentclass{../ucll-slides}
 \usepackage{../pvm}
 \usepackage{fourier}
+\usepackage{bbding}
 
 \usetikzlibrary{shadows,shapes.multipart}
 
 \title{Allocation Methods}
 \author{Fr\'ed\'eric Vogels}
 
+\newenvironment{procontralist}{
+  \begingroup
+  \newcommand{\pro}{\item[\Checkmark]}
+  \newcommand{\con}{\item[\XSolidBrush]}
+  \begin{itemize}
+  }{
+  \end{itemize}
+  \endgroup}
 
 
 \begin{document}
@@ -124,22 +133,47 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Consequences of Static Allocation}
-  \begin{itemize}
-    \item No out-of-memory errors possible
-    \item Entire memory footprint known beforehand
-    \item Full recompilation needed to allow larger data structures
-    \item Cannot make use of extra RAM
-      \begin{itemize}
-        \item If it's been compiled to work with 1MB but you have 8GB, too bad
-      \end{itemize}
-  \end{itemize}
+  \frametitle{Static Allocation}
+  \begin{procontralist}
+    \pro Very fast
+    \pro No bookkeeping needed at runtime
+    \pro No out-of-memory errors possible
+    \pro Entire memory footprint known beforehand
+    \con Data structure size must be known at compile time
+    \con Full recompilation needed to allow larger data structures
+    \con Cannot make use of extra RAM:
+         If it's been compiled to work with 1MB but you have 8GB, too bad
+    \con No recursion possible
+  \end{procontralist}
 \end{frame}
 
 \section{Stack Allocation}
 
 \begin{frame}
   \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Stack Allocation}
+  \begin{itemize}
+    \item Allocate your variables using static allocation
+    \item Introduce a {\tt new} keyword that allows for runtime allocation
+    \item Take the remainder of RAM (what's left after static allocation)
+    \item Act as if it were a stack of available bytes
+    \item Allocation = take top $N$ bytes
+  \end{itemize}
+  \vskip5mm
+  \begin{center}
+    \begin{tikzpicture}
+      \draw (0,0) rectangle ++(1,2);
+      \draw (1,0) rectangle ++(7,2);
+
+      \node[rotate=90] at (0.5,1) {static};
+      \node[rotate=90] at (4.5,1) {stack};
+
+      \draw[|-|] (0,-.5) -- ++(8,0) node[midway,below] {RAM};
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -226,6 +260,172 @@
     \end{center}
   \end{overprint}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Stack Allocation}
+  \begin{itemize}
+    \item You can keep on allocating\dots
+    \item \dots but eventually you'll run out of memory
+    \item Why not deallocate unused memory?
+    \item Problem: can only deallocate what's on top of the stack
+  \end{itemize}
+  \code[font size=\small,width=6cm]{stack-deallocation.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Stack Allocation}
+  \begin{procontralist}
+    \pro Fast allocation
+    \pro Little runtime bookkeeping needed
+    \pro Can allocate any amount of memory you want at runtime
+    \pro Recursion made possible
+    \con Problematic deallocation
+  \end{procontralist}
+\end{frame}
+
+\section{Heap Allocation}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Heap Allocation}
+  \begin{itemize}
+    \item Step 1: use static allocation where possible
+    \item Step 2: pick part of RAM and declare it stack
+    \item Step 3: remainder of RAM is heap
+  \end{itemize}
+  \vskip5mm
+  \begin{center}
+    \begin{tikzpicture}
+      \draw (0,0) rectangle ++(1,2);
+      \draw (1,0) rectangle ++(2,2);
+      \draw (3,0) rectangle ++(5,2);
+
+      \node[rotate=90] at (0.5,1) {static};
+      \node[rotate=90] at (2,1) {stack};
+      \node[rotate=90] at (5.5,1) {heap};
+
+      \draw[|-|] (0,-.5) -- ++(8,0) node[midway,below] {RAM};
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Heap Allocation}
+  \notrealcpp
+  \begin{columns}
+    \column{5cm}
+    \code[font size=\small]{heap-allocation.cpp}
+    \column{4cm}
+    \begin{center}
+      \begin{tikzpicture}[allocation/.style={-latex,thick},remember picture,overlay,scale=.5]
+        \coordinate (start) at (-4,4);
+
+        \only<3->{
+          \draw[fill=red!50] (start) rectangle ++(4,-1);
+        }
+        \only<3>{
+          \draw[allocation] (var a) to [bend left=30] ($ (start) + (0,-.5) $);
+        }
+
+        \only<4->{
+          \draw[fill=green!50] ($ (start) + (4,0) $) rectangle ++(4,-1);
+        }
+        \only<4>{
+          \draw[allocation] (var b) to [bend left=30] ($ (start) + (4,-0.5) $);
+        }
+
+        \only<5->{
+          \draw[fill=blue!50] ($ (start) + (0,-1) $) rectangle ++(4,-1);
+        }
+        \only<5>{
+          \draw[allocation] (var c) to [bend left=30] ($ (start) + (0,-1.5) $);
+        }
+
+        \only<6->{
+          \draw[fill=yellow!50] ($ (start) + (4,-1) $) rectangle ++(4,-1);
+        }
+        \only<6>{
+          \draw[allocation] (var d) to [bend left=30] ($ (start) + (4,-1.5) $);
+        }
+
+        \only<7-11>{
+          \draw[fill=red!50] ($ (start) + (0,-2) $) rectangle ++(8,-1);
+        }
+        \only<7>{
+          \draw[allocation] (mem a) to [bend right=30] ($ (start) + (0,-2.5) $);
+        }
+
+        \only<8-10>{
+          \draw[fill=green!50] ($ (start) + (0,-3) $) rectangle ++(8,-3);
+        }
+        \only<8>{
+          \draw[allocation] (mem b) to [bend right=30] ($ (start) + (0,-3.5) $);
+        }
+
+        \only<9-12>{
+          \draw[fill=blue!50] ($ (start) + (0,-6) $) rectangle ++(8,-2);
+        }
+        \only<9>{
+          \draw[allocation] (mem b) to [bend right=30] ($ (start) + (0,-6.5) $);
+        }
+
+        \only<10-13>{
+          \draw[fill=yellow!50] ($ (start) + (0,-8) $) rectangle ++(8,-2);
+        }
+        \only<10>{
+          \draw[allocation] (mem d) to [bend right=30] ($ (start) + (0,-8.5) $);
+        }
+
+        \only<11>{
+          \draw[->,thick] (del b) ++(2,0) -- ++(-1,0);
+        }
+
+        \only<12>{
+          \draw[->,thick] (del a) ++(2,0) -- ++(-1,0);
+        }
+
+        \only<13>{
+          \draw[->,thick] (del c) ++(2,0) -- ++(-1,0);
+        }
+
+        \only<14>{
+          \draw[->,thick] (del d) ++(2,0) -- ++(-1,0);
+        }
+
+        \draw (start) grid ++(8,-10);
+      \end{tikzpicture}
+    \end{center}
+  \end{columns}
+  \vskip2cm
+  \begin{overprint}
+    \onslide<2-6>
+    \begin{center}
+      \textbf{Compilation stage} \\ Compiler assigns memory locations to each variable \\ (this is still static allocation)
+    \end{center}
+
+    \onslide<7->
+    \begin{center}
+      \textbf{At runtime}
+    \end{center}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Heap Allocation}
+  \begin{procontralist}
+    \pro Allows allocation of arbitrarily large blocks
+    \pro Deallocation possible in any order
+    \pro Most general allocation method
+    \con Requires some bookkeeping \\ (keeps track of linked list of free blocks)
+    \con Allocation/Deallocation relatively slow
+    \con Fragmentation
+  \end{procontralist}
+\end{frame}
+
+%    \item Generally used for function-local data
 
 
 \end{document}
