@@ -1,5 +1,7 @@
 \documentclass{../ucll-slides}
 \usepackage{../pvm}
+\usepackage{fourier}
+
 \usetikzlibrary{shadows,shapes.multipart}
 
 \title{Allocation Methods}
@@ -40,9 +42,13 @@
   \end{itemize}
   \vskip1cm
   \begin{center}
-    {\color{red}\Huge \textsc{warning}} \\
-    Examples that follow are what-ifs \\
-    They do not show how \cpp\ works
+    {\color{red}\Huge\danger}
+    \parbox{8cm}{\centering 
+      {\color{red}\Huge \textsc{warning}} \\
+      Examples that follow are what-ifs \\
+      They do not show how really \cpp\ works
+    }
+    {\color{red}\Huge\danger}
   \end{center}
 \end{frame}
 
@@ -122,15 +128,104 @@
   \begin{itemize}
     \item No out-of-memory errors possible
     \item Entire memory footprint known beforehand
+    \item Full recompilation needed to allow larger data structures
+    \item Cannot make use of extra RAM
+      \begin{itemize}
+        \item If it's been compiled to work with 1MB but you have 8GB, too bad
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
+\section{Stack Allocation}
+
 \begin{frame}
-  \frametitle{Static Allocation Applied}
-  \begin{itemize}
-    \item Word documents would have a maximum size
-    \item 
-  \end{itemize}
+  \tableofcontents[currentsection]
 \end{frame}
+
+\begin{frame}
+  \frametitle{Stack Allocation}
+  \notrealcpp
+  \begin{columns}
+    \column{5cm}
+    \code[font size=\small]{stack-allocation.cpp}
+    \column{4cm}
+    \begin{center}
+      \begin{tikzpicture}[allocation/.style={-latex,thick},remember picture,overlay,scale=.5]
+        \coordinate (start) at (-4,4);
+
+        \only<3->{
+          \draw[fill=red!50] (start) rectangle ++(4,-1);
+        }
+        \only<3>{
+          \draw[allocation] (var a) to [bend left=30] ($ (start) + (0,-0.5) $);
+        }
+
+        \only<4->{
+          \draw[fill=green!50] ($ (start) + (4,0) $) rectangle ++(4,-1);
+        }
+        \only<4>{
+          \draw[allocation] (var b) to [bend left=30] ($ (start) + (4,-0.5) $);
+        }
+
+        \only<5->{
+          \draw[fill=blue!50] ($ (start) + (0,-1) $) rectangle ++(4,-1);
+        }
+        \only<5>{
+          \draw[allocation] (var c) to [bend left=30] ($ (start) + (0,-1.5) $);
+        }
+
+        \only<6->{
+          \draw[fill=yellow!50] ($ (start) + (4,-1) $) rectangle ++(4,-1);
+        }
+        \only<6>{
+          \draw[allocation] (var d) to [bend left=30] ($ (start) + (4,-1.5) $);
+        }
+
+        \only<8->{
+          \draw[fill=red!50] ($ (start) + (0,-2) $) rectangle ++(8,-2);
+        }
+        \only<8>{
+          \draw[allocation] (mem a) to [bend right=30] ($ (start) + (0,-2.5) $);
+        }
+
+        \only<9->{
+          \draw[fill=green!50] ($ (start) + (0,-4) $) rectangle ++(8,-3);
+        }
+        \only<9>{
+          \draw[allocation] (mem b) to [bend right=30] ($ (start) + (0,-4.5) $);
+        }
+
+        \only<10->{
+          \draw[fill=blue!50] ($ (start) + (0,-7) $) rectangle ++(4,-1);
+        }
+        \only<10>{
+          \draw[allocation] (mem c) to [bend right=30] ($ (start) + (0,-7.5) $);
+        }
+
+        \only<11->{
+          \draw[fill=yellow!50] ($ (start) + (4,-7) $) rectangle ++(4,-1);
+          \draw[fill=yellow!50] ($ (start) + (0,-8) $) rectangle ++(8,-1);
+        }
+        \only<11>{
+          \draw[allocation] (mem d) to [bend right=30] ($ (start) + (4,-7.5) $);
+        }
+
+        \draw (start) grid ++(8,-9);
+      \end{tikzpicture}
+    \end{center}
+  \end{columns}
+  \vskip2cm
+  \begin{overprint}
+    \onslide<2-6>
+    \begin{center}
+      \textbf{Compilation stage} \\ Compiler assigns memory locations to each variable \\ (this is still static allocation)
+    \end{center}
+    \onslide<7->
+    \begin{center}
+      \textbf{At runtime} \\ Extra memory is allocated on stack at runtime
+    \end{center}
+  \end{overprint}
+\end{frame}
+
 
 \end{document}
