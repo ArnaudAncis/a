@@ -250,7 +250,7 @@
     \item You will generally use {\tt int}s.
     \item You will generally assume it is 32 bit.
     \item If important, you can use \link{http://en.cppreference.com/w/cpp/language/static_assert}{{\tt static\_assert}}
-    \item If size matters, \cpp11 introduced {\tt int32\_t} and other such types
+    \item If size matters, \cpp11 introduced \link{http://en.cppreference.com/w/cpp/types/integer}{{\tt int32\_t}} and other such types
   \end{itemize}
 \end{frame}
 
@@ -438,7 +438,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Rationale}
+  \frametitle{\cpp's Rationale}
   \begin{itemize}
     \item Initialisation takes time
     \item Only those variables that can be initialised for free, are automatically initialised
@@ -451,6 +451,16 @@
             \item \dots
           \end{itemize}
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Java's Rationale}
+  \begin{itemize}
+    \item Uninitialised memory = recycled memory
+    \item Memory might contain sensitive information (e.g.\ passwords)
+    \item JVM zeroes memory to ensure apps cannot access such information
+  \end{itemize}
+  \code{security.java}
 \end{frame}
 
 \begin{frame}
@@ -469,6 +479,15 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Morality of this Presentation}
+  \begin{itemize}
+    \item When encountering errors, don't make assumptions
+    \item Do check for missing returns
+    \item Do check for uninitialised variables
+    \item Watch out for special values while debugging
+  \end{itemize}
+\end{frame}
 
 % Memory safety (can write anywhere)
 % Manual memory allocation
