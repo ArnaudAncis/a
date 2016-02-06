@@ -315,7 +315,7 @@
       \node[cpp] (foo cpp) at (4,0) {
         {\tt foo.cpp}
         \nodepart{two}
-        void foo(C c) { \dots }
+        void foo(C c) \{ \dots \}
       };
 
       \node[h,anchor=north] (foo h) at ($ (foo cpp.south) + (0,-.5) $) {
@@ -404,7 +404,7 @@
       \node[cpp] (foo cpp) at (4,0) {
         {\tt foo.cpp}
         \nodepart{two}
-        void foo(C c) { \dots }
+        void foo(C c) \{ \dots \}
       };
 
       \node[h,anchor=north] (foo h) at ($ (foo cpp.south) + (0,-.5) $) {
@@ -426,9 +426,9 @@
       \draw[includes,thick,green!50!black] (foo h) -- (C h);
     \end{tikzpicture}
   \end{center}
-  \begin{itemize}
-    \item The green arrow replaces the red one
-  \end{itemize}
+  \begin{center}
+    The green arrow replaces the red one
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -510,8 +510,7 @@
           files gets included multiple times (typically with headers from
           the standard \cpp\ library)
     \item Is this bad? It depends on what the header file contains
-    \item Multiple declarations in same compilation unit: ok
-    \item Other stuff: only allowed once
+    \item Multiple agreeing declarations are allowed \\ (but there are exceptions!)
     \item We need a way to prevent multiple includes
   \end{itemize}
 \end{frame}
@@ -605,20 +604,6 @@
     \code[font size=\small,frame=lines,title=Before preprocessing]{forrange.cpp}
     \onslide<2>
     \code[font size=\small,frame=lines,title=After preprocessing]{forrange-result.cpp}
-  \end{overprint}
-\end{frame}
-
-\begin{frame}
-  \frametitle{More Macros}
-  \begin{itemize}
-    \item {\tt \#} can be used to stringify tokens
-    \item More robust since less duplication necessary
-  \end{itemize}
-  \begin{overprint}
-    \onslide<1>
-    \code[font size=\small,frame=lines,title=Before preprocessing]{nullcheck2.cpp}
-    \onslide<2>
-    \code[font size=\small,frame=lines,title=After preprocessing]{nullcheck2-result.cpp}
   \end{overprint}
 \end{frame}
 
