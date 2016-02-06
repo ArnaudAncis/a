@@ -19,11 +19,11 @@
     <div id="contents">
       <section>
         <ul>
-          <%= link('pvm.pdf', 'Course Introduction') %>
-          <%= link('cpp-intro.pdf', 'C++ Introduction') %>
-          <%= link('declarations.pdf', 'Declarations') %>
-          <%= link('preprocessor.pdf', 'The Preprocessor') %>
-          <%= link('allocation-methods.pdf', 'Allocation Methods') %>
+          <%= link('pvm', 'Course Introduction') %>
+          <%= link('cpp-intro', 'C++ Introduction') %>
+          <%= link('declarations', 'Declarations') %>
+          <%= link('preprocessor', 'The Preprocessor') %>
+          <%= link('allocation-methods', 'Allocation Methods') %>
         </ul>
       </section>
     </div>

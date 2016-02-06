@@ -6,12 +6,16 @@ require 'Contracts'
 class Context
   include Contracts::TypeChecking
   
-  def link(filename, description)
+  def link(name, description)
     typecheck binding do
-      assert(filename: string, description: string)
+      assert(name: string, description: string)
     end
 
-    %{<li><a href="#{filename}">#{description}</a></li>}
+    if not File.directory? "../#{name}"
+    then abort "ERROR: No directory #{name}"
+    end
+
+    %{<li><a href="#{name}.pdf">#{description}</a></li>}
   end
 end
 
