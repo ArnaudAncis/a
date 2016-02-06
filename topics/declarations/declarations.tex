@@ -193,4 +193,21 @@
   \code[width=8cm]{class-weird.cpp}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Summary}
+  \begin{itemize}
+    \item Code gets compiled in single pass
+    \item Compiler needs to be able to verify your code and generate correct results without having to look ahead
+    \item Partial information (i.e.\ declarations) will often do
+  \end{itemize}
+  \vskip5mm
+  \structure{Examples}
+  \begin{itemize}
+    \item Calling a function: requires signature to be known
+    \item Manipulating a variable of type {\tt T}: requires {\tt class T}
+    \item Calling member functions on object of class {\tt T}: requires declarations of all members of {\tt T}
+    \item Instantiating a class {\tt T}: requires declarations of all members of {\tt T}
+  \end{itemize}
+\end{frame}
+
 \end{document}
