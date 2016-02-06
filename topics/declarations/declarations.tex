@@ -30,7 +30,7 @@
         \item Check the code for correctness (syntax, types, \dots)
         \item Produce assembly code
         \item Forget as much as possible (freeing up RAM)
-        \item Proceed to next function
+        \item Proceed to next bit of code
       \end{itemize}
   \end{itemize}
 \end{frame}
@@ -40,9 +40,21 @@
   \code[width=5cm]{forward-reference.cpp}
   \begin{itemize}
     \item Cannot compile {\tt foo} without knowing {\tt bar}'s type signature
-    \item {\tt bar} only appears later
-    \item Possible solution: require that {\tt bar} comes first
+          \begin{itemize}
+            \item Is it true that {\tt bar} does not require arguments?
+            \item Is it true that {\tt bar} returns a {\tt double}?
+          \end{itemize}
+    \item Definition of {\tt bar} only appears later
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solution}
+  \begin{center}
+    Put {\tt bar}'s definition before {\tt foo}'s
+  \end{center}
+  \vskip5mm
+  \code[width=5cm]{forward-reference-solution.cpp}
 \end{frame}
 
 \begin{frame}
