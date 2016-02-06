@@ -36,8 +36,7 @@
   title/.code=\lstset{title=#1},
 }
 
-
-\lstset{language=c++,escapeinside=\`\`}
+\lstset{language=c++,escapeinside=\`\`,basicstyle=\ttfamily}
 
 % \code[pgfkeys]{filename}
 \newcommand{\code}[2][]{
