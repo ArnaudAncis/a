@@ -26,6 +26,17 @@
 
 \begin{frame}
   \frametitle{Solution}
+  \begin{center}
+    \begin{tikzpicture}[chunk/.style={rectangle,,draw,top color=red!50,bottom color=red!80},
+                        big chunk/.style={chunk,minimum width=3cm,minimum height=1.5cm},
+                        small chunk/.style={chunk,minimum width=.75cm,minimum height=.5cm}]
+      \node[big chunk] (big) at (0,0) {};
+      \foreach \y in {-2,...,2} {
+        \node[small chunk] (small) at (4,\y) {};
+        \draw[-latex] (big) -- (small);
+      }
+    \end{tikzpicture}
+  \end{center}
   \begin{itemize}
     \item Divide the codebase in small units
     \item ``Compilation units'' (CUs): {\tt .cpp} files
@@ -160,20 +171,6 @@
       }
     \end{tikzpicture}
   \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Engineering Nightmare}
-  \begin{itemize}
-    \item Say the definition changes
-          \begin{itemize}
-            \item Name change
-            \item Parameter change
-            \item Return type change
-          \end{itemize}
-    \item Then all CUs containing a declaration need to be updated
-    \item Due to redundancy: same declaration in many files
-  \end{itemize}
 \end{frame}
 
 \begin{frame}
