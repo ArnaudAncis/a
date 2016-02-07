@@ -17,4 +17,6 @@ meta_object do
 
   uploadable(*pdf_files)
   upload_action
+
+  group_action(:full, [:tex, :upload])
 end
