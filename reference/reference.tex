@@ -1,0 +1,50 @@
+\documentclass[oneside]{book}
+\usepackage{amsthm}
+\usepackage{a4wide}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{pxfonts}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{makeidx}
+\usepackage{framed}
+\usepackage{etoolbox}
+\usepackage{comment}
+\usepackage{ucllcode}
+
+\includecomment{extra}
+\specialcomment{example}{\vfill\begin{center}\begin{minipage}{.99\linewidth}\begin{framed}\begin{center}\begin{minipage}{.9\linewidth}\begin{center}\textsc{\bfseries Example}\end{center}}{\end{minipage}\end{center}\end{framed}\end{minipage}\end{center}\vfill}
+
+\lstset{language=c++,basicstyle=\ttfamily,frame=lines}
+
+
+\begin{document}
+
+\begin{extra}
+\tableofcontents
+\end{extra}
+
+\chapter{IO}
+
+\begin{center}
+  \begin{tabular}{ll}
+    Standard input stream & \lstinline{std::cin} \\
+    Standard output stream & \lstinline{std::cout} \\
+    Reading from input stream & \lstinline{in >> var} \\
+    Writing to output stream & \lstinline{out << var} \\
+    Newline & \lstinline{std::endl} \\
+  \end{tabular}
+\end{center}
+
+\begin{example}
+  \code{hello-world.cpp}
+\end{example}
+
+\begin{example}
+  \code{io-example.cpp}
+\end{example}
+
+
+\end{document}
