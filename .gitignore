@@ -1,1 +1,7 @@
 *~
+*.cut
+*.aux
+*.log
+*.out
+*.toc
+*.pdf
