@@ -460,52 +460,52 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{New Problem: Multiply Included Header Files}
+  \frametitle{New Problem: Cycles}
   \begin{center}
     \begin{tikzpicture}[file/.style={rectangle split,rectangle split parts=2,draw},
                         cpp/.style={file,fill=red!50},
                         h/.style={file,fill=blue!50},
                         includes/.style={-latex}]
-      \node[cpp] (C cpp) at (0,0) {
-        {\tt C.cpp}
+      \node[cpp] (A cpp) at (-2,0) {
+        {\tt A.cpp}
         \nodepart{two}
         \parbox{3cm}{\tt
-          \#include "C.h" \\
-          \#include "D.h"
+          \#include "A.h"
         }
       };
 
-      \node[h,anchor=north] (C h) at ($ (C cpp.south) + (-2,-1) $) {
-        {\tt C.h}
+      \node[cpp] (B cpp) at (2,0) {
+        {\tt B.cpp}
         \nodepart{two}
-        {\tt \#include "X.h"}
+        \parbox{3cm}{\tt
+          \#include "B.h"
+        }
       };
 
-      \node[h,anchor=north] (D h) at ($ (C cpp.south) + (2,-1) $) {
-        {\tt D.h}
+      \node[h,anchor=north] (A h) at ($ (C cpp.south) + (-2,-1) $) {
+        {\tt A.h}
         \nodepart{two}
-        {\tt \#include "X.h"}
+        \tt \#include "B.h"
       };
 
-      \node[h,anchor=north] (X h) at ($ (C cpp.south) + (0,-3) $) {
-        {\tt X.h}
+      \node[h,anchor=north] (B h) at ($ (C cpp.south) + (2,-1) $) {
+        {\tt B.h}
         \nodepart{two}
-        {\tt ...}
+        \tt \#include "A.h"
       };
 
-      \draw[includes] (C cpp) -- (C h);
-      \draw[includes] (C cpp) -- (D h);
-      \draw[includes] (C h) -- (X h);
-      \draw[includes] (D h) -- (X h);
+      \draw[includes] (A cpp) -- (A h);
+      \draw[includes] (B cpp) -- (B h);
+      \draw[includes] (A h) -- (B h);
+      \draw[includes] (B h) -- (A h);
     \end{tikzpicture}
-    \vskip5mm
-    {\tt X.h} included twice!
   \end{center}
 \end{frame}
 
 \begin{frame}
   \frametitle{New Problem: Multiply Included Header Files}
   \begin{itemize}
+    \item Cycles: preprocessor infinite loop
     \item It's easy for situations to occur where the same header
           files gets included multiple times (typically with headers from
           the standard \cpp\ library)
