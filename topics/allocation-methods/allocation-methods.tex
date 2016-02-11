@@ -124,6 +124,15 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Quick Intermezzo}
+  \begin{itemize}
+    \item You can actually make this work in \cpp
+  \end{itemize}
+  \code{static-locals-working.cpp}
+\end{frame}
+
+
+\begin{frame}
   \frametitle{Consequences of Static Allocation}
   \notrealcpp
   \begin{itemize}
@@ -198,50 +207,29 @@
           \draw[fill=green!50] ($ (start) + (4,0) $) rectangle ++(4,-1);
         }
         \only<4>{
-          \draw[allocation] (var b) to [bend left=30] ($ (start) + (4,-0.5) $);
+          \draw[allocation] (var n) to [bend left=30] ($ (start) + (4,-0.5) $);
         }
 
         \only<5->{
           \draw[fill=blue!50] ($ (start) + (0,-1) $) rectangle ++(4,-1);
         }
         \only<5>{
-          \draw[allocation] (var c) to [bend left=30] ($ (start) + (0,-1.5) $);
+          \draw[allocation] (var b) to [bend left=30] ($ (start) + (0,-1.5) $);
         }
 
         \only<6->{
-          \draw[fill=yellow!50] ($ (start) + (4,-1) $) rectangle ++(4,-1);
+          \draw[fill=red!50] ($ (start) + (4,-1) $) rectangle ++(4,-1);
+          \draw[fill=red!50] ($ (start) + (0,-2) $) rectangle ++(8,-2);
         }
         \only<6>{
-          \draw[allocation] (var d) to [bend left=30] ($ (start) + (4,-1.5) $);
+          \draw[allocation] (mem a) to [bend left=30] ($ (start) + (4,-1.5) $);
         }
 
         \only<8->{
-          \draw[fill=red!50] ($ (start) + (0,-2) $) rectangle ++(8,-2);
-        }
-        \only<8>{
-          \draw[allocation] (mem a) to [bend right=30] ($ (start) + (0,-2.5) $);
-        }
-
-        \only<9->{
           \draw[fill=green!50] ($ (start) + (0,-4) $) rectangle ++(8,-3);
         }
-        \only<9>{
+        \only<8>{
           \draw[allocation] (mem b) to [bend right=30] ($ (start) + (0,-4.5) $);
-        }
-
-        \only<10->{
-          \draw[fill=blue!50] ($ (start) + (0,-7) $) rectangle ++(4,-1);
-        }
-        \only<10>{
-          \draw[allocation] (mem c) to [bend right=30] ($ (start) + (0,-7.5) $);
-        }
-
-        \only<11->{
-          \draw[fill=yellow!50] ($ (start) + (4,-7) $) rectangle ++(4,-1);
-          \draw[fill=yellow!50] ($ (start) + (0,-8) $) rectangle ++(8,-1);
-        }
-        \only<11>{
-          \draw[allocation] (mem d) to [bend right=30] ($ (start) + (4,-7.5) $);
         }
 
         \draw (start) grid ++(8,-9);
@@ -250,13 +238,21 @@
   \end{columns}
   \vskip2cm
   \begin{overprint}
-    \onslide<2-6>
+    \onslide<2-5>
     \begin{center}
       \textbf{Compilation stage} \\ Compiler assigns memory locations to each variable \\ (this is still static allocation)
     \end{center}
-    \onslide<7->
+    \onslide<6>
     \begin{center}
       \textbf{At runtime} \\ Extra memory is allocated on stack at runtime
+    \end{center}
+    \onslide<7>
+    \begin{center}
+      \textbf{At runtime} \\ Say user enters 3
+    \end{center}
+    \onslide<8>
+    \begin{center}
+      \textbf{At runtime} \\ Say user enters 3
     \end{center}
   \end{overprint}
 \end{frame}
@@ -277,6 +273,7 @@
   \begin{procontralist}
     \pro Fast allocation
     \pro Little runtime bookkeeping needed
+    \pro Amount of memory to be allocated does not have to be known at compile time
     \pro Can allocate any amount of memory you want at runtime
     \pro Recursion made possible
     \con Problematic deallocation
@@ -424,6 +421,8 @@
     \con Fragmentation
   \end{procontralist}
 \end{frame}
+
+
 
 %    \item Generally used for function-local data
 
