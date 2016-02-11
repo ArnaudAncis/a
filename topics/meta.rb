@@ -6,7 +6,5 @@ meta_object do
   extend MetaData::Actions
   extend Upload::Mixin
 
-  def remote_directory
-    world.parent.remote_directory + 'topics'
-  end
+  inherit_remote_directory('topics')
 end
