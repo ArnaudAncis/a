@@ -1,0 +1,28 @@
+\chapter{Primitive Types}
+\begin{center}
+  \begin{tabular}{ll}
+    \textbf{Type} & \textbf{Description} \\
+    \toprule
+    \tt char & -128 to 127 \\
+    \tt short & -32768 to 32767 \\
+    \tt int & -2147483648 to 2147483647 \\
+    \tt long & -2147483648 to 2147483647 \\
+    \tt long long & -9223372036854775808 to 9223372036854775807 \\
+    \midrule
+    \tt unsigned char & 0 to 255 \\
+    \tt unsigned short & 0 to 65535 \\
+    \tt unsigned int & 0 to 4294967295 \\
+    \tt unsigned long & 0 to 4294967295 \\
+    \tt unsigned long long & 0 to 18446744073709551615 \\
+    \midrule
+    \tt float & $1.17549 \times 10^{-38}$ to $3.40282 \times 10^{38}$ \\
+    \tt double & $2.22507 \times 10^{-308}$ to $1.79769 \times 10^{308}$ \\
+    \midrule
+    \tt bool & {\tt true}, {\tt false} \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+Ranges were determined using MSVC++2013 targetting Win64.
+\begin{extra}
+  \code[font size=\small,width=.95\textwidth]{primtypes.cpp}
+\end{extra}
