@@ -585,7 +585,99 @@
   \end{center}
 \end{frame}
 
-%    \item Generally used for function-local data
+\begin{frame}
+  \frametitle{Garbage Collection}
+  \begin{itemize}
+    \item Abstraction of memory
+    \item Tries to make it look as if there's an infinite amount of RAM
+    \item Recycles unreachable memory
+    \item Reduces memory leaks (but does not eliminate them)
+    \item Many different techniques
+  \end{itemize}
+\end{frame}
 
+\begin{frame}
+  \frametitle{Allocation in Java}
+  \begin{columns}[t]
+    \column{4cm}
+    \begin{center} \bf Static \end{center}
+    \begin{itemize}
+      \item Static fields
+    \end{itemize}
+
+    \column{4cm}
+    \begin{center} \bf Stack \end{center}
+    \begin{itemize}
+      \item Parameter values
+      \item Local variables
+    \end{itemize}
+
+    \column{4cm}
+    \begin{center} \bf Heap \end{center}
+    \begin{itemize}
+      \item All objects
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Allocation in \cpp}
+  \begin{columns}[t]
+    \column{4cm}
+    \begin{center} \bf Static \end{center}
+    \begin{itemize}
+      \item Global variables
+      \item Static fields
+      \item Static local variables
+    \end{itemize}
+
+    \column{4cm}
+    \begin{center} \bf Stack \end{center}
+    \begin{itemize}
+      \item Parameter values
+      \item Local variables
+    \end{itemize}
+
+    \column{4cm}
+    \begin{center} \bf Heap \end{center}
+    \begin{itemize}
+      \item Anything created using {\tt new}
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Java vs \cpp}
+  \begin{itemize}
+    \item \cpp\ is much more flexible
+    \item Anything can be placed anywhere
+  \end{itemize}
+  \vskip5mm
+  \begin{overprint}
+    \onslide<1>
+    \structure{Example: statically allocated object}
+    \code{object-on-static.cpp}
+
+    \onslide<2>
+    \structure{Example: object on stack}
+    \code{object-on-stack.cpp}
+
+    \onslide<3>
+    \structure{Example: object on heap}
+    \code{object-on-heap.cpp}
+
+    \onslide<4>
+    \structure{Example: statically allocated integer}
+    \code{int-on-static.cpp}
+
+    \onslide<5>
+    \structure{Example: integer on stack}
+    \code{int-on-stack.cpp}
+
+    \onslide<6>
+    \structure{Example: integer on heap}
+    \code{int-on-heap.cpp}
+  \end{overprint}
+\end{frame}
 
 \end{document}
