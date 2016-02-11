@@ -1,0 +1,46 @@
+\chapter{Preprocessor}
+
+\section{Preprocessor Directives}
+\begin{center}
+  \begin{tabular}{ll}
+    \verb'#include "file"' & Includes {\tt file}, looking for {\tt file} in local directory \\
+    \midrule
+    \verb'#include <file>' & Includes {\tt file}, looking for {\tt file} in libraries \\
+    \midrule
+    \verb'#define ID'      & Includes macro named {\tt ID} with no associated replacement \\
+    \midrule
+    \verb'#define ID BODY' & Defines a macro named {\tt ID} with specified replacement \\
+    \midrule
+    \verb'#undef ID'       & Undefines macro named {\tt ID} \\
+    \midrule
+    \verb'#ifdef ID' \\
+    \verb'...' \\
+    \verb'#endif'          & Conditionally included code \\
+    \midrule
+    \verb'#ifndef ID' \\
+    \verb'...' \\
+    \verb'#endif'          & Conditionally included code \\
+  \end{tabular}
+\end{center}
+
+\section{Predefined Macros}
+\begin{center}
+  \begin{tabular}{ll}
+    \verb'__LINE__' & Replaced by line number on which this macro appears \\
+    \midrule
+    \verb'__FILE__' & Replaced by name of file in which this macro appears \\
+    \midrule
+    \verb'__DATE__' & Replaced by date at which compilation process began \\
+    \midrule
+    \verb'__TIME__' & Replaced by time at which compilation process began \\
+    \midrule
+    \verb'NDEBUG' & Defined when not in debug mode \\
+  \end{tabular}
+\end{center}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "full-edition"
+%%% End:
