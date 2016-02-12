@@ -24,6 +24,7 @@
           <%= link('declarations', 'Declarations') %>
           <%= link('preprocessor', 'The Preprocessor') %>
           <%= link('allocation-methods', 'Allocation Methods') %>
+          <%= link('pointers', 'Pointers') %>          
         </ul>
       </section>
     </div>
