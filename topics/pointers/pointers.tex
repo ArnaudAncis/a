@@ -1,0 +1,226 @@
+\documentclass{../ucll-slides}
+\usepackage{../pvm}
+\usepackage{bbding}
+\usepackage{wasysym}
+
+\usetikzlibrary{shadows,shapes.multipart}
+
+\title{Pointers}
+\author{Fr\'ed\'eric Vogels}
+
+
+\newenvironment{procontralist}{
+  \begingroup
+  \newcommand{\pro}{\item[\Checkmark]}
+  \newcommand{\con}{\item[\XSolidBrush]}
+  \begin{itemize}
+  }{
+  \end{itemize}
+  \endgroup}
+
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Pointers}
+  \begin{itemize}
+    \item Pointers have a reputation
+    \item Pointers are \emph{not} hard
+    \item If you can work with arrays in Java, you can work with pointers in \cpp
+    \item Pointers are \emph{fragile}
+    \item Easy to make mistakes
+    \item But that's ok, because they're really simple
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Memory: A Simple Model}
+  \begin{itemize}
+    \item Memory can be seen as one gigantic {\tt byte[]} array
+    \item Every time you need memory (e.g.\ a stack-variable, a heap-object, \dots)
+          a little part of this array is given to you
+    \item You could assign ranges to the different allocation methods, e.g.
+          \begin{itemize}
+            \item Static allocation: first 1000000 bytes
+            \item Stack: following 1000000 bytes
+            \item Heap: all the rest
+          \end{itemize}
+          but this making this distinction not important right now
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Memory as a {\tt byte[]}}
+  \begin{center}
+    \begin{tikzpicture}[scale=.25,transform shape]
+      \only<2->{
+        \draw[fill=red!50] (7,0) rectangle ++(4,1);
+      }
+
+      \visible<3>{
+        \foreach \i in {0,...,39} {
+          \node[anchor=west,rotate=90] at ($ (\i,1) + (.5,0) $) {
+            \tikzmath{
+              int \address;
+              \address = 4684 + \i;
+               print {\tt\address};
+            }
+          };
+        }
+      }
+
+      \visible<4->{
+        \foreach \i in {0,...,39} {
+          \node[anchor=west,rotate=90] at ($ (\i,1) + (.5,0) $) {
+            \tikzmath{
+              int \address;
+              \address = hex(4684 + \i);
+               print {\tt0x\address};
+            }
+          };
+        }
+      }
+
+      \draw (0,0) grid (40,1);
+      \node[anchor=east,font=\Huge] at (0,0) {$\cdots$};
+      \node[anchor=west,font=\Huge] at (40,0) {$\cdots$};
+    \end{tikzpicture}
+  \end{center}
+  \begin{itemize}
+    \item If you need an {\tt int x} variable\dots
+    \item \dots somewhere four consecutive bytes will be chosen,
+          and will be associated with {\tt x}
+    \item<3-> Since memory is a {\tt byte[]}, every byte has its unique index
+    \item<4-> We can write this index in hexadecimal
+    \item<5-> In the above figure: {\tt x} occupies bytes with indices {\tt 0x1256}, {\tt 0x1257}, {\tt 0x1258}, {\tt 0x1259}
+    \item<5-> The index of the first byte of {\tt x} is the \emph{address} of {\tt x}
+    \item<5-> Address of {\tt x} is {\tt 0x1256}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A New Type}
+  \begin{itemize}
+    \item Given a variable {\tt int x}
+    \item {\tt x} must have an address
+    \item You can ask for this address
+    \item New type: ``address of {\tt int}''
+  \end{itemize}
+  \vskip1cm
+  \code[frame=lines,font size=\small]{address-of.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What Does One Do With An Address?}
+  \begin{itemize}
+  \item If you know where a variable resides in memory
+        (i.e.\ if you have its address), then you can read and write to it
+  \end{itemize}
+  \vskip1cm
+  \code[frame=lines,font size=\small]{use-address.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quiz}
+  \begin{itemize}
+    \item Integer division {\tt x / y} has two results:
+          \begin{itemize}
+            \item Quotient {\tt q}
+            \item Rest {\tt r}
+          \end{itemize}
+    \item {\tt q * y + r = x}
+    \item How to write a function {\tt div} that returns quotient and rest?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Div in Java: Attempt \#1}
+  \code[language=java,font size=\small,frame=lines]{div1.java}
+  \vskip5mm
+  \structure{Evaluation}
+  \begin{procontralist}
+    \con<2-> Need for array creation on heap (slow)
+    \con<2-> Array must contain 2 items, not compiler-enforced
+    \con<2-> Works only if function returns values of same type
+    \con<2-> No naming (is {\tt q} the first or second element?)
+  \end{procontralist}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Div in Java: Attempt \#2}
+  \code[language=java,font size=\small,frame=lines]{div2.java}
+  \structure{Evaluation}
+  \begin{procontralist}
+    \pro<2-> Type safe
+             \begin{itemize}
+               \item \emph{Two} results enforced
+               \item All type combinations possible
+             \end{itemize}
+    \pro<2-> Naming of results
+    \con<2-> Need for object creation on heap (slow)
+    \con<2-> Lots of ``stupid code'' necessary: we would need to define a new class for each function returning multiple values
+  \end{procontralist}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Div in Java: Attempt \#3}
+  \code[language=java,font size=\small,frame=lines]{div3.java}
+  \structure{Evaluation}
+  \begin{procontralist}
+    \pro<2-> Type safe
+    \pro<2-> Reusable {\tt Pair} class
+    \con<2-> Need for three (!) object creations on heap
+    \con<2-> No naming
+    \con<2-> Boilerplate code alert: {\tt Triple}, {\tt Quadruple}, \dots
+  \end{procontralist}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Div in Java: Attempt \#4}
+  \code[language=java,font size=\small,frame=lines]{div4.java}
+  \structure{Evaluation}
+  \begin{procontralist}
+    \pro<2-> Type safe
+    \pro<2-> No allocations necessary
+    \pro<2-> Clear naming
+    \con<2-> It doesn't work \frownie
+  \end{procontralist}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\cpp\ To The Rescue!}
+  \code{div.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Pass-by-value vs ``Pass-by-address''}
+  \begin{itemize}
+    \item Passing {\tt q} and {\tt r} as regular {\tt int}s does not work:
+          copies are given to {\tt div} and no matter what {\tt div} does,
+          it has no effect on {\tt func}'s {\tt q} and {\tt r}
+    \item Passing the \emph{addresses} of {\tt q} and {\tt r}
+          allows {\tt div} to access {\tt func}'s local variables:
+          it knows where they live!
+    \item This technique is called ``out parameters'': using parameters as output instead of input
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Uses}
+  \begin{itemize}
+    \item Using addresses has many other uses besides out parameters
+    \item Java uses addresses all the time when dealing with objects
+    \item More flexible (see later)
+    \item More efficient (see later)
+  \end{itemize}
+\end{frame}
+
+
+% Pass by value/pass by reference
+
+\end{document}
