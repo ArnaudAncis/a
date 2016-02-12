@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>PVM Assignment</title>
-    <% extend Html::Generation %>
     <%= default_externals %>
-    <%= Html::Generation::Quiz.setup(self) %>
+    <%= Html::Generation::Quiz.setup %>
     <style>
       #colours {
         margin-left: auto;
@@ -47,11 +46,7 @@
         <div id="toc-container"></div>
       </section>
 
-      <section>
-        <header><h1>Interpret</h1></header>
-        <%= code 'interpret1.cpp' %>
-        <%= quiz.validated_input "Quiz.verbatim('xxx')" %>
-      </section>
+      <%= interpret_exercise 'interpret1' %>
     </div>
   </body>
 

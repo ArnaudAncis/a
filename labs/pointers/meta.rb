@@ -3,22 +3,51 @@ require 'Html'
 require 'Code'
 require 'Cpp'
 require 'Upload'
+require 'Html'
 require 'pathname'
+
+
+module Quiz
+  extend Html::Generation::Quiz
+end
 
 
 class Context
   include Contracts::TypeChecking
+  include Html::Generation
 
-  def code(filename)
+
+  def compile(path)
     typecheck do
-      assert(filename: name_of_existing_file)
+      assert(path: file)
     end
 
-    path = Pathname.new filename
-    
     Cpp.compile(path)
+  end
 
-    %{<div class="code"><pre>#{Code.format_file(path)}</pre></div>}
+  def interpret_exercise(basename)
+    typecheck do
+      assert(basename: string)
+    end
+    
+    source_path = Pathname.new("#{basename}.cpp").expand_path
+
+    typecheck do
+      assert(source_path: file)
+    end
+
+    executable_path = Pathname.new("#{basename}.exe")
+
+    Cpp.compile source_path
+    output = `#{executable_path}`.strip
+
+    <<-END
+    <section class="interpretation-question">
+      <h1>Interpretation Exercise</h1>
+      <div class="code"><pre>#{Code.format_file(source_path).strip}</pre></div>
+      <p>Output: #{Quiz.validated_input { verbatim output }}</p>
+    </section>
+    END
   end
 end
 
