@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <% extend Html::Generation %>
+    <%= default_externals %>
+    <%= Html::Generation::Quiz.setup(self) %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+      
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: green;
+      }
+
+      input.incorrect {
+        background: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Pointers</div>
+    </header>
+
+    <div id="contents">
+      <section id="toc">
+        <span>Table of Contents</span>
+        <div id="toc-container"></div>
+      </section>
+
+      <section>
+        <header><h1>Interpret</h1></header>
+        <%= code 'interpret1.cpp' %>
+        <%= quiz.validated_input "Quiz.verbatim('xxx')" %>
+      </section>
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+  </script>
+</html>
