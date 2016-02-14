@@ -129,6 +129,14 @@ class Context
       out.write(output)
     end
   end
+
+  def solution_link(filename)
+    typecheck do
+      assert(filename: string)
+    end
+
+    %{<div class="solution"><a href="#{filename}">Solution</a></div>}
+  end
 end
 
 
