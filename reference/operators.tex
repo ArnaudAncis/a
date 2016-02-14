@@ -1,0 +1,88 @@
+\chapter{Operators}
+
+\begingroup
+\newcommand{\overloadable}[2]{{\tt #1} & #2 & \Checkmark}
+\newcommand{\notoverloadable}[2]{{\tt #1} & #2 & \XSolidBrush}
+
+\begin{center}
+  \begin{tabular}{c@{\hspace{1cm}}c}
+    \begin{tabular}{llc}
+      \rotatebox{45}{\textbf{Operator}} & \rotatebox{45}{\textbf{Description}} & \rotatebox{90}{\textbf{Overloadable}} \\
+      \toprule
+      \multicolumn{3}{c}{\bf\sc Unary prefix operators} \\
+      \midrule
+      \overloadable{+x}{} \\
+      \overloadable{-x}{Negation} \\
+      \overloadable{*x}{Dereferencing} \\
+      \overloadable{!x}{Logical NOT} \\
+      \overloadable{\&}{Address of} \\
+      \overloadable{\~{}}{Bitwise NOT} \\
+      \overloadable{++x}{Preincrement} \\
+      \overloadable{--x}{Predecrement} \\
+      \overloadable{new}{Allocation} \\
+      \overloadable{delete}{Deallocation} \\
+      \overloadable{sizeof}{Parameter pack} \\
+      \midrule
+      \multicolumn{3}{c}{\bf\sc Unary postfix operators} \\
+      \midrule
+      \overloadable{x++}{Postincrement} \\
+      \overloadable{x--}{Postdecrement} \\
+      \overloadable{x(...)}{Function call} \\
+      \overloadable{x[...]}{Indexing} \\
+      \notoverloadable{x.f}{Member access} \\
+      \overloadable{x->f}{Member access} \\
+      \bottomrule
+    \end{tabular}
+    &
+    \begin{tabular}{llc}
+      \rotatebox{45}{\textbf{Operator}} & \rotatebox{45}{\textbf{Description}} & \rotatebox{90}{\textbf{Overloadable}} \\
+      \toprule
+      \multicolumn{3}{c}{\bf\sc Binary infix operators} \\
+      \midrule
+      \overloadable{x + y}{Addition} \\
+      \overloadable{x - y}{Subtraction} \\
+      \overloadable{x * y}{Multiplication} \\
+      \overloadable{x / y}{Division} \\
+      \overloadable{x \% y}{Modulo} \\
+      \overloadable{x \& y}{Bitwise AND} \\
+      \overloadable{x | y}{Bitwise OR} \\
+      \overloadable{x \^{} y}{Bitwise XOR} \\
+      \overloadable{x \&\& y}{Logical AND} \\
+      \overloadable{x || y}{Logical OR} \\
+      \overloadable{x == y}{Equality} \\
+      \overloadable{x != y}{Inequality} \\
+      \overloadable{x < y}{Less than} \\
+      \overloadable{x <= y}{Not greater than} \\
+      \overloadable{x > y}{Greater than} \\
+      \overloadable{x >= y}{Not less than} \\
+      \overloadable{x, y}{Sequencing} \\
+      \overloadable{x << y}{Shift left} \\
+      \overloadable{x >> y}{Shift right} \\
+      \bottomrule
+    \end{tabular}
+  \end{tabular}
+
+    \begin{tabular}{llc}
+      \rotatebox{45}{\textbf{Operator}} & \rotatebox{45}{\textbf{Description}} & \rotatebox{90}{\textbf{Overloadable}} \\
+      \toprule
+      \multicolumn{3}{c}{\bf\sc Binary infix operators} \\
+      \midrule
+      \overloadable{x += y}{Addition assignment} \\
+      \overloadable{x -= y}{Subtraction assignment} \\
+      \overloadable{x *= y}{Multiplication assignment} \\
+      \overloadable{x /= y}{Division assignment} \\
+      \overloadable{x \&= y}{Bitwise AND assignment} \\
+      \overloadable{x |= y}{Bitwise OR assignment} \\
+      \overloadable{x \^{}= y}{Bitwise XOR assignment} \\
+      \overloadable{x <<= y}{Shift left assignment} \\
+      \overloadable{x >>= y}{Shift right assignment} \\
+      \bottomrule
+    \end{tabular}
+\end{center}
+
+\endgroup
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "full-edition"
+%%% End:
