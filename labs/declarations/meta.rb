@@ -41,7 +41,7 @@ class Context
     %{<div class="code"><pre>#{Code.format_file(path).strip}</pre></div>}
   end
 
-  def format_inline(source, file: 'temp.cpp')
+  def format_inline(source, file: 'temp-noupload.cpp')
     typecheck do
       assert(source: string, file: string | pathname)
     end
@@ -71,7 +71,7 @@ class Context
 
     current_exercise_index = increment_exercise_counter
 
-    basename = "temp#{current_exercise_index}"
+    basename = "temp-noupload#{current_exercise_index}"
     source_path = Pathname.new "#{basename}.cpp"
     executable_path = Pathname.new "#{basename}.exe"
 
@@ -152,8 +152,8 @@ meta_object do
   html_template('assignment', context: Context.new, group_name: 'html')
   
   uploadable('assignment.html')
-  uploadable('grade-average.cpp')
-  uploadable_globs( '*.txt' )
+  uploadable( *Dir['*.cpp'].select { |file| /noupload/ !~ file } )
+  uploadable_globs('*.txt')
   upload_action
 
   group_action(:full, [:upload])

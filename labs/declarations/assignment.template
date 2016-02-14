@@ -175,7 +175,7 @@
       <%= format_exercise do
             <<-END
               <p>Add the necessary declarations so as to make this code compile.</p>
-              #{format_source_file(Pathname.new 'prime.cpp')}
+              #{format_source_file(Pathname.new 'prime-noupload.cpp')}
             END
           end
       %>
@@ -222,8 +222,6 @@
             END
           end
       %>
-
-
     </div>
   </body>
 
