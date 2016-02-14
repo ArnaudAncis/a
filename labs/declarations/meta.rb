@@ -147,7 +147,7 @@ meta_object do
   extend Upload::Mixin
 
   def remote_directory
-    world.parent.remote_directory
+    world.parent.remote_directory + Pathname.pwd.basename.to_s
   end
 
   html_template('assignment', context: Context.new, group_name: 'html')
@@ -157,5 +157,5 @@ meta_object do
   uploadable_globs('*.txt')
   upload_action
 
-  group_action(:full, [:upload])
+  group_action(:full, [:html, :upload])
 end
