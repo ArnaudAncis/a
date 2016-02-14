@@ -181,6 +181,17 @@
       %>
 
       <%= format_exercise do
+            <<-END
+              <p>
+                Write a program that produces the numbers 1 to 100, one per line.
+              </p>
+
+              #{solution_link 'count100.cpp'}
+            END
+          end
+      %>
+
+      <%= format_exercise do
             produce_output('grade-average')
             <<-END
               <p>

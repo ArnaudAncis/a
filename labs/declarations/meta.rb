@@ -108,7 +108,7 @@ class Context
     END
   end
 
-  def produce_output(basename)
+  def produce_output(basename, input: true)
     typecheck do
       assert(basename: string)
     end
@@ -124,7 +124,8 @@ class Context
     end
 
     File.open(output_path, 'w') do |out|
-      output = Cpp.compile_and_run(source_path, input: input_path.read)
+      input = if input then input_path.read else nil end
+      output = Cpp.compile_and_run(source_path, input: input)
 
       out.write(output)
     end
