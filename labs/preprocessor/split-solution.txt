@@ -1,0 +1,110 @@
+==== main.cpp ====
+#include "ioutil.h"
+#include "primes.h"
+#include "arithmetic.h"
+#include <iostream>
+
+int main()
+{
+    std::cout << "Enter a value: ";
+    unsigned n = next_unsigned();
+
+    if (is_prime(n))
+    {
+        std::cout << n << " is prime" << std::endl;
+    }
+    else
+    {
+        std::cout << n << " is not prime" << std::endl;
+    }
+}
+==== END ====
+
+
+==== ioutil.h ====
+#ifndef IOUTIL_H
+#define IOUTIL_H
+
+unsigned next_unsigned();
+
+#endif
+==== END ====
+
+
+==== ioutil.cpp ====
+#include "ioutil.h"
+#include <iostream>
+
+unsigned next_unsigned()
+{
+    unsigned x;
+    std::cin >> x;
+    return x;
+}
+==== END ====
+
+
+==== primes.h ====
+#ifndef PRIMES_H
+#define PRIMES_H
+
+bool is_prime(unsigned);
+
+#endif
+==== END ====
+
+
+==== primes.cpp ====
+#include "primes.h"
+#include "arithmetic.h"
+
+bool is_prime(unsigned n)
+{
+    if (n < 2)
+    {
+        return false;
+    }
+    else
+    {
+        unsigned k = 2;
+
+        while (sqr(k) <= n)
+        {
+            if (is_divisible_by(n, k))
+            {
+                return false;
+            }
+
+            ++k;
+        }
+
+        return true;
+    }
+}
+==== END ====
+
+
+==== arithmetic.h ====
+#ifndef ARITHMETIC_H
+#define ARITHMETIC_H
+
+bool is_divisible_by(unsigned, unsigned);
+unsigned sqr(unsigned);
+
+#endif
+==== END ====
+
+
+==== arithmetic.cpp ====
+#include "arithmetic.h"
+
+bool is_divisible_by(unsigned a, unsigned b)
+{
+    return b != 0 ? a % b == 0 : false;
+}
+
+unsigned sqr(unsigned x)
+{
+    return x * x;
+}
+==== END ====
