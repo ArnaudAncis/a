@@ -146,12 +146,12 @@
           END
       %>
 
-      <%= format_exercise(<<-END)
-          <p>
-            Add declarations so that the following program compiles.
-          </p>
-          
-          END
+      <%= format_exercise do
+            <<-END
+              <p>Add the necessary declarations so as to make this code compile.</p>
+              #{format_source_file(Pathname.new 'prime.cpp')}
+            END
+          end
       %>
 
     </section>

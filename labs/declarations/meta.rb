@@ -85,23 +85,25 @@ class Context
       input_message = ""
     end
 
-    format_exercise(<<-END, index: current_exercise_index)
-      <p>What is the output of the following code?</p>
-      #{formatted_source}
-      #{input_message}
-      <p>Output: #{Quiz.validated_input { verbatim output }}</p>
-    END
+    format_exercise(index: current_exercise_index) do
+      <<-END
+        <p>What is the output of the following code?</p>
+        #{formatted_source}
+        #{input_message}
+        <p>Output: #{Quiz.validated_input { verbatim output }}</p>
+      END
+    end
   end
 
-  def format_exercise(body, index: increment_exercise_counter)
+  def format_exercise(index: increment_exercise_counter)
     typecheck do
-      assert(body: string)
+      assert(index: integer & positive)
     end
 
     <<-END
     <section class="question">
       <h1>Exercise #{index}</h1>
-      #{body}
+      #{yield}
     </section>
     END
   end
