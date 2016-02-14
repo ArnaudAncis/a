@@ -52,7 +52,7 @@ class Context
     end
 
     typecheck do
-      assert(file: pathname)
+      assert(path: pathname)
     end
 
     source = Code.remove_redundant_indentation(source)
