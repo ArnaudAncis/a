@@ -107,6 +107,28 @@ class Context
     </section>
     END
   end
+
+  def produce_output(basename)
+    typecheck do
+      assert(basename: string)
+    end
+ 
+    source_path = Pathname.new("#{basename}.cpp")
+    input_path = Pathname.new("#{basename}-input.txt")
+    output_path = Pathname.new("#{basename}-output.txt")
+
+    typecheck do
+      assert(source_path: file,
+             input_path: file,
+             output_path: pathname)
+    end
+
+    File.open(output_path, 'w') do |out|
+      output = Cpp.compile_and_run(source_path, input: input_path.read)
+
+      out.write(output)
+    end
+  end
 end
 
 
@@ -122,6 +144,8 @@ meta_object do
   html_template('assignment', context: Context.new, group_name: 'html')
   
   uploadable('assignment.html')
+  uploadable('grade-average.cpp')
+  uploadable_globs( '*.txt' )
   upload_action
 
   group_action(:full, [:upload])
