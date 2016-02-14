@@ -53,6 +53,7 @@
       <%= interpret_exercise <<-END
             #include <iostream>
             #include <string>
+            
             #define FOO
   
             int main()
@@ -68,6 +69,66 @@
               return 0;
             }
           END
+      %>
+
+      <%= interpret_exercise <<-END
+            #include <iostream>
+            
+            #define INIT 100
+  
+            int main()
+            {
+              std::cout << INIT << std::endl;
+            }
+          END
+      %>
+
+      <%= interpret_exercise(<<-END, input:'80 100' )
+            #include <iostream>
+
+            #define unless(x)              if (!(x))
+            #define down_to(i, from, to)   for ( int i = from; i >= to; --i )
+
+            int foo(int, int);
+
+            int main()
+            {
+                std::cout << foo(80, 100);
+                std::cin.get();
+            }
+
+            int foo(int a, int b)
+            {
+                down_to(i, a, 1)
+                {
+                    unless (a % i || b % i) return i;
+                }
+            }
+            END
+      %>
+
+      <%= interpret_exercise(<<-END, input:'80 100' )
+            #include <iostream>
+
+            #define unless(x)              if (!x)
+            #define down_to(i, from, to)   for ( int i = from; i >= to; --i )
+
+            int foo(int, int);
+
+            int main()
+            {
+                std::cout << foo(80, 100);
+                std::cin.get();
+            }
+
+            int foo(int a, int b)
+            {
+                down_to(i, a, 1)
+                {
+                    unless (a % i || b % i) return i;
+                }
+            }
+            END
       %>
 
     </div>

@@ -153,8 +153,6 @@ meta_object do
   html_template('assignment', context: Context.new, group_name: 'html')
   
   uploadable('assignment.html')
-  uploadable( *Dir['*.cpp'].select { |file| /noupload/ !~ file } )
-  uploadable_globs('*.txt')
   upload_action
 
   group_action(:full, [:upload])
