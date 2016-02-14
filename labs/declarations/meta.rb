@@ -4,6 +4,7 @@ require 'Code'
 require 'Cpp'
 require 'Upload'
 require 'Html'
+require 'Environment'
 require 'pathname'
 
 
@@ -76,13 +77,11 @@ class Context
 
     formatted_source = format_inline(source, file: source_path)
     
-    Cpp.compile source_path
+    output = Cpp.compile_and_run(source_path, input: input).strip
 
     if input
-      output = `echo #{input} | #{executable_path}`.strip
       input_message = %{<p>Input: <code>#{input}</code></p>}
     else
-      output = `#{executable_path}`.strip
       input_message = ""
     end
 
