@@ -192,6 +192,18 @@
       %>
 
       <%= format_exercise do
+            <<-END
+              <p>
+                Write a program that asks for an integer N and outputs
+                the Nth prime.
+              </p>
+
+              #{solution_link 'prime.cpp'}
+            END
+          end
+      %>
+
+      <%= format_exercise do
             produce_output('grade-average')
             <<-END
               <p>
