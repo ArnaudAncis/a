@@ -86,6 +86,23 @@
           END
       %>
 
+      <%= interpret_exercise(<<-END, input: 'abcde')
+            #include <iostream>
+            #include <string>
+
+            int main()
+            {
+              std::string string;
+
+              std::cin >> string;
+
+              std::cout << "The string counts " << string.length() << " characters" << std::endl;
+
+              return 0;
+            }
+          END
+      %>
+
       <%= interpret_exercise(<<-END, input: '5 1 2 3 4 5')
             #include <iostream>
 
@@ -154,7 +171,16 @@
           end
       %>
 
-    </section>
+      <%= format_exercise do
+            <<-END
+              <p>
+                Write a program that computes the average grade for courses. The input is structured
+                as follows:
+              </p>
+            END
+          end
+      %>
+
 
     </div>
   </body>
