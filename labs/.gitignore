@@ -2,3 +2,4 @@
 *.exe
 *.obj
 temp*.cpp
+*-output.txt
