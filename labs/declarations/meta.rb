@@ -32,22 +32,49 @@ class Context
     Cpp.compile(path)
   end
 
+  def format_source_file(path)
+    typecheck do
+      assert(path: file)
+    end
+    
+    %{<div class="code"><pre>#{Code.format_file(path).strip}</pre></div>}
+  end
+
+  def format_inline(source, file: 'temp.cpp')
+    typecheck do
+      assert(source: string, file: string | pathname)
+    end
+
+    if String === file
+    then path = Pathname.new file
+    else path = file
+    end
+
+    typecheck do
+      assert(file: pathname)
+    end
+
+    source = Code.remove_redundant_indentation(source)
+
+    File.open(path, 'w') do |out|
+      out.puts source
+    end
+
+    format_source_file(path)
+  end
+
   def interpret_exercise(source, input: nil)
     typecheck do
       assert(source: string)
     end
-
-    source = Code.remove_redundant_indentation(source)
 
     current_exercise_index = increment_exercise_counter
 
     basename = "temp#{current_exercise_index}"
     source_path = Pathname.new "#{basename}.cpp"
     executable_path = Pathname.new "#{basename}.exe"
-    
-    File.open(source_path, 'w') do |out|
-      out.puts source
-    end
+
+    formatted_source = format_inline(source, file: source_path)
     
     Cpp.compile source_path
 
@@ -59,13 +86,23 @@ class Context
       input_message = ""
     end
 
-    <<-END
-    <section class="interpretation-question">
-      <h1>Exercise #{current_exercise_index}</h1>
+    format_exercise(<<-END, index: current_exercise_index)
       <p>What is the output of the following code?</p>
-      <div class="code"><pre>#{Code.format_file(source_path).strip}</pre></div>
+      #{formatted_source}
       #{input_message}
       <p>Output: #{Quiz.validated_input { verbatim output }}</p>
+    END
+  end
+
+  def format_exercise(body, index: increment_exercise_counter)
+    typecheck do
+      assert(body: string)
+    end
+
+    <<-END
+    <section class="question">
+      <h1>Exercise #{index}</h1>
+      #{body}
     </section>
     END
   end
