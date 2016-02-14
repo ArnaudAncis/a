@@ -16,6 +16,13 @@ class Context
   include Contracts::TypeChecking
   include Html::Generation
 
+  def initialize
+    @last_exercise_index = 0
+  end
+
+  def increment_exercise_counter
+    @last_exercise_index += 1
+  end
 
   def compile(path)
     typecheck do
@@ -30,8 +37,11 @@ class Context
       assert(source: string)
     end
 
-    source_path = Pathname.new 'temp.cpp'
-    executable_path = Pathname.new 'temp.exe'
+    current_exercise_index = increment_exercise_counter
+
+    basename = "temp#{current_exercise_index}"
+    source_path = Pathname.new "#{basename}.cpp"
+    executable_path = Pathname.new "#{basename}.exe"
     
     File.open(source_path, 'w') do |out|
       out.puts source
@@ -49,7 +59,7 @@ class Context
 
     <<-END
     <section class="interpretation-question">
-      <h1>Interpretation Exercise</h1>
+      <h1>Exercise #{current_exercise_index}</h1>
       <p>What is the output of the following code?</p>
       <div class="code"><pre>#{Code.format_file(source_path).strip}</pre></div>
       #{input_message}

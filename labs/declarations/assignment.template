@@ -64,7 +64,47 @@
               int x;
               std::cin >> x;
 
-              std::cout << x << std::endl;
+              std::cout << 2 * x << std::endl;
+
+              return 0;
+            }
+          END
+      %>
+
+      <%= interpret_exercise(<<-END, input: '8')
+            #include <iostream>
+
+            int main()
+            {
+              int x;
+              std::cin >> x;
+
+              std::cout << (x ^ 2) << std::endl;
+
+              return 0;
+            }
+          END
+      %>
+
+      <%= interpret_exercise(<<-END, input: '5 1 2 3 4 5')
+            #include <iostream>
+
+            int main()
+            {
+              int n;
+              std::cin >> n;
+
+              int total = 0;
+              for ( int i = 0; i != n; ++i )
+              {
+                int x;
+                std::cin >> x;
+                total += x;
+              }
+
+              std::cout << total << std::endl;
+
+              return 0;
             }
           END
       %>
