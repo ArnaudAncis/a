@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+      
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Preprocessor</div>
+    </header>
+    <div id="contents">
+
+      <%= interpret_exercise <<-END
+            #include <iostream>
+            #include <string>
+            #define FOO
+  
+            int main()
+            {
+              #ifndef FOO
+              int x = 10;
+              #else
+              std::string x = "qux";
+              #endif
+              
+              std::cout << x << std::endl;
+
+              return 0;
+            }
+          END
+      %>
+
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+  </script>
+</html>
