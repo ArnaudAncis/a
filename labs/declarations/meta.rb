@@ -37,6 +37,8 @@ class Context
       assert(source: string)
     end
 
+    source = Code.remove_redundant_indentation(source)
+
     current_exercise_index = increment_exercise_counter
 
     basename = "temp#{current_exercise_index}"
