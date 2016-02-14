@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+      
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Declarations</div>
+    </header>
+    <div id="contents">
+      <p>
+        Reminder: you might need the reference to find out what code does.
+      </p>
+
+      <%= interpret_exercise <<-END
+            #include <iostream>
+
+            int main()
+            {
+              std::cout << "Hello world" << std::endl;
+
+              return 0;
+            }
+          END
+      %>
+
+      <%= interpret_exercise(<<-END, input: '5')
+            #include <iostream>
+
+            int main()
+            {
+              int x;
+              std::cin >> x;
+
+              std::cout << x << std::endl;
+            }
+          END
+      %>
+
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+  </script>
+</html>
