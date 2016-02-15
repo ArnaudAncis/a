@@ -1,0 +1,71 @@
+<% require 'Settings' %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM</title>
+    <link rel="stylesheet" href="<%= Settings::SHARED_URL %>/ucll.css">
+    <script src="<%= Settings::SHARED_URL %>/jquery.js"></script>
+    <script src="<%= Settings::SHARED_URL %>/underscore.js"></script>
+    <style>
+      #reference-table {
+        margin-left: auto;
+        margin-right: auto;
+        width: 75%;
+        border: 1px solid black;
+        padding: 10px;
+        box-shadow: 10px 10px 5px #AAAAAA;
+      }
+      #reference-table th {
+        padding: 10px;
+        width: 40%;
+      }
+      #reference-table tr {
+        text-align: center;
+      }
+      #reference-table tr.header {
+        font-size: 2em;
+        background: #AAAAAA;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">PVM</div>
+    </header>
+
+    <div id="contents">
+      <section>      
+        <table id="reference-table">
+          <tbody>
+            <tr class="header">
+              <td colspan="2">Reference</td>
+            </tr>
+            <tr>
+              <th><a href="reference/full-edition.pdf">Full Edition</a></th>
+              <th><a href="reference/limited-edition.pdf">Limited Edition</a></th>
+            </tr>
+            <tr>
+              <td>This is the complete reference.</td>
+              <td>
+                This is the document you'll get at the exam.
+                It lacks examples, model exam questions, etc.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ul>
+          <%= topic('pvm', 'Course Introduction') %>
+          <%= topic('cpp-intro', 'C++ Introduction') %>
+          <%= topic('declarations', 'Declarations') %>
+          <%= topic('preprocessor', 'The Preprocessor') %>
+          <%= topic('allocation-methods', 'Allocation Methods') %>
+          <%= topic('pointers', 'Pointers') %>          
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
