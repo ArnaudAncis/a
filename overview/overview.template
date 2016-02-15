@@ -8,26 +8,54 @@
     <script src="<%= Settings::SHARED_URL %>/jquery.js"></script>
     <script src="<%= Settings::SHARED_URL %>/underscore.js"></script>
     <style>
-      #reference-table {
+      .center {
         margin-left: auto;
         margin-right: auto;
+      }      
+
+      #reference-table {
         width: 75%;
         border: 1px solid black;
         padding: 10px;
         box-shadow: 10px 10px 5px #AAAAAA;
       }
+      
       #reference-table th {
         padding: 10px;
         width: 40%;
       }
+      
       #reference-table tr {
         text-align: center;
       }
+      
       #reference-table tr.header {
         font-size: 2em;
         background: #AAAAAA;
         font-weight: bold;
       }
+
+      #course-material {
+        width: 70%;
+      }
+
+      #course-material th {
+        background: #AAAAAA;
+        width: 50%;
+      }
+
+      #course-material td:nth-child(1) {
+        text-align: center;
+      }
+
+      #course-material td:nth-child(2) {
+        text-align: center;
+      }
+
+      #course-material tr:nth-child(odd) {
+        background: #DDDDDD;
+      }
+
     </style>
   </head>
 
@@ -38,7 +66,7 @@
 
     <div id="contents">
       <section>      
-        <table id="reference-table">
+        <table class="center" id="reference-table">
           <tbody>
             <tr class="header">
               <td colspan="2">Reference</td>
@@ -57,13 +85,35 @@
           </tbody>
         </table>
 
-        <ul>
-          <%= topic('pvm', 'Course Introduction') %>
-          <%= topic('cpp-intro', 'C++ Introduction') %>
-          <%= topic('declarations', 'Declarations') %>
-          <%= topic('preprocessor', 'The Preprocessor') %>
-          <%= topic('allocation-methods', 'Allocation Methods') %>
-          <%= topic('pointers', 'Pointers') %>          
+        <table id="course-material" class="center" style="margin-top: 50px;">
+          <tr>
+            <th>Slides</td>
+            <th>Lab Assignments</th>
+          </tr>
+          <tr>
+            <td><%= topic('pvm', 'Course Introduction') %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= topic('cpp-intro', 'C++ Introduction') %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= topic('declarations', 'Declarations') %></td>
+            <td><%= lab('declarations', 'Declarations') %></td>
+          </tr>
+          <tr>
+            <td><%= topic('preprocessor', 'The Preprocessor') %></td>
+            <td><%= lab('preprocessor', 'The Preprocessor') %></td>
+          </tr>
+          <tr>
+            <td><%= topic('allocation-methods', 'Allocation Methods') %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= topic('pointers', 'Pointers') %></td>
+            <td></td>
+          </tr>
         </ul>
       </section>
     </div>

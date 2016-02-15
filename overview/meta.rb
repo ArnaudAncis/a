@@ -15,7 +15,19 @@ class Context
     then abort "ERROR: No directory #{name}"
     end
 
-    %{<li><a href="topics/#{name}.pdf">#{description}</a></li>}
+    %{<a href="topics/#{name}.pdf">#{description}</a>}
+  end
+
+  def lab(name, description)
+    typecheck binding do
+      assert(name: string, description: string)
+    end
+
+    if not File.directory? "../labs/#{name}"
+    then abort "ERROR: No directory #{name}"
+    end
+
+    %{<a href="labs/#{name}/assignment.html">#{description}</a>}
   end
 end
 
@@ -34,5 +46,5 @@ meta_object do
   uploadable('overview.html')
   upload_action
 
-  group_action(:full, [:overview, :upload])
+  group_action(:full, [:html, :upload])
 end
