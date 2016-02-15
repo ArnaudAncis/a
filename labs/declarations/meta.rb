@@ -43,7 +43,7 @@ class Context
       assert(path: file)
     end
     
-    %{<div class="code" id="code#{increment_code_index}"><pre>#{Html.escape(IO.read(path).strip)}</pre></div>}
+    %{<div class="source-editor" id="code#{increment_code_index}"><pre>#{Html.escape(IO.read(path).strip)}</pre></div>}
   end
 
   def format_inline(source, file: 'temp-noupload.cpp')
