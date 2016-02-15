@@ -19,10 +19,15 @@ class Context
 
   def initialize
     @last_exercise_index = 0
+    @last_code_index = 0
   end
 
   def increment_exercise_counter
     @last_exercise_index += 1
+  end
+
+  def increment_code_index
+    @last_code_index += 1
   end
 
   def compile(path)
@@ -38,7 +43,7 @@ class Context
       assert(path: file)
     end
     
-    %{<div class="code"><pre>#{Code.format_file(path).strip}</pre></div>}
+    %{<div class="code" id="code#{increment_code_index}"><pre>#{Html.escape(IO.read(path).strip)}</pre></div>}
   end
 
   def format_inline(source, file: 'temp-noupload.cpp')
