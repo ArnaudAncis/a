@@ -230,7 +230,7 @@
 
             <<-END
               <p>
-                Split the above file in several smaller files. Make use of header
+                Split the source code below in several smaller files. Make use of header
                 files and include guards.
               </p>
               
