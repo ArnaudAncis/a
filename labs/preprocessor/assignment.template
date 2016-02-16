@@ -41,6 +41,22 @@
         margin-right: auto;
         text-align: center;
       }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 10px auto;      
+        text-align: center;
+        cursor: help;
+      }
+
+      .hint {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
     </style>
   </head>
 
@@ -136,7 +152,6 @@
       %>
 
       <%= interpret_exercise(<<-END)
-            // In file App.cpp
             #ifndef FOO
             #define FOO
 
@@ -162,6 +177,14 @@
           END
       %>
 
+      <div data-revealer="Show hint" class="hint">
+        <p>
+          Ask yourself what <code>#include __FILE__</code> does.
+          Use the ability to modify code in the code editor above to simulate what happens
+          during preprocessing.
+        </p>
+      </div>
+                                  
       <%= format_exercise do
             source = <<-END
               #include <iostream>
@@ -235,6 +258,7 @@
               </p>
               
               #{source_editor source}
+             
               #{solution_link 'split-solution.txt'}
             END
           end
@@ -245,8 +269,10 @@
 
   <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+  <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>  
   <script>
     Quiz.formatQuizzes();
     SourceEditor.initialize();
+    Revealer.initialize();
   </script>
 </html>

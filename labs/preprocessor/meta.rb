@@ -81,6 +81,10 @@ class Context < SharedContext
     executable_path = Pathname.new "#{basename}.exe"
 
     formatted_source = source_editor(source)
+
+    File.open(source_path, 'w') do |out|
+      out.write(source)
+    end
     
     output = Cpp.compile_and_run(source_path, input: input).strip
 
