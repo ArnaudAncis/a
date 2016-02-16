@@ -42,4 +42,18 @@ class SharedContext
 
     %{<div class="source-editor" id="code#{source_editor_counter.next}"><pre>#{source}</pre></div>}
   end
+
+  def format_exercise(index: increment_exercise_counter)
+    typecheck do
+      assert(index: integer & positive)
+    end
+
+    <<-END
+    <section class="question">
+      <h1>Exercise #{index}</h1>
+      #{yield}
+    </section>
+    END
+  end
+
 end
