@@ -6,14 +6,14 @@ require 'Upload'
 require 'Html'
 require 'Environment'
 require 'pathname'
-
+require '../shared.rb'
 
 module Quiz
   extend Html::Generation::Quiz
 end
 
 
-class Context
+class Context < SharedContext
   include Contracts::TypeChecking
   include Html::Generation
 
@@ -30,13 +30,13 @@ class Context
     @last_code_index += 1
   end
 
-  def compile(path)
-    typecheck do
-      assert(path: file)
-    end
+  # def compile(path)
+  #   typecheck do
+  #     assert(path: file)
+  #   end
 
-    Cpp.compile(path)
-  end
+  #   Cpp.compile(path)
+  # end
 
   def format_source_file(path)
     typecheck do
@@ -80,7 +80,7 @@ class Context
     source_path = Pathname.new "#{basename}.cpp"
     executable_path = Pathname.new "#{basename}.exe"
 
-    formatted_source = format_inline(source, file: source_path)
+    formatted_source = source_editor(source)
     
     output = Cpp.compile_and_run(source_path, input: input).strip
 

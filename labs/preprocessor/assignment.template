@@ -234,7 +234,7 @@
                 files and include guards.
               </p>
               
-              #{format_inline source}
+              #{source_editor source}
               #{solution_link 'split-solution.txt'}
             END
           end
