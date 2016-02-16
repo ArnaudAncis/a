@@ -243,7 +243,10 @@
     </div>
   </body>
 
+  <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
   <script>
     Quiz.formatQuizzes();
+    SourceEditor.initialize();
   </script>
 </html>
