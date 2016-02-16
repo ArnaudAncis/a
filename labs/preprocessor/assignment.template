@@ -151,6 +151,19 @@
           END
       %>
 
+      <div data-revealer="Show hint" class="hint">
+        <p>
+          First, look for the difference with the previous exercise.
+        </p>
+        <div data-revealer="Show hint" class="hint">
+          <p>
+            The definition for <code>unless</code> differs.
+            Edit the code above to simulate what
+            happens during preprocessing.
+          </p>
+        </div>
+      </div>
+                                        
       <%= interpret_exercise(<<-END)
             #ifndef FOO
             #define FOO
