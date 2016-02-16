@@ -30,14 +30,6 @@ class Context < SharedContext
     @last_code_index += 1
   end
 
-  # def compile(path)
-  #   typecheck do
-  #     assert(path: file)
-  #   end
-
-  #   Cpp.compile(path)
-  # end
-
   def format_source_file(path)
     typecheck do
       assert(path: file)
@@ -102,19 +94,6 @@ class Context < SharedContext
         <p>Output: #{Quiz.validated_input { verbatim output }}</p>
       END
     end
-  end
-
-  def format_exercise(index: increment_exercise_counter)
-    typecheck do
-      assert(index: integer & positive)
-    end
-
-    <<-END
-    <section class="question">
-      <h1>Exercise #{index}</h1>
-      #{yield}
-    </section>
-    END
   end
 
   def produce_output(basename, input: true)
