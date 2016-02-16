@@ -6,14 +6,14 @@ require 'Upload'
 require 'Html'
 require 'Environment'
 require 'pathname'
-
+require '../shared.rb'
 
 module Quiz
   extend Html::Generation::Quiz
 end
 
 
-class Context
+class Context < SharedContext
   include Contracts::TypeChecking
   include Html::Generation
 
@@ -80,8 +80,12 @@ class Context
     source_path = Pathname.new "#{basename}.cpp"
     executable_path = Pathname.new "#{basename}.exe"
 
-    formatted_source = format_inline(source, file: source_path)
-    
+    formatted_source = source_editor(source)
+
+    File.open(source_path, 'w') do |out|
+      out.write(source)
+    end
+
     output = Cpp.compile_and_run(source_path, input: input).strip
 
     if input
@@ -98,19 +102,6 @@ class Context
         <p>Output: #{Quiz.validated_input { verbatim output }}</p>
       END
     end
-  end
-
-  def format_exercise(index: increment_exercise_counter)
-    typecheck do
-      assert(index: integer & positive)
-    end
-
-    <<-END
-    <section class="question">
-      <h1>Exercise #{index}</h1>
-      #{yield}
-    </section>
-    END
   end
 
   def produce_output(basename, input: true)
