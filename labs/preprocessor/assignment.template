@@ -155,7 +155,7 @@
         <p>
           First, look for the difference with the previous exercise.
         </p>
-        <div data-revealer="Show hint" class="hint">
+        <div data-revealer="Show further hint" class="hint">
           <p>
             The definition for <code>unless</code> differs.
             Edit the code above to simulate what
