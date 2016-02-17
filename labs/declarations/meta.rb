@@ -69,6 +69,12 @@ class Context < SharedContext
     format_source_file(path)
   end
 
+  def interpretation_exercise(&block)
+    format_exercise do
+      InterpretationExerciseContext.new.instance_eval(&block)
+    end
+  end
+
   def interpret_exercise(source, input: nil)
     typecheck do
       assert(source: string)

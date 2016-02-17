@@ -54,17 +54,25 @@
         Reminder: you might need the reference to find out what code does.
       </p>
 
-      <%= interpret_exercise <<-END
-            #include <iostream>
+      <%=
+         interpretation_exercise do
+           self.source = <<-END
+             #include <iostream>
 
-            int main()
-            {
-              std::cout << "Hello world" << std::endl;
+             int main()
+             {
+               std::cout << "Hello world" << std::endl;
 
-              return 0;
-            }
-          END
-      %>
+               return 0;
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             #{show_output_field}
+           END
+         end
+      %>          
 
       <%= interpret_exercise(<<-END, input: '5')
             #include <iostream>
