@@ -1,5 +1,9 @@
+require 'Contracts'
 require 'Html'
-require 'Html'
+
+module Quiz
+  extend Html::Generation::Quiz
+end
 
 
 class Counter
@@ -9,6 +13,46 @@ class Counter
 
   def next
     @last += 1
+  end
+end
+
+
+class InterpretationExerciseContext
+  include Contracts::TypeChecking
+
+  attr_accessor :source, :input, :output
+  
+  def show_source_editor(**opts)
+    typecheck do
+      assert(source: string)
+    end
+    
+    Html::Generation.source_editor(source, **opts)
+  end
+
+  def show_input
+    typecheck do
+      assert(input: string)
+    end
+    
+    %{<p>Input: <code>#{input}</code></p>}
+  end
+
+  def compute_output
+    typecheck do
+      assert(source: string, output: string | value(nil))
+    end
+    
+    self.output = Cpp.compile_and_run_source(source, input: input).strip
+  end
+
+  def show_output_field(auto_compute: true)
+    if !output && auto_compute then
+      compute_output
+    end
+
+    out = output
+    %{<p>Output: #{Quiz.validated_input { verbatim out }}</p>}
   end
 end
 
