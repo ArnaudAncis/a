@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>PVM Assignment</title>
     <%= default_externals %>
-    
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+
     <%= Html::Generation::Quiz.setup %>
     <style>
       #colours {
@@ -12,7 +14,7 @@
         margin-right: auto;
         width: 50%;
       }
-      
+
       #colours td:first-child {
         color: #FFF;
         text-align: center;
@@ -72,7 +74,20 @@
              #{show_output_field}
            END
          end
-      %>          
+      %>
+
+      <%=
+         quick_interpretation_exercise(<<-END)
+           #include <iostream>
+
+           int main()
+           {
+             std::cout << "Hello world" << std::endl;
+
+             return 0;
+           }
+         END
+      %>
 
       <%= interpret_exercise(<<-END, input: '5')
             #include <iostream>
@@ -158,13 +173,13 @@
             {
               int result = std::numeric_limits<int>::max();
               int n = next_int();
-              
+
               for ( int i = 0; i != n; ++i )
               {
                 result = pick(result, next_int());
               }
 
-              std::cout << result << std::endl;            
+              std::cout << result << std::endl;
 
               return 0;
             }
@@ -173,7 +188,7 @@
             {
               int x;
               std::cin >> x;
-              
+
               return x;
             }
 
@@ -244,7 +259,7 @@
                   return x * x;
               }
             END
-            
+
             <<-END
               <p>Add the necessary declarations so as to make this code compile.</p>
               #{source_editor source}
@@ -320,8 +335,6 @@
     </div>
   </body>
 
-  <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
   <script>
     Quiz.formatQuizzes();
     SourceEditor.initialize();

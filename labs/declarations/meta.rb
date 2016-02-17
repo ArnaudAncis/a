@@ -70,10 +70,29 @@ class Context < SharedContext
   end
 
   def interpretation_exercise(&block)
-    format_exercise do
-      InterpretationExerciseContext.new.instance_eval(&block)
+    format_exercise do |exercise_index|
+      InterpretationExerciseContext.new(exercise_index).instance_eval(&block)
     end
   end
+  
+  def quick_interpretation_exercise(source, input: nil)
+    typecheck do
+      assert(source: string)
+    end
+
+    interpretation_exercise do
+      self.source = source
+      self.input = input
+
+      <<-END
+        <p>What is the output of the following code?</p>
+        #{show_source_editor}
+        #{if input then show_input else '' end}
+        #{show_output_field}
+      END
+    end
+  end
+
 
   def interpret_exercise(source, input: nil)
     typecheck do
