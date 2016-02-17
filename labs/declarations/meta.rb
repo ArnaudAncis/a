@@ -18,115 +18,11 @@ class Context < SharedContext
   include Html::Generation
 
   def initialize
-    @last_exercise_index = 0
     @last_code_index = 0
-  end
-
-  def increment_exercise_counter
-    @last_exercise_index += 1
   end
 
   def increment_code_index
     @last_code_index += 1
-  end
-
-  def compile(path)
-    typecheck do
-      assert(path: file)
-    end
-
-    Cpp.compile(path)
-  end
-
-  def format_source_file(path)
-    typecheck do
-      assert(path: file)
-    end
-    
-    %{<div class="source-editor" id="code#{increment_code_index}"><pre>#{Html.escape(IO.read(path).strip)}</pre></div>}
-  end
-
-  def format_inline(source, file: 'temp.cpp')
-    typecheck do
-      assert(source: string, file: string | pathname)
-    end
-
-    if String === file
-    then path = Pathname.new file
-    else path = file
-    end
-
-    typecheck do
-      assert(path: pathname)
-    end
-
-    source = Code.remove_redundant_indentation(source)
-
-    File.open(path, 'w') do |out|
-      out.puts source
-    end
-
-    format_source_file(path)
-  end
-
-  def interpretation_exercise(&block)
-    format_exercise do |exercise_index|
-      InterpretationExerciseContext.new(exercise_index).instance_eval(&block)
-    end
-  end
-  
-  def quick_interpretation_exercise(source, input: nil)
-    typecheck do
-      assert(source: string)
-    end
-
-    interpretation_exercise do
-      self.source = source
-      self.input = input
-
-      <<-END
-        <p>What is the output of the following code?</p>
-        #{show_source_editor}
-        #{if input then show_input else '' end}
-        #{show_output_field}
-      END
-    end
-  end
-
-
-  def interpret_exercise(source, input: nil)
-    typecheck do
-      assert(source: string)
-    end
-
-    current_exercise_index = increment_exercise_counter
-
-    basename = "temp#{current_exercise_index}"
-    source_path = Pathname.new "#{basename}.cpp"
-    executable_path = Pathname.new "#{basename}.exe"
-
-    formatted_source = source_editor(source)
-
-    File.open(source_path, 'w') do |out|
-      out.write(source)
-    end
-
-    output = Cpp.compile_and_run(source_path, input: input).strip
-
-    if input
-      input_message = %{<p>Input: <code>#{input}</code></p>}
-    else
-      input_message = ""
-    end
-
-    format_exercise(index: current_exercise_index) do
-      <<-END
-        <p>What is the output of the following code?</p>
-        #{formatted_source}
-        #{input_message}
-        <p>Output: #{Quiz.validated_input { verbatim output }}</p>
-      END
-    end
   end
 
   def produce_output(basename, input: true)

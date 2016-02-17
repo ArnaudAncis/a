@@ -57,26 +57,6 @@
       </p>
 
       <%=
-         interpretation_exercise do
-           self.source = <<-END
-             #include <iostream>
-
-             int main()
-             {
-               std::cout << "Hello world" << std::endl;
-
-               return 0;
-             }
-           END
-
-           <<-END
-             #{show_source_editor}
-             #{show_output_field}
-           END
-         end
-      %>
-
-      <%=
          quick_interpretation_exercise(<<-END)
            #include <iostream>
 
@@ -89,7 +69,7 @@
          END
       %>
 
-      <%= interpret_exercise(<<-END, input: '5')
+      <%= quick_interpretation_exercise(<<-END, input: '5')
             #include <iostream>
 
             int main()
@@ -104,7 +84,7 @@
           END
       %>
 
-      <%= interpret_exercise(<<-END, input: '8')
+      <%= quick_interpretation_exercise(<<-END, input: '8')
             #include <iostream>
 
             int main()
@@ -119,7 +99,7 @@
           END
       %>
 
-      <%= interpret_exercise(<<-END, input: 'abcde')
+      <%= quick_interpretation_exercise(<<-END, input: 'abcde')
             #include <iostream>
             #include <string>
 
@@ -139,7 +119,7 @@
           END
       %>
 
-      <%= interpret_exercise(<<-END, input: '5 1 2 3 4 5')
+      <%= quick_interpretation_exercise(<<-END, input: '5 1 2 3 4 5')
             #include <iostream>
 
             int main()
@@ -162,7 +142,7 @@
           END
       %>
 
-      <%= interpret_exercise(<<-END, input: '10 6 4 1 8 7 -2 3 8 4 0')
+      <%= quick_interpretation_exercise(<<-END, input: '10 6 4 1 8 7 -2 3 8 4 0')
             #include <iostream>
             #include <limits>
 
