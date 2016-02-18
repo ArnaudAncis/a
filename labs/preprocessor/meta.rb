@@ -30,37 +30,6 @@ class Context < SharedContext
     @last_code_index += 1
   end
 
-  def format_source_file(path)
-    typecheck do
-      assert(path: file)
-    end
-    
-    %{<div class="source-editor" id="code#{increment_code_index}"><pre>#{Html.escape(IO.read(path).strip)}</pre></div>}
-  end
-
-  def format_inline(source, file: 'temp-noupload.cpp')
-    typecheck do
-      assert(source: string, file: string | pathname)
-    end
-
-    if String === file
-    then path = Pathname.new file
-    else path = file
-    end
-
-    typecheck do
-      assert(path: pathname)
-    end
-
-    source = Code.remove_redundant_indentation(source)
-
-    File.open(path, 'w') do |out|
-      out.puts source
-    end
-
-    format_source_file(path)
-  end
-
   def interpret_exercise(source, input: nil)
     typecheck do
       assert(source: string)
@@ -77,7 +46,7 @@ class Context < SharedContext
     File.open(source_path, 'w') do |out|
       out.write(source)
     end
-    
+
     output = Cpp.compile_and_run(source_path, input: input).strip
 
     if input
@@ -100,7 +69,7 @@ class Context < SharedContext
     typecheck do
       assert(basename: string)
     end
- 
+
     source_path = Pathname.new("#{basename}.cpp")
     input_path = Pathname.new("#{basename}-input.txt")
     output_path = Pathname.new("#{basename}-output.txt")
@@ -116,6 +85,24 @@ class Context < SharedContext
       output = Cpp.compile_and_run(source_path, input: input)
 
       out.write(output)
+    end
+  end
+
+  def interpretation(source, input: nil)
+    typecheck do
+      assert(source: string)
+    end
+
+    exercise(Lib::Interpretation) do
+      self.source = source
+      self.input = input
+
+      <<-END
+        <p>What is the output of the following code?</p>
+        #{show_source_editor}
+        #{if input then show_input else '' end}
+        #{show_output_field}
+      END
     end
   end
 
@@ -139,7 +126,7 @@ meta_object do
   end
 
   html_template('assignment', context: Context.new, group_name: 'html')
-  
+
   uploadable('assignment.html')
   uploadable('split-solution.txt')
   upload_action

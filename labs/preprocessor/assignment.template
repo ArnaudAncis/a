@@ -66,7 +66,7 @@
     </header>
     <div id="contents">
 
-      <%= interpret_exercise <<-END
+      <%= interpretation <<-END
             #include <iostream>
             #include <string>
             
@@ -87,7 +87,7 @@
           END
       %>
 
-      <%= interpret_exercise <<-END
+      <%= interpretation <<-END
             #include <iostream>
             
             #define INIT 100
@@ -99,7 +99,7 @@
           END
       %>
 
-      <%= interpret_exercise(<<-END, input:'80 100')
+      <%= interpretation(<<-END, input:'80 100')
             #include <iostream>
 
             #define unless(x)              if (!(x))
@@ -125,7 +125,7 @@
           END
       %>
 
-      <%= interpret_exercise(<<-END, input:'80 100')
+      <%= interpretation(<<-END, input:'80 100')
             #include <iostream>
 
             #define unless(x)              if (!x)
@@ -164,7 +164,7 @@
         </div>
       </div>
                                         
-      <%= interpret_exercise(<<-END)
+      <%= interpretation(<<-END)
             #ifndef FOO
             #define FOO
 
