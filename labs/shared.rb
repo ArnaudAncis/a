@@ -17,16 +17,20 @@ class Counter
 end
 
 
-class InterpretationExerciseContext
+class Exercise
   include Contracts::TypeChecking
 
   def initialize(exercise_index)
     @exercise_index = exercise_index
   end
-  
-  attr_accessor :source, :input, :output
+
   attr_reader :exercise_index
-  
+end
+
+
+module SourceCodeMixin
+  attr_accessor :source
+
   def show_source_editor(**opts)
     typecheck do
       assert(source: string)
@@ -34,6 +38,14 @@ class InterpretationExerciseContext
     
     Html::Generation.source_editor(source, **opts)
   end
+end
+
+
+class InterpretationExerciseContext < Exercise
+  include Contracts::TypeChecking
+  include SourceCodeMixin
+  
+  attr_accessor :input, :output
 
   def show_input
     typecheck do
