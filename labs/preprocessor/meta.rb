@@ -141,6 +141,7 @@ meta_object do
   html_template('assignment', context: Context.new, group_name: 'html')
   
   uploadable('assignment.html')
+  uploadable('split-solution.txt')
   upload_action
 
   group_action(:full, [:html, :upload])
