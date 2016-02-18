@@ -25,7 +25,7 @@ class Context < SharedContext
     @last_code_index += 1
   end
 
-  def quick_interpretation_exercise(source, input: nil)
+  def interpretation(source, input: nil)
     typecheck do
       assert(source: string)
     end

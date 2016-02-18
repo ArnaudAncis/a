@@ -79,7 +79,7 @@
       %>
 
       <%=
-         quick_interpretation_exercise(<<-END)
+         interpretation(<<-END)
            #include <iostream>
 
            int main()
@@ -91,7 +91,7 @@
          END
       %>
 
-      <%= quick_interpretation_exercise(<<-END, input: '5')
+      <%= interpretation(<<-END, input: '5')
             #include <iostream>
 
             int main()
@@ -106,7 +106,7 @@
           END
       %>
 
-      <%= quick_interpretation_exercise(<<-END, input: '8')
+      <%= interpretation(<<-END, input: '8')
             #include <iostream>
 
             int main()
@@ -121,7 +121,7 @@
           END
       %>
 
-      <%= quick_interpretation_exercise(<<-END, input: 'abcde')
+      <%= interpretation(<<-END, input: 'abcde')
             #include <iostream>
             #include <string>
 
@@ -141,7 +141,7 @@
           END
       %>
 
-      <%= quick_interpretation_exercise(<<-END, input: '5 1 2 3 4 5')
+      <%= interpretation(<<-END, input: '5 1 2 3 4 5')
             #include <iostream>
 
             int main()
@@ -164,7 +164,7 @@
           END
       %>
 
-      <%= quick_interpretation_exercise(<<-END, input: '10 6 4 1 8 7 -2 3 8 4 0')
+      <%= interpretation(<<-END, input: '10 6 4 1 8 7 -2 3 8 4 0')
             #include <iostream>
             #include <limits>
 
