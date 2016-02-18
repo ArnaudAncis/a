@@ -57,6 +57,28 @@
       </p>
 
       <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int main()
+             {
+               std::cout << "Hello world" << std::endl;
+
+               return 0;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
          quick_interpretation_exercise(<<-END)
            #include <iostream>
 

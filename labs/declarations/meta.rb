@@ -25,6 +25,24 @@ class Context < SharedContext
     @last_code_index += 1
   end
 
+  def quick_interpretation_exercise(source, input: nil)
+    typecheck do
+      assert(source: string)
+    end
+
+    exercise(Lib::Interpretation) do
+      self.source = source
+      self.input = input
+
+      <<-END
+        <p>What is the output of the following code?</p>
+        #{show_source_editor}
+        #{if input then show_input else '' end}
+        #{show_output_field}
+      END
+    end                                  
+  end
+  
   def produce_output(basename, input: true)
     typecheck do
       assert(basename: string)
