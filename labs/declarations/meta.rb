@@ -17,14 +17,6 @@ class Context < SharedContext
   include Contracts::TypeChecking
   include Html::Generation
 
-  def initialize
-    @last_code_index = 0
-  end
-
-  def increment_code_index
-    @last_code_index += 1
-  end
-
   def interpretation(source, input: nil)
     typecheck do
       assert(source: string)
