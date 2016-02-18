@@ -41,7 +41,7 @@ module SourceCodeMixin
 end
 
 
-class InterpretationExerciseContext < Exercise
+class InterpretationExercise < Exercise
   include Contracts::TypeChecking
   include SourceCodeMixin
   
@@ -126,7 +126,7 @@ class SharedContext
 
   def interpretation_exercise(&block)
     format_exercise do |exercise_index|
-      InterpretationExerciseContext.new(exercise_index).instance_eval(&block)
+      InterpretationExercise.new(exercise_index).instance_eval(&block)
     end
   end
   
