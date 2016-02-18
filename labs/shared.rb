@@ -20,7 +20,12 @@ end
 class InterpretationExerciseContext
   include Contracts::TypeChecking
 
+  def initialize(exercise_index)
+    @exercise_index = exercise_index
+  end
+  
   attr_accessor :source, :input, :output
+  attr_reader :exercise_index
   
   def show_source_editor(**opts)
     typecheck do
@@ -61,21 +66,23 @@ class SharedContext
   include Contracts::TypeChecking
   include Html::Generation
 
-  def self.create_counter(symbol)
-    instance_variable = "@#{symbol.to_s}"
+  def self.create_counters(*symbols)
+    symbols.each do |symbol|
+      instance_variable = "@#{symbol.to_s}"
 
-    define_method symbol do
-      counter = instance_variable_get(instance_variable)
+      define_method symbol do
+        counter = instance_variable_get(instance_variable)
 
-      unless counter then
-        instance_variable_set(instance_variable, counter = Counter.new)
+        unless counter then
+          instance_variable_set(instance_variable, counter = Counter.new)
+        end
+
+        counter
       end
-
-      counter
-    end      
+    end
   end
-
-  create_counter :source_editor_counter
+  
+  create_counters :exercise_counter
 
   def source_editor(source)
     typecheck do
@@ -84,10 +91,34 @@ class SharedContext
 
     source = Html.escape(Code.remove_redundant_indentation(source)).strip
 
-    %{<div class="source-editor" id="code#{source_editor_counter.next}"><pre>#{source}</pre></div>}
+    %{<div class="source-editor"><pre>#{source}</pre></div>}
   end
 
-  def format_exercise(index: increment_exercise_counter)
+  def quick_interpretation_exercise(source, input: nil)
+    typecheck do
+      assert(source: string)
+    end
+
+    interpretation_exercise do
+      self.source = source
+      self.input = input
+
+      <<-END
+        <p>What is the output of the following code?</p>
+        #{show_source_editor}
+        #{if input then show_input else '' end}
+        #{show_output_field}
+      END
+    end
+  end
+
+  def interpretation_exercise(&block)
+    format_exercise do |exercise_index|
+      InterpretationExerciseContext.new(exercise_index).instance_eval(&block)
+    end
+  end
+  
+  def format_exercise(index: exercise_counter.next)
     typecheck do
       assert(index: integer & positive)
     end
@@ -95,7 +126,7 @@ class SharedContext
     <<-END
     <section class="question">
       <h1>Exercise #{index}</h1>
-      #{yield}
+      #{yield index}
     </section>
     END
   end
