@@ -27,7 +27,6 @@ class Exercise
   attr_reader :exercise_index
 end
 
-
 module SourceCodeMixin
   attr_accessor :source
 
@@ -41,35 +40,37 @@ module SourceCodeMixin
 end
 
 
-class InterpretationExercise < Exercise
-  include Contracts::TypeChecking
-  include SourceCodeMixin
-  
-  attr_accessor :input, :output
+module Lib
+  class Interpretation < Exercise
+    include Contracts::TypeChecking
+    include SourceCodeMixin
 
-  def show_input
-    typecheck do
-      assert(input: string)
-    end
-    
-    %{<p>Input: <code>#{input}</code></p>}
-  end
+    attr_accessor :input, :output
 
-  def compute_output
-    typecheck do
-      assert(source: string, output: string | value(nil))
-    end
-    
-    self.output = Cpp.compile_and_run_source(source, input: input).strip
-  end
+    def show_input
+      typecheck do
+        assert(input: string)
+      end
 
-  def show_output_field(auto_compute: true)
-    if !output && auto_compute then
-      compute_output
+      %{<p>Input: <code>#{input}</code></p>}
     end
 
-    out = output
-    %{<p>Output: #{Quiz.validated_input { verbatim out }}</p>}
+    def compute_output
+      typecheck do
+        assert(source: string, output: string | value(nil))
+      end
+
+      self.output = Cpp.compile_and_run_source(source, input: input).strip
+    end
+
+    def show_output_field(auto_compute: true)
+      if !output && auto_compute then
+        compute_output
+      end
+
+      out = output
+      %{<p>Output: #{Quiz.validated_input { verbatim out }}</p>}
+    end
   end
 end
 
@@ -126,7 +127,7 @@ class SharedContext
 
   def interpretation_exercise(&block)
     format_exercise do |exercise_index|
-      InterpretationExercise.new(exercise_index).instance_eval(&block)
+      Lib::Interpretation.new(exercise_index).instance_eval(&block)
     end
   end
   
@@ -143,4 +144,18 @@ class SharedContext
     END
   end
 
+  def exercise(exercise_context = Exercise, index: exercise_counter.next, &block)
+    typecheck do
+      assert(index: integer & positive)
+    end
+
+    ctx = exercise_context.new(index)
+
+    <<-END
+    <section class="question">
+      <h1>Exercise #{index}</h1>
+      #{ctx.instance_eval(&block)}
+    </section>
+    END
+  end
 end
