@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>PVM Assignment</title>
     <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+
     <%= Html::Generation::Quiz.setup %>
     <style>
       #colours {
@@ -11,7 +14,7 @@
         margin-right: auto;
         width: 50%;
       }
-      
+
       #colours td:first-child {
         color: #FFF;
         text-align: center;
@@ -26,11 +29,27 @@
       }
 
       input.correct {
-        background: green;
+        background: #AFA;
       }
 
       input.incorrect {
-        background: red;
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .message {
+        text-align: center;
+        width: 75%;
+        margin: 20px auto;
+        border: 1px solid black;
       }
     </style>
   </head>
@@ -39,18 +58,222 @@
     <header>
       <div class="center-vertically">Pointers</div>
     </header>
-
     <div id="contents">
-      <section id="toc">
-        <span>Table of Contents</span>
-        <div id="toc-container"></div>
-      </section>
+      <div class="message">
+        <p>
+          Some code fragments below have undefined results. If you think this is the case for a particular
+          exercise, fill in <code>???</code>.
+        </p>
+      </div>
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
 
-      <%= interpret_exercise 'interpret1' %>
+             int main()
+             {
+               int x = 5;
+               int* px = &x;
+
+               std::cout << *px << std::endl;
+
+               return 0;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int main()
+             {
+               int x = 5;
+               int* px = &x;
+
+               x = 10;
+
+               std::cout << *px << std::endl;
+
+               return 0;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int main()
+             {
+               int x = 5;
+               int* px = &x;
+
+               ++*px;
+
+               std::cout << x << std::endl;
+
+               return 0;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             void foo(int* x)
+             {
+               *x *= 2;
+             }
+
+             int main()
+             {
+               int x = 5;
+
+               foo(&x);
+
+               std::cout << x << std::endl;
+
+               return 0;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int* foo()
+             {
+               int x = 5;
+               return &x;
+             }
+
+             int main()
+             {
+               std::cout << *foo() << std::endl;
+
+               return 0;
+             }
+           END
+
+           self.output = '???'
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+        exercise do
+          extend SourceCodeMixin
+
+          self.source = <<-END
+            #include <iostream>
+
+            int main()
+            {
+              int x = 3, y = 4;
+
+              // function call to swap with x and y
+
+              std::cout << x << " " << y << std::endl;
+
+              return 0;
+            }
+          END
+
+          <<-END
+            <p>
+              Write a function <code>swap</code> that can be used
+              to exchange the values of two variables. Use pointers to make this possible.
+              For example, the code below should output <code>4&nbsp;3</code>.
+            </p>
+            #{show_source_editor}
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          extend SourceCodeMixin
+
+          self.source = <<-END
+            #include <iostream>
+
+            int main()
+            {
+              int x = 8, y = 1;
+
+              // function call to minmax with x and y
+
+              std::cout << x << " " << y << std::endl;
+
+              // function call to minmax with x and y
+
+              std::cout << x << " " << y << std::endl;
+
+              return 0;
+            }
+          END
+
+          <<-END
+            <p>
+              Write a function <code>minmax</code> that can be used
+              to find the minimum and maximum of two <code>int</code>s.
+              For example, the code below should output <code>1&nbsp;8&nbsp;1&nbsp;8</code>.
+            </p>
+            #{show_source_editor}
+          END
+        end
+      %>
+
     </div>
   </body>
 
   <script>
     Quiz.formatQuizzes();
+    SourceEditor.initialize();
   </script>
 </html>

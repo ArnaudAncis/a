@@ -4,50 +4,66 @@ require 'Code'
 require 'Cpp'
 require 'Upload'
 require 'Html'
+require 'Environment'
 require 'pathname'
-
+require '../shared.rb'
 
 module Quiz
   extend Html::Generation::Quiz
 end
 
 
-class Context
+class Context < SharedContext
   include Contracts::TypeChecking
   include Html::Generation
 
-
-  def compile(path)
+  def interpretation(source, input: nil)
     typecheck do
-      assert(path: file)
+      assert(source: string)
     end
 
-    Cpp.compile(path)
-  end
+    exercise(Lib::Interpretation) do
+      self.source = source
+      self.input = input
 
-  def interpret_exercise(basename)
+      <<-END
+        <p>What is the output of the following code?</p>
+        #{show_source_editor}
+        #{if input then show_input else '' end}
+        #{show_output_field}
+      END
+    end                                  
+  end
+  
+  def produce_output(basename, input: true)
     typecheck do
       assert(basename: string)
     end
-    
-    source_path = Pathname.new("#{basename}.cpp").expand_path
+ 
+    source_path = Pathname.new("#{basename}.cpp")
+    input_path = Pathname.new("#{basename}-input.txt")
+    output_path = Pathname.new("#{basename}-output.txt")
 
     typecheck do
-      assert(source_path: file)
+      assert(source_path: file,
+             input_path: file,
+             output_path: pathname)
     end
 
-    executable_path = Pathname.new("#{basename}.exe")
+    File.open(output_path, 'w') do |out|
+      input = if input then input_path.read else nil end
+      output = Cpp.compile_and_run(source_path, input: input)
 
-    Cpp.compile source_path
-    output = `#{executable_path}`.strip
+      out.write(output)
+    end
+  end
 
-    <<-END
-    <section class="interpretation-question">
-      <h1>Interpretation Exercise</h1>
-      <div class="code"><pre>#{Code.format_file(source_path).strip}</pre></div>
-      <p>Output: #{Quiz.validated_input { verbatim output }}</p>
-    </section>
-    END
+  def solution_link(filename)
+    typecheck do
+      assert(filename: string)
+    end
+
+    %{<div class="solution"><a href="#{filename}">Solution</a></div>}
   end
 end
 
@@ -58,13 +74,15 @@ meta_object do
   extend Upload::Mixin
 
   def remote_directory
-    world.parent.remote_directory
+    world.parent.remote_directory + Pathname.pwd.basename.to_s
   end
 
   html_template('assignment', context: Context.new, group_name: 'html')
   
   uploadable('assignment.html')
+  uploadable( *Dir['*.cpp'].select { |file| /temp/ !~ file } )
+  uploadable_globs('*.txt')
   upload_action
 
-  group_action(:full, [:upload])
+  group_action(:full, [:html, :upload])
 end
