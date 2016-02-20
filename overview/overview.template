@@ -112,6 +112,14 @@
           </tr>
           <tr>
             <td><%= topic('pointers', 'Pointers') %></td>
+            <td><%= lab('pointers', 'Pointers') %></td>
+          </tr>
+          <tr>
+            <td><%= topic('heap-allocation', 'Heap Allocation') %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= topic('arrays', 'Arrays') %></td>
             <td></td>
           </tr>
         </ul>
