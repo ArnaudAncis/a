@@ -1,0 +1,202 @@
+\documentclass{../ucll-slides}
+\usepackage{../pvm}
+\usepackage{bbding}
+\usepackage{wasysym}
+
+\usetikzlibrary{shadows,shapes.multipart}
+
+\title{Arrays}
+\author{Fr\'ed\'eric Vogels}
+
+
+\newenvironment{procontralist}{
+  \begingroup
+  \newcommand{\pro}{\item[\Checkmark]}
+  \newcommand{\con}{\item[\XSolidBrush]}
+  \begin{itemize}
+  }{
+  \end{itemize}
+  \endgroup}
+
+
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{C-style Arrays}
+  \begin{itemize}
+    \item Syntactically resemble Java arrays
+    \item Arrays in Java are evil (too unflexible, use {\tt ArrayList})
+    \item Arrays in \cpp\ are particularly evil
+    \item Complicated rules
+    \item ``Shortcuts'' that complicate things even more
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quick Intermezzo: {\tt sizeof}}
+  \begin{itemize}
+    \item \cpp\ has {\tt sizeof({\it id})} operator
+    \item Can be used to find out size
+    \item Works on \emph{static} type
+  \end{itemize}
+  \code[font size=\small,frame=lines,width=.9\linewidth]{sizeof-examples.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quiz: What's the Output?}
+  \code[font size=\small,frame=lines,width=.9\linewidth]{sizeof-array.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reasoning}
+  \begin{itemize}
+    \item When a {\tt T[]} is passed as parameter, its type decays to {\tt T*}
+    \item The pointer points to the first element in the array
+    \item $\Rightarrow$ You can also index pointers: {\tt p[0]} is same as {\tt *p}
+    \item No way of knowing how large the array is
+    \item Solution: pass along size as extra parameter
+    \item Not knowing size is typical cause of buffer overflows
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quiz: What's the Problem?}
+  \code[font size=\small,frame=lines,width=.9\linewidth]{return-array.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Answer}
+  \begin{itemize}
+    \item It doesn't compile
+    \item Cannot return arrays
+    \item Use pointer instead
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quiz: What's the Problem?}
+  \code[font size=\small,frame=lines,width=.9\linewidth]{return-array2.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Answer}
+  \structure{Problem \#1}
+  \begin{itemize}
+    \item Array is created on stack
+    \item Array size needs to be known at compile time
+    \item Heap allocation is necessary
+  \end{itemize}
+  \vskip5mm
+  \structure{Problem \#2}
+  \begin{itemize}
+    \item Array is created on stack
+    \item Memory gets deallocated upon function exit
+    \item You've got yourself a dangling pointer
+  \end{itemize}
+  \vskip5mm
+  \structure{Problem \#3}
+  \begin{itemize}
+    \item Array size is unknown
+    \item {\tt for} loop cannot possibly know when to stop iterating
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\cpp\ Alternatives}
+  \structure{Static Arrays (Size Known at Compile Time)}
+  \begin{center} \tt
+    std::array<T, N>
+  \end{center}
+  \vskip5mm
+  \structure{Dynamic List}
+  \begin{center} \tt
+    std::vector<T>
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\tt std::array<T, N>}
+  \begin{center}
+    \begin{tabular}{ll}
+      \bf Type & {\tt std::array<T, N>} \\[2mm]
+      \bf Initialisation & {\tt std::array<T, N> \{ a,b,c,\dots \}} \\[2mm]
+      \bf Reading & {\tt x = xs[i]} \\[2mm]
+      \bf Writing & {\tt xs[i] = x} \\[2mm]
+      \bf Size & {\tt xs.size()} \\
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\tt std::array<T, N>}
+  \code[frame=lines,font size=\small,width=.9\linewidth]{array-usage.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quiz}
+  \code[frame=lines,font size=\small,width=.9\linewidth]{by-value.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\tt std::array<T, N>}
+  \begin{itemize}
+    \item {\tt std::array}s are allocated on the stack
+    \item {\tt std::array}s are passed by value
+    \item For more efficiency: pass by pointer
+  \end{itemize}
+  \code[frame=lines,font size=\small,width=.9\linewidth]{by-pointer.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\tt std::array<T, N>}
+  \begin{itemize}
+    \item Functions can only deal with one array size
+    \item Quite limiting
+    \item Make functions polymorphic in size
+  \end{itemize}
+  \code[frame=lines,font size=\small,width=.9\linewidth]{polymorphic.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\tt std::vector<T>}
+  \begin{center}
+    \begin{tabular}{ll}
+      \bf Type & {\tt std::vector<T>} \\[2mm]
+      \bf Initialisation & {\tt std::vector<T> \{ a,b,c,\dots \}} \\[2mm]
+      \bf Reading & {\tt x = xs[i]} \\[2mm]
+      \bf Writing & {\tt xs[i] = x} \\[2mm]
+      \bf Reading (with range check) & {\tt x = xs.at(i)} \\[2mm]
+      \bf Writing (with range check) & {\tt xs.at(i) = x} \\[2mm]
+      \bf Size & {\tt xs.size()} \\[2mm]
+      \bf Add at end & {\tt xs.push\_back(x)} \\[2mm]
+      \bf Remove at end & {\tt xs.pop\_back(x)} \\[2mm]
+      \bf \vdots
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\tt std::vector<T>}
+  \code[frame=lines,font size=\small,width=.9\linewidth]{vector-usage.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\tt std::vector<T>}
+  \begin{itemize}
+    \item Same rules as with {\tt std::array}
+    \item Pass-by-value
+          \begin{itemize}
+            \item Copied when passed as parameters
+            \item Copied when returned
+          \end{itemize}
+    \item Use pointers for efficiency
+  \end{itemize}
+\end{frame}
+
+\end{document}
