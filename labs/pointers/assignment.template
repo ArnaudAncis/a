@@ -49,6 +49,7 @@
         text-align: center;
         width: 75%;
         margin: 20px auto;
+        padding: 20px;
         border: 1px solid black;
       }
     </style>
@@ -214,9 +215,42 @@
 
             int main()
             {
+              int x = 56, y = 10;
+              int q, r;
+
+              // function call on x, y, q, r
+
+              std::cout << q << " " << r << std::endl;
+
+              return 0;
+            }
+          END
+
+          <<-END
+            <p>
+              Write a function <code>quotrest</code> that
+              can be used to compute the quotient and the
+              rest of two integers. Use pointers to be able
+              to return the two results. For example,
+              the code below should print <code>5&nbsp;6</code>.
+            </p>
+            #{show_source_editor}
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          extend SourceCodeMixin
+
+          self.source = <<-END
+            #include <iostream>
+
+            int main()
+            {
               int x = 3, y = 4;
 
-              // function call to swap with x and y
+              // function call to swap x and y
 
               std::cout << x << " " << y << std::endl;
 
@@ -246,11 +280,11 @@
             {
               int x = 8, y = 1;
 
-              // function call to minmax with x and y
+              // function call to minmax on x and y
 
               std::cout << x << " " << y << std::endl;
 
-              // function call to minmax with x and y
+              // function call to minmax on x and y
 
               std::cout << x << " " << y << std::endl;
 
