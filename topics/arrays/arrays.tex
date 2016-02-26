@@ -19,8 +19,6 @@
   \endgroup}
 
 
-
-
 \begin{document}
 
 \begin{frame}
@@ -54,7 +52,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Reasoning}
+  \frametitle{Reasoning: Arrays as Pointers}
   \begin{itemize}
     \item When a {\tt T[]} is passed as parameter, its type decays to {\tt T*}
     \item The pointer points to the first element in the array
@@ -64,6 +62,57 @@
     \item Not knowing size is typical cause of buffer overflows
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Arrays as Pointers}
+  \begin{center}
+    \begin{tikzpicture}[scale=.25]
+      \only<2->{
+        \draw[fill=red!50] (3,0) rectangle ++(20,1);
+      }
+      \visible<2>{
+        \foreach \i in {0,...,4} {
+          \tikzmath{
+            int \x;
+            \x = int(\i * 4 + 3);
+          }
+
+          \draw[|-|] (\x,2) -- ++(4,0) node[midway,above,font=\tiny] {\tt xs[\i]};
+        }
+      }
+
+      \visible<3>{
+        \draw[-latex] (3.5,-1.5) -- ++(0,1.5) node[anchor=north,at start] {\tt p};
+      }
+
+      \visible<4>{
+        \draw[-latex] (3.5,-1.5) -- ++(0,1.5) node[anchor=north,at start] {\tt q};
+      }
+
+      \visible<5>{
+        \draw[|-|] (11,2) -- ++(4,0) node[midway,above,font=\tiny] {\tt p[2]};;
+      }
+
+      \visible<6>{
+        \draw[|-|] (15,2) -- ++(4,0) node[midway,above,font=\tiny] {\tt q[3]};;
+      }
+
+      \visible<7>{
+        \draw[|-|] (23,2) -- ++(4,0) node[midway,above,font=\tiny] {\tt p[5]};;
+      }
+
+      \draw (0,0) grid (30,1);
+    \end{tikzpicture}
+  \end{center}
+  \vskip5mm
+  \code[frame=lines,width=.5\linewidth]{arrays-as-pointers.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Improved Version}
+  \code[font size=\small,frame=lines,width=.9\linewidth]{sizeof-array2.cpp}
+\end{frame}
+
 
 \begin{frame}
   \frametitle{Quiz: What's the Problem?}
@@ -109,7 +158,7 @@
 
 \begin{frame}
   \frametitle{\cpp\ Alternatives}
-  \structure{Static Arrays (Size Known at Compile Time)}
+  \structure{Static Arrays (size known at compile time)}
   \begin{center} \tt
     std::array<T, N>
   \end{center}
@@ -192,8 +241,8 @@
     \item Same rules as with {\tt std::array}
     \item Pass-by-value
           \begin{itemize}
-            \item Copied when passed as parameters
-            \item Copied when returned
+            \item Copied when passed as parameters \cake
+            \item Copied when returned \cake
           \end{itemize}
     \item Use pointers for efficiency
   \end{itemize}
