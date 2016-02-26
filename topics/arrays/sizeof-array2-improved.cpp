@@ -1,10 +1,10 @@
 #include <iostream>
 
-void foo(int xs[5]) {
+void foo(int* xs) {
   std::cout << sizeof(xs) << std::endl;
 }
 
-void bar(int xs[]) {
+void bar(int* xs) {
   std::cout << sizeof(xs) << std::endl;
 }
 

@@ -56,7 +56,7 @@
   \begin{itemize}
     \item When a {\tt T[]} is passed as parameter, its type decays to {\tt T*}
     \item The pointer points to the first element in the array
-    \item $\Rightarrow$ You can also index pointers: {\tt p[0]} is same as {\tt *p}
+    \item You can also index pointers: {\tt p[0]} is same as {\tt *p}
     \item No way of knowing how large the array is
     \item Solution: pass along size as extra parameter
     \item Not knowing size is typical cause of buffer overflows
@@ -109,18 +109,29 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Improved Version}
+  \frametitle{Old Version}
   \code[font size=\small,frame=lines,width=.9\linewidth]{sizeof-array2.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Improved Version}
+  \code[font size=\small,frame=lines,width=.9\linewidth]{sizeof-array2-improved.cpp}
 \end{frame}
 
 
 \begin{frame}
   \frametitle{Quiz: What's the Problem?}
   \code[font size=\small,frame=lines,width=.9\linewidth]{return-array.cpp}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \draw[ultra thick,red] (rettype) circle (.5);
+    }
+  \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
   \frametitle{Answer}
+  \Large
   \begin{itemize}
     \item It doesn't compile
     \item Cannot return arrays
@@ -154,6 +165,27 @@
     \item Array size is unknown
     \item {\tt for} loop cannot possibly know when to stop iterating
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Array Heap Allocation}
+  \structure{Allocation}
+  \begin{center} \tt
+    T* xs = new T[n];
+  \end{center}
+  \vskip5mm
+  \structure{Allocation}
+  \begin{center} \tt
+    delete[] xs;
+  \end{center}
+  \begin{itemize}
+    \item Don't forgot the {\tt []} when deallocating arrays!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Improved Version}
+  \code[font size=\small,frame=lines,width=.9\linewidth]{return-array2-improved.cpp}
 \end{frame}
 
 \begin{frame}
