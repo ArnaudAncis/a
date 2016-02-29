@@ -1,4 +1,4 @@
-void sum(const std::vector<int>* xs)
+int sum(const std::vector<int>* xs)
 {
   int total;
 
