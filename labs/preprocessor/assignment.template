@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>PVM Assignment</title>
     <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+
     <%= Html::Generation::Quiz.setup %>
     <style>
       #colours {
@@ -280,9 +284,6 @@
     </div>
   </body>
 
-  <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
-  <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>  
   <script>
     Quiz.formatQuizzes();
     SourceEditor.initialize();
