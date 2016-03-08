@@ -1,5 +1,6 @@
 require 'Contracts'
 require 'Html'
+require 'Environment'
 
 module Quiz
   extend Html::Generation::Quiz
@@ -46,6 +47,18 @@ module SolutionMixin
     end
 
     %{<div class="solution"><a href="#{filename}">Solution</a></div>}
+  end
+end
+
+module GitMixin
+  def git_link(target)
+    typecheck do
+      assert(target: string)
+    end
+
+    relative_path = Environment.relative_to_git_root( Pathname.new(target).expand_path )
+
+    %{<div class="git">Git-repo path: #{relative_path}</div>}
   end
 end
 
