@@ -315,7 +315,6 @@
               Write a <code>main</code> function that tests all three implementations.
               Try to make each overload share as much code as possible (i.e. minimise copy pasting).
             </p>
-            #{solution_link 'minmax.cpp'}
           END
         end
       %>
