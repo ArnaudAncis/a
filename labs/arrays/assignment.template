@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .message {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        width: 75%;
+        margin: 100px auto;
+        padding: 20px;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Arrays</div>
+    </header>
+    <div id="contents">
+      <div class="message" title="You better be reading this!">
+        Assume all code has been compiled targetting a 32 bit platform.
+      </div>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             void foo(std::vector<int> ns)
+             {
+               for ( int i = 0; i != ns.size(); ++i )
+                 ns[i] *= 2;
+             }
+
+             int main()
+             {
+               std::vector<int> ns = { 1, 2, 3 };
+               foo(ns);
+
+               for ( int n : ns )
+                 std::cout << n;
+
+               std::cout << std::endl;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             void foo(std::vector<int>* ns)
+             {
+               for ( int i = 0; i != (*ns).size(); ++i )
+                 (*ns)[i] *= 2;
+             }
+
+             int main()
+             {
+               std::vector<int> ns = { 1, 2, 3 };
+               foo(&ns);
+
+               for ( int n : ns )
+                 std::cout << n;
+
+               std::cout << std::endl;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int main()
+             {
+               std::cout << sizeof(int) << std::endl;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int main()
+             {
+               std::cout << sizeof(int*) << std::endl;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int main()
+             {
+               std::cout << sizeof(int[10]) << std::endl;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int main()
+             {
+               int ns[5];
+               
+               std::cout << sizeof(ns) << std::endl;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             void foo(int ns[6])
+             {
+               std::cout << sizeof(ns) << std::endl;
+             }
+
+             int main()
+             {
+               int ns[] = { 1, 2, 3, 4, 5, 6 };
+               foo(ns);
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             void foo(int ns[], int size)
+             {
+               for ( int i = 0; i != size; ++i )
+                 ns[i] *= 2;
+             }
+
+             int main()
+             {
+               int ns[] = { 1, 2, 3 };
+               foo(ns, sizeof(ns) / sizeof(int));
+
+               for ( int i = 0; i != sizeof(ns) / sizeof(int); ++i )
+                 std::cout << ns[i];
+
+               std::cout << std::endl;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+  </script>
+</html>
