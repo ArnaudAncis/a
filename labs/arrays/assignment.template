@@ -6,7 +6,8 @@
     <%= default_externals %>
     <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
-
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+   
     <%= Html::Generation::Quiz.setup %>
     <style>
       #colours {
@@ -272,11 +273,42 @@
            END
          end                                  
       %>
+
+      <%=
+        exercise do
+          extend SolutionMixin
+          
+          <<-END
+            <p>
+              Write three overloads of a <code>minmax</code>
+            </p>
+            <ul>
+              <li>
+                <code>void minmax(int* ns, int size, int* min, int* max);</code>
+              </li>
+              <li>
+                <code>void minmax(std::vector&lt;int&gt;* ns, int* min, int* max);</code>
+              </li>
+              <li>
+                <code>template&lt;unsigned N&gt; void minmax(std::array&lt;int, N&gt;* ns, int* min, int* max);</code>
+              </li>
+            </ul>
+            <p>
+              that given a sequence of integers, it returns the minimum and maximum using out-parameters.
+              Write a <code>main</code> function that tests all three implementations.
+              Try to make each overload share as much code as possible (i.e. minimise copy pasting).
+            </p>
+            #{solution_link 'minmax.cpp'}
+          END
+        end
+      %>
+
     </div>
   </body>
 
   <script>
     Quiz.formatQuizzes();
     SourceEditor.initialize();
+    Revealer.initialize();
   </script>
 </html>
