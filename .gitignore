@@ -5,3 +5,6 @@
 *.out
 *.toc
 *.pdf
+Testing/
+*.sdf
+*.suo
