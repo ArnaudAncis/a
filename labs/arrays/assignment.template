@@ -56,6 +56,15 @@
         background: #F44;
         box-shadow: 0px 0px 50px 30px #F44;
       }
+
+      .git {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
     </style>
   </head>
 
@@ -277,24 +286,32 @@
       <%=
         exercise do
           extend SolutionMixin
+          extend GitMixin
           
           <<-END
+            #{git_link 'minmax/minmax.sln'}
             <p>
-              Write three overloads of a <code>minmax</code>
+              A Visual Studio solution is available at the location shown above.
+              To run the tests, pick the "Testing" build. Look for <code>TODO</code>
+              tags to find out where you need to write code.
+            </p>
+            <p>
+              Write three overloads of a <code>minmax</code>:
             </p>
             <ul>
               <li>
-                <code>void minmax(int* ns, int size, int* min, int* max);</code>
+                <code>void minmax(const int* ns, int size, int* min, int* max);</code>
               </li>
               <li>
-                <code>void minmax(std::vector&lt;int&gt;* ns, int* min, int* max);</code>
+                <code>void minmax(const std::vector&lt;int&gt;* ns, int* min, int* max);</code>
               </li>
               <li>
-                <code>template&lt;unsigned N&gt; void minmax(std::array&lt;int, N&gt;* ns, int* min, int* max);</code>
+                <code>template&lt;unsigned N&gt; void minmax(const std::array&lt;int, N&gt;* ns, int* min, int* max);</code>
               </li>
             </ul>
             <p>
-              that given a sequence of integers, it returns the minimum and maximum using out-parameters.
+              These functions must each, given a sequence of integers,
+              return both the minimum and maximum using out-parameters.
               Write a <code>main</code> function that tests all three implementations.
               Try to make each overload share as much code as possible (i.e. minimise copy pasting).
             </p>
