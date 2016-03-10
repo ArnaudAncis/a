@@ -2,17 +2,18 @@
 \ProvidesPackage{ucll-slides}[16/05/2014]
 \LoadClass{beamer}
 
-\usepackage{graphicx}
-\usepackage{pxfonts}
-%\usepackage[rgb]{xcolor}
-\usepackage{tikz}
-\usepackage{calc}
-\usepackage{listings}
-\usepackage{booktabs}
-\usepackage{url}
-\usepackage{framed}
-\usepackage{hyperref}
-\usepackage{cleveref}
+\RequirePackage{graphicx}
+\RequirePackage{pxfonts}
+\RequirePackage{tikz}
+\RequirePackage{calc}
+\RequirePackage{listings}
+\RequirePackage{booktabs}
+\RequirePackage{url}
+\RequirePackage{framed}
+\RequirePackage{hyperref}
+\RequirePackage{cleveref}
+\RequirePackage{bbding}
+\RequirePackage{wasysym}
 
 \usetikzlibrary{shadows,calc,shapes}
 
@@ -83,3 +84,12 @@
 }
 
 \newcommand{\link}[2]{\href{#1}{{\color{blue}#2}}}
+
+\newenvironment{procontralist}{
+  \begingroup
+  \newcommand{\pro}{\item[\Checkmark]}
+  \newcommand{\con}{\item[\XSolidBrush]}
+  \begin{itemize}
+  }{
+  \end{itemize}
+  \endgroup}
