@@ -318,6 +318,23 @@
         end
       %>
 
+      <%=
+        exercise do
+          extend SolutionMixin
+          extend GitMixin
+          
+          <<-END
+            #{git_link 'most-frequent/most-frequent.sln'}
+            <p>
+              Write the function <code>int most_frequent(std::vector&lt;int&gt;* ns)</code> which
+              returns the element of <code>ns</code> that appears the most often. For example,
+              given a sequence <code>1 2 2 3 3 3</code>, <code>3</code> appears most often.
+              If <code>ns</code> is empty, the function should return <code>-1</code>.
+            </p>
+          END
+        end
+      %>
+             
     </div>
   </body>
 
