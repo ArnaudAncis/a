@@ -7,7 +7,7 @@
     <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
     <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
-   
+
     <%= Html::Generation::Quiz.setup %>
     <style>
       #colours {
@@ -77,6 +77,12 @@
         Assume all code has been compiled targetting a 32 bit platform.
       </div>
 
+      <div class="message" title="You better be reading this!">
+        You will need access to the git-repository of this course.
+        Use <code>git clone https://bitbucket.org/fvogels/ucll-pvm.git</code> to
+        download it.
+      </div>
+
       <%=
          exercise(Lib::Interpretation) do
            self.source = <<-END
@@ -107,7 +113,7 @@
              #{if input then show_input else '' end}
              #{show_output_field}
            END
-         end                                  
+         end
       %>
 
       <%=
@@ -140,7 +146,7 @@
              #{if input then show_input else '' end}
              #{show_output_field}
            END
-         end                                  
+         end
       %>
 
       <%=
@@ -160,7 +166,7 @@
              #{if input then show_input else '' end}
              #{show_output_field}
            END
-         end                                  
+         end
       %>
 
       <%=
@@ -180,7 +186,7 @@
              #{if input then show_input else '' end}
              #{show_output_field}
            END
-         end                                  
+         end
       %>
 
       <%=
@@ -200,7 +206,7 @@
              #{if input then show_input else '' end}
              #{show_output_field}
            END
-         end                                  
+         end
       %>
 
       <%=
@@ -211,7 +217,7 @@
              int main()
              {
                int ns[5];
-               
+
                std::cout << sizeof(ns) << std::endl;
              }
            END
@@ -222,7 +228,7 @@
              #{if input then show_input else '' end}
              #{show_output_field}
            END
-         end                                  
+         end
       %>
 
       <%=
@@ -248,7 +254,7 @@
              #{if input then show_input else '' end}
              #{show_output_field}
            END
-         end                                  
+         end
       %>
 
       <%=
@@ -280,14 +286,14 @@
              #{if input then show_input else '' end}
              #{show_output_field}
            END
-         end                                  
+         end
       %>
 
       <%=
         exercise do
           extend SolutionMixin
           extend GitMixin
-          
+
           <<-END
             #{git_link 'minmax/minmax.sln'}
             <p>
@@ -322,7 +328,7 @@
         exercise do
           extend SolutionMixin
           extend GitMixin
-          
+
           <<-END
             #{git_link 'most-frequent/most-frequent.sln'}
             <p>
@@ -339,7 +345,7 @@
         exercise do
           extend SolutionMixin
           extend GitMixin
-          
+
           <<-END
             #{git_link 'most-frequent/longest-increasing-subsequence.sln'}
             <p>
@@ -348,9 +354,9 @@
             </p>
             <ul>
               <li><span style="font-weight: bold;">0 1 2 3 4</span> 0 1</li>
-              <li>0 1 <span style="font-weight: bold;">0 1 2 3 4</span></li>              
+              <li>0 1 <span style="font-weight: bold;">0 1 2 3 4</span></li>
               <li>0 1 2 <span style="font-weight: bold;">0 1 2 3</span> 0 1</li>
-              <li>0 10 100 <span style="font-weight: bold;">0 1 50 3000 30001</span> 0 -1</li>              
+              <li>0 10 100 <span style="font-weight: bold;">0 1 50 3000 30001</span> 0 -1</li>
             </ul>
            <p>
              If there are multiple longest subsequences, the one appearing first should be returned.
@@ -362,11 +368,11 @@
            <p>
              The function <code>longest_increasing_subsequence</code> should return the start and end of this longest increasing subsequence
              using out-parameters. Examples:
-           </p>   
+           </p>
            <ul>
-             <li><span style="font-weight: bold;">0 0 0</span>: start_index = 0, end_index = 2</li>             
+             <li><span style="font-weight: bold;">0 0 0</span>: start_index = 0, end_index = 2</li>
              <li><span style="font-weight: bold;">0 1 2 3 4</span> 0 1: start_index = 0, end_index = 4</li>
-             <li>0 1 <span style="font-weight: bold;">0 1 2 3 4</span>: start_index = 2, end_index = 6</li>              
+             <li>0 1 <span style="font-weight: bold;">0 1 2 3 4</span>: start_index = 2, end_index = 6</li>
            </ul>
            <p>
              The function also returns a <code>bool</code>: it must return <code>true</code> whenever <code>ns</code> is nonempty,
