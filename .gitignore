@@ -6,5 +6,9 @@
 *.toc
 *.pdf
 Testing/
+Debug/
 *.sdf
 *.suo
+*.opensdf
+*.opendb
+*.user
