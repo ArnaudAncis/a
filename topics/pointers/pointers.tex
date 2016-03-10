@@ -1,22 +1,11 @@
 \documentclass{../ucll-slides}
 \usepackage{../pvm}
-\usepackage{bbding}
-\usepackage{wasysym}
 
 \usetikzlibrary{shadows,shapes.multipart}
 
 \title{Pointers}
 \author{Fr\'ed\'eric Vogels}
 
-
-\newenvironment{procontralist}{
-  \begingroup
-  \newcommand{\pro}{\item[\Checkmark]}
-  \newcommand{\con}{\item[\XSolidBrush]}
-  \begin{itemize}
-  }{
-  \end{itemize}
-  \endgroup}
 
 \newcommand{\drawboxaround}[1]{
   \draw[box] ($ (#1.south west) + (-.15,-.15) $) rectangle ($ (#1.north east) + (.15,.15) $);
