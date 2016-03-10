@@ -334,7 +334,48 @@
           END
         end
       %>
-             
+
+      <%=
+        exercise do
+          extend SolutionMixin
+          extend GitMixin
+          
+          <<-END
+            #{git_link 'most-frequent/longest-increasing-subsequence.sln'}
+            <p>
+              Write the function <code>bool longest_increasing_subsequence(const std::vector&lt;int&gt;* ns, int* start_index, int* end_index)</code>
+              which looks for the longest increasing subsequence. A few examples:
+            </p>
+            <ul>
+              <li><span style="font-weight: bold;">0 1 2 3 4</span> 0 1</li>
+              <li>0 1 <span style="font-weight: bold;">0 1 2 3 4</span></li>              
+              <li>0 1 2 <span style="font-weight: bold;">0 1 2 3</span> 0 1</li>
+              <li>0 10 100 <span style="font-weight: bold;">0 1 50 3000 30001</span> 0 -1</li>              
+            </ul>
+           <p>
+             If there are multiple longest subsequences, the one appearing first should be returned.
+           </p>
+            <p>
+              Equal values are also considered increasing: <code>5 5 5 5</code> is an increasing sequence of length 4,
+              <code>1 2 2 3 3 3</code> is an increasing sequence of length 6.
+            </p>
+           <p>
+             The function <code>longest_increasing_subsequence</code> should return the start and end of this longest increasing subsequence
+             using out-parameters. Examples:
+           </p>   
+           <ul>
+             <li><span style="font-weight: bold;">0 0 0</span>: start_index = 0, end_index = 2</li>             
+             <li><span style="font-weight: bold;">0 1 2 3 4</span> 0 1: start_index = 0, end_index = 4</li>
+             <li>0 1 <span style="font-weight: bold;">0 1 2 3 4</span>: start_index = 2, end_index = 6</li>              
+           </ul>
+           <p>
+             The function also returns a <code>bool</code>: it must return <code>true</code> whenever <code>ns</code> is nonempty,
+             and <code>false</code> when <code>ns</code> is empty. In the latter case, <code>start_index</code> and
+             <code>end_index</code> can contain arbitrary values, as there is no longest increasing subsequence to speak of.
+           </p>
+          END
+        end
+      %>
     </div>
   </body>
 
