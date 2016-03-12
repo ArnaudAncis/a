@@ -438,6 +438,34 @@
         end
       %>
 
+      <%=
+        exercise do
+          extend SolutionMixin
+          extend GitMixin
+          extend CakeMixin
+
+          cake_description = <<-END
+            <p>
+              Implement the function such that
+            </p>
+            <ul>
+              <li>it is fast: it must work in linear time.</li>
+              <li>memory is accessed sequentially (better cache performance): you can only read the <code>i+1</code>th element after reading the <code>i</code>th, and analogously for writes.</li>
+            </ul>
+          END
+
+          <<-END
+            #{git_link 'bitsort/bitsort.sln'}
+            <p>
+              Write the function <code>void bitsort(std::vector&lt;unsigned&gt;* ns)</code> that, given a list that
+              contains only <code>0</code>s and <code>1</code>s, sorts this list in place (i.e. the function modifies the list pointed to by <code>ns</code>).
+              For example, the list 0 1 0 1 must be transformed into 0 0 1 1.
+            </p>
+            #{cake cake_description}
+          END
+        end
+      %>
+
     </div>
   </body>
 
