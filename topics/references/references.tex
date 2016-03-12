@@ -129,14 +129,87 @@
   \frametitle{Rules of Thumb}
   \begin{itemize}
     \item Readonly access to small data: use {\tt T}
+          \begin{itemize}
+            \item Value will be copied
+            \item Gives readonly access to variable
+            \item Only efficient if {\tt T}s are small
+          \end{itemize}
     \item Readonly access to large data: use {\tt const T\&}
+          \begin{itemize}
+            \item {T\&} is as efficient as passing a pointer
+            \item {T\&} gives ``full access''
+            \item {const T\&} restricts access to readonly
+            \item Efficient and safe
+          \end{itemize}
     \item Read/write access: use {\tt T*}
+          \begin{itemize}
+            \item Efficient
+            \item Gives full access (read + write)
+          \end{itemize}
   \end{itemize}  
 \end{frame}
 
 \begin{frame}
-  \frametitle{Interesting Use Case}
-
+  \frametitle{Quiz}
+  \code[frame=lines]{return-reference.cpp}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Returning References}
+  \code[frame=lines,width=.5\linewidth]{return-value.cpp}
+  \begin{itemize}
+    \item Does not compile
+    \item Nonsensical
+    \item {\tt foo} returns value {\tt 5}
+    \item We are trying to assign {\tt 6} to {\tt 5}
+    \item What could this even mean?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Returning References}
+  \code[frame=lines,width=.5\linewidth]{return-reference2.cpp}
+  \begin{itemize}
+    \item Compiles just perfectly
+    \item {\tt foo} does return a reference to {\tt x}
+    \item We do not just get the value of {\tt x}
+    \item We also get its location in memory
+    \item We receive a complete variable, not just a value
+    \item Assigning to a variable makes perfect sense
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Use Cases}
+  \code[language=java,frame=lines,font size=\small]{use-case-arraylist.java}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Use Cases (Advanced Example)}
+  \code[frame=lines]{use-case-vectors.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Summary}
+  \begin{center}
+    \Large Reference to {\tt T}, written {\tt T\&}
+  \end{center}
+  \begin{itemize}
+    \item Usage syntax same as ordinary variable
+    \item Works with pointer behind-the-scenes
+    \item Passes along the entire variable instead of just its value
+  \end{itemize}
+  \vskip5mm
+  \begin{center}
+    \begin{tabular}{lccc}
+      & \textbf{By value} & \textbf{By pointer} & \textbf{By reference} \\
+      \toprule
+      \textbf{Type} & {\tt T x = init} & {\tt T* x = \&init} & {\tt T\& x = init} \\
+      \textbf{Reading} & {y = x} & {\tt y = *x} & {\tt y = x} \\
+      \textbf{Writing} & {x = y} & {\tt *x = y} & {\tt x = y} \\
+    \end{tabular}
+  \end{center}
+\end{frame}
+
 
 \end{document}
