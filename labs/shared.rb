@@ -62,6 +62,12 @@ module GitMixin
   end
 end
 
+module CakeMixin
+  def cake(contents)
+    %{<section class="cake"><span class="header">Cake Question</span>#{contents}</section>}
+  end
+end
+
 module Lib
   class Interpretation < Exercise
     include Contracts::TypeChecking
