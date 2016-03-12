@@ -65,6 +65,22 @@
         text-align: center;
         font-weight: bold;
       }
+
+      .cake {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        font-weight: bold;
+        background: #FFAA77;
+      }
+
+      .cake .header {
+        display: block;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+      }
     </style>
   </head>
 
@@ -332,7 +348,7 @@
           <<-END
             #{git_link 'most-frequent/most-frequent.sln'}
             <p>
-              Write the function <code>int most_frequent(std::vector&lt;int&gt;* ns)</code> which
+              Write the function <code>int most_frequent(std::vector&lt;int&gt;* ns)</code> that
               returns the element of <code>ns</code> that appears the most often. For example,
               given a sequence <code>1 2 2 3 3 3</code>, <code>3</code> appears most often.
               If <code>ns</code> is empty, the function should return <code>-1</code>.
@@ -350,7 +366,7 @@
             #{git_link 'most-frequent/longest-increasing-subsequence.sln'}
             <p>
               Write the function <code>bool longest_increasing_subsequence(const std::vector&lt;int&gt;* ns, int* start_index, int* end_index)</code>
-              which looks for the longest increasing subsequence. A few examples:
+              that looks for the longest increasing subsequence. A few examples:
             </p>
             <ul>
               <li><span style="font-weight: bold;">0 1 2 3 4</span> 0 1</li>
@@ -358,30 +374,70 @@
               <li>0 1 2 <span style="font-weight: bold;">0 1 2 3</span> 0 1</li>
               <li>0 10 100 <span style="font-weight: bold;">0 1 50 3000 30001</span> 0 -1</li>
             </ul>
-           <p>
-             If there are multiple longest subsequences, the one appearing first should be returned.
-           </p>
             <p>
-              Equal values are also considered increasing: <code>5 5 5 5</code> is an increasing sequence of length 4,
-              <code>1 2 2 3 3 3</code> is an increasing sequence of length 6.
+              If there are multiple longest subsequences, the one appearing first should be returned.
             </p>
-           <p>
-             The function <code>longest_increasing_subsequence</code> should return the start and end of this longest increasing subsequence
-             using out-parameters. Examples:
-           </p>
-           <ul>
-             <li><span style="font-weight: bold;">0 0 0</span>: start_index = 0, end_index = 2</li>
-             <li><span style="font-weight: bold;">0 1 2 3 4</span> 0 1: start_index = 0, end_index = 4</li>
-             <li>0 1 <span style="font-weight: bold;">0 1 2 3 4</span>: start_index = 2, end_index = 6</li>
-           </ul>
-           <p>
-             The function also returns a <code>bool</code>: it must return <code>true</code> whenever <code>ns</code> is nonempty,
-             and <code>false</code> when <code>ns</code> is empty. In the latter case, <code>start_index</code> and
-             <code>end_index</code> can contain arbitrary values, as there is no longest increasing subsequence to speak of.
-           </p>
+             <p>
+               Equal values are also considered increasing: <code>5 5 5 5</code> is an increasing sequence of length 4,
+               <code>1 2 2 3 3 3</code> is an increasing sequence of length 6.
+             </p>
+            <p>
+              The function <code>longest_increasing_subsequence</code> should return the start and end of this longest increasing subsequence
+              using out-parameters. Examples:
+            </p>
+            <ul>
+              <li><span style="font-weight: bold;">0 0 0</span>: start_index = 0, end_index = 2</li>
+              <li><span style="font-weight: bold;">0 1 2 3 4</span> 0 1: start_index = 0, end_index = 4</li>
+              <li>0 1 <span style="font-weight: bold;">0 1 2 3 4</span>: start_index = 2, end_index = 6</li>
+            </ul>
+            <p>
+              The function also returns a <code>bool</code>: it must return <code>true</code> whenever <code>ns</code> is nonempty,
+              and <code>false</code> when <code>ns</code> is empty. In the latter case, <code>start_index</code> and
+              <code>end_index</code> can contain arbitrary values, as there is no longest increasing subsequence to speak of.
+            </p>
           END
         end
       %>
+
+      <%=
+        exercise do
+          extend SolutionMixin
+          extend GitMixin
+          extend CakeMixin
+
+          cake_description = <<-END
+            <p>
+              Implement the function such that
+            </p>
+            <ul>
+              <li>it is fast: each <code>n</code> of <code>ns</code> is only read once.</li>
+              <li>it consumes little memory: no extra data structures are necessary.</li>
+            </ul>
+          END
+
+          <<-END
+            #{git_link 'lone-wolf/lone-wolf.sln'}
+            <p>
+              Write the function <code>void lone_wolf(const std::vector&lt;unsigned&gt;* ns)</code> that, given a list of <code>unsigned int</code>s
+              (i.e. <code>int</code>s without sign bit, you can treat them the same as signed <code>int</code>s), looks for the "lone wolf":
+              the list <code>ns</code> contains pairs of integers plus one unpaired integer, which we call the lone wolf. For example,
+            </p>
+            <ul>
+              <li>0 0 1 1 2 2 3: the lone wolf is 3.</li>
+              <li>0 1 2 1 0: the lone wolf is 2.</li>
+              <li>5: the lone wolf is 5.</li>
+              <li>5 5 5: the lone wolf is 5.</li>
+            </ul>
+            <p>
+              Your function is allowed to assume that the list does indeed contain N pairs + one unpaired integer, i.e. it does
+              not have to work correctly if given the list <code>1 2 3</code>. Feel free to use any data structure you want (e.g. <a href="http://www.cplusplus.com/reference/map/"><code>std::map</code></a>,
+              <a href="http://www.cplusplus.com/reference/set/set/"><code>std::set</code></a>, &hellip;)
+            </p>
+            #{cake cake_description}
+          END
+        end
+      %>
+
     </div>
   </body>
 
