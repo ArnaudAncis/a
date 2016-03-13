@@ -4,8 +4,8 @@ private:
   int contents, capacity;
 
 public:
-  OilTank(int contents = 0,
-          int capacity = 100)
+  OilTank(int capacity = 100,
+          int contents = 0)
     : contents(contents),
       capacity(capacity) { }
 };
