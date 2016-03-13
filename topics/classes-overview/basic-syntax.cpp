@@ -1,3 +1,4 @@
+// Declaration of Person
 class Person
 {
 `\NODE{\tt{\bfseries private}:}{private}`

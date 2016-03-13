@@ -3,6 +3,7 @@
 int main()
 {
   Person p("Jan", 20);
+  Person q; // Default constructor
 
   std::cout << p.getName()
             << " is "
