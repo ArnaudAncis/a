@@ -17,14 +17,41 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Special Constructors}
+  \begin{itemize}
+    \item \cpp\ has a few ``special'' constructors
+    \item They get called in specific circumstances
+    \item New stuff in \cpp11!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
   \frametitle{Default Constructor}
   \begin{itemize}
     \item Constructor with zero parameters
+  \end{itemize}
+  \code[frame=lines,width=.6\linewidth]{default-constructor-example.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Default Constructor: When Is It Called?}
+  \begin{itemize}
+    \item When creating an object without giving arguments
+    \item Array creation
+  \end{itemize}
+  \vskip5mm
+  \structure{Examples}
+  \code[frame=lines,width=.9\linewidth]{default-constructor-calls.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Default Constructor: Automatic Generation}
+  \begin{itemize}
     \item Generated automatically if you do not define any constructors yourself
           \begin{itemize}
             \item Calls base constructors
             \item Calls default constructors on member variables
-            \item Does \emph{not} initialise fields to zero!
+            \item Does \emph{not} initialise member variables to zero! \\ Default constructor for {\tt int} does not set value to {\tt 0}
           \end{itemize}
     \item Generation \link{http://en.cppreference.com/w/cpp/language/default_constructor}{rules} are quite complex
     \item It is easier to be explicit about default constructors
@@ -81,10 +108,7 @@
   \frametitle{Copy Constructor}
   \begin{itemize}
     \item Constructor taking {\tt const T\&}
-    \item Should make copy of given object
-    \item Automatically generated, similar \link{http://en.cppreference.com/w/cpp/language/copy_constructor}{rules} to default constructor
-    \item Can be explicitly generated (using {\tt = default})
-    \item Can be explicitly omitted (using {\tt = delete})
+    \item Should make (deep) copy of given object
     \item Called whenever a copy needs to be made
   \end{itemize}
   \vskip5mm
@@ -92,211 +116,58 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Working Example}
-  \code[frame=lines,font size=\small]{oiltank.cpp}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \structure{Does the copy constructor get called?}
-  \vskip5mm
-  \code[frame=lines]{copy-quiz1.cpp}
-  \visible<2>{
-    \begin{center}
-      Yes!
-    \end{center}
-  }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \structure{Does the copy constructor get called?}
-  \vskip5mm
-  \code[frame=lines]{copy-quiz2.cpp}
-  \visible<2>{
-    \begin{center}
-      Yes!
-    \end{center}
-  }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \structure{Does the copy constructor get called?}
-  \vskip5mm
-  \code[frame=lines]{copy-quiz3.cpp}
-  \visible<2>{
-    \begin{center}
-      No! \\
-      This calls {\tt operator =(const OilTank\&)} (see later)
-    \end{center}
-  }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \structure{Does the copy constructor get called?}
-  \vskip5mm
-  \code[frame=lines]{copy-quiz4.cpp}
-  \visible<2>{
-    \begin{center}
-      No!
-    \end{center}
-  }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \structure{Does the copy constructor get called?}
-  \vskip5mm
-  \code[frame=lines]{copy-quiz5.cpp}
-  \visible<2>{
-    \begin{center}
-      Yes!
-    \end{center}
-  }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \structure{Does the copy constructor get called?}
-  \vskip5mm
-  \code[frame=lines]{copy-quiz6.cpp}
-  \visible<2>{
-    \begin{center}
-      No!
-    \end{center}
-  }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \structure{Does the copy constructor get called?}
-  \vskip5mm
-  \code[frame=lines]{copy-quiz7.cpp}
-  \visible<2>{
-    \begin{center}
-      No!
-    \end{center}
-  }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \structure{Does the copy constructor get called?}
-  \vskip5mm
-  \code[frame=lines]{copy-quiz8.cpp}
-  \visible<2>{
-    \begin{center}
-      No!
-    \end{center}
-  }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \structure{Does the copy constructor get called?}
-  \vskip5mm
-  \code[frame=lines]{copy-quiz9.cpp}
-  \visible<2>{
-    \begin{center}
-      Yes!
-    \end{center}
-  }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \structure{Does the copy constructor get called?}
-  \vskip5mm
-  \code[frame=lines]{copy-quiz10.cpp}
-  \visible<2>{
-    \begin{center}
-      Yes!
-    \end{center}
-  }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Rules}
+  \frametitle{Copy Constructor: Automatic Generation}
   \begin{itemize}
-    \item Pre \cpp11: copy constructor called when copy needed
-      \begin{itemize}
-        \item Parameter pass-by-value
-        \item Returned by value
-      \end{itemize}
-    \item \cpp11 introduced \emph{move constructor}
-      \begin{itemize}
-        \item Optimisation
-        \item Called when object needs to be copied, but original is immediately discarded
-      \end{itemize}
+    \item Automatically generated, similar \link{http://en.cppreference.com/w/cpp/language/copy_constructor}{rules} to default constructor
+    \item Can be explicitly generated (using {\tt = default})
+    \item Can be explicitly omitted (using {\tt = delete})
+  \end{itemize}
+  \code[frame=lines,font size=\small]{implicit-copy-constructor.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Copy Constructor: When Is It Called?}
+  \begin{itemize}
+    \item When copy of object is needed
+    \item In some cases, \cpp\ standard allows \link{https://en.wikipedia.org/wiki/Return_value_optimization}{optimisations}
+          that change the behaviour of the program, so maybe copy constructor does not even get called
+    \item It is therefore important not to do exotic things in the copy constructor besides copying the object
   \end{itemize}
 \end{frame}
 
-% TODO: Rationale
+\begin{frame}
+  \frametitle{Copy Constructor: When Is It Called?}
+  \code[frame=lines]{copy-constructor1.cpp}
+\end{frame}
 
 \begin{frame}
-  \frametitle{Examples}
-  \begin{overprint}
-    \onslide<1>
-    \code[frame=lines]{move-constructor1.cpp}
-
-    \onslide<2>
-    \code[frame=lines]{move-constructor2.cpp}
-
-    \onslide<3>
-    \code[frame=lines]{move-constructor3.cpp}
-
-    \onslide<4>
-    \code[frame=lines]{move-constructor4.cpp}
-
-    \onslide<5>
-    \code[frame=lines]{move-constructor5.cpp}
-
-    \onslide<6>
-    \code[frame=lines]{move-constructor6.cpp}
-  \end{overprint}
-  \vskip5mm
-  \begin{overprint}
-    \onslide<1>
-    \begin{itemize}
-      \item Copy constructor is called
-      \item Because {\tt t1} still exists afterwards
-    \end{itemize}
-
-    \onslide<2>
-    \begin{itemize}
-      \item Move constructor is called
-      \item Because {\tt OilTank(0, 100)} is temporary
-    \end{itemize}
-
-    \onslide<3>
-    \begin{itemize}
-      \item Move constructor is called
-      \item Because {\tt OilTank(0, 100)} is temporary
-    \end{itemize}
-
-    \onslide<4>
-    \begin{itemize}
-      \item Move constructor is called
-      \item Because {\tt t} goes out of scope
-    \end{itemize}
-
-    \onslide<5>
-    \begin{itemize}
-      \item Copy constructor is called
-      \item Because {\tt t} goes on existing after function is done
-    \end{itemize}
-
-    \onslide<6>
-    \begin{itemize}
-      \item Move constructor is called
-      \item It does not matter that result of {\tt foo()} is not stored
-      \item It's as if the result is stored in a hidden temporary variable
-      \item Move, although useless here, is still performed because it might have side effects (e.g. print something)
-    \end{itemize}
-  \end{overprint}
+  \frametitle{Copy Constructor: When Is It Called?}
+  \code[frame=lines]{copy-constructor2.cpp}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Copy Constructor: When Is It Called?}
+  \code[frame=lines]{copy-constructor3.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Copy Constructor: When Is It Called?}
+  \code[frame=lines]{copy-constructor4.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Copy Constructor: When Is It Called?}
+  \code[frame=lines]{copy-constructor5.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Copy Constructor: When Is It Called?}
+  \code[frame=lines]{copy-constructor6.cpp}
+\end{frame}
+
+
+% TODO: Rationale
+
 
 
 \end{document}

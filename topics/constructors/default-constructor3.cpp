@@ -6,9 +6,9 @@ public:
   int x;
 };
 
-void foo() { return Foo`\only<2->{\color{red}\tt()}`; }
+Foo foo() { return Foo`\only<2->{\color{red}\tt()}`; }
 
 int main() {
-  Foo foo = foo();
-  std::cout << foo.x << std::endl;
+  Foo f = foo();
+  std::cout << f.x << std::endl;
 }
