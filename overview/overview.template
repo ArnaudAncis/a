@@ -120,10 +120,26 @@
           </tr>
           <tr>
             <td><%= topic('arrays', 'Arrays') %></td>
-            <td></td>
+            <td><%= lab('arrays', 'Arrays') %></td>
           </tr>
           <tr>
             <td><%= topic('const', 'Const') %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= topic('references', 'References') %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= topic('classes-overview', 'Classes (overview)') %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= topic('constructors', 'Constructors') %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= topic('structs', 'Structs)') %></td>
             <td></td>
           </tr>
         </ul>
