@@ -139,7 +139,7 @@
             <td></td>
           </tr>
           <tr>
-            <td><%= topic('structs', 'Structs)') %></td>
+            <td><%= topic('structs', 'Structs') %></td>
             <td></td>
           </tr>
         </ul>
