@@ -314,8 +314,7 @@
             #{git_link 'minmax/minmax.sln'}
             <p>
               A Visual Studio solution is available at the location shown above.
-              To run the tests, pick the "Testing" build. Look for <code>TODO</code>
-              tags to find out where you need to write code.
+              Look for <code>TODO</code> tags to find out where you need to write code.
             </p>
             <p>
               Write three overloads of a <code>minmax</code>:
