@@ -2,6 +2,18 @@
 #include <vector>
 #include <array>
 
+template<typename T>
+void generic_minmax(const T& ns, int length, int* min, int* max)
+{
+    *min = std::numeric_limits<int>::max();
+    *max = std::numeric_limits<int>::min();
+
+    for (int i = 0; i != length; ++i)
+    {
+        update_minmax(min, max, ns[i]);
+    }
+}
+
 void update_minmax(int* min, int* max, int n)
 {
     if (n < *min)
@@ -17,30 +29,18 @@ void update_minmax(int* min, int* max, int n)
 
 void minmax(const int* ns, int length, int* min, int* max)
 {
-    *min = std::numeric_limits<int>::max();
-    *max = std::numeric_limits<int>::min();
-
-    for (int i = 0; i != length; ++i)
-    {
-        update_minmax(min, max, ns[i]);
-    }
+    generic_minmax(ns, length, min, max);
 }
 
 void minmax(const std::vector<int>* ns, int* min, int* max)
 {
-    *min = std::numeric_limits<int>::max();
-    *max = std::numeric_limits<int>::min();
-
-    for (int n : *ns)
-    {
-        update_minmax(min, max, n);
-    }    
+    generic_minmax(*ns, ns->size(), min, max);
 }
 
 template<unsigned N>
 void minmax(const std::array<int, N>* ns, int* min, int* max)
 {
-    minmax((*ns).data(), N, min, max);
+    minmax(ns->data(), N, min, max);
 }
 /*
 
