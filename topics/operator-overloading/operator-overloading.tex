@@ -1,0 +1,316 @@
+\documentclass{../ucll-slides}
+\usepackage{../pvm}
+\usetikzlibrary{shadows,shapes.multipart}
+
+\title{Operator Overloading}
+\author{Fr\'ed\'eric Vogels}
+
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Comparison}
+  \code[language=cobol,title={Cobol code}]{quad.cobol}
+  \begin{center}
+    What does this compute?
+  \end{center}
+  \visible<2->{
+    \code[title={\cpp\ code}]{quad.cpp}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operator Overloading}
+  \begin{itemize}
+    \item Overloading = giving multiple meanings to same symbol
+    \item Abundant in mathematics: symbol $+$ do denote
+          addition of naturals, integers, rationals, reals, complex numbers,
+          matrices, \dots
+    \item In Java: {\tt +} works on {\tt int}, {\tt double}, {\tt String}
+    \item Same symbol, but different internal implementation
+    \item Operator overloading: to be able to define meaning of {\tt +}
+          for your own types
+  \end{itemize}
+\end{frame}
+
+{
+  \newcommand{\showcode}[1]{
+    \onslide<#1>
+    \code[font size=\small,width=.9\linewidth]{rsa#1.cpp}
+  }
+
+  \begin{frame}
+    \frametitle{Advantages of Operator Overloading}
+    \begin{itemize}
+      \item Mathematical notation generally more readable
+      \item Example: implementing RSA
+    \end{itemize}
+    \begin{overprint}
+      \showcode1
+      \showcode2
+      \showcode3
+      \showcode4
+      \showcode5
+      \showcode6
+      \showcode7
+      \showcode8
+      \showcode9
+      \showcode{10}
+    \end{overprint}
+  \end{frame}
+}
+
+\begin{frame}
+  \frametitle{Consistent Notation}
+  \begin{itemize}
+    \item Using same notation allows for reusable code
+    \item {\tt sum} works on {\tt int}s, {\tt double}s, {\tt string}s, matrices, \dots
+  \end{itemize}
+  \code{sum.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Smart Pointers}
+  \begin{itemize}
+    \item By overloading {\tt *} and {\tt ->}, we can
+          create objects that behave like pointers
+    \item See later topic on smart pointers
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: {\tt TimeSpan}}
+  \code[font size=\small]{timespan.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operations {\tt TimeSpan}}
+  \code{timespan-operations.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{{\tt TimeSpan} Addition}
+  \code[font size=\small,width=\linewidth]{timespan-addition.cpp}
+
+  \begin{tikzpicture}[overlay,remember picture,box/.style={red,thick}]
+    \only<2>{\drawboxaround{operator}}
+    \only<4>{\drawboxaround{return type}}
+    \only<5>{\drawboxaround{const function}}
+    \only<6>{\drawboxaround{const parameter}}
+  \end{tikzpicture}
+  
+  \begin{overprint}
+    \onslide<2>
+    \begin{center}
+      We're overloading the {\tt +} operator.
+    \end{center}
+
+    \onslide<3>
+    \begin{center}
+      {\tt ts1 + ts2} calls {\tt operator +} on {\tt ts1} with {\tt other} referring to {\tt ts2}
+    \end{center}
+
+    \onslide<4>
+    \begin{center}
+      Adding two {\tt TimeSpan}s together yields a new {\tt TimeSpan}
+    \end{center}
+
+    \onslide<5>
+    \begin{center}
+      {\tt ts1 + ts2}: we only need a readonly view of {\tt ts1}
+    \end{center}
+
+    \onslide<6>
+    \begin{center}
+      {\tt ts1 + ts2}: we only need a readonly view of {\tt ts2}
+    \end{center}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Other binary operators}
+  \code[font size=\small,width=\linewidth]{timestamp-binary.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{{\tt TimeSpan} Addition and Assignment}
+  \code[font size=\small,width=\linewidth]{timespan-additioneq.cpp}
+
+  \begin{tikzpicture}[overlay,remember picture,box/.style={red,thick}]
+    \only<2>{\drawboxaround{operator}}
+    \only<4>{\drawboxaround{return type}}
+    \only<5>{\drawboxaround{nonconst function}}
+    \only<6>{\drawboxaround{const parameter}}
+  \end{tikzpicture}
+  
+  \begin{overprint}
+    \onslide<2>
+    \begin{center}
+      We're overloading the {\tt +=} operator.
+    \end{center}
+
+    \onslide<3>
+    \begin{center}
+      {\tt ts1 += ts2} calls {\tt operator +=} on {\tt ts1} with \\ {\tt other} referring to {\tt ts2}
+    \end{center}
+
+    \onslide<4>
+    \begin{center}
+      By convention, {\tt ts1 += ts2} returns a reference to {\tt ts1}
+    \end{center}
+
+    \onslide<5>
+    \begin{center}
+      {\tt ts1 += ts2}: {\tt ts1} gets modified, so it's not a {\tt const} function
+    \end{center}
+
+    \onslide<6>
+    \begin{center}
+      {\tt ts1 += ts2}: we only need a readonly view of {\tt ts2}
+    \end{center}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{{\tt TimeSpan}: Unary {\tt -}}
+  \code{timespan-inversion.cpp}
+  \begin{itemize}
+    \item Allows to write {\tt -ts}
+    \item Unary operator: no second operand
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{{\tt TimeSpan}: Assignment}
+  \code[font size=\small,width=\linewidth]{timespan-assignment.cpp}
+
+  \begin{tikzpicture}[overlay,remember picture,box/.style={red,thick}]
+    \only<2>{\drawboxaround{operator}}
+    \only<4>{\drawboxaround{return type}}
+    \only<5>{\drawboxaround{nonconst function}}
+    \only<6>{\drawboxaround{const parameter}}
+  \end{tikzpicture}
+  
+  \begin{overprint}
+    \onslide<2>
+    \begin{center}
+      We're overloading the {\tt =} operator.
+    \end{center}
+
+    \onslide<3>
+    \begin{center}
+      {\tt ts1 = ts2} calls {\tt operator =} on {\tt ts1} with \\ {\tt other} referring to {\tt ts2}
+    \end{center}
+
+    \onslide<4>
+    \begin{center}
+      By convention, {\tt ts1 = ts2} returns a reference to {\tt ts1} \\
+      This allows for {\tt ts1 = ts2 = ts3}
+    \end{center}
+
+    \onslide<5>
+    \begin{center}
+      {\tt ts1 = ts2}: {\tt ts1} gets modified, so it's not a {\tt const} function
+    \end{center}
+
+    \onslide<6>
+    \begin{center}
+      {\tt ts1 = ts2}: we only need a readonly view of {\tt ts2}
+    \end{center}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Problem}
+  \begin{itemize}
+    \item To allow {\tt ts * 5}, we need to implement
+          \begin{center}
+            \tt TimeSpan::operator +(int) const
+          \end{center}
+    \item By the same logic, to allow {\tt 5 * ts}, we would need
+          \begin{center}
+            \tt int::operator +(const TimeSpamp\&) const
+          \end{center}
+    \item {\tt int} is not a class, and even if it were, we
+          would not be able to extend it
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Solution}
+  \begin{itemize}
+    \item It's possible to define operators as non-member functions
+  \end{itemize}
+  \code[font size=\small,width=\linewidth]{timespan-nonmember-mult.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Nonmember Operator Functions}
+  \begin{itemize}
+    \item You can define most operators as nonmember functions
+    \item Problem: implementation would often like to access private members
+  \end{itemize}
+  \code[font size=\small,width=\linewidth]{timespan-nonmember-plus.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Friend functions}
+  \begin{itemize}
+    \item A class can give access to its private parts
+    \item It can declare functions to be {\tt friend}s
+  \end{itemize}
+  \code[font size=\small,width=\linewidth]{timespan-nonmember-plus-friend.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overloadable Operators}
+  \code{overloadable-operators.cpp}
+  \begin{center}
+    \link{http://en.cppreference.com/w/cpp/language/operators}{source}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\tt std::vector}
+  \begin{itemize}
+    \item {\tt std::vector} is a regular \cpp\ class
+    \item Has array-like syntax
+      \begin{itemize}
+        \item {\tt int x = vector[i];}
+        \item {\tt vector[i] = x;}
+      \end{itemize}
+    \item Same for other containers (e.g.\ {\tt std::map})
+    \item Implemented using operator overloading
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\tt std::vector}
+  \code{vector.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{{\tt std::cin} and {\tt std::cout}}
+  \begin{itemize}
+    \item {\tt std::cin >> x}
+    \item {\tt std::cout << x}
+    \item Possible through overloading of {\tt <<} and {\tt >>}
+  \end{itemize}
+  \code[font size=\small,width=\linewidth]{cin-cout.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{{\tt toString} in \cpp}
+  \begin{itemize}
+    \item No {\tt toString()} in \cpp
+    \item To make printable, define how to write to {\tt std::ostream}
+  \end{itemize}
+  \code[font size=\small,width=\linewidth]{timespan-tostring.cpp}
+\end{frame}
+
+\end{document}
