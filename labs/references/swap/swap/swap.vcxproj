@@ -81,7 +81,7 @@
     <ClInclude Include="Catch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="solution.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
