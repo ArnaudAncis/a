@@ -358,6 +358,20 @@
          end
       %>
 
+      <%=
+        exercise do
+          extend GitMixin
+
+          <<-END
+            #{git_link 'swap/swap.sln'}
+            <p>
+              Write the function <code>swap</code> that can swap the values
+              of two <code>int</code> variables using the following syntax: <code>swap(x, y)</code>.
+            </p>
+          END
+        end
+      %>
+
     </div>
   </body>
 
