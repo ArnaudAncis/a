@@ -68,12 +68,48 @@ module CakeMixin
   end
 end
 
+module RevealerMixin
+  def show_revealable(contents, html_class:, caption:)
+    typecheck do
+      assert(contents: string,
+             html_class: string,
+             caption: string)
+    end
+
+    <<-END
+      <div data-revealer="#{caption}" class="#{html_class}">
+        #{contents}
+      </div>
+    END
+  end
+
+  def show_explanation(contents, html_class: 'explanation', caption: 'Show explanation')
+    typecheck do
+      assert(contents: string,
+             html_class: string,
+             caption: string)
+    end
+
+    show_revealable(contents, html_class: html_class, caption: caption)
+  end
+
+  def show_hint(contents, html_class: 'hint', caption: 'Show hint')
+    typecheck do
+      assert(contents: string,
+             html_class: string,
+             caption: string)
+    end
+
+    show_revealable(contents, html_class: html_class, caption: caption)
+  end
+end
+
 module Lib
   class Interpretation < Exercise
     include Contracts::TypeChecking
     include SourceCodeMixin
 
-    attr_accessor :input, :output, :explanation
+    attr_accessor :input, :output
 
     def show_input
       typecheck do
@@ -81,20 +117,6 @@ module Lib
       end
 
       %{<p>Input: <code>#{input}</code></p>}
-    end
-
-    def show_explanation(html_class: 'explanation', caption: 'Show explanation')
-      typecheck do
-        assert(explanation: string,
-               html_class: string,
-               caption: string)
-      end
-
-      <<-END
-        <div data-revealer="#{caption}" class="#{html_class}">
-          #{explanation}
-        </div>
-      END
     end
 
     def compute_output
