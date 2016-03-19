@@ -73,7 +73,7 @@ module Lib
     include Contracts::TypeChecking
     include SourceCodeMixin
 
-    attr_accessor :input, :output
+    attr_accessor :input, :output, :explanation
 
     def show_input
       typecheck do
@@ -81,6 +81,20 @@ module Lib
       end
 
       %{<p>Input: <code>#{input}</code></p>}
+    end
+
+    def show_explanation(html_class: 'explanation', caption: 'Show explanation')
+      typecheck do
+        assert(explanation: string,
+               html_class: string,
+               caption: string)
+      end
+
+      <<-END
+        <div data-revealer="#{caption}" class="#{html_class}">
+          #{explanation}
+        </div>
+      END
     end
 
     def compute_output
