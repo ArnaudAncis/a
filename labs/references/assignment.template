@@ -221,6 +221,101 @@
          end
       %>
 
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int& foo(int& x)
+             {
+                 return x;
+             }
+
+             int main()
+             {
+                 int x = 2;
+                 foo(x)++;
+
+                 std::cout << x << std::endl;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           extend CakeMixin
+
+           cake_description = <<-END
+             <p><code>return ++x;</code> works, but not <code>return x++;</code>. Why?</p>
+           END
+
+           self.source = <<-END
+             #include <iostream>
+
+             int& foo(int& x)
+             {
+                 return x + 1;
+             }
+
+             int main()
+             {
+                 int x = 2;
+                 foo(x)++;
+
+                 std::cout << x << std::endl;
+             }
+           END
+
+           self.output = 'DNC'
+
+           self.explanation = <<-END
+             <p>
+               <code>foo</code> should return a reference to an <code>int</code>.
+               This means that there must exist an <code>int</code>-variable
+               whose address can be found and passed around.
+             </p>
+             <p>
+               Returning <code>x</code> works, as <code>x</code>
+               is an existing variable, it has a memory location.
+               Returning <code>x + 1</code>, however, will lead
+               to an error. <code>x + 1</code> yields a value,
+               but this value is not stored in memory,
+               so no reference to it can be returned.
+             </p>
+             <p>
+               If <code>foo</code> is supposed to increment its argument
+               and return it by value, the following implementations will work:
+             </p>
+             <ul>
+               <li><code>x++; return x;</code></li>
+               <li><code>return x += 1;</code></li>
+               <li><code>return ++x;</code></li>
+             </ul>
+             <p>
+               These work because the increment value is stored in memory, i.e.
+               in <code>x</tt>.
+             </p>
+             #{cake cake_description}
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             #{if explanation then show_explanation else '' end}
+           END
+         end
+      %>
+
     </div>
   </body>
 
