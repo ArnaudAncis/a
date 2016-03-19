@@ -316,6 +316,48 @@
          end
       %>
 
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int& foo(int x)
+             {
+                 return x;
+             }
+
+             int main()
+             {
+                 int x = 2;
+                 foo(x)++;
+
+                 std::cout << x << std::endl;
+             }
+           END
+
+           self.output = 'UB'
+
+           self.explanation = <<-END
+             <p>
+               The code compiles perfectly (some compilers might give warnings though)
+               but its behaviour is undefined: the parameter <code>x</code>
+               is a local variable (meaning it's located on the satck)
+               and returning a reference to it is a bad idea since
+               <code>x</code> gets popped off the stack and hence
+               its address refers to no man's land.
+             </p>
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             #{if explanation then show_explanation else '' end}
+           END
+         end
+      %>
+
     </div>
   </body>
 
