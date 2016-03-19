@@ -175,6 +175,8 @@
 
       <%=
          exercise(Lib::Interpretation) do
+           extend RevealerMixin
+
            self.source = <<-END
              #include <iostream>
 
@@ -191,7 +193,7 @@
 
            self.output = 'DNC'
 
-           self.explanation = <<-END
+           explanation = <<-END
              <p>
                <code>foo</code> asks for a reference to an <code>int</code>,
                which means that there has to exist some <code>int</code>-variable
@@ -216,7 +218,7 @@
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
-             #{if explanation then show_explanation else '' end}
+             #{show_explanation explanation}
            END
          end
       %>
@@ -252,6 +254,7 @@
       <%=
          exercise(Lib::Interpretation) do
            extend CakeMixin
+           extend RevealerMixin
 
            cake_description = <<-END
              <p><code>return ++x;</code> works, but not <code>return x++;</code>. Why?</p>
@@ -276,7 +279,7 @@
 
            self.output = 'DNC'
 
-           self.explanation = <<-END
+           explanation = <<-END
              <p>
                <code>foo</code> should return a reference to an <code>int</code>.
                This means that there must exist an <code>int</code>-variable
@@ -301,7 +304,7 @@
              </ul>
              <p>
                These work because the increment value is stored in memory, i.e.
-               in <code>x</tt>.
+               in <code>x</code>.
              </p>
              #{cake cake_description}
            END
@@ -311,13 +314,15 @@
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
-             #{if explanation then show_explanation else '' end}
+             #{show_explanation explanation}
            END
          end
       %>
 
       <%=
          exercise(Lib::Interpretation) do
+           extend RevealerMixin
+           
            self.source = <<-END
              #include <iostream>
 
@@ -337,7 +342,7 @@
 
            self.output = 'UB'
 
-           self.explanation = <<-END
+           explanation = <<-END
              <p>
                The code compiles perfectly (some compilers might give warnings though)
                but its behaviour is undefined: the parameter <code>x</code>
@@ -353,7 +358,7 @@
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
-             #{if explanation then show_explanation else '' end}
+             #{show_explanation(explanation)}
            END
          end
       %>
@@ -368,6 +373,36 @@
               Write the function <code>swap</code> that can swap the values
               of two <code>int</code> variables using the following syntax: <code>swap(x, y)</code>.
             </p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          extend GitMixin
+          extend SourceCodeMixin
+
+          self.source = <<-END
+            std::vector<int> ns = { 1, 10, 1 };
+
+            max(ns)++;
+
+            // ns must now contain { 1, 11, 1 }
+          END
+
+          <<-END
+            #{git_link 'max/max.sln'}
+            <p>
+              Write the function <code>max</code> that, given a <code>std::vector&lt;int&gt;</code>,
+              returns a reference to the maximum element. If more than one maximum exists,
+              the a reference to the leftmost once (i.e. lowest index) should be returned.
+              <code>max</code>'s behaviour is undefined for empty vectors, i.e.
+              you don't have to take this corner case into account.
+            </p>
+            <p>
+             The following code should work:
+            </p>                      
+            #{show_source_editor}
           END
         end
       %>
