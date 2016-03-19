@@ -6,7 +6,8 @@
     <%= default_externals %>
     <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
-
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+    
     <%= Html::Generation::Quiz.setup %>
     <style>
       #colours {
@@ -80,6 +81,22 @@
         font-size: 2em;
         font-weight: bold;
       }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 10px auto;      
+        text-align: center;
+        cursor: help;
+      }
+
+      .explanation {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
     </style>
   </head>
 
@@ -95,7 +112,38 @@
 
       <div class="message" title="You better be reading this!">
         Update the contents of the local copy of the PVM repo!
+        Use <code>git pull</code> to fetch the new material.
       </div>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             void foo(int& x)
+             {
+                 x++;
+             }
+
+             int main()
+             {
+                 int x = 2;
+                 foo(&x);
+
+                 std::cout << x << std::endl;
+             }
+           END
+
+           self.output = 'DNC'
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
 
       <%=
          exercise(Lib::Interpretation) do
@@ -125,7 +173,53 @@
          end
       %>
 
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
 
+             int foo(int& x)
+             {
+                 return x + 1;
+             }
+
+             int main()
+             {
+                 std::cout << foo(5) << std::endl;
+             }
+           END
+
+           self.output = 'DNC'
+
+           self.explanation = <<-END
+             <p>
+               <code>foo</code> asks for a reference to an <code>int</code>,
+               which means that there has to exist some <code>int</code>-variable
+               somewhere in memory to refer to. If you pass along the constant
+               <code>5</code>, no such variable exists.
+             </p>
+             <p>
+               Imagine <code>foo</code> had <code>x++</code>
+               as body and you pass it <code>5</code>. What would <code>5++</code> mean?
+             </p>
+             <p>
+               If <code>foo</code> were to accept an <code>int</code>
+               instead of an <code>int&amp;</code>, there would be no problem:
+               a copy needs to be made, and this entails allocating
+               new memory to host this copy (i.e. a new variable is created).
+               <code>x++</code> would then operate on this newly allocated memory.
+             </p>
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             #{if explanation then show_explanation else '' end}
+           END
+         end
+      %>
 
     </div>
   </body>
@@ -133,5 +227,6 @@
   <script>
     Quiz.formatQuizzes();
     SourceEditor.initialize();
+    Revealer.initialize();
   </script>
 </html>
