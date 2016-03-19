@@ -102,7 +102,7 @@
 
   <body>
     <header>
-      <div class="center-vertically">Arrays</div>
+      <div class="center-vertically">References</div>
     </header>
     <div id="contents">
       <div class="message" title="You better be reading this!">
