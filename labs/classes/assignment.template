@@ -297,6 +297,58 @@
          end
       %>
 
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             class Foo
+             {
+             public:
+                 Foo() { std::cout << "FD"; }
+                 Foo(const Foo&) { std::cout << "FC"; }
+                 Foo(Foo&&) { std::cout << "FM"; }
+                 ~Foo() { std::cout << "FX"; }
+             };
+
+             class Bar
+             {
+                 Foo foo;
+
+             public:
+                 Bar() { std::cout << "BD"; }
+                 Bar(const Bar&) { std::cout << "BC"; }
+                 Bar(Bar&&) { std::cout << "BM"; }
+                 ~Bar() { std::cout << "BX"; }
+             };
+
+             class Qux
+             {
+                 Bar bar;
+
+             public:
+                 Qux() { std::cout << "QD"; }
+                 Qux(const Qux&) { std::cout << "QC"; }
+                 Qux(Qux&&) { std::cout << "QM"; }
+                 ~Qux() { std::cout << "QX"; }
+
+             };
+
+             int main()
+             {
+                 Qux q;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
 
 
     </div>
