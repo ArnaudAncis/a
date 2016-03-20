@@ -136,7 +136,7 @@
           </tr>
           <tr>
             <td><%= topic('constructors', 'Constructors') %></td>
-            <td></td>
+            <td><%= lab('classes', 'Classes') %></td>
           </tr>
           <tr>
             <td><%= topic('structs', 'Structs') %></td>
