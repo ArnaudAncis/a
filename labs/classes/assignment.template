@@ -227,6 +227,76 @@
          end
       %>
 
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             class Foo
+             {
+             public:
+                 Foo() { std::cout << "D"; }
+                 Foo(const Foo&) { std::cout << "C"; }
+                 Foo(Foo&&) { std::cout << "M"; }
+                 ~Foo() { std::cout << "X"; }
+             };
+
+             void bar(Foo foo)
+             {
+
+             }
+
+             int main()
+             {
+                 Foo foo;
+                 bar(foo);
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             class Foo
+             {
+             public:
+                 Foo() { std::cout << "D"; }
+                 Foo(const Foo&) { std::cout << "C"; }
+                 Foo(Foo&&) { std::cout << "M"; }
+                 ~Foo() { std::cout << "X"; }
+             };
+
+             Foo bar(Foo foo)
+             {
+                 return foo;
+             }
+
+             int main()
+             {
+                 Foo foo;
+                 bar(foo);
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
 
 
     </div>
