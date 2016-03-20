@@ -349,8 +349,121 @@
          end
       %>
 
+      <%=
+        exercise do
+          extend GitMixin
 
 
+          <<-END
+            #{git_link 'complex/complex.sln'}
+            <p>
+              Write a class <code>complex</code> that
+              represents <a href="https://en.wikipedia.org/wiki/Complex_number">complex numbers</a>.
+            </p>
+            <p>
+              A quick explanation: let's first take a look at fractions.
+              Fractions consist of two parts: a numerator A and a denominator B.
+              The mathematical notation for this fraction is A/B.
+            </p>
+            <p>
+              Similary, a complex number consists of two parts:
+              a real part A and a so-called imaginary part B.
+              This complex number is generally written as A + B i, where
+              i denotes the <em>imaginary unit</em>, a "magical" number
+              that is equal to the square root of -1.
+            </p>
+            <p>
+              This imaginary unit allows us to take the square root of any real number,
+              including negative ones. You can work with complex numbers
+              as with any other numbers, treating i as some unknown variable.
+              For example,
+            </p>
+            <ul>
+              <li>(5 + 3i) &times; 2 = 10 + 6i</li>
+              <li>i + i = 2i</li>
+              <li>7 + 3 + 5i - 2 = 8+5i</li>
+            </ul>
+            <p>
+              The product of i and i is simply -1, so for example,
+              (5 + 3i) &times i = 5i + 3ii = 5i + 3 &times (-1) = 5i - 3.
+            </p>
+            <p>
+              Write the class <code>complex</code> that has the following functionality:
+            </p>
+            <ul>
+              <li>
+                <code>complex c;</code> initialises <code>c</code> to 0.
+              </li>
+              <li>
+                <code>complex c(5);</code> initialises <code>c</code> to 5.
+              </li>
+              <li>
+                <code>complex c(7, 2);</code> initialises <code>c</code> to 7 + 2i.
+              </li>
+              <li>
+                A copy constructor should allow us to copy <code>complex</code> objects.
+              </li>
+              <li>
+                <code>c.re()</code> should return the real part. E.g. <code>complex(5, 3).re() == 5</code>.
+              </li>
+              <li>
+                <code>c.im()</code> should return the imaginary part. E.g. <code>complex(5, 3).im() == 3</code>.
+              </li>
+              <li>
+                <code>c.re() = 7;</code> should set the real part to 7.
+              </li>
+              <li>
+                <code>c.im() = 7;</code> should set the imaginary part to 7.
+              </li>
+              <li>
+                <code>c1.add(c2)</code> should return a new complex number equal to the
+                <a href="https://en.wikipedia.org/wiki/Complex_number#Addition_and_subtraction">sum</a>.
+              </li>
+              <li>
+                <code>c1.sub(c2)</code> should return a new complex number equal to the
+                <a href="https://en.wikipedia.org/wiki/Complex_number#Addition_and_subtraction">difference</a>.
+              </li>
+              <li>
+                <code>c1.neg()</code> should return a new complex number equal to <code>c1</code>'s
+                negation. E.g. complex(5, -3).neg() should return a <code>complex(-5, 3)</code>.
+              </li>
+              <li>
+                <code>c1.mul(c2)</code> should return a new complex number equal to the
+                <a href="https://en.wikipedia.org/wiki/Complex_number#Multiplication_and_division">product</a>.
+              </li>
+              <li>
+                <code>c1.div(c2)</code> should return a new complex number equal to the
+                <a href="https://en.wikipedia.org/wiki/Complex_number#Multiplication_and_division">division</a>
+                of <code>c1</code> and <code>c2</code>.
+              </li>
+              <li>
+                <code>c1.reciprocal()</code> should return a new complex number equal to the
+                <a href="https://en.wikipedia.org/wiki/Complex_number#Multiplication_and_division">reciprocal</a> of <code>c1</code>.
+              </li>
+              <li>
+                <code>c1.conj()</code> should return a new complex number equal to the
+                <a href="https://en.wikipedia.org/wiki/Complex_number#Conjugate">complex conjugate</a> of <code>c1</code>.
+              </li>
+              <li>
+                <code>c1.abs()</code> should return a <code>double</code> equal to the
+                <a href="https://en.wikipedia.org/wiki/Complex_number#Absolute_value_and_argument">absolute value</a> of <code>c1</code>.
+              </li>
+            </ul>
+            <p>
+              Create both <code>complex.cpp</code> and <code>complex.h</code> files, containing definitions and declarations respectively.
+              Tests are available in <code>tests.cpp</code>. Since all code has to compile before you're able to run it,
+              you normally wouldn't be able to work incrementally, writing one member
+              function at a time, since more advanced tests would invoke
+              member functions which you haven't written yet. To remedy this,
+              tests have been put between <code>#ifdef</code> and <code>#endif</code> preprocessor directives,
+              which allows you to easily exclude tests from the compilation process.
+              tests.cpp contains a macro definition <code>#define TEST_LEVEL 9999</code>,
+              which controls which tests are included. Set this value to <code>0</code>
+              and none of the tests will run. Set it to <code>1</code> and only very basic tests will run, etc.
+            </p>
+          END
+        end
+      %>
     </div>
   </body>
 
