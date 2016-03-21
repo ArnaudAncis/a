@@ -346,7 +346,7 @@
              <p>
                The code compiles perfectly (some compilers might give warnings though)
                but its behaviour is undefined: the parameter <code>x</code>
-               is a local variable (meaning it's located on the satck)
+               is a local variable (meaning it's located on the stack)
                and returning a reference to it is a bad idea since
                <code>x</code> gets popped off the stack and hence
                its address refers to no man's land.
