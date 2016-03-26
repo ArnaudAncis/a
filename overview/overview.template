@@ -150,6 +150,10 @@
             <td><%= topic('operator-overloading', 'Operator Overloading') %></td>
             <td></td>
           </tr>
+          <tr>
+            <td><%= topic('default-parameter-values', 'Default Parameter Values') %></td>
+            <td></td>
+          </tr>
         </ul>
       </section>
     </div>
