@@ -162,6 +162,10 @@
             <td><%= topic('smart-pointers', 'Smart Pointers') %></td>
             <td></td>
           </tr>
+          <tr>
+            <td><%= topic('inheritance', 'Inheritance') %></td>
+            <td></td>
+          </tr>
         </ul>
       </section>
     </div>
