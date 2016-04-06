@@ -166,6 +166,10 @@
             <td><%= topic('inheritance', 'Inheritance') %></td>
             <td></td>
           </tr>
+          <tr>
+            <td><%= topic('compression-intro', 'Compression: Introduction') %></td>
+            <td></td>
+          </tr>
         </ul>
       </section>
     </div>
