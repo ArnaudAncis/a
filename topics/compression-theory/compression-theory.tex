@@ -1,0 +1,411 @@
+\documentclass{../ucll-slides}
+\usepackage{../pvm}
+\usepackage{siunitx}
+\usepackage{ifthen}
+
+\usetikzlibrary{positioning}
+
+\makeatletter
+\def\light@caption@on{on}
+\def\light@caption@off{off}
+\def\light@caption@neutral{}
+\makeatother
+
+\tikzset{
+  light/.pic={\draw node[circle,#1,minimum size=7mm,font=\tiny] {\csname light@caption@#1\endcsname};},
+  light/.style={draw},
+  on/.style={light,fill=yellow},
+  off/.style={light,fill=gray!50},
+  neutral/.style={light}
+}
+
+\title{Data Compression: Theory}
+\author{Fr\'ed\'eric Vogels}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Working Example Contet}
+  \begin{itemize}
+    \item Say Alice and Bob live on separate islands
+    \item Alice has a lighthouse on her island
+    \item Alice can turn the light on or off, but only once
+    \item Bob can see the lighthouse from his island
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Alice's Exam}
+  \begin{itemize}
+    \item Alice has had her exam PVM
+    \item She wishes to inform Bob of the results
+    \item She only wishes to tell him whether she passed or failed (i.e.\ not the exact grade)
+    \item Can she use the lighthouse to inform Bob?
+    \item (You can assume Alice and Bob were able to somehow agree beforehand on what an off/on light means)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Alice's Exam}
+  \structure{Possible Convention \#1}
+  \begin{center}
+    \begin{tabular}{m{1cm}m{2cm}}
+      \tikz \pic {light=on}; & Passed \\
+      \tikz \pic {light=off}; & Failed \\
+    \end{tabular}
+  \end{center}
+  \vskip5mm
+  \structure{Possible Convention \#2}
+  \begin{center}
+    \begin{tabular}{m{1cm}m{2cm}}
+      \tikz \pic {light=off}; & Passed \\
+      \tikz \pic {light=on}; & Failed \\
+    \end{tabular}
+  \end{center}
+  \vskip5mm
+  \begin{center}
+    Which encoding is used is not important,
+    what matters is that it's possible
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Information vs Encoding}
+  \begin{center}
+    \begin{tabular}{c@{\hspace{2cm}}c}
+      \textbf{Information} & \textbf{Encoding} \\
+      \toprule
+      Passed & \alt<2>{1}{Light on} \\
+      Failed & \alt<2>{0}{Light off} \\
+    \end{tabular}
+  \end{center}
+  \vskip5mm
+  \begin{itemize}
+    \item Two possible ``informations''
+    \item Two possible codes
+    \item We can map each information to a code
+    \item No ambiguities
+    \item Injection
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Alice's Exam}
+  \begin{itemize}
+    \item Say Alice wants to be able to tell Bob whether she
+      \begin{itemize}
+        \item Passed
+        \item Failed, but tolerable
+        \item Failed, intolerable
+      \end{itemize}
+    \item Can she use the lighthouse to inform Bob?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Information vs Encoding}
+  \begin{center}
+    \begin{tabular}{c@{\hspace{2cm}}c}
+      \textbf{Information} & \textbf{Encoding} \\
+      \toprule
+      Passed & Light on (1) \\
+      Tolerable & Light off (0) \\
+      Intolerable
+    \end{tabular}
+  \end{center}
+  \vskip5mm
+  \begin{itemize}
+    \item Three possible ``informations''
+    \item Two possible codes
+    \item We cannot map each information to a code
+  \end{itemize}
+  \vskip5mm
+  \begin{center}
+    \Large
+    How to solve this problem? \\
+    \visible<2>{Build a second lighttower!}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Using Two Lighttowers}
+  \structure{Possible Encoding}
+  \begin{center}
+    \begin{tabular}{m{2cm}m{2cm}}
+      \tikz \pic {light=on}; \space \tikz \pic {light=on}; & Passed \\
+      \tikz \pic {light=on}; \space \tikz \pic {light=off}; & Tolerable \\
+      \tikz \pic {light=off}; \space \tikz \pic {light=off}; & Intolerable \\
+    \end{tabular}
+  \end{center}
+  \begin{itemize}
+    \item 24 possible encodings
+    \item Again, not important which encoding
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Information vs Encoding}
+  \begin{center}
+    \begin{tabular}{c@{\hspace{2cm}}c}
+      \textbf{Information} & \textbf{Encoding} \\
+      \toprule
+      Passed & 11 \\
+      Tolerable & 10 \\
+      Intolerable & 00
+    \end{tabular}
+  \end{center}
+  \vskip5mm
+  \begin{itemize}
+    \item Three possible ``informations''
+    \item Four possible codes
+    \item Mapping possible
+    \item Unused code 01
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Redundancy}
+  \begin{itemize}
+    \item Two lighttowers allow 4 codes
+    \item Yet we only need 3
+    \item Seems kind of wasteful
+    \item We clearly need more than one lighthouse
+    \item We clearly don't need two
+    \item Build 1.5 lighthouses?
+    \item Only solution: accept redundancy, build 2 lighthouses
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multiple Exams}
+  \begin{itemize}
+    \item What if Alice has multiple exams, say 5
+    \item She wishes to inform Bob about each exam whether she passed, failed tolerable or failed intolerably
+    \item She needed 2 lighthouses per exam
+    \item So she builds 10 lighthouses for 5 exams
+  \end{itemize}
+  \vskip5mm
+  \[
+    \foreach \x in {1,2,...,5} {
+      \underbrace{
+        \tikz\pic{light=neutral};
+        \;
+        \tikz\pic{light=neutral};
+      }_{\textrm{exam \x}} \quad
+    }
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Information vs Encoding}
+  \begin{center}
+    \begin{tabular}{c@{\hspace{1cm}}c}
+      \textbf{Information} & \textbf{Encoding} \\
+      \toprule
+      Exam 1: P/T/F & Lighthouse 1: on/off \\
+      Exam 2: P/T/F & Lighthouse 2: on/off \\
+      Exam 3: P/T/F & Lighthouse 3: on/off \\
+      Exam 4: P/T/F & Lighthouse 4: on/off \\
+      Exam 5: P/T/F & Lighthouse 5: on/off \\
+                    & Lighthouse 6: on/off \\
+                    & Lighthouse 7: on/off \\
+                    & Lighthouse 8: on/off \\
+                    & Lighthouse 9: on/off \\
+                    & Lighthouse 10: on/off \\
+      \midrule
+      $3^5 = 243$ outcomes & $2^{10} = 1024$ codes
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Redundancy}
+  \begin{center}
+    243 outcomes vs 1024 codes
+  \end{center}
+  \begin{itemize}
+    \item Need a unique code for each of the 243 outcomes
+    \item Is certainly possible: there are 1024 codes available
+    \item But we're wasting 1024-243=781 codes
+    \item Can we get away with less lighthouses?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Number of Codes}
+  \begin{center}
+    \begin{tabular}{cc}
+      \textbf{\#lighthouses} & \textbf{\#codes} \\
+      \toprule
+      1 & 2 \\
+      2 & 4 \\
+      3 & 8 \\
+      4 & 16 \\
+      5 & 32 \\
+      6 & 64 \\
+      7 & 128 \\
+      \bf 8 & \bf 256 \\
+      9 & 512 \\
+      10 & 1024 \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  \begin{itemize}
+    \item We need 243 codes
+    \item We can get away with 8 lighthouses
+    \item How? \cake
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Compression}
+  \begin{itemize}
+    \item Original encoding used 10 lighthouses (bits)
+    \item We really only need 8 lighthouses (bits)
+    \item Finding the minimal number of bits needed = compression
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Bits vs Bits}
+  \begin{itemize}
+    \item You already know ``physical'' bits
+          \begin{itemize}
+            \item RAM
+            \item Harddisk
+            \item Network
+            \item \dots
+          \end{itemize}
+    \item These are the bits used for the encoding
+    \item If you have \SI{8}{GiB} storage, you have
+          \[ 2^{2^{36}} \approx 10^{\SI{20000000000}{}} \]
+          codes available
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Bits vs Bits}
+  \begin{itemize}
+    \item Distance can be measured in meters
+    \item Time can be measured in seconds
+    \item Weight can be measured in kilogram
+    \item Information can also be quantified
+    \item The unit for information is ``bit''
+    \item To distinguish from the encoding bit, we'll use ``ibit''
+    \item Formula to compute the number of ibits
+          \[
+            \log_2(\textrm{number of outcomes})
+          \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quantising Information: Example}
+  \begin{itemize}
+    \item One exam
+    \item Two possible outcomes: Pass/Fail
+  \end{itemize}
+  \vskip5mm
+  \[
+    \log_2(2) = \SI{1}{ibits}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quantising Information: Example}
+  \begin{itemize}
+    \item One exam
+    \item Three possible outcomes: Pass/Tolerable/Intolerable
+  \end{itemize}
+  \vskip5mm
+  \[
+    \log_2(3) \approx \SI{1.58}{ibits}
+  \]
+  \vskip5mm
+  \begin{itemize}
+    \item Remember we needed more than one lighttower, but less than two
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quantising Information: Example}
+  \begin{itemize}
+    \item Five exam
+    \item Three possible outcomes: Pass/Tolerable/Intolerable
+  \end{itemize}
+  \vskip5mm
+  \[
+    \log_2(3^5) \approx \SI{7.92}{ibits}
+  \]
+  \vskip5mm
+  \begin{itemize}
+    \item Remember we needed 8 lighttowers
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Compression}
+  \begin{itemize}
+    \item If you have $N$ ibits of information\dots
+    \item \dots you will minimally need $N$ bits of storage
+    \item (Lossless) Compression = only using $N$ bits of storage
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Compression: Example}
+  \begin{itemize}
+    \item Five exams
+    \item We want exact grade
+    \item 0, 1, \dots, 20: 21 possible grades
+    \item $\log_2(21^5) \approx \SI{21.96}{ibits}$
+    \item You'd probably use an {\tt int} array: $5 \times 32 = \SI{160}{bits}$
+    \item In reality, you only need \SI{22}{bits}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Infinite Compression}
+  \begin{itemize}
+    \item Can you zip a zip?
+    \item Can you continue compressing a file?
+    \item Ibits form lower bound (if you want lossless)
+    \item Lossy: no lower bound, but compressing every picture to a black image (only \SI{0}{bits} needed) is not very useful
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Infinite Compression}
+  \begin{itemize}
+    \item Say you invent a new compression algorithm ``zop''
+    \item Say it compressed any $N$ bits file to a $N-1$ bits file.
+    \item Any file can then be compressed to $1$ bit.
+    \item How can you reconstruct a movie/music/data based on one single bit?
+  \end{itemize}
+  \begin{center}
+    \begin{tikzpicture}
+      \foreach \i in {1,...,8} {
+        \tikzmath{
+          real \size;
+          \size = 0.85^\i;
+          int \intensity;
+          \intensity = int((1 - \size) * 100);
+        }
+        \node[circle,minimum size=\size cm,draw,inner sep=0mm,fill=red!\intensity] (d\i) at (\i,0) {};
+      }
+
+      \foreach[count=\j] \i in {2,...,8} {
+        \draw[-latex] (d\j) -- (d\i) node[rotate=90,midway,font=\tiny,anchor=west] {zop!};
+      }
+    \end{tikzpicture}
+  \end{center}
+  \begin{itemize}
+    \item Infinite compression is impossible.
+  \end{itemize}
+\end{frame}
+
+\end{document}
