@@ -29,7 +29,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Working Example Contet}
+  \frametitle{Working Example}
   \begin{itemize}
     \item Say Alice and Bob live on separate islands
     \item Alice has a lighthouse on her island
@@ -406,6 +406,313 @@
   \begin{itemize}
     \item Infinite compression is impossible.
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Optimal Compression}
+  \begin{itemize}
+    \item Maths tell us what the best possible compression is
+    \item But doesn't tell us how to achieve it
+    \item Achieving best compression requires knowledge about data
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Optimal Compression: Example}
+  \begin{itemize}
+    \item Say you have a file with grades (0--20)
+    \item You use one byte per grade
+    \item Byte has 8 bits, hence 256 codes
+    \item Grades: only 21 possibilities
+    \item Redundancy!
+    \item But if you want to zip this file\dots
+    \item Zip does not know these are grades
+    \item Zip must assume all byte values are possible
+    \item How can zip then compress data?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Optimal Compression}
+  \begin{itemize}
+    \item Zip does not know about grades
+    \item Hence, it will never be able to compress optimally
+    \item But, zip \emph{does} manage to compress data without making assumptions
+    \item How does zip do that?
+    \item We'll discuss some general-purpose compression algorithms
+    \item MP3 is the opposite of zip: it knows the data represents sounds,
+          and makes all kinds of assumptions about it (psychoacoustics)
+          in order to better compress it
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Assumptions about Data}
+  \begin{itemize}
+    \item To better understand zip, we start with familiar data
+    \item We have ``knowledge'' about this data
+    \item We can use this knowledge to compress the data
+    \item We then see if we can generalise this principe and use
+          it on all kinds of data
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Compressing Text}
+  \begin{center}
+    Quand quelqu'un quitte apr\`es les quarante questions
+  \end{center}
+  \begin{itemize}
+    \item We assume we're compressing this French text
+    \item We're trying to find a way to save on bits
+    \item We notice that {\tt q} is often followed by {\tt u}
+    \item Our compression algorithm would replace {\tt qu} by simply {\tt q}
+    \item Our decompression algorithm would add a {\tt } after each {\tt q}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Applying Our Compression Algorithm}
+  \structure{Original}
+  \begin{center}
+    Quand quelqu'un quitte apr\`es les quarante questions
+  \end{center}
+  \vskip5mm
+  \structure{Replace {\tt qu} with {\tt q}}
+  \begin{center}
+    Qand qelq'un qitte apr\`es les qarante qestions
+  \end{center}
+  \vskip5mm
+  \structure{Adding {\tt} after each {\tt q}}
+  \begin{center}
+    Quand quelqu'un quitte apr\`es les quarante questions
+  \end{center}
+  \begin{center}
+    \visible<2>{\Large It seems to work!}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Applying Our Compression Algorithm}
+  \structure{Original}
+  \begin{center}
+    Cinq coqs iraqiens
+  \end{center}
+  \vskip5mm
+  \structure{Replace {\tt qu} with {\tt q}}
+  \begin{center}
+    Cinq coqs iraqiens
+  \end{center}
+  \vskip5mm
+  \structure{Adding {\tt} after each {\tt q}}
+  \begin{center}
+    Cinqu coqus iraquiens
+  \end{center}
+  \begin{center}
+    \visible<2>{\Large Fails for words with {\tt q} without {\tt u}}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Compression Algorithm}
+  \begin{itemize}
+    \item A compression algorithm \emph{must} be able to
+          reconstruct the original
+    \item Our first attempt is a failure
+    \item How to fix it?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Compression Algorithm: Second Attempt}
+  \structure{Compression}
+  \begin{itemize}
+    \item Replace {\tt qu} by {\tt q}
+    \item Replace {\tt q[\^{}u]} by {\tt qu}
+  \end{itemize}
+  \vskip5mm
+  \structure{Decompression}
+  \begin{itemize}
+    \item Replace {\tt qu} by {\tt q}
+    \item Replace {\tt q[\^{}u]} by {\tt qu}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Applying Our New Compression Algorithm}
+  \structure{Original}
+  \begin{center}
+    Quarante coqs
+  \end{center}
+  \vskip5mm
+  \structure{Compressing}
+  \begin{center}
+    Qarante coqus
+  \end{center}
+  \vskip5mm
+  \structure{Decompressing}
+  \begin{center}
+    Quarante coqs
+  \end{center}
+  \begin{center}
+    \visible<2>{\Large It works!}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Applying Our New Compression Algorithm}
+  \structure{Original}
+  \begin{center}
+    Equus antiquus reliquum
+  \end{center}
+  \vskip5mm
+  \structure{Compressing}
+  \begin{center}
+    Equs antiqus reliqum
+  \end{center}
+  \vskip5mm
+  \structure{Decompressing}
+  \begin{center}
+    Eqs antiqs reliqm
+  \end{center}
+  \begin{center}
+    \visible<2>{\Large Sigh\dots}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Third Attempt}
+  \structure{Compression}
+  \begin{itemize}
+    \item {\tt quu} $\rightarrow$ {\tt quuu}
+    \item {\tt qu[\^{}u]} $\rightarrow$ {\tt q}
+    \item {\tt q[\^{}u]} $\rightarrow$ {\tt qu}
+  \end{itemize}
+  \vskip5mm
+  \structure{Decompression}
+  \begin{itemize}
+    \item {\tt qu[\^{}u]} $\rightarrow$ {\tt q}
+    \item {\tt q[\^{}u]} $\rightarrow$ {\tt qu}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Applying Our Third Attempt}
+  \structure{Original}
+  \begin{center}
+    Quarante coqs equus
+  \end{center}
+  \vskip5mm
+  \structure{Compressing}
+  \begin{center}
+    Qarante coqus equuus
+  \end{center}
+  \vskip5mm
+  \structure{Decompressing}
+  \begin{center}
+    Quarante coqs equus
+  \end{center}
+  \begin{center}
+    \visible<2>{\Large It works\dots we think}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Third Attempt}
+  \begin{itemize}
+    \item Third attempt is provably correct
+    \item But if we look at the compression algorithm\dots
+  \end{itemize}
+  \begin{center}
+    \begin{tabular}{ccc}
+      \bf Original & \bf Compressed & \bf Difference in length \\
+      \toprule
+      \tt quu & \tt quuu & +1 \\
+      \tt qu & \tt q & -1 \\
+      \tt q & \tt qu & +1 \\
+    \end{tabular}
+  \end{center}
+  \begin{itemize}
+    \item In two of the three cases, length increases!
+    \item Does it really compress?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Statistics}
+  \begin{itemize}
+    \item We feel intuitively that our algorithm should decrease size
+    \item There are many more words with {\tt qu} than with {\tt q} or {\tt quu}
+    \item The -1 case occurs much more often than the +1 cases
+    \item Our algorithm does indeed work
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{General Rule in Compression}
+  \begin{center}
+    \begin{tabular}{ccc}
+      \bf Original & \bf Compressed & \bf Difference in length \\
+      \toprule
+      \tt quu & \tt quuu & +1 \\
+      \tt qu & \tt q & -1 \\
+      \tt q & \tt qu & +1 \\
+    \end{tabular}
+  \end{center}
+  \begin{itemize}
+    \item We can make space gains in one of these cases (-1 case)
+    \item Price we pay: we ``sacrifice'' two other cases (+1 cases)
+    \item Recurring phenomenon in compression
+    \item We depend on the fact that the -1 case happens more often than the +1 cases
+    \item In order to make gains, {\tt qu} should occur more often than {\tt q} and {\tt quu} together
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Generalising Our Algorithm}
+  \begin{itemize}
+    \item The {\tt q} trick is very nice and all\dots
+    \item \dots but it's rather limited
+    \item It's rather useless on non-textual data
+    \item Can we somehow generalise the algoritm?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Generalising Our Algorithm}
+  \begin{itemize}
+    \item Given a random piece of data\dots
+    \item \dots we can analyse if certain pairs of bytes occur often
+    \item E.g.\ we would find {\tt qu} as such a pair in text
+    \item We should also verify that {\tt qu}s appear more often than {\tt q} and {\tt quu}s together
+    \item If this is the case, we can keep a table of ``interesting pairs'' for which we apply our trick
+          of omitting the second member of the pair
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example}
+  \structure{Input}
+  \begin{center}
+    \tt aboabpgabmlmllaabtmlqiabml
+  \end{center}
+  \vskip5mm
+  \structure{Pair Frequencies}
+  \begin{center}
+    \begin{tabular}{cc@{\hspace{1cm}}cc}
+      \bf Pair & \bf Frequency & \bf Pair & \bf Frequency \\
+      \toprule
+      \tt\bfseries ab & \bfseries5 & \tt bo & 1 \\
+      \tt oa & 1 & \tt bp & 1 \\
+      \tt pg & 1 & \tt ga & 1 \\
+      \tt bm & 2 & \tt\bfseries ml & \bfseries4 \\
+      \tt lm & 1 & \tt ll & 1 \\
+      \tt la & 1 & \tt aa & 1 \\
+      \tt bt & 1 & \tt tm & 1 \\
+      \tt lq & 1 & \tt qi & 1 \\
+      \tt ia & 1 \\
+    \end{tabular}
+  \end{center}
 \end{frame}
 
 \end{document}
