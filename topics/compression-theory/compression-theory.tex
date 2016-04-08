@@ -715,4 +715,71 @@
   \end{center}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Example}
+  \structure{Input}
+  \begin{center}
+    \tt aboabpgabmlmllaabtmlqiabml
+  \end{center}
+  \vskip5mm
+  \structure{Frequent Pairs}
+  \begin{center}
+    \texttt{ab}, \texttt{ml}
+  \end{center}
+  \vskip5mm
+  \structure{Compression Algorithm}
+  \begin{itemize}
+    \item Say we found $n$ frequent pairs: $\alpha_i\beta_i$
+    \item In example: $n = 2$, $\alpha_1 = \texttt{a}, \beta_1 = \texttt{b}$, $\alpha_2 = \texttt{m}$, $\beta_2 = \texttt{l}$
+    \item We need to store these pairs for decompression
+    \item Encoding data
+          \[
+            \alpha\beta\beta \rightarrow \alpha\beta\beta\beta \qquad \alpha\beta \rightarrow \alpha \qquad \alpha \rightarrow \alpha\beta
+          \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example}
+  \structure{Original Data}
+  \[
+    \underbrace{\texttt{aboabpgabmlmllaabtmlqiabml}}_{\textrm{26 bytes}}
+  \]
+  \vskip5mm
+  \structure{Frequent Pairs}
+  \begin{center}
+    \texttt{ab}, \texttt{ml}
+  \end{center}
+  \vskip5mm
+  \structure{Compressed Data}
+  \[
+    \overbrace{
+      \underbrace{\texttt{2}}_{\rotatebox{90}{\tiny\textrm{\#pairs}}}
+      \underbrace{\texttt{ab}}_{\rotatebox{90}{\tiny\textrm{pair 1}}}
+      \underbrace{\texttt{ml}}_{\rotatebox{90}{\tiny\textrm{pair 2}}}
+      \underbrace{\texttt{aoapgammlllabatmqiam}}_{\tiny\textrm{compressed data}}}
+    ^{\textrm{25 bytes}}
+  \]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example}
+  \structure{Original Data}
+  \begin{center}
+    \texttt{aboabpgabmlmllaabtmlqiabml}
+  \end{center}
+  \structure{Compressed Data}
+  \begin{center}
+    \texttt{2abmlaoapgammlllabatmqiam}
+  \end{center}
+  \structure{Gains}
+  \begin{itemize}
+    \item We gained only one byte
+    \item It would work better on larger inputs
+    \item We make some losses in the header (5 bytes)
+    \item Header = price for generalising
+  \end{itemize}
+\end{frame}
+
+
 \end{document}
