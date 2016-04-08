@@ -1,6 +1,8 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 
+#include <iostream>
+
 class complex
 {
 private:
@@ -35,5 +37,7 @@ complex& operator +=(complex&, const complex&);
 complex& operator -=(complex&, const complex&);
 complex& operator *=(complex&, const complex&);
 complex& operator /=(complex&, const complex&);
+
+std::ostream& operator <<(std::ostream&, const complex&);
 
 #endif

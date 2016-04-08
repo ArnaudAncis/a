@@ -108,3 +108,8 @@ complex& operator /=(complex& c1, const complex& c2)
 {
     return c1 = c1 / c2;
 }
+
+std::ostream& operator <<(std::ostream& out, const complex& c)
+{
+    return out << c.re() << "+" << c.im() << "i";
+}
