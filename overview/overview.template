@@ -152,7 +152,7 @@
           </tr>
           <tr>
             <td><%= topic('default-parameter-values', 'Default Parameter Values') %></td>
-            <td></td>
+            <td><%= lab('complex', 'Complex numbers') %></td>
           </tr>
           <tr>
             <td><%= topic('raii', 'RAII') %></td>
