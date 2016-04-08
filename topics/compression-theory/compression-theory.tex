@@ -28,6 +28,12 @@
   \titlepage
 \end{frame}
 
+\section{Quantising Information}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
 \begin{frame}
   \frametitle{Working Example}
   \begin{itemize}
@@ -368,6 +374,12 @@
   \end{itemize}
 \end{frame}
 
+\section{Limitations of Compression}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
 \begin{frame}
   \frametitle{Infinite Compression}
   \begin{itemize}
@@ -413,7 +425,7 @@
   \begin{itemize}
     \item Maths tell us what the best possible compression is
     \item But doesn't tell us how to achieve it
-    \item Achieving best compression requires knowledge about data
+    \item Best compression requires knowledge about data
   \end{itemize}
 \end{frame}
 
@@ -437,7 +449,7 @@
   \begin{itemize}
     \item Zip does not know about grades
     \item Hence, it will never be able to compress optimally
-    \item But, zip \emph{does} manage to compress data without making assumptions
+    \item But, zip \emph{does} manage to compress data without seemingly making assumptions
     \item How does zip do that?
     \item We'll discuss some general-purpose compression algorithms
     \item MP3 is the opposite of zip: it knows the data represents sounds,
@@ -446,10 +458,17 @@
   \end{itemize}
 \end{frame}
 
+\section{QU Compression Algorithm}
+
 \begin{frame}
-  \frametitle{Assumptions about Data}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{QU Compression Algorithm}
   \begin{itemize}
-    \item To better understand zip, we start with familiar data
+    \item To better understand zip, we develop our own small compression algorithm
+    \item We will first focus on compressing ``familiar'' data
     \item We have ``knowledge'' about this data
     \item We can use this knowledge to compress the data
     \item We then see if we can generalise this principe and use
@@ -460,7 +479,7 @@
 \begin{frame}
   \frametitle{Compressing Text}
   \begin{center}
-    Quand quelqu'un quitte apr\`es les quarante questions
+    Quand quelqu'un quitte apr\`es quarante questions
   \end{center}
   \begin{itemize}
     \item We assume we're compressing this French text
@@ -475,17 +494,17 @@
   \frametitle{Applying Our Compression Algorithm}
   \structure{Original}
   \begin{center}
-    Quand quelqu'un quitte apr\`es les quarante questions
+    Quand quelqu'un quitte apr\`es quarante questions
   \end{center}
   \vskip5mm
   \structure{Replace {\tt qu} with {\tt q}}
   \begin{center}
-    Qand qelq'un qitte apr\`es les qarante qestions
+    Qand qelq'un qitte apr\`es qarante qestions
   \end{center}
   \vskip5mm
   \structure{Adding {\tt} after each {\tt q}}
   \begin{center}
-    Quand quelqu'un quitte apr\`es les quarante questions
+    Quand quelqu'un quitte apr\`es quarante questions
   \end{center}
   \begin{center}
     \visible<2>{\Large It seems to work!}
@@ -687,11 +706,12 @@
     \item We should also verify that {\tt qu}s appear more often than {\tt q} and {\tt quu}s together
     \item If this is the case, we can keep a table of ``interesting pairs'' for which we apply our trick
           of omitting the second member of the pair
+    \item Generalised QU Compression, ``GQU'' for short
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Example}
+  \frametitle{GQU: Example}
   \structure{Input}
   \begin{center}
     \tt aboabpgabmlmllaabtmlqiabml
@@ -716,7 +736,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Example}
+  \frametitle{GQU: Example}
   \structure{Input}
   \begin{center}
     \tt aboabpgabmlmllaabtmlqiabml
@@ -740,7 +760,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Example}
+  \frametitle{GQU: Example}
   \structure{Original Data}
   \[
     \underbrace{\texttt{aboabpgabmlmllaabtmlqiabml}}_{\textrm{26 bytes}}
@@ -763,7 +783,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Example}
+  \frametitle{Reflections on GQU}
   \structure{Original Data}
   \begin{center}
     \texttt{aboabpgabmlmllaabtmlqiabml}
@@ -781,5 +801,35 @@
   \end{itemize}
 \end{frame}
 
+\section{Summary}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Summary}
+  \structure{Compression makes assumptions}
+  \begin{itemize}
+    \item In order to compress data\dots
+    \item \dots we need to make assumptions about it
+    \item QU compression: assumes {\tt qu} appears often
+    \item GQU compression: assumes certain pairs occur often
+    \item MP3: assumes it's audio meant for human ears
+    \item \dots
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Summary}
+  \structure{No compression is perfect}
+  \begin{itemize}
+    \item A compression algorithm will \emph{decrease}
+          the size of input that satisfies the assumptions
+    \item But will \emph{increase} the size of input
+          that does not satisfy the assumptions
+    \item No compression algorithm can compress \emph{all} inputs to something smaller
+  \end{itemize}
+\end{frame}
 
 \end{document}
