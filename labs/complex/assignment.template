@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+    
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .message {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        width: 75%;
+        margin: 100px auto;
+        padding: 20px;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
+      }
+
+      .git {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .cake {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        font-weight: bold;
+        background: #FFAA77;
+      }
+
+      .cake .header {
+        display: block;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 10px auto;      
+        text-align: center;
+        cursor: help;
+      }
+
+      .explanation {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Complex</div>
+    </header>
+    <div id="contents">
+      <div class="message" title="You better be reading this!">
+        Update the contents of the local copy of the PVM repo!
+        Use <code>git pull</code> to fetch the new material.
+      </div>
+
+      <%=
+        exercise do
+          extend GitMixin
+
+          <<-END
+            #{git_link 'complex/complex.sln'}
+            <p>
+              We revisit the <code>complex</code> class from a previous assignment.
+              Rewrite the class <code>complex</code> so that it
+            </p>
+            <ul>
+              <li>
+                makes use of operator overloading,
+              </li>
+              <li>
+                is const-correct,
+              </li>
+              <li>
+                makes use of default parameter values where possible.
+              </li>
+            </p>
+            <p>
+              Implement it so that the following syntax has the specified semantics:
+            </p>
+            <ul>
+              <li>
+                <code>complex c;</code> creates a new complex number <code>c</code> equal to 0.
+              </li>
+              <li>
+                <code>complex c(5);</code> creates a new complex number <code>c</code> equal to 5.
+              </li>
+              <li>
+                <code>complex c(7, 2);</code> creates a new complex number <code>c</code> equal to 7+2i.
+              </li>
+              <li>
+                <code>complex c2 = c1;</code> creates a new complex number <code>c2</code> equal to <code>c1</code>.
+              </li>
+              <li>
+                <code>c.re()</code> retrieves the real part of <code>c</code>.
+              </li>
+              <li>
+                <code>c.im()</code> retrieves the imaginary part of <code>c</code>.
+              </li>
+              <li>
+                <code>c.re() = 7;</code> sets <code>c</code>'s real part to 7.
+              </li>
+              <li>
+                <code>c.im() = 7;</code> sets <code>c</code>'s imaginary part to 7.
+              </li>
+              <li>
+                <code>c1 + c2</code> <a href="https://en.wikipedia.org/wiki/Complex_number#Addition_and_subtraction">adds</a> the two complex numbers.
+              </li>
+              <li>
+                <code>c1 - c2</code> should compute the <a href="https://en.wikipedia.org/wiki/Complex_number#Addition_and_subtraction">difference</a>.
+              </li>
+              <li>
+                <code>-c</code> should equal to <code>c</code>'s negation. E.g. -complex(5, -3) should return an object representing -5+3i.
+              </li>
+              <li>
+                <code>c1 * c2</code> corresponds to <a href="https://en.wikipedia.org/wiki/Complex_number#Multiplication_and_division">multiplication</a>.
+              </li>
+              <li>
+                <code>c1 / c2</code> <a href="https://en.wikipedia.org/wiki/Complex_number#Multiplication_and_division">divides</a> <code>c1</code> by <code>c2</code>.
+              </li>
+              <li>
+                <code>c1 += c2</code>, <code>c1 -= c2</code>, <code>c1 *= c2</code>, <code>c1 /= c2</code> should work as expected.
+              </li>
+              <li>
+                <code>c1 = c2</code> should assign <code>c2</code> to <code>c1</code>.
+              </li>
+              <li>
+                <code>c1.reciprocal()</code> should return a new complex number equal to the
+                <a href="https://en.wikipedia.org/wiki/Complex_number#Multiplication_and_division">reciprocal</a> of <code>c1</code>.
+              </li>
+              <li>
+                <code>c1.conj()</code> should return a new complex number equal to the
+                <a href="https://en.wikipedia.org/wiki/Complex_number#Conjugate">complex conjugate</a> of <code>c1</code>.
+              </li>
+              <li>
+                <code>c1.abs()</code> should return a <code>double</code> equal to the
+                <a href="https://en.wikipedia.org/wiki/Complex_number#Absolute_value_and_argument">absolute value</a> of <code>c1</code>.
+              </li>
+              <li>
+                <code>out &lt;&lt; c</code> should write a textual represention of <code>c</code>
+                to <code>out</code>. For example, <code>std::cout &lt;&lt; c</code> should print <code>c</code>
+                to the standard output stream. The complex number a+bi should be formatted as <code>"a+bi"</code>.
+              </li>
+            </ul>
+            <p>
+              Create both <code>complex.cpp</code> and <code>complex.h</code> files, containing definitions and declarations respectively.
+              Tests are available in <code>tests.cpp</code>.
+            </p>
+          END
+        end
+      %>
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>
