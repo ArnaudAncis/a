@@ -99,7 +99,6 @@
     <ClCompile Include="interval.cpp" />
     <ClCompile Include="interval_mapper.cpp" />
     <ClCompile Include="projection.cpp" />
-    <ClCompile Include="solutions\ex9-solution.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -133,7 +133,10 @@
          to determine how they work. It is important that you
          experiment and think logically.
        </p>
-         
+       <p>
+         Producing the image below is your ultimate goal for this lab session.
+       </p>
+       <img class="center" src="ex12b-solution.png" />
        <%=
          exercise do
            <<-END
@@ -303,6 +306,147 @@
          end
        %>
 
+       <%=
+         exercise do
+           <<-END
+             <p>
+               Render the <a href="https://en.wikipedia.org/wiki/Mandelbrot_set">Mandelbrot fractal</a>.
+             </p>
+             <img class="center" src="ex10-solution.png" />
+             <p>
+               This probably requires some explanation. We first introduce the concept
+               of infinite sequences. An infinite sequence can be seen
+               as an array of numbers (e.g. <code>double[]</code>), but
+               with no last element: it just goes on forever.
+             </p>
+             <p>
+               An infinite sequence is said to converge if the items of the sequence
+               grow forever closer to some "final value". For example,
+               the sequence 1, 0.1, 0.01, 0.001, 0.0001, 0.00001, &hellip;
+               is convergent as the values grow forever closer to 0.
+             </p>
+             <p>
+               An infinite sequence is said to diverge if it does not converge.
+               For example, in the sequence 1, 2, 3, 4, 5, &hellip;
+               the values will forever grow larger.
+             </p>
+             <p>
+               We can construct such an infinite sequence making use
+               of a function and an initial value. For example, say we want to build
+               an infinite sequence of <code>double</code>s, we
+               can use a <code>double f(double x)</code>
+               and an initial value <code>x</code> as follows:
+             </p>
+             <ul>
+               <li>The infinite sequence's first element is <code>x</code>.</li>
+               <li>The second element is <code>f(x)</code>.</li>
+               <li>The third element is <code>f(f(x))</code>.</li>
+               <li>The third element is <code>f(f(f(x)))</code>.</li>
+               <li>&hellip;</li>
+             </ul>
+             <p>
+               For example, take f(x) = x<sup>2</sup>. Below are a few infinite sequences,
+               each with a different starting value:
+             </p>
+             <ul>
+               <li>Starting at 0, we get 0, 0<sup>2</sup> = 0, 0, 0, 0, 0, &hellip;</li>
+               <li>Starting at 0.5, we get 0.5, 0.5<sup>2</sup> = 0.25,
+                 0.25<sup>2</sup> = 0.0625,
+                 0.0625<sup>2</sup> = 0.00390625, 0.0000152587890625, 0.00000000023283064365386962890625, &hellip;</li>
+               <li>Starting at 1, we get 1, 1<sup>2</sup> = 1, 1, 1, 1, 1, &hellip;</li>
+               <li>Starting at 2, we get 2, 2<sup>2</sup> = 4, 4<sup>2</sup> = 16, 16<sup>2</sup>=256, 256<sup>2</sup> = 65536, 4294967296, &hellip;</li>
+             </ul>
+             <p>
+               If we start at 0, 0.5 or 1, we get convergent infinite sequences. The infinite sequence starting at 2, however, diverges.
+             </p>
+             <p>
+               Producing the above fractal is simple: each pixel corresponds to a complex <code>c</code> (as you did in the previous exercise).
+               We take the function <code>f(z) = z * z + c</code> and build an infinite sequence with it starting with 0+0i. If it converges,
+               colour the pixel black, otherwise, colour it white.
+             </p>
+             <p>
+               How to detect if the sequence converges? There's no particularly nifty approach to this.
+               The most straightforward way is to apply the function <code>f</code> a large number of times and see if <code>z</code>'s
+               absolute value grows larger than a certain value.
+             </p>
+             <p>
+               For example, consider c = 1+2i. We compute the sequence:
+             </p>
+             <ol>
+               <li>We start at z = 0+0i.</li>
+               <li>We compute <code>f(z) = z * z + c = (0+0i * 0+0i) + c = 1+2i</code>.</li>
+               <li>We compute <code>f(f(z)) = f(1+2i) = -2+6i</code>.</li>
+               <li>We compute <code>f(f(f(z))) = f(-2+6i) = -31-22i</code>.</li>
+               <li>We compute <code>f(f(f(f(z)))) = f(-31-22i) = 478+1366i</code>.</li>
+             </ol>
+             <p>
+               We see that the complex number grows larger at each step. We see this as an indication that the sequence diverges,
+               se colour the pixel corresponding to 1+2i white. If we start at 0.1+0.1i, we get
+             </p>
+             <ol>
+               <li>0 + 0i</li>
+               <li>0.1 + 0.1i</li>
+               <li>0.1 + 0.12i</li>
+               <li>0.0956 + 0.124i</li>
+               <li>0.0937634 + 0.123709i</li>
+               <li>0.0934877 + 0.123199i</li>
+               <li>0.093562 + 0.123035i</li>
+               <li>0.0936162 + 0.123023i</li>
+               <li>0.0936294 + 0.123034i</li>
+               <li>&hellip;</li>
+             </ol>
+             <p>
+               We see that the complex value remains small. We can decide that if <code>z</code> remains
+               small after N steps (where you can choose N; try several values and compare results),
+               the sequence probably converges. To measure <code>z</code>, use the absolute value.
+               <code>z</code> remaining small means that its absolute value remains
+               below a certain threshold value, which again you can choose yourself (try and compare).
+             </p>
+           END
+         end
+       %>
+              
+       <%=
+         exercise do
+           <<-END
+             <p>
+               In the previous exercise, we used just black (convergent) and white (divergent).
+               In order to get a nicer picture, we can introduce intermediate colours by
+               counting the number of iterations necessary before <code>z</code>'s absolute value
+               exceeds a chosen threshold.
+             </p>
+             <p>
+               Say, for example, that we want to distinguish 100 levels of shades.
+               We can then start building the infinite sequence of <code>z</code>s,
+               counting how many times we apply the function <code>f</code>
+               and stopping when <code>z.abs()</code> becomes greater than some chosen
+               maximum. If it took 0 iterations, we know it diverges immediately.
+               If it took 10 iterations, <code>z</code> remained low for a short while
+               but then "exploded" (on the 10th step), meaning it diverges quickly.
+               Sometimes it will diverge very slowly, and only after 1000 steps
+               will <code>z</code> exceed the threshold. Since we are only
+               interested in 100 levels of shades, we can choose to stop after
+               100 steps. If <code>z</code> hasn't exploded by then, we assume
+               the sequence converges.
+             </p>
+             <img class="center" src="ex11-solution.png" />
+           END
+         end
+       %>
+
+
+       <%=
+         exercise do
+           <<-END
+             <p>
+               Introduce <a href="https://en.wikipedia.org/wiki/Supersampling">anti-aliasing</a>.
+             </p>
+             <img class="center" src="ex12a-solution.png" />
+             <img class="center" src="ex12b-solution.png" />
+           END
+         end
+       %>
+              
     </div>
   </body>
 

@@ -2,32 +2,28 @@
 #include "projection.h"
 #include "function.h"
 
+const unsigned MAX_ITERATIONS = 50;
+const double ABS_THRESHOLD = 2;
 
-unsigned div(const complex& c, unsigned max_iterations)
+bool converges(const complex& c, unsigned max_iterations)
 {
-    unsigned result = 0;
+    unsigned iterations = max_iterations;
     complex z(0);
 
-    while (z.abs() < 1000 && result < max_iterations)
+    while (z.abs() < ABS_THRESHOLD && iterations > 0 )
     {
         z = z * z + c;
-        ++result;
+        --iterations;
     }
 
-    return result;
+    return iterations == 0;
 }
 
 int main()
 {
-    const unsigned MAX_ITERATIONS = 100;
-    Bitmap bitmap(1000, 1000);
-    // projection proj(bitmap.width(), bitmap.height(), complex(-0.1011, 0.9563), 0.001);
+    Bitmap bitmap(800, 800);
+    
     projection proj(bitmap.width(), bitmap.height(), complex(-.5, 0), 2);
-
-    auto r = easeInOut(0, 1);
-    auto g = easeInOut(0, 1);
-    auto b = easeInOut(0, 1);
-    auto cfunc = color_function(r, g, b);
 
     for (unsigned y = 0; y != bitmap.height(); ++y)
     {
@@ -35,12 +31,10 @@ int main()
         {
             position pos(x, y);
             complex z = proj.project(pos);
-            unsigned n = div(z, MAX_ITERATIONS);
-            auto c = cfunc(double(n) / MAX_ITERATIONS);
-
-            bitmap[pos] = c;
+            
+            bitmap[pos] = converges(z, 100) ? colors::black() : colors::white();
         }
     }
 
-    save_bitmap("g:/fractal.bmp", bitmap);
+    save_bitmap("output.bmp", bitmap);
 }

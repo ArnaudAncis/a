@@ -31,3 +31,13 @@ std::function<double(double)> constant(double y)
 {
     return[y](double x){ return y; };
 }
+
+inline double sqr(double x)
+{
+    return x * x;
+}
+
+std::function<double(double)> gauss(double center, double slenderness)
+{
+    return[center, slenderness](double x) { return exp(-(sqr(slenderness * (x - center)))); };
+}
