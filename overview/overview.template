@@ -155,6 +155,10 @@
             <td><%= lab('complex', 'Complex numbers') %></td>
           </tr>
           <tr>
+            <td></td>
+            <td><%= lab('fractals', 'Image Generation: Fractals') %></td>
+          </tr>
+          <tr>
             <td><%= topic('raii', 'RAII') %></td>
             <td></td>
           </tr>
