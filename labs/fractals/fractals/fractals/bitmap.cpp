@@ -1,8 +1,6 @@
 #include "bitmap.h"
 #include <assert.h>
 
-using namespace imaging;
-
 
 Bitmap::Bitmap(unsigned width, unsigned height)
     : m_width(width)

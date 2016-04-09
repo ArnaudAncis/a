@@ -5,31 +5,27 @@
 #include "position.h"
 #include <memory>
 
-namespace imaging
+class Bitmap final
 {
-    class Bitmap final
-    {
-    private:
-        std::unique_ptr<color[]> m_pixels;
-        unsigned m_width;
-        unsigned m_height;
+private:
+    std::unique_ptr<color[]> m_pixels;
+    unsigned m_width;
+    unsigned m_height;
 
-    public:
-        Bitmap(unsigned width, unsigned height);
-        Bitmap(const Bitmap&) = delete;
-        Bitmap(Bitmap&&);
+public:
+    Bitmap(unsigned width, unsigned height);
+    Bitmap(const Bitmap&) = delete;
+    Bitmap(Bitmap&&);
 
-        bool is_inside(const position&) const;
+    bool is_inside(const position&) const;
 
-        color& operator [](const position&);
-        const color& operator [](const position&) const;
+    color& operator [](const position&);
+    const color& operator [](const position&) const;
 
-        unsigned width() const { return m_width; }
-        unsigned height() const { return m_height; }
+    unsigned width() const { return m_width; }
+    unsigned height() const { return m_height; }
 
-        void clear(const color&);
-    };
-}
-
+    void clear(const color&);
+};
 
 #endif

@@ -1,8 +1,8 @@
 #include "projection.h"
 
 projection::projection(int width, int height, const interval& target_x, const interval& target_y)
-    : m_horizontal(interval(0, width), target_x)
-    , m_vertical(interval(0, height), target_y)
+    : m_horizontal(interval(0, width - 1), target_x)
+    , m_vertical(interval(0, height - 1), target_y)
 {
     // NOP
 }

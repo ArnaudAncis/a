@@ -147,8 +147,6 @@ struct RGB
 #pragma pack(pop, r1)
 
 
-using namespace imaging;
-
 ARGB to_argb(const color& c)
 {
     color clamped = c.clamped();
@@ -286,7 +284,7 @@ void read_32bit_pixels(Bitmap& bmp, array<uint8_t> pixels)
     }
 }
 
-Bitmap imaging::load_bitmap(const std::string& path)
+Bitmap load_bitmap(const std::string& path)
 {
     array<uint8_t> data = read_data(path);
     BITMAP_FILE_V5* file = reinterpret<BITMAP_FILE_V5>(data);
@@ -318,7 +316,7 @@ Bitmap imaging::load_bitmap(const std::string& path)
     return bitmap;
 }
 
-void imaging::save_bitmap(const std::string& path, const Bitmap& bitmap)
+void save_bitmap(const std::string& path, const Bitmap& bitmap)
 {
     BITMAP_FILE_V5 header;
     memset(&header, 0, sizeof(header));

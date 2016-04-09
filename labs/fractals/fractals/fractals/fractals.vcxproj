@@ -69,6 +69,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -90,7 +91,6 @@
     <ClInclude Include="projection.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="app.cpp" />
     <ClCompile Include="bitmap.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="complex.cpp" />
@@ -99,6 +99,7 @@
     <ClCompile Include="interval.cpp" />
     <ClCompile Include="interval_mapper.cpp" />
     <ClCompile Include="projection.cpp" />
+    <ClCompile Include="solutions\ex9-solution.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

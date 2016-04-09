@@ -4,10 +4,7 @@
 #include "bitmap.h"
 #include <string>
 
-namespace imaging
-{
-    Bitmap load_bitmap(const std::string& path);
-    void save_bitmap(const std::string& path, const Bitmap& bitmap);
-}
+Bitmap load_bitmap(const std::string& path);
+void save_bitmap(const std::string& path, const Bitmap& bitmap);
 
 #endif

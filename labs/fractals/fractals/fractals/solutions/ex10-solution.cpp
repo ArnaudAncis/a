@@ -20,14 +20,14 @@ unsigned div(const complex& c, unsigned max_iterations)
 int main()
 {
     const unsigned MAX_ITERATIONS = 100;
-    imaging::Bitmap bitmap(1000, 1000);
+    Bitmap bitmap(1000, 1000);
     // projection proj(bitmap.width(), bitmap.height(), complex(-0.1011, 0.9563), 0.001);
     projection proj(bitmap.width(), bitmap.height(), complex(-.5, 0), 2);
 
     auto r = easeInOut(0, 1);
     auto g = easeInOut(0, 1);
     auto b = easeInOut(0, 1);
-    auto cfunc = imaging::color_function(r, g, b);
+    auto cfunc = color_function(r, g, b);
 
     for (unsigned y = 0; y != bitmap.height(); ++y)
     {
@@ -42,5 +42,5 @@ int main()
         }
     }
 
-    imaging::save_bitmap("g:/fractal.bmp", bitmap);
+    save_bitmap("g:/fractal.bmp", bitmap);
 }
