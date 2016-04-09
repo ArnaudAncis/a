@@ -31,12 +31,8 @@ end
 module SourceCodeMixin
   attr_accessor :source
 
-  def show_source_editor(**opts)
-    typecheck do
-      assert(source: string)
-    end
-    
-    Html::Generation.source_editor(source, **opts)
+  def show_source_editor(source: nil, **opts)
+    Html::Generation.source_editor(source || self.source, **opts)
   end
 end
 
