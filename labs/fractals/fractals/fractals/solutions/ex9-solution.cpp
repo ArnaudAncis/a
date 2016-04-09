@@ -1,7 +1,7 @@
 #include "formats.h"
 #include "projection.h"
 
-double sqr(double x)
+inline double sqr(double x)
 {
     return x * x;
 }
