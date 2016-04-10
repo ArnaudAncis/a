@@ -417,4 +417,24 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Destructors: Important}
+  \code[font size=\small]{virtual-destructors.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Destructors: Important}
+  \begin{itemize}
+    \item {\tt delete} needs to know the dynamic type so as to
+          call the correct destructor
+    \item Destructor must be virtual
+          \vskip2mm
+          \code[font size=\small]{virtual-destructors2.cpp}
+    \item Why not abstract? \cake
+          \vskip2mm
+          \code[font size=\small]{virtual-destructors3.cpp}
+    \item Rule of thumb: add virtual destructor to each class
+  \end{itemize}
+\end{frame}
+
 \end{document}
