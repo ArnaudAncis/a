@@ -148,15 +148,15 @@
           </tr>
           <tr>
             <td><%= topic('operator-overloading', 'Operator Overloading') %></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><%= topic('default-parameter-values', 'Default Parameter Values') %></td>
             <td><%= lab('complex', 'Complex numbers') %></td>
           </tr>
           <tr>
             <td></td>
             <td><%= lab('fractals', 'Image Generation: Fractals') %></td>
+          </tr>
+          <tr>
+            <td><%= topic('default-parameter-values', 'Default Parameter Values') %></td>
+            <td></td>
           </tr>
           <tr>
             <td><%= topic('raii', 'RAII') %></td>
@@ -168,6 +168,10 @@
           </tr>
           <tr>
             <td><%= topic('inheritance', 'Inheritance') %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= topic('casts', 'Casting') %></td>
             <td></td>
           </tr>
           <tr>
