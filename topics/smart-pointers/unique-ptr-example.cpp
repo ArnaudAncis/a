@@ -13,7 +13,7 @@ public:
 };
 
 Class c;
-auto p = std::make_unique<Person>("Jan", 20);
+auto p = std::make_unique<Student>("Jan", 20);
 
 c.add(std::move(p));
 
