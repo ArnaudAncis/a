@@ -1,7 +1,9 @@
 \chapter{Operators}
 
+\section{Overview}
 \begingroup
 \newcommand{\overloadable}[2]{{\tt #1} & #2 & \Checkmark}
+\newcommand{\overloadableM}[2]{{\tt #1} & #2 & M}
 \newcommand{\notoverloadable}[2]{{\tt #1} & #2 & \XSolidBrush}
 
 \begin{center}
@@ -28,9 +30,9 @@
       \overloadable{x++}{Postincrement} \\
       \overloadable{x--}{Postdecrement} \\
       \overloadable{x(...)}{Function call} \\
-      \overloadable{x[y]}{Indexing} \\
+      \overloadableM{x[y]}{Indexing} \\
       \notoverloadable{x.f}{Member access} \\
-      \overloadable{x->f}{Member access} \\
+      \overloadableM{x->f}{Member access} \\
       \bottomrule
     \end{tabular}
     &
@@ -49,6 +51,7 @@
       \overloadable{x \^{} y}{Bitwise XOR} \\
       \overloadable{x \&\& y}{Logical AND} \\
       \overloadable{x || y}{Logical OR} \\
+      \overloadableM{x = y}{Assignment} \\
       \overloadable{x == y}{Equality} \\
       \overloadable{x != y}{Inequality} \\
       \overloadable{x < y}{Less than} \\
@@ -79,8 +82,28 @@
       \bottomrule
     \end{tabular}
 \end{center}
-
 \endgroup
+
+\section{Overloading}
+
+\begingroup
+\newcommand{\op}{{\footnotesize\Asterisk}}
+\begin{center}
+  \begin{tabular}{lll}
+    \textbf{Expression} & \textbf{As member} & \textbf{As nonmember} \\
+    \toprule
+    \tt \op a   & \tt A::operator \op()  & \tt operator \op(A) \\
+    \tt a \op\ b & \tt A::operator \op(B) & \tt operator \op(A, B) \\
+    \tt a = b   & \tt A::operator =(B)  & \\
+    \tt a[b]    & \tt A::operator [](B) & \\
+    \tt a->     & \tt A::operator ->()  & \\
+  \end{tabular}
+\end{center}
+\endgroup
+
+% \begin{example}
+
+% \end{example}
 
 %%% Local Variables:
 %%% mode: latex
