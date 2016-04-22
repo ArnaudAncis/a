@@ -186,6 +186,10 @@
             <td><%= topic('compression-rle', 'Compression: RLE') %></td>
             <td></td>
           </tr>
+          <tr>
+            <td><%= topic('compression-huffman', 'Compression: Huffman') %></td>
+            <td></td>
+          </tr>
         </ul>
       </section>
     </div>
