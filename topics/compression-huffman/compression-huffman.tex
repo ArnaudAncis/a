@@ -118,7 +118,7 @@
   \end{itemize}
 \end{frame}
 
-% \input{8-bit-tree.tex}
+\input{8-bit-tree.included}
 
 \begin{frame}
   \frametitle{Oops}
@@ -429,7 +429,7 @@
       \textbf{Letter} & \textbf{\#} & \textbf{Letter} & \textbf{\#} & \textbf{Letter} & \textbf{\#} & \textbf{Letter} & \textbf{\#} \\
       \toprule
       A & 98 & E & 154 & I & 72 & M & 29 \\
-      B & 20 & F & 254 & J & 3 & N & 81 \\
+      B & 20 & F & 54 & J & 3 & N & 81 \\
       C & 22 & G & 27 & K & 14 & O & 92 \\
       D & 66 & H & 87 & L & 54 & P & 15 \\
     \end{tabular}
@@ -675,8 +675,427 @@
   \begin{itemize}
     \item Is this new tree optimal?
     \item We could make E two bits long by sacrificing other letters
-    \item 
+    \item We should perhaps also consider making T and A shorter
+    \item In order to find the best, we need a way to compare trees
+    \item Can we associate a metric with each tree?
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{``Measuring'' Tree}
+  \begin{itemize}
+    \item Given a tree\dots
+    \item \dots we know how often each byte occurs
+    \item \dots we know how many bits are used for each byte
+    \item We can compute how long the compressed file would be
+    \item This is exactly what we want to minimise
+    \item Approach to finding optimal tree:
+          \begin{itemize}
+            \item Consider all trees
+            \item Picking the one with the smallest file size
+          \end{itemize}
+    \item Hardly efficient
+    \item Luckily, Huffman developed algorithm to find optimal tree
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Building Huffman Tree}
+  \begin{itemize}
+    \item Creates a leaf node for each byte
+    \item Each node has a weight
+    \item The weight of a leaf node equals the frequency of the byte
+    \item Repeat until one node left:
+          \begin{itemize}
+            \item Take the two nodes with the least weight
+            \item Join them in a new node
+            \item This node's weight equals the sum of its children
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Building Huffman Tree: Example}
+  \begin{center} \small
+    \begin{tabular}{cc@{\hspace{5mm}}cc}
+      \textbf{Letter} & \textbf{\#} & \textbf{Letter} & \textbf{\#} \\
+      \toprule
+      A & 98 & E & 154 \\
+      B & 20 & F & 54 \\
+      C & 22 & G & 27 \\
+      D & 66 & H & 87 \\
+    \end{tabular}
+  \end{center}
+  \vskip5mm
+  \begin{center}
+    \begin{tikzpicture}[node/.style={draw,circle,minimum size=0.75cm,font=\tiny}]
+      \only<1>{
+        \foreach[count=\i] \letter/\frequency in {A/98,B/20,C/22,D/66,E/154,F/54,G/27,H/87} {
+          \node[node] (node) at (\i,0) {\frequency};
+          \node[anchor=north,font=\tiny] at (node.south) {\letter};
+        }
+      }
+      \only<2>{
+        \foreach[count=\i] \letter/\frequency in {B/20,C/22,G/27,F/54,D/66,H/87,A/98,E/154} {
+          \node[node] (node) at (\i,0) {\frequency};
+          \node[anchor=north,font=\tiny] at (node.south) {\letter};
+        }
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Building Huffman Tree: Example}
+  \begin{center}
+    \begin{tikzpicture}[node/.style={draw,circle,minimum size=0.75cm,font=\tiny}]
+      \path[use as bounding box] (-1,-1) rectangle (8,1);
+
+      \node[node] (B) at (0,0) {20};
+      \node[anchor=north,font=\tiny] at (B.south) {B};
+
+      \node[node] (C) at (1,0) {22};
+      \node[anchor=north,font=\tiny] at (C.south) {C};
+
+      \node[node] (G) at (2,0) {27};
+      \node[anchor=north,font=\tiny] at (G.south) {G};
+
+      \node[node] (F) at (3,0) {54};
+      \node[anchor=north,font=\tiny] at (F.south) {F};
+
+      \node[node] (D) at (4,0) {66};
+      \node[anchor=north,font=\tiny] at (D.south) {D};
+
+      \node[node] (H) at (5,0) {87};
+      \node[anchor=north,font=\tiny] at (H.south) {H};
+
+      \node[node] (A) at (6,0) {98};
+      \node[anchor=north,font=\tiny] at (A.south) {A};
+
+      \node[node] (E) at (7,0) {154};
+      \node[anchor=north,font=\tiny] at (E.south) {E};
+
+      \visible<2->{
+        \node[node] (BC) at ($ (B) ! 0.5 ! (C) + (0,1) $) {42};
+        \draw (BC) -- (B);
+        \draw (BC) -- (C);
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Building Huffman Tree: Example}
+  \begin{center}
+    \begin{tikzpicture}[node/.style={draw,circle,minimum size=0.75cm,font=\tiny}]
+      \path[use as bounding box] (-1,-1) rectangle (7,1);
+
+      \node[node] (G) at (0,0) {27};
+      \node[anchor=north,font=\tiny] at (G.south) {G};
+
+      \node[node] (BC) at (1,0) {42};
+
+      \node[node] (F) at (2,0) {54};
+      \node[anchor=north,font=\tiny] at (F.south) {F};
+
+      \node[node] (D) at (3,0) {66};
+      \node[anchor=north,font=\tiny] at (D.south) {D};
+
+      \node[node] (H) at (4,0) {87};
+      \node[anchor=north,font=\tiny] at (H.south) {H};
+
+      \node[node] (A) at (5,0) {98};
+      \node[anchor=north,font=\tiny] at (A.south) {A};
+
+      \node[node] (E) at (6,0) {154};
+      \node[anchor=north,font=\tiny] at (E.south) {E};
+
+      \node[node] (B) at (0.5,-1) {20};
+      \node[anchor=north,font=\tiny] at (B.south) {B};
+
+      \node[node] (C) at (1.5,-1) {22};
+      \node[anchor=north,font=\tiny] at (C.south) {C};
+
+      \draw (BC) -- (B);
+      \draw (BC) -- (C);
+
+      \visible<2->{
+        \node[node] (GBC) at (0.5,1) {69};
+        \draw (GBC) -- (G);
+        \draw (GBC) -- (BC);
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Building Huffman Tree: Example}
+  \begin{center}
+    \begin{tikzpicture}[node/.style={draw,circle,minimum size=0.75cm,font=\tiny}]
+      \path[use as bounding box] (-1,-1) rectangle (6,1);
+
+      \node[node] (F) at (0,0) {54};
+      \node[anchor=north,font=\tiny] at (F.south) {F};
+
+      \node[node] (D) at (1,0) {66};
+      \node[anchor=north,font=\tiny] at (D.south) {D};
+
+      \node[node] (GBC) at (2,0) {69};
+
+      \node[node] (G) at ($ (GBC) + (-0.5,-1) $) {27};
+      \node[anchor=north,font=\tiny] at (G.south) {G};
+
+      \node[node] (BC) at ($ (GBC) + (0.5,-1) $) {42};
+
+      \node[node] (B) at ($ (BC) + (-0.5,-1) $) {20};
+      \node[anchor=north,font=\tiny] at (B.south) {B};
+
+      \node[node] (C) at ($ (BC) + (0.5,-1) $) {22};
+      \node[anchor=north,font=\tiny] at (C.south) {C};
+
+      \draw (BC) -- (B);
+      \draw (BC) -- (C);
+
+      \draw (GBC) -- (G);
+      \draw (GBC) -- (BC);
+
+      \node[node] (H) at (3,0) {87};
+      \node[anchor=north,font=\tiny] at (H.south) {H};
+
+      \node[node] (A) at (4,0) {98};
+      \node[anchor=north,font=\tiny] at (A.south) {A};
+
+      \node[node] (E) at (5,0) {154};
+      \node[anchor=north,font=\tiny] at (E.south) {E};
+
+      \visible<2->{
+        \node[node] (FD) at (0.5,1) {120};
+        \draw (FD) -- (F);
+        \draw (FD) -- (D);
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Building Huffman Tree: Example}
+  \begin{center}
+    \begin{tikzpicture}[node/.style={draw,circle,minimum size=0.75cm,font=\tiny}]
+      \path[use as bounding box] (-1,-1) rectangle (5,1);
+
+      \node[node] (GBC) at (0,0) {69};
+
+      \node[node] (G) at ($ (GBC) + (-0.5,-1) $) {27};
+      \node[anchor=north,font=\tiny] at (G.south) {G};
+
+      \node[node] (BC) at ($ (GBC) + (0.5,-1) $) {42};
+
+      \node[node] (B) at ($ (BC) + (-0.5,-1) $) {20};
+      \node[anchor=north,font=\tiny] at (B.south) {B};
+
+      \node[node] (C) at ($ (BC) + (0.5,-1) $) {22};
+      \node[anchor=north,font=\tiny] at (C.south) {C};
+
+      \node[node] (H) at (1,0) {87};
+      \node[anchor=north,font=\tiny] at (H.south) {H};
+
+      \draw (BC) -- (B);
+      \draw (BC) -- (C);
+
+      \draw (GBC) -- (G);
+      \draw (GBC) -- (BC);
+
+      \node[node] (A) at (2,0) {98};
+      \node[anchor=north,font=\tiny] at (A.south) {A};
+
+      \node[node] (FD) at (3,0) {120};
+
+      \node[node] (F) at ($ (FD) + (-0.5,-1) $) {54};
+      \node[anchor=north,font=\tiny] at (F.south) {F};
+
+      \node[node] (D) at ($ (FD) + (0.5,-1) $) {66};
+      \node[anchor=north,font=\tiny] at (D.south) {D};
+
+      \draw (FD) -- (F);
+      \draw (FD) -- (D);
+
+      \node[node] (E) at (4,0) {154};
+      \node[anchor=north,font=\tiny] at (E.south) {E};
+
+      \visible<2->{
+        \node[node] (GBCH) at (0.5,1) {156};
+        \draw (GBCH) -- (GBC);
+        \draw (GBCH) -- (H);
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Building Huffman Tree: Example}
+  \begin{center}
+    \begin{tikzpicture}[node/.style={draw,circle,minimum size=0.75cm,font=\tiny}]
+      \path[use as bounding box] (-1,-1) rectangle (4,1);
+
+      \node[node] (A) at (0,0) {98};
+      \node[anchor=north,font=\tiny] at (A.south) {A};
+
+      \node[node] (FD) at (1,0) {120};
+
+      \node[node] (F) at ($ (FD) + (-0.5,-1) $) {54};
+      \node[anchor=north,font=\tiny] at (F.south) {F};
+
+      \node[node] (D) at ($ (FD) + (0.5,-1) $) {66};
+      \node[anchor=north,font=\tiny] at (D.south) {D};
+
+      \draw (FD) -- (F);
+      \draw (FD) -- (D);
+
+      \node[node] (E) at (2,0) {154};
+      \node[anchor=north,font=\tiny] at (E.south) {E};
+
+      \node[node] (GBCH) at (3,0) {156};
+
+      \node[node] (GBC) at ($ (GBCH) + (-0.5,-1) $) {69};
+
+      \node[node] (G) at ($ (GBC) + (-0.5,-1) $) {27};
+      \node[anchor=north,font=\tiny] at (G.south) {G};
+
+      \node[node] (BC) at ($ (GBC) + (0.5,-1) $) {42};
+
+      \node[node] (B) at ($ (BC) + (-0.5,-1) $) {20};
+      \node[anchor=north,font=\tiny] at (B.south) {B};
+
+      \node[node] (C) at ($ (BC) + (0.5,-1) $) {22};
+      \node[anchor=north,font=\tiny] at (C.south) {C};
+
+      \node[node] (H) at ($ (GBCH) + (0.5,-1) $) {87};
+      \node[anchor=north,font=\tiny] at (H.south) {H};
+
+      \draw (BC) -- (B);
+      \draw (BC) -- (C);
+
+      \draw (GBC) -- (G);
+      \draw (GBC) -- (BC);
+
+      \draw (GBCH) -- (GBC);
+      \draw (GBCH) -- (H);
+
+      \visible<2->{
+        \node[node] (AFD) at (0.5,1) {218};
+        \draw (AFD) -- (A);
+        \draw (AFD) -- (FD);
+      }
+
+      \visible<3->{
+        \node[node] (EGBCH) at (2.5,1) {310};
+        \draw (EGBCH) -- (E);
+        \draw (EGBCH) -- (GBCH);
+      }
+
+      \visible<4->{
+        \node[node] (root) at (1.5,2) {528};
+        \draw (root) -- (AFD);
+        \draw (root) -- (EGBCH);
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Building Huffman Tree: Example}
+  \begin{columns}
+    \column{5cm}
+    \begin{center}
+      \begin{tikzpicture}[node/.style={draw,circle,minimum size=0.75cm,font=\tiny},
+                          label/.style={font=\tiny,midway,above,sloped}]
+        \node[node] (A) at (0,0) {98};
+        \node[anchor=north,font=\tiny] at (A.south) {A};
+
+        \node[node] (FD) at (1,0) {120};
+
+        \node[node] (F) at ($ (FD) + (-0.5,-1) $) {54};
+        \node[anchor=north,font=\tiny] at (F.south) {F};
+
+        \node[node] (D) at ($ (FD) + (0.5,-1) $) {66};
+        \node[anchor=north,font=\tiny] at (D.south) {D};
+
+        \draw (FD) -- (F) node[label] {0};
+        \draw (FD) -- (D) node[label] {1};
+
+        \node[node] (E) at (2,0) {154};
+        \node[anchor=north,font=\tiny] at (E.south) {E};
+
+        \node[node] (GBCH) at (3,0) {156};
+
+        \node[node] (GBC) at ($ (GBCH) + (-0.5,-1) $) {69};
+
+        \node[node] (G) at ($ (GBC) + (-0.5,-1) $) {27};
+        \node[anchor=north,font=\tiny] at (G.south) {G};
+
+        \node[node] (BC) at ($ (GBC) + (0.5,-1) $) {42};
+
+        \node[node] (B) at ($ (BC) + (-0.5,-1) $) {20};
+        \node[anchor=north,font=\tiny] at (B.south) {B};
+
+        \node[node] (C) at ($ (BC) + (0.5,-1) $) {22};
+        \node[anchor=north,font=\tiny] at (C.south) {C};
+
+        \node[node] (H) at ($ (GBCH) + (0.5,-1) $) {87};
+        \node[anchor=north,font=\tiny] at (H.south) {H};
+
+        \draw (BC) -- (B) node[label] {0};
+        \draw (BC) -- (C) node[label] {1};
+
+        \draw (GBC) -- (G) node[label] {0};
+        \draw (GBC) -- (BC) node[label] {1};
+
+        \draw (GBCH) -- (GBC) node[label] {0};
+        \draw (GBCH) -- (H) node[label] {1};
+
+        \node[node] (AFD) at (0.5,1) {218};
+        \draw (AFD) -- (A) node[label] {0};
+        \draw (AFD) -- (FD) node[label] {1};
+
+        \node[node] (EGBCH) at (2.5,1) {310};
+        \draw (EGBCH) -- (E) node[label] {0};
+        \draw (EGBCH) -- (GBCH) node[label] {1};
+
+        \node[node] (root) at (1.5,2) {528};
+        \draw (root) -- (AFD) node[label] {0};
+        \draw (root) -- (EGBCH) node[label] {1};
+      \end{tikzpicture}
+    \end{center}
+      
+    \column{5cm}
+    \begin{center}
+      \begin{tabular}{cc}
+        \textbf{Letter} & \textbf{Code} \\
+        \toprule
+        A & 00 \\
+        B & 11010 \\
+        C & 11011 \\
+        D & 011 \\
+        E & 10 \\
+        F & 010 \\
+        G & 1100 \\
+        H & 111 \\
+      \end{tabular}
+    \end{center}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Huffman Compression}
+  \begin{enumerate}
+    \item Count the frequency of all bytes
+    \item Build Huffman tree
+    \item Derive code table (byte to code)
+    \item Write Huffman tree to file (decompressor needs this information)
+    \item Write encoded bytes to file
+    \item Is it possible to omit Huffman tree in compressed file? \cake
+  \end{enumerate}
+\end{frame}
+
 
 \end{document}
