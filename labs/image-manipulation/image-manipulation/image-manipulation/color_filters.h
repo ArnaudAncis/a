@@ -1,24 +1,24 @@
 #ifndef COLOR_FILTERS_H
 #define COLOR_FILTERS_H
 
-#include "filter.h"
+#include "per_pixel_filter.h"
 
-class RedFilter : public Filter
+class RedFilter : public PerPixelFilter
 {
-public:
-	std::shared_ptr<Bitmap> apply(const Bitmap&) const override;
+protected:
+	color process(const color&) const override;
 };
 
-class GreenFilter : public Filter
+class GreenFilter : public PerPixelFilter
 {
-public:
-	std::shared_ptr<Bitmap> apply(const Bitmap&) const override;
+protected:
+	color process(const color&) const override;
 };
 
-class BlueFilter : public Filter
+class BlueFilter : public PerPixelFilter
 {
-public:
-	std::shared_ptr<Bitmap> apply(const Bitmap&) const override;
+protected:
+	color process(const color&) const override;
 };
 
 #endif
