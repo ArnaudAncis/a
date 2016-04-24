@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{04CC20B2-C3E5-45C3-B344-8E4A158C33F2}</ProjectGuid>
+    <ProjectGuid>{29829E52-9145-4E20-B1D6-ADC027166062}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>imagemanipulation</RootNamespace>
+    <RootNamespace>solution</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -146,19 +146,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="app.cpp" />
     <ClCompile Include="bitmap.cpp" />
+    <ClCompile Include="blur_filter.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="color_filters.cpp" />
+    <ClCompile Include="composed_filter.cpp" />
     <ClCompile Include="formats.cpp" />
+    <ClCompile Include="grayscale_filter.cpp" />
+    <ClCompile Include="hflip_filter.cpp" />
+    <ClCompile Include="invert_filter.cpp" />
+    <ClCompile Include="mosaic_filter.cpp" />
+    <ClCompile Include="per_pixel_filter.cpp" />
+    <ClCompile Include="vflip_filter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array.h" />
     <ClInclude Include="bitmap.h" />
+    <ClInclude Include="blur_filter.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="color_filters.h" />
+    <ClInclude Include="composed_filter.h" />
     <ClInclude Include="filter.h" />
+    <ClInclude Include="filters.h" />
     <ClInclude Include="formats.h" />
+    <ClInclude Include="grayscale_filter.h" />
+    <ClInclude Include="hflip_filter.h" />
+    <ClInclude Include="invert_filter.h" />
+    <ClInclude Include="mosaic_filter.h" />
+    <ClInclude Include="per_pixel_filter.h" />
     <ClInclude Include="position.h" />
+    <ClInclude Include="vflip_filter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

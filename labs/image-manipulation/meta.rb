@@ -34,7 +34,7 @@ meta_object do
   exe_path = Pathname.new('manip.exe')
 
   action(:compile, description: 'Compiles image-manipulation project') do
-    dir_path = Pathname.new('image-manipulation/image-manipulation').expand_path
+    dir_path = Pathname.new('image-manipulation/solution').expand_path
     cpp_files = Find.find('.').select do |file|
       file.end_with? '.cpp'
     end
@@ -47,36 +47,50 @@ meta_object do
     puts `convert sample.jpg sample.bmp`
   end
 
-  image_action_names = { 'grayscale' => 'grayscale',
-                         'blur5' => 'blur 5',
-                         'blur2' => 'blur 2',
-                         'invert' => 'invert',
-                         'hflip' => 'hflip',
-                         'vflip' => 'vflip',
-                         'red' => 'red',
-                         'green' => 'green',
-                         'blue' => 'blue',
-                         'mosaic5' => 'mosaic 5' }.to_a.map do |basename, options|
-    filename = "#{basename}.bmp"
-    action_name = filename
+  bmp_actions = []
+  jpg_actions = []
+
+  { 'grayscale' => 'grayscale',
+    'blur5' => 'blur 5',
+    'blur2' => 'blur 2',
+    'invert' => 'invert',
+    'hflip' => 'hflip',
+    'vflip' => 'vflip',
+    'red' => 'red',
+    'green' => 'green',
+    'blue' => 'blue',
+    'mosaic5' => 'mosaic 5' }.to_a.each do |basename, options|
+    bmp_name = "#{basename}.bmp"
+    jpg_name = "#{basename}.jpg"
     
-    action(action_name) do
+    action(bmp_name) do
       abort "Missing sample.bmp; build it first" unless File.exist? 'sample.bmp'
       abort "Missing #{exe_path}; build it first" unless exe_path.file?
-     
-      command = "#{exe_path.to_s} sample.bmp #{filename} #{options}"
+
+      puts "Generating #{bmp_name}"
+      command = "#{exe_path.to_s} sample.bmp #{bmp_name} #{options}"
       puts `#{command}`
     end
 
-    action_name
-  end
+    action(jpg_name) do
+      puts "Converting #{bmp_name} to #{jpg_name}"
+      command = "convert #{bmp_name} #{jpg_name}"
+      puts `#{command}`
+    end
 
-  group_action(:img, [:compile, 'sample.bmp'] + image_action_names)
+    bmp_actions << bmp_name
+    jpg_actions << jpg_name
+  end.flatten
+
+  group_action(:bmp, bmp_actions)
+  group_action(:jpg, jpg_actions)
+  group_action(:compile, ['sample.bmp', :bmp, :jpg])
   
   html_template('assignment', context: Context.new, group_name: 'html')
   
   uploadable('assignment.html')
-  uploadable_globs( '*.bmp' )
+  uploadable_globs( '*.jpg' )
+  uploadable_globs( 'sample.bmp' )
   upload_action
 
   group_action(:full, [:img, :html, :upload])
