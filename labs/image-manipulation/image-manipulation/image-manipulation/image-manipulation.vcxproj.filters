@@ -60,6 +60,9 @@
     <ClCompile Include="color_filters.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mosaic_filter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array.h">
@@ -111,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="color_filters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mosaic_filter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

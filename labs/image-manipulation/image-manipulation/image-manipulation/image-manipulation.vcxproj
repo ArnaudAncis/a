@@ -159,6 +159,7 @@
     <ClCompile Include="interval.cpp" />
     <ClCompile Include="interval_mapper.cpp" />
     <ClCompile Include="invert_filter.cpp" />
+    <ClCompile Include="mosaic_filter.cpp" />
     <ClCompile Include="vflip_filter.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +178,7 @@
     <ClInclude Include="interval.h" />
     <ClInclude Include="interval_mapper.h" />
     <ClInclude Include="invert_filter.h" />
+    <ClInclude Include="mosaic_filter.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="vflip_filter.h" />
   </ItemGroup>

@@ -19,7 +19,8 @@ int main(int argc, char** argv)
 
 		options.push_back("e:/temp/fountain.bmp");
 		options.push_back("e:/temp/fountain2.bmp");
-		options.push_back("blue");
+		options.push_back("mosaic");
+		options.push_back("5");
 	}
 
 	options.pop_front();
@@ -86,6 +87,14 @@ int main(int argc, char** argv)
 			filter.add(std::make_shared<BlueFilter>());
 
 			std::cout << "Blue filter" << std::endl;
+		}
+		else if (option == "mosaic")
+		{
+			int size = std::stoi(options.front());
+			options.pop_front();
+			filter.add(std::make_shared<MosaicFilter>(size));
+
+			std::cout << "Mosaic with size " << size << std::endl;
 		}
 		else
 		{
