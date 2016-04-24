@@ -1,7 +1,5 @@
 #include "formats.h"
-#include "grayscale_filter.h"
-#include "blur_filter.h"
-#include "composed_filter.h"
+#include "filters.h"
 #include <iostream>
 #include <string>
 #include <list>
@@ -21,8 +19,7 @@ int main(int argc, char** argv)
 
 		options.push_back("e:/temp/fountain.bmp");
 		options.push_back("e:/temp/fountain2.bmp");
-		options.push_back("blur");
-		options.push_back("5");
+		options.push_back("blue");
 	}
 
 	options.pop_front();
@@ -53,6 +50,42 @@ int main(int argc, char** argv)
 			filter.add(std::make_shared<BlurFilter>(distance));
 
 			std::cout << "Blur with distance " << distance << std::endl;
+		}
+		else if (option == "invert")
+		{
+			filter.add(std::make_shared<InvertFilter>());
+
+			std::cout << "Invert" << std::endl;
+		}
+		else if (option == "hflip")
+		{
+			filter.add(std::make_shared<HorizontalFlipFilter>());
+
+			std::cout << "Horizontal flip" << std::endl;
+		}
+		else if (option == "vflip")
+		{
+			filter.add(std::make_shared<VerticalFlipFilter>());
+
+			std::cout << "Vertical flip" << std::endl;
+		}
+		else if (option == "red")
+		{
+			filter.add(std::make_shared<RedFilter>());
+
+			std::cout << "Red filter" << std::endl;
+		}
+		else if (option == "green")
+		{
+			filter.add(std::make_shared<GreenFilter>());
+
+			std::cout << "Green filter" << std::endl;
+		}
+		else if (option == "blue")
+		{
+			filter.add(std::make_shared<BlueFilter>());
+
+			std::cout << "Blue filter" << std::endl;
 		}
 		else
 		{

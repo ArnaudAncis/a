@@ -1,0 +1,19 @@
+#include "vflip_filter.h"
+
+std::shared_ptr<Bitmap> VerticalFlipFilter::apply(const Bitmap& bitmap) const
+{
+	auto result = std::make_shared<Bitmap>(bitmap.width(), bitmap.height());
+
+	for (unsigned y = 0; y != bitmap.height(); ++y)
+	{
+		for (unsigned x = 0; x != bitmap.width(); ++x)
+		{
+			position p(x, y);
+			position q(x, bitmap.height() - y - 1);
+
+			(*result)[q] = bitmap[p];
+		}
+	}
+
+	return result;
+}
