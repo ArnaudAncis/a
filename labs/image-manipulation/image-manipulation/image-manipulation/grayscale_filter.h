@@ -1,12 +1,12 @@
 #ifndef GRAYSCALE_FILTER_H
 #define GRAYSCALE_FILTER_H
 
-#include "filter.h"
+#include "per_pixel_filter.h"
 
-class GrayscaleFilter : public Filter
+class GrayscaleFilter : public PerPixelFilter
 {
-public:
-	std::shared_ptr<Bitmap> apply(const Bitmap&) const override;
+protected:
+	color process(const color&) const override;
 };
 
 #endif
