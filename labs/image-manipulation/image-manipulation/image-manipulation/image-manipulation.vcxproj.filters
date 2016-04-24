@@ -27,45 +27,6 @@
     <ClCompile Include="formats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="function.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="interval.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="interval_mapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="grayscale_filter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="app.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="composed_filter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="blur_filter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="invert_filter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hflip_filter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="vflip_filter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="color_filters.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mosaic_filter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="per_pixel_filter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array.h">
@@ -80,49 +41,10 @@
     <ClInclude Include="formats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="function.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="interval.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="interval_mapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="filter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="grayscale_filter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="composed_filter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="blur_filter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="invert_filter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="filters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hflip_filter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vflip_filter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="color_filters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mosaic_filter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="per_pixel_filter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

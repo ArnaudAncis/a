@@ -147,42 +147,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bitmap.cpp" />
-    <ClCompile Include="blur_filter.cpp" />
     <ClCompile Include="color.cpp" />
-    <ClCompile Include="app.cpp" />
-    <ClCompile Include="color_filters.cpp" />
-    <ClCompile Include="composed_filter.cpp" />
-    <ClCompile Include="hflip_filter.cpp" />
     <ClCompile Include="formats.cpp" />
-    <ClCompile Include="function.cpp" />
-    <ClCompile Include="grayscale_filter.cpp" />
-    <ClCompile Include="interval.cpp" />
-    <ClCompile Include="interval_mapper.cpp" />
-    <ClCompile Include="invert_filter.cpp" />
-    <ClCompile Include="mosaic_filter.cpp" />
-    <ClCompile Include="per_pixel_filter.cpp" />
-    <ClCompile Include="vflip_filter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array.h" />
     <ClInclude Include="bitmap.h" />
-    <ClInclude Include="blur_filter.h" />
     <ClInclude Include="color.h" />
-    <ClInclude Include="color_filters.h" />
-    <ClInclude Include="composed_filter.h" />
     <ClInclude Include="filter.h" />
-    <ClInclude Include="filters.h" />
-    <ClInclude Include="hflip_filter.h" />
     <ClInclude Include="formats.h" />
-    <ClInclude Include="function.h" />
-    <ClInclude Include="grayscale_filter.h" />
-    <ClInclude Include="interval.h" />
-    <ClInclude Include="interval_mapper.h" />
-    <ClInclude Include="invert_filter.h" />
-    <ClInclude Include="mosaic_filter.h" />
-    <ClInclude Include="per_pixel_filter.h" />
     <ClInclude Include="position.h" />
-    <ClInclude Include="vflip_filter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
