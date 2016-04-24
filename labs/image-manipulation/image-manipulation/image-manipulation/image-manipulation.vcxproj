@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="app.cpp" />
     <ClCompile Include="bitmap.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="color_filters.cpp" />
