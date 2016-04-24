@@ -35,11 +35,12 @@ meta_object do
 
   action(:compile, description: 'Compiles image-manipulation project') do
     dir_path = Pathname.new('image-manipulation/solution').expand_path
-    cpp_files = Find.find('.').select do |file|
+    cpp_files = Find.find('image-manipulation/solution').select do |file|
       file.end_with? '.cpp'
     end
     
     command = "cl -I\"#{dir_path.to_s}\" -O2 -EHsc -Fe#{exe_path.to_s} #{cpp_files.join(' ')}"
+    puts "Executing #{command}"
     puts `#{command}`
   end
 
@@ -52,14 +53,16 @@ meta_object do
 
   { 'grayscale' => 'grayscale',
     'blur5' => 'blur 5',
-    'blur2' => 'blur 2',
+    'blur10' => 'blur 10',
     'invert' => 'invert',
     'hflip' => 'hflip',
     'vflip' => 'vflip',
     'red' => 'red',
     'green' => 'green',
     'blue' => 'blue',
-    'mosaic5' => 'mosaic 5' }.to_a.each do |basename, options|
+    'mosaic20' => 'mosaic 20',
+    'mosaic30' => 'mosaic 30'
+  }.to_a.each do |basename, options|
     bmp_name = "#{basename}.bmp"
     jpg_name = "#{basename}.jpg"
     
@@ -84,7 +87,7 @@ meta_object do
 
   group_action(:bmp, bmp_actions)
   group_action(:jpg, jpg_actions)
-  group_action(:compile, ['sample.bmp', :bmp, :jpg])
+  group_action(:img, ['sample.bmp', :bmp, :jpg])
   
   html_template('assignment', context: Context.new, group_name: 'html')
   
