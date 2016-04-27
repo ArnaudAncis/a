@@ -1,0 +1,195 @@
+\documentclass{../ucll-slides}
+\usepackage{../pvm}
+\usepackage{siunitx}
+\usepackage{ifthen}
+
+\usetikzlibrary{positioning}
+
+\makeatletter
+\def\light@caption@on{on}
+\def\light@caption@off{off}
+\def\light@caption@neutral{}
+\makeatother
+
+\tikzset{
+  light/.pic={\draw node[circle,#1,minimum size=7mm,font=\tiny] {\csname light@caption@#1\endcsname};},
+  light/.style={draw},
+  on/.style={light,fill=yellow},
+  off/.style={light,fill=gray!50},
+  neutral/.style={light}
+}
+
+\title{Data Compression: LZ77}
+\author{Fr\'ed\'eric Vogels}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Disclaimer}
+  \begin{center}
+    \Large
+    Most examples assume we deal with text,
+    but the principles apply to bytes in general
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Compression Algorithms}
+  \begin{itemize}
+    \item GQU
+          \begin{itemize}
+            \item Example algorithm
+            \item Assumes pairs of bytes occur often
+          \end{itemize}
+    \item RLE
+          \begin{itemize}
+            \item Assumes long runs of the same value occur often
+            \item TGA, PCX, fax machines
+          \end{itemize}
+    \item Huffman
+          \begin{itemize}
+            \item Assumes certain bytes occur more often
+            \item Widely used (MP3, JPEG, zip, web, \dots)
+          \end{itemize}
+    \item<2-> LZ77/LZ78/LZSS/LZMA/\dots
+          \begin{itemize}
+            \item Assumes same series of bytes occur repeatedly
+            \item Widely used (zip, 7z, rar, \dots)
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+{
+  \newcommand{\drawbox}[1]{\draw (#1.south west) rectangle (#1.north east);}
+  \begin{frame}
+    \frametitle{Example Input}
+    \code[language={},font size=\small,width=\linewidth,frame=none]{singer.txt}
+    \begin{tikzpicture}[overlay,remember picture,ref/.style={-latex,thick}]
+      \visible<2->{
+        \drawbox{inger1}
+        \drawbox{inger2}
+        \draw[ref] (inger2.east) to[bend right=30] (inger1.east);
+      }
+
+      \visible<3->{
+        \drawbox{hoort1}
+        \drawbox{hoort2}
+        \draw[ref] (hoort2.east) to[bend right=30] (hoort1.east);
+      }
+
+      \visible<4->{
+        \draw (singer1.north west) rectangle (inger2.south east);
+        \drawbox{singer2}
+        \draw[ref] (singer2.north) to[bend right=30] (inger2.east);
+      }
+
+      \visible<5->{
+        \drawbox{naaimasjien1}
+        \drawbox{naaimasjien2}
+        \draw[ref] (naaimasjien2.north) to[bend right=30] (naaimasjien1.east);
+      }
+
+      \visible<6->{
+        \drawbox{wat1}
+        \drawbox{wat2}
+        \draw[ref] (wat2.east) to[bend right=30] (wat1.east);
+      }
+
+      \visible<7->{
+        \drawbox{jespers1}
+        \drawbox{jespers2}
+        \draw[ref] (jespers2.east) to[bend right=30] (jespers1.south);
+      }
+
+      \visible<8->{
+        \drawbox{singer3}
+        \drawbox{singer2}
+        \draw[ref] (singer3.north east) to[bend right=10] (singer2.south);
+      }
+
+      \visible<9->{
+        \drawbox{naaimasjien3}
+        \drawbox{naaimasjien2}
+        \draw[ref] (naaimasjien3.north east) to[bend right=10] (naaimasjien2.south);
+      }
+    \end{tikzpicture}
+  \end{frame}
+}
+
+\begin{frame}
+  \frametitle{Observations}
+  \begin{itemize}
+    \item Same words are repeated often
+    \item Happens often in certain data files
+          \begin{itemize}
+            \item Source code (keywords, identifiers, etc.)
+            \item Text files (word, pdf, etc.)
+            \item XML
+            \item \dots
+          \end{itemize}
+    \item More generally: certain series of bytes occur repeatedly
+    \item We can use this to our advantage
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Basic Principle of LZ77}
+  \begin{itemize}
+    \item If same word has appeared before\dots
+    \item \dots don't repeat it
+    \item \dots but refer to the previous occurence
+  \end{itemize}
+\end{frame}
+
+{
+  \newcommand{\chunk}[3]{
+    \draw[|-|] ($ (#1.south west) + (0,-0.1) $) -- ($ (#1.south east) + (0,-0.1) $);
+    \draw[|->] ($ (#2.south west) + (0,-0.1) $) -- ($ (#2.south east) + (0,-0.1) $) node[midway,below,font=\tiny] {#3};
+    \draw[-latex] ($ (#1.south) + (0,-0.1) $) -- ++(0,-0.5) -| ($ (#2.south west) + (0,-0.2) $);
+  }
+  \newcommand{\multichunk}[5]{
+    \draw[|-|] ($ (#1.south west) + (0,-0.1) $) -- ($ (#2.south east) + (0,-0.1) $);
+    \draw[|->] ($ (#3.south west) + (0,-0.1) $) -- ($ (#4.south east) + (0,-0.1) $) node[midway,below,font=\tiny] {#5};
+    \draw[-latex] ($ (#1.south) ! 0.5 ! (#2.south) + (0,-0.1) $) -- ++(0,-0.5) -| ($ (#3.south west) + (0,-0.2) $);
+  }
+  \begin{frame}
+    \frametitle{Conceptual Example}
+    \structure{Data to be compressed}
+    \begin{center} \tt
+      \NODE{\alert<2>{foo}}{foo1}\NODE{\alert<3>{foo}}{foo2}\NODE{\alert<4>{bar}}{bar1}\NODE{\alert<5>{bar}}{bar2}\NODE{\alert<6>{foobarbar}}{foobarbar}\NODE{\alert<7>{foofoobarbarfoobarbar}}{last}
+    \end{center}
+    \begin{tikzpicture}[overlay,remember picture]
+      \visible<3>{
+        \chunk{foo2}{foo1}{3}
+      }
+
+      \visible<5>{
+        \chunk{bar2}{bar1}{3}
+      }
+
+      \visible<6>{
+        \multichunk{foobarbar}{foobarbar}{foo2}{bar2}{6}
+      }
+
+      \visible<7>{
+        \multichunk{last}{last}{foo1}{foobarbar}{21}
+      }
+    \end{tikzpicture}
+    \vskip5mm
+    \structure{Compressed form}
+    \begin{enumerate}
+      \item<2-> {\tt foo}
+      \item<3-> Repeat 3 letters starting from first letter
+      \item<4-> {\tt bar}
+      \item<5-> Repeat 3 letters starting from 6th letter
+      \item<6-> Repeat 6 letters starting from 3rd letter
+      \item<7-> Repeat 21 letters starting from first letter
+    \end{enumerate}
+  \end{frame}
+}
+
+\end{document}

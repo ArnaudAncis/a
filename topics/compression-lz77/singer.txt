@@ -1,0 +1,14 @@
+Sl`\NODE{inger}{inger1}`
+  `\NODE{S}{singer1}``\NODE{inger}{inger2}`
+    `\NODE{naaimasjien}{naaimasjien1}`
+`\NODE{Hoort}{hoort1}`
+  `\NODE{Hoort}{hoort2}`
+    `\NODE{Floris}{floris1}` `\NODE{Jespers}{jespers1}` heeft een `\NODE{Singer}{singer2}``\NODE{naaimasjien}{naaimasjien2}` gekocht
+`\NODE{Wat}{wat1}`
+  `\NODE{Wat}{wat2}`
+jawel
+  `\NODE{Jespers}{jespers2}` `\NODE{Singer}{singer3}` `\NODE{naaimasjien}{naaimasjien3}`
+hoe zo
+  jawel
+    ik zeg het u
+    `\NODE{Floris Jespers}{}` heeft een `\NODE{Singernaaimasjien}{}` gekocht
