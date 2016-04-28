@@ -44,7 +44,7 @@
 
 \newcommand{\showif}[2][]{%
   {%
-    \tikzset{/ucll/showif/.cd,#1,show/.get=\showbox@show}%
+    \tikzset{/ucll/showif/.cd,#1,/ucll/showif/show/.get=\showbox@show}%
     \csname showif@\showbox@show\endcsname{#2}%
   }
 }
@@ -165,27 +165,6 @@
 
 \iftoggle{showsolution}{\includecomment{solution}}{\excludecomment{solution}}
 \iftoggle{showsolution}{\excludecomment{sheet}}{\includecomment{sheet}}
-
-
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\real}{\mathbb{R}}
-\newcommand{\+}[1]{\mathrm{#1}}
-\newcommand{\R}{\+{R}}
-\newcommand{\G}{\+{G}}
-\newcommand{\B}{\+{B}}
-\newcommand{\norm}[1]{|#1|}
-\newcommand{\conj}[1]{#1^*}
-\newcommand{\transpose}[1]{#1^{\mathrm{T}}}
-\newcommand{\inverse}[1]{#1^{-1}}
-\newcommand{\degrees}{\ensuremath{^{\circ}}}
-\newcommand{\colorrgb}[3]{\ensuremath{({\color{red}#1},{\color{green}#2},{\color{blue}#3})}}
-
-
-\tikzset{
-  vector/.style={-latex,thick},
-  light/.style={-latex,thick,orange},
-  axis/.style={-latex,thick}
-}
 
 \newcommand{\blanks}[1]{
   \begin{center}

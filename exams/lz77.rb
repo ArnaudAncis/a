@@ -39,7 +39,7 @@ end
 def print_hex(ns)
   puts( ns.map do |i|
           i.to_s(16).rjust(2, '0')
-        end.join ' ' )
+        end.join(' ').upcase )
 end
 
 

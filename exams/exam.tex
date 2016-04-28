@@ -15,6 +15,7 @@
   duur={3 uur}
 }
 
+\newcommand{\hex}[1]{\texttt{\bfseries #1}}
 
 \newcommand{\lzsheet}[1]{
   \begin{center}
@@ -85,6 +86,60 @@
   Noteer hieronder de resulterende bytes (hexadecimaal).
   \lzsheet{00/solution,00/solution,41/solution,01/solution,01/always,42/solution,00/solution,00/solution,43/solution,04/solution,04/solution,44/solution,01/solution,01/solution,41/solution,09/always,03/solution,44/solution,0c/solution,03/solution,42/always}
 \end{question}
+
+
+\begin{question}
+  Decomprimeer de gegeven bytes gebruik makende van LZ77.
+  \begin{center}
+    \hex{00 00 46 00 00 4f 01 01 4c 03 02 46 04 04 46 05 01 46}
+  \end{center}
+  De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
+  Noteer hieronder het resultaat van decompressie (in tekstvorm):
+  \vskip5mm
+  \begin{center}
+    \blank{8cm}{FOOLOOFLOOFFLF}
+  \end{center}
+\end{question}
+
+\begin{question}
+  Decomprimeer de gegeven bytes gebruik makende van LZ77.
+  \begin{center}
+    \hex{00 00 50 00 00 4f 00 00 4c 01 01 4f 05 02 50 07 03 4f}
+  \end{center}
+  De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
+  Noteer hieronder het resultaat van decompressie (in tekstvorm):
+  \vskip5mm
+  \begin{center}
+    \blank{8cm}{BABARRABARBER}
+  \end{center}
+\end{question}
+
+\begin{question}
+  Decomprimeer de gegeven bytes gebruik makende van LZ77.
+  \begin{center}
+    \hex{00 00 50 00 00 4F 00 00 4C 01 01 4F 05 02 50 07 03 4F}
+  \end{center}
+  De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
+  Noteer hieronder het resultaat van decompressie (in tekstvorm):
+  \vskip5mm
+  \begin{center}
+    \blank{8cm}{POLLOPOPOLLO}
+  \end{center}
+\end{question}
+
+\begin{question}
+  Decomprimeer de gegeven bytes gebruik makende van LZ77.
+  \begin{center}
+    \hex{00 00 44 00 00 49 00 00 50 01 01 49 05 02 44 07 02 49 00 00 44}
+  \end{center}
+  De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
+  Noteer hieronder het resultaat van decompressie (in tekstvorm):
+  \vskip5mm
+  \begin{center}
+    \blank{8cm}{DIPPIDIDIPID}
+  \end{center}
+\end{question}
+
 
 
 
