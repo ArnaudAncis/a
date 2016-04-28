@@ -1,4 +1,4 @@
-%\def\solution{}
+% \def\solution{}
 \documentclass{ucll-exam}
 
 \exam{
@@ -10,8 +10,8 @@
   ola={MBI66a -- Programmeren voor Multimedia},
   activiteit={Examen},
   hulpmiddelen={Rekenmachine, formularium},
-  datum={4 januari 2016},
-  beginuur={13.00},
+  datum={TODO},
+  beginuur={TODO},
   duur={3 uur}
 }
 
@@ -48,6 +48,8 @@
   \end{center}
 \end{question}
 
+\vfil
+
 \begin{question}
   Comprimeer de string gebruik makende van LZ77.
   \begin{center} \tt
@@ -75,5 +77,67 @@
     \end{tikzpicture}
   \end{center}
 \end{question}
+
+
+
+\begin{question}
+  Comprimeer de string gebruik makende van LZ77.
+  \begin{center} \tt
+    ABABCBABDBABDABABA
+  \end{center}
+  Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
+  Noteer hieronder de resulterende bytes (hexadecimaal).
+
+  \begin{center}
+    \begin{tikzpicture}[box/.style={minimum width=1cm,minimum height=1.25cm,draw,font=\tt}]
+      \foreach[count=\i] \byte/\given in {00/solution,00/solution,41/solution,00/solution,00/solution,42/solution,02/solution,02/solution,43/solution,04/solution,03/solution,44/solution,04/solution,04/solution,41/solution,05/solution,03/solution,41/solution} {
+        \tikzmath{
+          int \col;
+          int \row;
+          real \x;
+          real \y;
+          \row = -int((\i - 1) / 8);
+          \col = mod((\i - 1), 8);
+          \x = \col * 1.25;
+          \y = \row * 1.5;
+        }
+
+        \node[box] at (\x,\y) {\showif[show=\given]{\byte}};
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{question}
+
+\vfil
+
+\begin{question}
+  Comprimeer de string gebruik makende van LZ77.
+  \begin{center} \tt
+    AABCAABCDDABCAD
+  \end{center}
+  Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
+  Noteer hieronder de resulterende bytes (hexadecimaal).
+
+  \begin{center}
+    \begin{tikzpicture}[box/.style={minimum width=1cm,minimum height=1.25cm,draw,font=\tt}]
+      \foreach[count=\i] \byte/\given in {00/solution,00/solution,41/always,01/solution,01/solution,42/solution,00/solution,00/solution,43/solution,04/solution,04/solution,44/solution,01/solution,01/solution,41/solution,09/always,03/solution,44/solution} {
+        \tikzmath{
+          int \col;
+          int \row;
+          real \x;
+          real \y;
+          \row = -int((\i - 1) / 8);
+          \col = mod((\i - 1), 8);
+          \x = \col * 1.25;
+          \y = \row * 1.5;
+        }
+
+        \node[box] at (\x,\y) {\showif[show=\given]{\byte}};
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{question}
+
+
 
 \end{document}
