@@ -16,6 +16,28 @@
 }
 
 
+\newcommand{\lzsheet}[1]{
+  \begin{center}
+    \begin{tikzpicture}[box/.style={minimum width=1cm,minimum height=1.25cm,draw,font=\tt}]
+      \foreach[count=\i] \byte/\given in {#1} {
+        \tikzmath{
+          int \col;
+          int \row;
+          real \x;
+          real \y;
+          \row = -int((\i - 1) / 8);
+          \col = mod((\i - 1), 8);
+          \x = \col * 1.25;
+          \y = \row * 1.5;
+        }
+
+        \node[box] at (\x,\y) {\showif[show=\given]{\byte}};
+      }
+    \end{tikzpicture}
+  \end{center}
+}
+
+
 \begin{document}
 
 \input{guidelines}
@@ -27,25 +49,7 @@
   \end{center}
   Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
   Noteer hieronder de resulterende bytes (hexadecimaal).
-
-  \begin{center}
-    \begin{tikzpicture}[box/.style={minimum width=1cm,minimum height=1.25cm,draw,font=\tt}]
-      \foreach[count=\i] \byte/\given in {00/solution,00/solution,41/solution,00/solution,00/always,42/solution,00/solution,00/solution,43/solution,03/solution,03/solution,44/always,04/solution,04/solution,45/solution,06/solution,02/always,42/solution} {
-        \tikzmath{
-          int \col;
-          int \row;
-          real \x;
-          real \y;
-          \row = -int((\i - 1) / 8);
-          \col = mod((\i - 1), 8);
-          \x = \col * 1.25;
-          \y = \row * 1.5;
-        }
-
-        \node[box] at (\x,\y) {\showif[show=\given]{\byte}};
-      }
-    \end{tikzpicture}
-  \end{center}
+  \lzsheet{00/solution,00/solution,41/solution,00/solution,00/always,42/solution,00/solution,00/solution,43/solution,03/solution,03/solution,44/always,04/solution,04/solution,45/solution,06/solution,02/always,42/solution}
 \end{question}
 
 \vfil
@@ -57,28 +61,8 @@
   \end{center}
   Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
   Noteer hieronder de resulterende bytes (hexadecimaal).
-
-  \begin{center}
-    \begin{tikzpicture}[box/.style={minimum width=1cm,minimum height=1.25cm,draw,font=\tt}]
-      \foreach[count=\i] \byte/\given in {00/solution,00/solution,58/solution,01/always,01/solution,59/solution,03/solution,03/solution,5a/solution,05/solution,04/solution,58/solution,00/always,00/solution,57/solution,06/solution,04/solution,5a/always} {
-        \tikzmath{
-          int \col;
-          int \row;
-          real \x;
-          real \y;
-          \row = -int((\i - 1) / 8);
-          \col = mod((\i - 1), 8);
-          \x = \col * 1.25;
-          \y = \row * 1.5;
-        }
-
-        \node[box] at (\x,\y) {\showif[show=\given]{\byte}};
-      }
-    \end{tikzpicture}
-  \end{center}
+  \lzsheet{00/solution,00/solution,58/solution,01/always,01/solution,59/solution,03/solution,03/solution,5a/solution,05/solution,04/solution,58/solution,00/always,00/solution,57/solution,06/solution,04/solution,5a/always}
 \end{question}
-
-
 
 \begin{question}
   Comprimeer de string gebruik makende van LZ77.
@@ -87,25 +71,7 @@
   \end{center}
   Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
   Noteer hieronder de resulterende bytes (hexadecimaal).
-
-  \begin{center}
-    \begin{tikzpicture}[box/.style={minimum width=1cm,minimum height=1.25cm,draw,font=\tt}]
-      \foreach[count=\i] \byte/\given in {00/solution,00/solution,41/solution,00/solution,00/solution,42/solution,02/solution,02/solution,43/solution,04/solution,03/solution,44/solution,04/solution,04/solution,41/solution,05/solution,03/solution,41/solution} {
-        \tikzmath{
-          int \col;
-          int \row;
-          real \x;
-          real \y;
-          \row = -int((\i - 1) / 8);
-          \col = mod((\i - 1), 8);
-          \x = \col * 1.25;
-          \y = \row * 1.5;
-        }
-
-        \node[box] at (\x,\y) {\showif[show=\given]{\byte}};
-      }
-    \end{tikzpicture}
-  \end{center}
+  \lzsheet{00/solution,00/solution,41/solution,00/always,00/solution,42/solution,02/solution,02/solution,43/solution,04/solution,03/always,44/solution,04/solution,04/solution,41/solution,05/solution,03/solution,41/always}
 \end{question}
 
 \vfil
@@ -113,29 +79,11 @@
 \begin{question}
   Comprimeer de string gebruik makende van LZ77.
   \begin{center} \tt
-    AABCAABCDDABCAD
+    AABCAABCDDABCADCAAB
   \end{center}
   Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
   Noteer hieronder de resulterende bytes (hexadecimaal).
-
-  \begin{center}
-    \begin{tikzpicture}[box/.style={minimum width=1cm,minimum height=1.25cm,draw,font=\tt}]
-      \foreach[count=\i] \byte/\given in {00/solution,00/solution,41/always,01/solution,01/solution,42/solution,00/solution,00/solution,43/solution,04/solution,04/solution,44/solution,01/solution,01/solution,41/solution,09/always,03/solution,44/solution} {
-        \tikzmath{
-          int \col;
-          int \row;
-          real \x;
-          real \y;
-          \row = -int((\i - 1) / 8);
-          \col = mod((\i - 1), 8);
-          \x = \col * 1.25;
-          \y = \row * 1.5;
-        }
-
-        \node[box] at (\x,\y) {\showif[show=\given]{\byte}};
-      }
-    \end{tikzpicture}
-  \end{center}
+  \lzsheet{00/solution,00/solution,41/solution,01/solution,01/always,42/solution,00/solution,00/solution,43/solution,04/solution,04/solution,44/solution,01/solution,01/solution,41/solution,09/always,03/solution,44/solution,0c/solution,03/solution,42/always}
 \end{question}
 
 
