@@ -58,62 +58,16 @@
   \end{itemize}
 \end{examguidelines}
 
+
+
 \input{lz77-compress-1.tex}
 \input{lz77-compress-2.tex}
 \input{lz77-compress-3.tex}
 \input{lz77-compress-4.tex}
 
-
-\begin{question}
-  Decomprimeer de gegeven bytes gebruik makende van LZ77.
-  \begin{center}
-    \hex{00 00 46 00 00 4f 01 01 4c 03 02 46 04 04 46 05 01 46}
-  \end{center}
-  De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
-  Noteer hieronder het resultaat van decompressie (in tekstvorm).
-  \vskip5mm
-  \begin{center}
-    \answerbox[width=6cm]{FOOLOOFLOOFFLF}
-  \end{center}
-\end{question}
-
-\begin{question}
-  Decomprimeer de gegeven bytes gebruik makende van LZ77.
-  \begin{center}
-    \hex{00 00 50 00 00 4f 00 00 4c 01 01 4f 05 02 50 07 03 4f}
-  \end{center}
-  De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
-  Noteer hieronder het resultaat van decompressie (in tekstvorm).
-  \vskip5mm
-  \begin{center}
-    \answerbox[width=6cm]{BABARRABARBER}
-  \end{center}
-\end{question}
-
-\begin{question}
-  Decomprimeer de gegeven bytes gebruik makende van LZ77.
-  \begin{center}
-    \hex{00 00 50 00 00 4F 00 00 4C 01 01 4F 05 02 50 07 03 4F}
-  \end{center}
-  De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
-  Noteer hieronder het resultaat van decompressie (in tekstvorm).
-  \vskip5mm
-  \begin{center}
-    \answerbox[width=6cm]{POLLOPOPOLLO}
-  \end{center}
-\end{question}
-
-\begin{question}
-  Decomprimeer de gegeven bytes gebruik makende van LZ77.
-  \begin{center}
-    \hex{00 00 44 00 00 49 00 00 50 01 01 49 05 02 44 07 02 49 00 00 44}
-  \end{center}
-  De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
-  Noteer hieronder het resultaat van decompressie (in tekstvorm).
-  \vskip5mm
-  \begin{center}
-    \answerbox[width=6cm]{DIPPIDIDIPID}
-  \end{center}
-\end{question}
+\input{lz77-decompress-1.tex}
+\input{lz77-decompress-2.tex}
+\input{lz77-decompress-3.tex}
+\input{lz77-decompress-4.tex}
 
 \end{document}
