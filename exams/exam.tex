@@ -1,18 +1,11 @@
-% \def\solution{}
-\documentclass{ucll-exam}
+\documentclass[]{pvm-exam}
 
 \exam{
   academiejaar=2015--2016,
-  opleiding={Bachelor in de Toegepaste Informatica},
-  fase={1},
   examinator={F. Vogels},
-  opo={MBI66A -- Programmeren voor Multimedia},
-  ola={MBI66a -- Programmeren voor Multimedia},
-  activiteit={Examen},
-  hulpmiddelen={Rekenmachine, formularium},
+  hulpmiddelen={Formularium},
   datum={TODO},
   beginuur={TODO},
-  duur={3 uur}
 }
 
 \newcommand{\hex}[1]{\texttt{\bfseries #1}}
@@ -32,7 +25,10 @@
           \y = \row * 1.5;
         }
 
-        \node[box] at (\x,\y) {\showif[show=\given]{\byte}};
+        \node[box] at (\x,\y) {
+          % \edef\condparam{\yesno[\given]{always}{if solution}}
+          \cond[\given]{\byte}
+        };
       }
     \end{tikzpicture}
   \end{center}
@@ -50,7 +46,7 @@
   \end{center}
   Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
   Noteer hieronder de resulterende bytes (hexadecimaal).
-  \lzsheet{00/solution,00/solution,41/solution,00/solution,00/always,42/solution,00/solution,00/solution,43/solution,03/solution,03/solution,44/always,04/solution,04/solution,45/solution,06/solution,02/always,42/solution}
+  \lzsheet{00/if solution,00/if solution,41/if solution,00/if solution,00/always,42/if solution,00/if solution,00/if solution,43/if solution,03/if solution,03/if solution,44/always,04/if solution,04/if solution,45/if solution,06/if solution,02/always,42/if solution}
 \end{question}
 
 \vfil
@@ -62,7 +58,7 @@
   \end{center}
   Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
   Noteer hieronder de resulterende bytes (hexadecimaal).
-  \lzsheet{00/solution,00/solution,58/solution,01/always,01/solution,59/solution,03/solution,03/solution,5a/solution,05/solution,04/solution,58/solution,00/always,00/solution,57/solution,06/solution,04/solution,5a/always}
+  \lzsheet{00/if solution,00/if solution,58/if solution,01/always,01/if solution,59/if solution,03/if solution,03/if solution,5a/if solution,05/if solution,04/if solution,58/if solution,00/always,00/if solution,57/if solution,06/if solution,04/if solution,5a/always}
 \end{question}
 
 \begin{question}
@@ -72,7 +68,7 @@
   \end{center}
   Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
   Noteer hieronder de resulterende bytes (hexadecimaal).
-  \lzsheet{00/solution,00/solution,41/solution,00/always,00/solution,42/solution,02/solution,02/solution,43/solution,04/solution,03/always,44/solution,04/solution,04/solution,41/solution,05/solution,03/solution,41/always}
+  \lzsheet{00/if solution,00/if solution,41/if solution,00/always,00/if solution,42/if solution,02/if solution,02/if solution,43/if solution,04/if solution,03/always,44/if solution,04/if solution,04/if solution,41/if solution,05/if solution,03/if solution,41/always}
 \end{question}
 
 \vfil
@@ -84,7 +80,7 @@
   \end{center}
   Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
   Noteer hieronder de resulterende bytes (hexadecimaal).
-  \lzsheet{00/solution,00/solution,41/solution,01/solution,01/always,42/solution,00/solution,00/solution,43/solution,04/solution,04/solution,44/solution,01/solution,01/solution,41/solution,09/always,03/solution,44/solution,0c/solution,03/solution,42/always}
+  \lzsheet{00/if solution,00/if solution,41/if solution,01/if solution,01/always,42/if solution,00/if solution,00/if solution,43/if solution,04/if solution,04/if solution,44/if solution,01/if solution,01/if solution,41/if solution,09/always,03/if solution,44/if solution,0c/if solution,03/if solution,42/always}
 \end{question}
 
 
@@ -114,31 +110,31 @@
   \end{center}
 \end{question}
 
-\begin{question}
-  Decomprimeer de gegeven bytes gebruik makende van LZ77.
-  \begin{center}
-    \hex{00 00 50 00 00 4F 00 00 4C 01 01 4F 05 02 50 07 03 4F}
-  \end{center}
-  De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
-  Noteer hieronder het resultaat van decompressie (in tekstvorm):
-  \vskip5mm
-  \begin{center}
-    \blank{8cm}{POLLOPOPOLLO}
-  \end{center}
-\end{question}
+% \begin{question}
+%   Decomprimeer de gegeven bytes gebruik makende van LZ77.
+%   \begin{center}
+%     \hex{00 00 50 00 00 4F 00 00 4C 01 01 4F 05 02 50 07 03 4F}
+%   \end{center}
+%   De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
+%   Noteer hieronder het resultaat van decompressie (in tekstvorm):
+%   \vskip5mm
+%   \begin{center}
+%     \blank{8cm}{POLLOPOPOLLO}
+%   \end{center}
+% \end{question}
 
-\begin{question}
-  Decomprimeer de gegeven bytes gebruik makende van LZ77.
-  \begin{center}
-    \hex{00 00 44 00 00 49 00 00 50 01 01 49 05 02 44 07 02 49 00 00 44}
-  \end{center}
-  De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
-  Noteer hieronder het resultaat van decompressie (in tekstvorm):
-  \vskip5mm
-  \begin{center}
-    \blank{8cm}{DIPPIDIDIPID}
-  \end{center}
-\end{question}
+% \begin{question}
+%   Decomprimeer de gegeven bytes gebruik makende van LZ77.
+%   \begin{center}
+%     \hex{00 00 44 00 00 49 00 00 50 01 01 49 05 02 44 07 02 49 00 00 44}
+%   \end{center}
+%   De relatieve positie en lengte van de matches zijn telkens voorgesteld d.m.v.~8~bits.
+%   Noteer hieronder het resultaat van decompressie (in tekstvorm):
+%   \vskip5mm
+%   \begin{center}
+%     \blank{8cm}{DIPPIDIDIPID}
+%   \end{center}
+% \end{question}
 
 
 
