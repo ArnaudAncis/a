@@ -1,4 +1,4 @@
-\documentclass[solution]{pvm-exam}
+\documentclass[]{pvm-exam}
 \usepackage{booktabs}
 
 \exam{
@@ -9,31 +9,6 @@
   beginuur={TODO},
 }
 
-\newcommand{\hex}[1]{\texttt{\bfseries #1}}
-
-\newcommand{\lzsheet}[1]{
-  \begin{center}
-    \begin{tikzpicture}[box/.style={minimum width=1cm,minimum height=1.25cm,draw,font=\tt}]
-      \foreach[count=\i] \byte/\given in {#1} {
-        \tikzmath{
-          int \col;
-          int \row;
-          real \x;
-          real \y;
-          \row = -int((\i - 1) / 8);
-          \col = mod((\i - 1), 8);
-          \x = \col * 1.25;
-          \y = \row * 1.5;
-        }
-
-        \node[box] at (\x,\y) {
-          % \edef\condparam{\yesno[\given]{always}{if solution}}
-          \cond[\given]{\byte}
-        };
-      }
-    \end{tikzpicture}
-  \end{center}
-}
 
 
 \begin{document}
@@ -59,49 +34,9 @@
   \end{itemize}
 \end{examguidelines}
 
-\begin{question}
-  Gegeven de volgende frequenties, bouw een optimale Huffman-boom.
-  \begin{center}
-    \begin{tabular}{cc@{\hspace{1cm}}cc}
-      \textbf{Letter} & \textbf{Frequentie} & \textbf{Letter} & \textbf{Frequentie} \\
-      \toprule
-      A & 50 & E & 25 \\
-      B & 7 & F & 12 \\
-      C & 44 & G & 19 \\
-      D & 34 & H & 30 \\
-      \bottomrule
-    \end{tabular}
-  \end{center}
-  \vskip1cm
-  \begin{solutionframe}[height=15cm]
-\begin{solutionblock}
-    \begin{center}
-      \begin{tikzpicture}[node/.style={circle,black,draw,minimum size=8mm,inner sep=0mm,font=\tiny}]
-        \node[node] (root) at (0,0) {};
-        \node[node] (0) at ($ (root) + (-3,-1) $) {};
-        \node[node] (00) at ($ (0) + (-1,-1) $) {C};
-        \node[node] (01) at ($ (0) + (1,-1) $) {A};
-        \node[node] (1) at ($ (root) + (3,-1) $) {};
-        \node[node] (10) at ($ (1) + (-2,-1) $) {};
-        \node[node] (100) at ($ (10) + (-1,-1) $) {E};
-        \node[node] (101) at ($ (10) + (1,-1) $) {H};
-        \node[node] (11) at ($ (1) + (2,-1) $) {};
-        \node[node] (110) at ($ (11) + (-1,-1) $) {D};
-        \node[node] (111) at ($ (11) + (1,-1) $) {};
-        \node[node] (1110) at ($ (111) + (-1,-1) $) {G};
-        \node[node] (1111) at ($ (111) + (1,-1) $) {};
-        \node[node] (11110) at ($ (1111) + (-1,-1) $) {B};
-        \node[node] (11111) at ($ (1111) + (1,-1) $) {F};
-
-        \foreach \x/\y in {root/0,root/1,0/00,0/01,1/10,1/11,11/110,11/111,111/1110,111/1111,1111/11110,1111/11111,10/100,10/101} {
-          \draw (\x) -- (\y);
-        }
-      \end{tikzpicture}
-    \end{center}
-\end{solutionblock}
-  \end{solutionframe}
-\end{question}
-
+\input{huffman-tree-1.tex}
+\input{huffman-encode-1.tex}
+\input{huffman-decode-1.tex}
 
 % \input{lz77-compress-1.tex}
 % \input{lz77-compress-2.tex}

@@ -60,6 +60,12 @@ tree = build_tree fs
 
 codes = build_codes tree
 
-p fs
-p codes
+puts("ABCDHGFE".split(//).map do |letter|
+  codes[letter]
+end.join.split(//).join(','))
+
+puts("ABCDHGFE".split(//).map do |letter|
+  codes[letter]
+end.join)
+
 
