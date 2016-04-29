@@ -58,49 +58,10 @@
   \end{itemize}
 \end{examguidelines}
 
-\begin{question}
-  Comprimeer de string gebruik makende van LZ77.
-  \begin{center} \tt
-    ABCABCDABCDEDAB
-  \end{center}
-  Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
-  Noteer hieronder de resulterende bytes (hexadecimaal).
-  \lzsheet{00/if solution,00/if solution,41/if solution,00/if solution,00/always,42/if solution,00/if solution,00/if solution,43/if solution,03/if solution,03/if solution,44/always,04/if solution,04/if solution,45/if solution,06/if solution,02/always,42/if solution}
-\end{question}
-
-\vfil
-
-\begin{question}
-  Comprimeer de string gebruik makende van LZ77.
-  \begin{center} \tt
-    XXYXXYZYXXYXWYXXYZ
-  \end{center}
-  Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
-  Noteer hieronder de resulterende bytes (hexadecimaal).
-  \lzsheet{00/if solution,00/if solution,58/if solution,01/always,01/if solution,59/if solution,03/if solution,03/if solution,5a/if solution,05/if solution,04/if solution,58/if solution,00/always,00/if solution,57/if solution,06/if solution,04/if solution,5a/always}
-\end{question}
-
-\begin{question}
-  Comprimeer de string gebruik makende van LZ77.
-  \begin{center} \tt
-    ABABCBABDBABDABABA
-  \end{center}
-  Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
-  Noteer hieronder de resulterende bytes (hexadecimaal).
-  \lzsheet{00/if solution,00/if solution,41/if solution,00/always,00/if solution,42/if solution,02/if solution,02/if solution,43/if solution,04/if solution,03/always,44/if solution,04/if solution,04/if solution,41/if solution,05/if solution,03/if solution,41/always}
-\end{question}
-
-\vfil
-
-\begin{question}
-  Comprimeer de string gebruik makende van LZ77.
-  \begin{center} \tt
-    AABCAABCDDABCADCAAB
-  \end{center}
-  Gebruik telkens 8 bits om de relatieve positie en de lengte van de matches voor te stellen.
-  Noteer hieronder de resulterende bytes (hexadecimaal).
-  \lzsheet{00/if solution,00/if solution,41/if solution,01/if solution,01/always,42/if solution,00/if solution,00/if solution,43/if solution,04/if solution,04/if solution,44/if solution,01/if solution,01/if solution,41/if solution,09/always,03/if solution,44/if solution,0c/if solution,03/if solution,42/always}
-\end{question}
+\input{lz77-compress-1.tex}
+\input{lz77-compress-2.tex}
+\input{lz77-compress-3.tex}
+\input{lz77-compress-4.tex}
 
 
 \begin{question}
