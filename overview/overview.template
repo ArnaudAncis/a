@@ -168,7 +168,7 @@
           </tr>
           <tr>
             <td><%= topic('inheritance', 'Inheritance') %></td>
-            <td></td>
+            <td><%= lab('image-manipulation', 'Image Generation: Filters') %></td>
           </tr>
           <tr>
             <td><%= topic('casts', 'Casting') %></td>
@@ -184,10 +184,14 @@
           </tr>
           <tr>
             <td><%= topic('compression-rle', 'Compression: RLE') %></td>
-            <td></td>
+            <td><%= lab('rle', 'RLE') %></td>
           </tr>
           <tr>
             <td><%= topic('compression-huffman', 'Compression: Huffman') %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= topic('compression-lz77', 'Compression: LZ77') %></td>
             <td></td>
           </tr>
         </ul>
