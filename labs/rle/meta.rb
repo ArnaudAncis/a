@@ -38,5 +38,5 @@ meta_object do
   uploadable_globs( 'sample.bmp' )
   upload_action
 
-  group_action(:full, [:compile, :img, :html, :upload])
+  group_action(:full, [:html, :upload])
 end
