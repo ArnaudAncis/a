@@ -13,23 +13,24 @@
         margin-right: auto;
       }      
 
-      #reference-table {
+      #link-table {
         width: 75%;
         border: 1px solid black;
         padding: 10px;
         box-shadow: 10px 10px 5px #AAAAAA;
+        margin-bottom: 50px;
       }
-      
-      #reference-table th {
+
+      #link-table th {
         padding: 10px;
         width: 40%;
       }
       
-      #reference-table tr {
+      #link-table tr {
         text-align: center;
       }
       
-      #reference-table tr.header {
+      #link-table tr.header {
         font-size: 2em;
         background: #AAAAAA;
         font-weight: bold;
@@ -66,7 +67,7 @@
 
     <div id="contents">
       <section>      
-        <table class="center" id="reference-table">
+        <table class="center" id="link-table">
           <tbody>
             <tr class="header">
               <td colspan="2">Reference</td>
@@ -81,6 +82,18 @@
                 This is the document you'll get at the exam.
                 It lacks examples, model exam questions, etc.
               </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="center" id="link-table">
+          <tbody>
+            <tr class="header">
+              <td colspan="2">Model Exams</td>
+            </tr>
+            <tr>
+              <th><a href="exams/without-solutions.pdf">Without Solutions</a></th>
+              <th><a href="exams/with-solutions.pdf">With Solutions</a></th>
             </tr>
           </tbody>
         </table>
