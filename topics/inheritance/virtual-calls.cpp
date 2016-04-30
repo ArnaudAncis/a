@@ -13,4 +13,4 @@ struct C : public B {
   virtual void foo() { print "C"; }
 };
 
-C c; // In Java: CCC, in C++: ABC
+C c; // In Java: `\visible<2->{CCC}`, in C++: `\visible<3>{ABC}`

@@ -256,14 +256,14 @@
     \item Virtual methods: methods that are overridable
     \item When calling a virtual method, dynamic type determines which version is called
     \item When calling a nonvirtual method, static type determines which version is called
-    \item In Java, all object methods are virtual
+    \item In Java, all (nonprivate) object methods are virtual
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Virtual Methods in \cpp}
   \begin{itemize}
-    \item If you want methods to be overridable, you have to say so explicitly
+    \item If you want a member function to be overridable, you have to be explicit about it
     \item To make virtual: add {\tt virtual}
     \item To override: add {\tt override} (optional, but encouraged)
   \end{itemize}
@@ -287,6 +287,7 @@
   \begin{itemize}
     \item When working with inheritance, always use pointers/references
     \item When working by-value, inheritance won't work correctly
+    \item Why would that be? \cake
   \end{itemize}
   \code{inheritance-by-value.cpp}
 \end{frame}
@@ -381,6 +382,7 @@
     \item {\tt A} is only inherited once by {\tt C}
     \item Has some weird consequences
     \item Generally discouraged
+    \item Just know that it exists
   \end{itemize}
 \end{frame}
 
@@ -401,6 +403,26 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Stepwise Object Construction}
+  \code{constructors2.cpp}
+  \begin{center}
+    \begin{tikzpicture}[layer/.style={draw,minimum width=5cm,minimum height=1cm}]
+      \visible<2->{
+        \node[layer] (A) at (0,0) {A};
+      }
+
+      \visible<3->{
+        \node[layer,anchor=south west] (B) at (A.north west) {B};
+      }
+
+      \visible<4->{
+        \node[layer,anchor=south west] (C) at (B.north west) {C};
+      }
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
   \frametitle{Calling Virtual Functions in Constructor}
   \begin{itemize}
     \item Just don't do it
@@ -415,6 +437,27 @@
     \item Always happens automatically, no need to do it yourself
     \item Akin to destroying a house: stories removed from top to bottom
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Stepwise Object Destruction}
+  \code{destructors.cpp}
+  \begin{center}
+    \begin{tikzpicture}[layer/.style={draw,minimum width=5cm,minimum height=1cm}]
+      \visible<-3>{
+        \node[layer] (A) at (0,0) {A};
+      }
+
+      \visible<-2>{
+        \node[layer,anchor=south west] (B) at (A.north west) {B};
+      }
+
+      \visible<-1>{
+        \node[layer,anchor=south west] (C) at (B.north west) {C};
+      }
+    \end{tikzpicture}
+  \end{center}
+  \visible<4>{}
 \end{frame}
 
 \begin{frame}
