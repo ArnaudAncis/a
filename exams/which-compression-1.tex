@@ -1,0 +1,29 @@
+\begin{question}
+  Welke compressiealgoritmes werken het best op volgende inputs?
+  Ga ervan uit dat we niet per byte, maar per nibble (4 bits) werken, m.a.w.~er
+  zijn slechts 16 mogelijke waarden: \texttt{0123456789ABCDEF}.
+  \begin{center}
+    \begin{tabular}{ll}
+      \toprule
+      \textbf{Input} & \textbf{Algoritme} \\
+      \midrule
+      \parbox[c]{12cm}{
+        \texttt{0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF \\
+                0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF}} &%
+      \parbox[c]{2cm}{
+        \checkbox[unchecked,if solution] RLE \\
+        \checkbox[unchecked,if solution] Huffman \\
+        \checkbox[checked,if solution] LZ77
+      } \\
+      \midrule
+      \textbf{Uitleg} \\[2mm]
+      \multicolumn{2}{l}{%
+        \parbox[t][5cm][l]{14cm}{%
+          \ifsolution{RLE faalt omdat er geen reeksen gelijke tekens voorkomen in de input.
+          Huffman faalt omdat elk teken even vaak voorkomt.
+          LZ77 zal het best werken omdat hetzelfde patroon
+          \texttt{0123456789ABCDEF} telkens herhaald wordt.}}} \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{question}
