@@ -42,7 +42,8 @@ public class Person
         return String.format( "%s %s (weight = %fkg, height = %dcm)", firstName, lastName, weightInKg, heightInCm );
     }
 
-    public static class Comparer
+    // In C++, Person.Comparison.ByFirstName becomes Person::Comparison::ByFirstName
+    public static class Comparison
     {
         public static class ByFirstName implements PersonComparer
         {

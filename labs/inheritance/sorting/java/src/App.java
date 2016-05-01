@@ -20,7 +20,7 @@ public class App
             then weight (descending). Do this not by defining a new class, but by combining
              existing ones.
          */
-        PersonComparer comparer = new ComparisonInverter( new Person.Comparer.ByHeight() );
+        PersonComparer comparer = new ComparisonInverter( new Person.Comparison.ByHeight() );
         sort( people, comparer );
 
         for ( Person p : people )
@@ -42,7 +42,7 @@ public class App
                 Person p1 = people.get( i - 1 );
                 Person p2 = people.get( i );
 
-                if ( comparer.compare( p1, p2 ) == ComparisonResult.GREATER_THAN )
+                if ( comparer.compare( p1, p2 ) == ComparisonResult.GREATER )
                 {
                     people.set( i - 1, p2 );
                     people.set( i, p1 );
