@@ -16,3 +16,4 @@ Release/
 *.db
 **/.idea/workspace.xml
 **/.idea/tasks.xml
+*.class
