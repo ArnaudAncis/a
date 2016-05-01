@@ -6,7 +6,7 @@
 class Cat : public Animal
 {
 public:
-	std::string getVerb() const;
+	std::string getVerb() const override;
 };
 
 #endif
