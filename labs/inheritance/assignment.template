@@ -110,7 +110,21 @@
            END
          end
        %>
-      
+
+       <%=
+         exercise do 
+           extend GitMixin         
+           <<-END
+             <p>
+               Translate the Java code at
+             </p>
+             #{git_link 'sorting/java'}
+             <p>
+               into C++.
+             </p>
+           END
+         end
+       %>
     </div>
   </body>
 
