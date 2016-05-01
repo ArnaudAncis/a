@@ -184,6 +184,10 @@
             <td><%= lab('image-manipulation', 'Image Generation: Filters') %></td>
           </tr>
           <tr>
+            <td></td>
+            <td><%= lab('inheritance', 'Inheritance') %></td>
+          </tr>
+          <tr>
             <td><%= topic('casts', 'Casting') %></td>
             <td></td>
           </tr>
