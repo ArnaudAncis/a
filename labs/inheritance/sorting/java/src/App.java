@@ -5,7 +5,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        ArrayList<Person> people = new ArrayList()
+        ArrayList<Person> people = new ArrayList<Person>()
         {{
             add( new Person( "Jan", "Janssens", 60, 165 ) );
             add( new Person( "Piet", "Janssens", 90, 180 ) );
