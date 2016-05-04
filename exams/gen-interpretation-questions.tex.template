@@ -1,0 +1,19 @@
+<%=
+
+  Dir['interpret-*.cpp'].map do |file|
+    output = execute(file)
+
+    <<-END
+      \\begin{question}
+        Wat is de uitvoer van volgend programma?
+        \\vskip1cm
+        \\code{#{file}}
+        \\vskip1cm
+        \\begin{center}
+          #{ generate_answerboxes(output) }
+        \\end{center}
+      \\end{question}
+    END
+  end.join("\n\n")
+
+%>
