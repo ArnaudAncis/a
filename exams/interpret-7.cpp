@@ -7,7 +7,7 @@ struct Foo {
   ~Foo()          { std::cout << "X"; }
 };
 
-void bar(Foo& foo) { }
+void bar(const Foo& foo) { }
 
 int main() {
   std::cout << "1";

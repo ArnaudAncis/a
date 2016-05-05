@@ -1,6 +1,14 @@
 <%=
 
-  Dir['interpret-*.cpp'].map do |file|
+  Dir['interpret-*.cpp'].sort do |f1, f2|
+    /interpret-(\d+)/ =~ f1
+    n1 = $1.to_i
+
+    /interpret-(\d+)/ =~ f2
+    n2 = $1.to_i
+
+    n1 <=> n2
+  end.map do |file|
     output = execute(file)
     %r{^// (\S*) ?(.*)$} =~ IO.readlines(file)[0] or abort "Missing question type in #{file}"
     type, arg = $1, $2
