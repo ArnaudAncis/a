@@ -15,7 +15,7 @@ class Context
     rows = cpp_output.lines.map do |line|
       /^(.):(.*)$/ =~ line.strip
       id, val = $1, $2
-      "\\texttt{#{id}:} & \\answerbox[width=1cm,vertical alignment=c]{#{val}}"
+      "\\texttt{#{id}:} & \\answerbox[width=5cm,vertical alignment=c]{#{val}}"
     end.join("\\\\\n")
 
     <<-END
