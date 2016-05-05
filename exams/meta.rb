@@ -11,7 +11,7 @@ class Context
     Cpp.compile_and_run(Pathname.new filename)
   end
 
-  def generate_associative_answerboxes(cpp_output)
+  def generate_associative_answerboxes(cpp_output, arg)
     rows = cpp_output.lines.map do |line|
       /^(.):(.*)$/ =~ line.strip
       id, val = $1, $2
@@ -19,16 +19,37 @@ class Context
     end.join("\\\\\n")
 
     <<-END
-      \\begin{tabular}{r@{}l}
-        #{rows}
-      \\end{tabular}
+      \\begin{center}
+        \\begin{tabular}{r@{}l}
+          #{rows}
+        \\end{tabular}
+      \\end{center}
     END
   end
 
-  def generate_string_answerbox(cpp_output)
-    cpp_output.strip.split(//).map do |char|
+  def generate_string_answerbox(cpp_output, arg)
+    if /n=(\d+)/ =~ arg then
+      n_boxes = $1.to_i
+    else
+      n_boxes = cpp_output.length
+    end
+
+    if n_boxes < cpp_output.size then
+      abort "Too few boxes to contain answer!"
+    end
+
+    padded_cpp_output = cpp_output.strip.ljust(n_boxes, ' ')
+    
+    boxes = padded_cpp_output.split(//).map do |char|
       "\\answerbox[width=1cm]{#{char}}"
     end.join(' ')
+
+    <<-END
+    \\begin{center}
+      #{boxes}
+    \\end{center}
+    Vul \\'e\\'en teken per vakje in. Mogelijk worden er minder tekens uitgevoerd dan er vakjes zijn.
+    END
   end
 end
 
