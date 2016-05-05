@@ -2,15 +2,17 @@
 
   Dir['interpret-*.cpp'].map do |file|
     output = execute(file)
+    %r{^// (.*)$} =~ IO.readlines(file)[0] or abort "Missing type comment in #{file}"
+    type = $1
 
     <<-END
       \\begin{question}
         Wat is de uitvoer van volgend programma?
         \\vskip1cm
-        \\code{#{file}}
+        \\code[firstline=2]{#{file}}
         \\vskip1cm
         \\begin{center}
-          #{ generate_answerboxes(output) }
+          #{ send(type, output) }
         \\end{center}
       \\end{question}
     END

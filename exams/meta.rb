@@ -11,12 +11,24 @@ class Context
     Cpp.compile_and_run(Pathname.new filename)
   end
 
-  def generate_answerboxes(cpp_output)
-    cpp_output.lines.map do |line|
+  def generate_associative_answerboxes(cpp_output)
+    rows = cpp_output.lines.map do |line|
       /^(.):(.*)$/ =~ line.strip
       id, val = $1, $2
-      "#{id}: \\answerbox[width=1cm,vertical alignment=c]{#{val}} \\\\"
-    end.join("\n")
+      "\\texttt{#{id}:} & \\answerbox[width=1cm,vertical alignment=c]{#{val}}"
+    end.join("\\\\\n")
+
+    <<-END
+      \\begin{tabular}{r@{}l}
+        #{rows}
+      \\end{tabular}
+    END
+  end
+
+  def generate_string_answerbox(cpp_output)
+    cpp_output.strip.split(//).map do |char|
+      "\\answerbox[width=1cm]{#{char}}"
+    end.join(' ')
   end
 end
 
