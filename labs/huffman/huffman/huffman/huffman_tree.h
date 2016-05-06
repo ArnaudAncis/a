@@ -20,25 +20,13 @@ public:
 
 class leaf : public huffman_tree
 {
-protected:
-	leaf(unsigned weight) : huffman_tree(weight) { }
-};
-
-class datum_leaf : public leaf
-{
 private:
 	uint8_t m_datum;
 
 public:
-	datum_leaf(unsigned weight, uint8_t datum) : leaf(weight), m_datum(datum) { }
+	leaf(unsigned weight, uint8_t datum) : huffman_tree(weight), m_datum(datum) { }
 
 	uint8_t datum() const { return m_datum; }
-};
-
-class eof_leaf : public leaf
-{
-public:
-	eof_leaf() : leaf(1) { }
 };
 
 class branch : public huffman_tree

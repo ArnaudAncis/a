@@ -2,16 +2,6 @@
 #include "encoder.h"
 #include "bit_sequence_test_aux.h"
 
-TEST_CASE("Encoder for { }", "[encoder]")
-{
-	frequency_map frequencies;
-	std::shared_ptr<huffman_tree> root = build_tree(frequencies);
-
-	encoder enc(*root);
-
-	REQUIRE(enc.eof() == bit_sequence::empty());
-}
-
 TEST_CASE("Encoder for { A => 2 }", "[encoder]")
 {
 	frequency_map frequencies;
@@ -20,39 +10,54 @@ TEST_CASE("Encoder for { A => 2 }", "[encoder]")
 
 	encoder enc(*root);
 
-	REQUIRE(enc.eof() == parse_bit_sequence("0"));
+	REQUIRE(enc['A'] == parse_bit_sequence(""));
+}
+
+TEST_CASE("Encoder for { X => 1, A => 2 }", "[encoder]")
+{
+	frequency_map frequencies;
+	frequencies['X'] = 1;
+	frequencies['A'] = 2;
+	std::shared_ptr<huffman_tree> root = build_tree(frequencies);
+
+	encoder enc(*root);
+
+	REQUIRE(enc['X'] == parse_bit_sequence("0"));
 	REQUIRE(enc['A'] == parse_bit_sequence("1"));
 }
 
-TEST_CASE("Encoder for { B => 2 }", "[encoder]")
+TEST_CASE("Encoder for { X => 1, B => 2 }", "[encoder]")
 {
 	frequency_map frequencies;
+	frequencies['X'] = 1;
 	frequencies['B'] = 2;
 	std::shared_ptr<huffman_tree> root = build_tree(frequencies);
 
 	encoder enc(*root);
 
-	REQUIRE(enc.eof() == parse_bit_sequence("0"));
+	REQUIRE(enc['X'] == parse_bit_sequence("0"));
 	REQUIRE(enc['B'] == parse_bit_sequence("1"));
 }
 
-TEST_CASE("Encoder for { A => 2, B => 4 }", "[encoder]")
+TEST_CASE("Encoder for { X => 1, A => 2, B => 4 }", "[encoder]")
 {
 	frequency_map frequencies;
+	frequencies['X'] = 1;
 	frequencies['A'] = 2;
 	frequencies['B'] = 4;
 	std::shared_ptr<huffman_tree> root = build_tree(frequencies);
 
 	encoder enc(*root);
 
-	REQUIRE(enc.eof() == parse_bit_sequence("00"));
+	REQUIRE(enc['X'] == parse_bit_sequence("00"));
 	REQUIRE(enc['A'] == parse_bit_sequence("01"));
 	REQUIRE(enc['B'] == parse_bit_sequence("1"));
 }
 
-TEST_CASE("Encoder for { A => 2, B => 4, C => 8 }", "[encoder]")
+TEST_CASE("Encoder for { X => 1, A => 2, B => 4, C => 8 }", "[encoder]")
 {
 	frequency_map frequencies;
+	frequencies['X'] = 1;
 	frequencies['A'] = 2;
 	frequencies['B'] = 4;
 	frequencies['C'] = 8;
@@ -60,15 +65,16 @@ TEST_CASE("Encoder for { A => 2, B => 4, C => 8 }", "[encoder]")
 	std::shared_ptr<huffman_tree> root = build_tree(frequencies);
 	encoder enc(*root);
 
-	REQUIRE(enc.eof() == parse_bit_sequence("000"));
+	REQUIRE(enc['X'] == parse_bit_sequence("000"));
 	REQUIRE(enc['A'] == parse_bit_sequence("001"));
 	REQUIRE(enc['B'] == parse_bit_sequence("01"));
 	REQUIRE(enc['C'] == parse_bit_sequence("1"));
 }
 
-TEST_CASE("Encoder for { A => 8, B => 4, C => 2 }", "[encoder]")
+TEST_CASE("Encoder for { X => 1, A => 8, B => 4, C => 2 }", "[encoder]")
 {
 	frequency_map frequencies;
+	frequencies['X'] = 1;
 	frequencies['A'] = 8;
 	frequencies['B'] = 4;
 	frequencies['C'] = 2;
@@ -76,15 +82,16 @@ TEST_CASE("Encoder for { A => 8, B => 4, C => 2 }", "[encoder]")
 	std::shared_ptr<huffman_tree> root = build_tree(frequencies);
 	encoder enc(*root);
 
-	REQUIRE(enc.eof() == parse_bit_sequence("000"));
+	REQUIRE(enc['X'] == parse_bit_sequence("000"));
 	REQUIRE(enc['C'] == parse_bit_sequence("001"));
 	REQUIRE(enc['B'] == parse_bit_sequence("01"));
 	REQUIRE(enc['A'] == parse_bit_sequence("1"));
 }
 
-TEST_CASE("Encoder for { A => 23, B => 59, C => 8, D => 40, E => 100, F => 33 }", "[encoder]")
+TEST_CASE("Encoder for { X => 1, A => 23, B => 59, C => 8, D => 40, E => 100, F => 33 }", "[encoder]")
 {
 	frequency_map frequencies;
+	frequencies['X'] = 1;
 	frequencies['A'] = 23;
 	frequencies['B'] = 59;
 	frequencies['C'] = 8;
@@ -95,7 +102,7 @@ TEST_CASE("Encoder for { A => 23, B => 59, C => 8, D => 40, E => 100, F => 33 }"
 	std::shared_ptr<huffman_tree> root = build_tree(frequencies);
 	encoder enc(*root);
 
-	REQUIRE(enc.eof() == parse_bit_sequence("10000"));
+	REQUIRE(enc['X'] == parse_bit_sequence("10000"));
 	REQUIRE(enc['A'] == parse_bit_sequence("1001"));
 	REQUIRE(enc['B'] == parse_bit_sequence("111"));
 	REQUIRE(enc['C'] == parse_bit_sequence("10001"));

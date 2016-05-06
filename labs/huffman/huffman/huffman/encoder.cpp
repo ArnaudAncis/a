@@ -15,7 +15,7 @@ void encoder::gather_data(const huffman_tree& tree, const bit_sequence& prefix)
 	}
 
 	{
-		auto p = dynamic_cast<const datum_leaf*>(&tree);
+		auto p = dynamic_cast<const leaf*>(&tree);
 
 		if (p != nullptr)
 		{
@@ -24,16 +24,9 @@ void encoder::gather_data(const huffman_tree& tree, const bit_sequence& prefix)
 			return;
 		}
 	}
-
-	{
-		auto p = dynamic_cast<const eof_leaf*>(&tree);
-
-		m_eof = prefix;
-	}
 }
 
 encoder::encoder(const huffman_tree& tree)
-	: m_eof( bit_sequence::empty() )
 {
 	gather_data(tree, bit_sequence::empty());
 }
