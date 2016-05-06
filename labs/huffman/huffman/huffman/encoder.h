@@ -16,6 +16,7 @@ public:
 	encoder(const huffman_tree& tree);
 
 	bit_sequence operator[](uint8_t x) const { return m_map.at(x); }
+	bit_sequence operator[](std::string) const;
 };
 
 #endif

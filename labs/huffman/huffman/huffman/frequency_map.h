@@ -12,4 +12,6 @@ public:
 	unsigned operator [](uint8_t) const;
 };
 
+frequency_map frequencies(const std::string&);
+
 #endif

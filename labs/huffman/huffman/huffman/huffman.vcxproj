@@ -148,13 +148,17 @@
   <ItemGroup>
     <ClInclude Include="bit_sequence.h" />
     <ClInclude Include="bit_sequence_test_aux.h" />
+    <ClInclude Include="decoder.h" />
     <ClInclude Include="huffman_tree.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="encoder.h" />
     <ClInclude Include="frequency_map.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bit_sequence.cpp" />
     <ClCompile Include="bit_sequence_tests.cpp" />
+    <ClCompile Include="decoder.cpp" />
+    <ClCompile Include="decoder_tests.cpp" />
     <ClCompile Include="encoder.cpp" />
     <ClCompile Include="encoder_tests.cpp" />
     <ClCompile Include="huffman_tree.cpp" />

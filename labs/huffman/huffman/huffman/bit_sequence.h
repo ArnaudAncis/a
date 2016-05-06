@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <ostream>
 
 class bit_sequence
 {
@@ -26,28 +27,13 @@ public:
 
 	bool operator [](unsigned index) const { return bits[index]; }
 
-	bit_sequence operator +(const bit_sequence& ys) const
-	{
-		std::vector<bool> concat = bits;
-		concat.insert(concat.end(), ys.bits.begin(), ys.bits.end());
+	bit_sequence operator +(const bit_sequence& ys) const;
+	bit_sequence& operator +=(const bit_sequence& ys);
 
-		return bit_sequence(concat);
-	}
-
-	bit_sequence& operator +=(const bit_sequence& ys)
-	{
-		return *this = *this + ys;
-	}
-
-	bool operator ==(const bit_sequence& xs) const
-	{
-		return this->bits == xs.bits;
-	}
-
-	bool operator !=(const bit_sequence& xs) const
-	{
-		return !(*this == xs);
-	}
+	bool operator ==(const bit_sequence& xs) const;
+	bool operator !=(const bit_sequence& xs) const;
 };
+
+std::ostream& operator <<(std::ostream& out, const bit_sequence& bits);
 
 #endif

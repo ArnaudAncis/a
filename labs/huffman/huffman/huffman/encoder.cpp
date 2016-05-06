@@ -30,3 +30,15 @@ encoder::encoder(const huffman_tree& tree)
 {
 	gather_data(tree, bit_sequence::empty());
 }
+
+bit_sequence encoder::operator[](std::string string) const
+{
+	auto result = bit_sequence::empty();
+
+	for (char c : string)
+	{
+		result += (*this)[uint8_t(c)];
+	}
+
+	return result;
+}

@@ -19,3 +19,15 @@ unsigned frequency_map::operator [](uint8_t x) const
 
 	return this->map.at(x);
 }
+
+frequency_map frequencies(const std::string& string)
+{
+	frequency_map result;
+
+	for (char c : string)
+	{
+		result[uint8_t(c)]++;
+	}
+
+	return result;
+}
