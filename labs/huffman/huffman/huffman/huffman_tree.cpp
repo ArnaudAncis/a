@@ -1,9 +1,9 @@
-#include "bintree.h"
+#include "huffman_tree.h"
 #include <list>
 #include <limits>
 #include <assert.h>
 
-std::shared_ptr<bintree> extract_lightest(std::list<std::shared_ptr<bintree>>& nodes)
+std::shared_ptr<huffman_tree> extract_lightest(std::list<std::shared_ptr<huffman_tree>>& nodes)
 {
 	auto it = nodes.begin();
 	auto best = it;
@@ -24,9 +24,9 @@ std::shared_ptr<bintree> extract_lightest(std::list<std::shared_ptr<bintree>>& n
 	return result;
 }
 
-std::shared_ptr<bintree> build_tree(const frequency_map& frequencies)
+std::shared_ptr<huffman_tree> build_tree(const frequency_map& frequencies)
 {
-    std::list<std::shared_ptr<bintree>> nodes;
+    std::list<std::shared_ptr<huffman_tree>> nodes;
 
 	// Build list of leaves
 	nodes.push_back(std::make_shared<eof_leaf>());
