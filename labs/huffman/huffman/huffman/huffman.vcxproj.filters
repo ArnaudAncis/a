@@ -44,9 +44,6 @@
     <ClCompile Include="frequency_map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="huffman_tree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -69,6 +66,9 @@
       <Filter>Tests</Filter>
     </ClCompile>
     <ClCompile Include="huffman_tree_tests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="tests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
