@@ -115,3 +115,43 @@ TEST_CASE("+= other_bitsequence", "[bit_sequence]")
 	REQUIRE(bs[4] == false);
 	REQUIRE(bs[5] == true);
 }
+
+TEST_CASE("==", "[bit_sequence]")
+{
+	auto bs1 = parse_bit_sequence("0110");
+	auto bs2 = parse_bit_sequence("0110");
+	auto bs3 = parse_bit_sequence("");
+	auto bs4 = parse_bit_sequence("1001");
+
+	REQUIRE(bs1 == bs1);
+	REQUIRE(bs2 == bs2);
+	REQUIRE(bs3 == bs3);
+	REQUIRE(bs4 == bs4);
+	REQUIRE(bs1 == bs2);
+	REQUIRE(bs2 == bs1);
+	REQUIRE(!(bs1 == bs3));
+	REQUIRE(!(bs1 == bs4));
+	REQUIRE(!(bs2 == bs3));
+	REQUIRE(!(bs1 == bs4));
+	REQUIRE(!(bs3 == bs4));
+}
+
+TEST_CASE("!=", "[bit_sequence]")
+{
+	auto bs1 = parse_bit_sequence("0110");
+	auto bs2 = parse_bit_sequence("0110");
+	auto bs3 = parse_bit_sequence("");
+	auto bs4 = parse_bit_sequence("1001");
+
+	REQUIRE(!(bs1 != bs1));
+	REQUIRE(!(bs2 != bs2));
+	REQUIRE(!(bs3 != bs3));
+	REQUIRE(!(bs4 != bs4));
+	REQUIRE(!(bs1 != bs2));
+	REQUIRE(!(bs2 != bs1));
+	REQUIRE(bs1 != bs3);
+	REQUIRE(bs1 != bs4);
+	REQUIRE(bs2 != bs3);
+	REQUIRE(bs1 != bs4);
+	REQUIRE(bs3 != bs4);
+}

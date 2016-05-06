@@ -19,7 +19,7 @@ void encoder::gather_data(const huffman_tree& tree, const bit_sequence& prefix)
 
 		if (p != nullptr)
 		{
-			map.insert(std::pair<uint8_t, bit_sequence>(p->datum(), prefix));
+			m_map.insert(std::pair<uint8_t, bit_sequence>(p->datum(), prefix));
 
 			return;
 		}
@@ -28,12 +28,12 @@ void encoder::gather_data(const huffman_tree& tree, const bit_sequence& prefix)
 	{
 		auto p = dynamic_cast<const eof_leaf*>(&tree);
 
-		eof = prefix;
+		m_eof = prefix;
 	}
 }
 
 encoder::encoder(const huffman_tree& tree)
-	: eof( bit_sequence::empty() )
+	: m_eof( bit_sequence::empty() )
 {
 	gather_data(tree, bit_sequence::empty());
 }

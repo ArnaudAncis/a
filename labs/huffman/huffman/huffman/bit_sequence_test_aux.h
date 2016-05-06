@@ -2,7 +2,7 @@
 
 #include "bit_sequence.h"
 
-bit_sequence parse_bit_sequence(std::string string)
+inline bit_sequence parse_bit_sequence(std::string string)
 {
 	auto result = bit_sequence::empty();
 
