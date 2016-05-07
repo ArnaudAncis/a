@@ -127,6 +127,12 @@
          GitLink.git_link 'huffman/huffman.sln'
        %>
 
+       <p>
+         For this assigment, you will implement Huffman coding.
+         Do not put your code in a single file but instead
+         spread it across several <code>.cpp</code> and <code>.h</code> files.
+       </p>
+
        <%=
          exercise do
            extend SourceCodeMixin
@@ -159,6 +165,73 @@
            END
          end
        %>
+
+       <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             frequency_map freqs = frequencies("ABBCCC");
+
+             assert( freqs['A'] == 1 );
+             assert( freqs['B'] == 2 );
+             assert( freqs['C'] == 3 );
+             assert( freqs['D'] == 0 );
+           END
+          
+           <<-END
+             <p>
+               Define a global function (i.e. not part of a class) named <code>frequencies</code>
+               that, given a <code>std::string</code>, counts each character in this string
+               and returns the restults as a <code>frequency_map</code>.
+             </p>
+             #{show_source_editor}
+           END
+         end
+       %>
+
+       <%=
+         exercise do
+           <<-END
+             <p>
+               We need to define a Huffman tree data structure. Each node is associated with a weight, which
+               is a positive integral number. We distinguish two
+               kinds of nodes: the branches (= inner nodes) and the leaf nodes.
+             </p>
+             <ul>
+               <li>
+                 A branch node has exactly two children. Its weight equals the sum of its children's weight.
+               </li>
+               <li>
+                 A leaf node has no children. Apart from its weight, it also carries a "datum", which is a <code>uint8_t</code>.
+               </li>
+             </ul>
+             <img src="huffman-tree.png" width="50%" class="center" />
+             <p>
+               Define the following class hierarchy:
+             </p>
+             <ul>
+               <li>
+                 An abstract superclass <code>huffman_tree</code> which holds
+                 a field <code>unsigned m_weight</code> that can be queried
+                 using the public member function <code>weight()</code>.
+               </li>
+               <li>
+                 A subclass <code>leaf</code> with an extra field <code>uint8_t m_datum</code>
+                 that can be queried with the public member function <code>datum()</code>.
+                 <code>leaf</code> should have a constructor <code>leaf(unsigned weight, uint8_t datum)</code>.
+               </li>
+               <li>
+                 A second subclass <code>branch</code> that carries
+                 two fields <code>std::shared_ptr&lt;huffman_tree&gt; m_left</code> and <code>m_right</code>.
+                 Make two public methods <code>left()</code> and <code>right()</code>
+                 that give access to these fields.
+               </li>
+             </ul>
+           END
+         end
+       %>
+
     </div>
   </body>
 
