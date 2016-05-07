@@ -13,7 +13,6 @@ class bit_sequence
 
 public:
 	bit_sequence(bool b) { bits.push_back(b); }
-	bit_sequence() = delete;
 	bit_sequence(const bit_sequence&) = default;
 	bit_sequence(bit_sequence&&) = default;
 

@@ -232,6 +232,68 @@
          end
        %>
 
+       <%=
+         exercise do
+           <<-END
+             Define a function <code>build_tree</code> that given a <code>frequency_map</code> constructs a huffman tree.
+             We refer you to the slides for the algorithm.
+           END
+         end
+       %>
+
+       <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             // Default constructor creates zero length bit sequence
+             // Also, a length() method returning the length of the bit sequence
+             bit_sequence bs;
+             assert( bs.length() == 0 );
+
+             // A copy constructor
+             bit_sequence xs;
+             bit_sequence ys = xs;
+             assert( ys == xs );
+
+             // A constructor taking a bool, creating a one-length bit sequence
+             // operator [] should allow us to read bits
+             bit_sequence xs = true;
+             assert( xs.length() == 1 );
+             assert( xs[0] == true );
+
+             // An assignment operator
+             bit_sequence xs;
+             bit_sequence ys;
+             xs = ys;
+             assert( xs == ys );
+
+             // Operators + and += for concatenation
+             bit_sequence xs;
+             bit_sequence ys;
+             bit_sequence zs = xs + ys;
+             zs += xs;
+             
+             // Operators == and != for comparison
+             bit_sequence xs;
+             bit_sequence ys;
+             assert( xs == ys );
+
+             // Operator <<(std::ostream&, const bit_sequence&)
+             bit_sequence bs;
+             std::cout << bs;
+           END
+          
+           <<-END
+             <p>
+               Create a class <code>bit_sequence</code>, which, as the name suggests, is a sequence of bits.
+               It should provide the following operations:
+             </p>
+             #{show_source_editor}
+           END
+         end
+       %>
+              
     </div>
   </body>
 
