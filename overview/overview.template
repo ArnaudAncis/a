@@ -205,7 +205,7 @@
           </tr>
           <tr>
             <td><%= topic('compression-huffman', 'Compression: Huffman') %></td>
-            <td></td>
+            <td><%= lab('huffman', 'Huffman compression') %></td>
           </tr>
           <tr>
             <td><%= topic('compression-lz77', 'Compression: LZ77') %></td>
