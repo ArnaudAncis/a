@@ -71,5 +71,8 @@
     <ClCompile Include="tests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="frequency_map_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

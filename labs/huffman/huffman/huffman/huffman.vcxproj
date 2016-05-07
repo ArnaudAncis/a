@@ -161,6 +161,7 @@
     <ClCompile Include="decoder_tests.cpp" />
     <ClCompile Include="encoder.cpp" />
     <ClCompile Include="encoder_tests.cpp" />
+    <ClCompile Include="frequency_map_tests.cpp" />
     <ClCompile Include="huffman_tree.cpp" />
     <ClCompile Include="huffman_tree_tests.cpp" />
     <ClCompile Include="frequency_map.cpp" />

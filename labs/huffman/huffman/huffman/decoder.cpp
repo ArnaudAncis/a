@@ -14,6 +14,7 @@ std::string decoder::decode(const bit_sequence& bits) const
 		if (lf != nullptr)
 		{
 			result += lf->datum();
+			p = std::dynamic_pointer_cast<const branch>(this->root);
 		}
 		else
 		{
