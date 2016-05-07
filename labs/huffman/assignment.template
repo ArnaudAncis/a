@@ -131,6 +131,8 @@
          For this assigment, you will implement Huffman coding.
          Do not put your code in a single file but instead
          spread it across several <code>.cpp</code> and <code>.h</code> files.
+         You cannot choose the names of the header files yourself.
+         Take a look at the test files so as to know what headers they expect to find.
        </p>
        <p>
          Note that some parts of this assignment are relatively difficult.

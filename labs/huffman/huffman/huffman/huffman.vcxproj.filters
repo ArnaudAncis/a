@@ -18,44 +18,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="frequency_map.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="bit_sequence_test_aux.h">
+      <Filter>Tests</Filter>
     </ClInclude>
     <ClInclude Include="Catch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="huffman_tree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bit_sequence.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bit_sequence_test_aux.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="encoder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="decoder.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="frequency_map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="huffman_tree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="encoder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="decoder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bit_sequence.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="bit_sequence_tests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
@@ -72,7 +42,7 @@
       <Filter>Tests</Filter>
     </ClCompile>
     <ClCompile Include="frequency_map_tests.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
