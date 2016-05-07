@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+    
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .message {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        width: 75%;
+        margin: 100px auto;
+        padding: 20px;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
+      }
+
+      .git {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .cake {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        font-weight: bold;
+        background: #FFAA77;
+      }
+
+      .cake .header {
+        display: block;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 10px auto;      
+        text-align: center;
+        cursor: help;
+      }
+
+      .explanation {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
+
+      img.center {
+        display: block;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Huffman</div>
+    </header>
+    <div id="contents">
+      <div class="message" title="You better be reading this!">
+        Update your repo!
+      </div>
+
+      <p>
+        All exercises are to be made within the same solution, which
+        can be found here:
+      </p>
+      <%=
+         module GitLink
+           extend Contracts::TypeChecking
+           extend GitMixin
+         end
+
+         GitLink.git_link 'huffman/huffman.sln'
+       %>
+
+       <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             // Create empty frequency_map
+             frequency_map freqs;
+
+             // Initial frequency of all bytes is zero
+             // Getting frequency is done using operator []
+             assert( freqs['A'] == 0 );
+             assert( freqs['B'] == 0 );
+             // ...
+
+             // Updating frequency, also using operator []
+             freqs['A']++;
+             freqs['B'] = 2;
+
+             assert( freqs['A'] == 1 );
+             assert( freqs['B'] == 2 );
+           END
+          
+           <<-END
+             <p>
+               Create a class <code>frequency_map</code> that can be used to count frequencies of bytes.
+               Use the type <code>uint8_t</code> to represent a single byte.
+               <code>frequency_map</code>s should be able to be used as follows:
+             </p>
+             #{show_source_editor}
+           END
+         end
+       %>
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>
