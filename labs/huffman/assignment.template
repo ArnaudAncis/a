@@ -132,6 +132,11 @@
          Do not put your code in a single file but instead
          spread it across several <code>.cpp</code> and <code>.h</code> files.
        </p>
+       <p>
+         Note that some parts of this assignment are relatively difficult.
+         If you manage to complete it without peeking at the solution,
+         you have a good grasp on C++.
+       </p>
 
        <%=
          exercise do
@@ -293,7 +298,57 @@
            END
          end
        %>
-              
+
+       <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             huffman_tree tree;
+
+             // Constructing an encoder
+             encoder enc(tree);
+
+             // Asking for the translation of a single char
+             bit_sequence bits_for_A = enc['A'];
+
+             // Asking for the translation of an entire string
+             bit_sequence bits = enc["ABCD"];
+           END
+          
+           <<-END
+             <p>
+               Create a class <code>encoder</code> that given a Huffman tree can use it to encode strings.
+             </p>
+             #{show_source_editor}
+           END
+         end
+       %>
+
+       <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             huffman_tree tree;
+             bit_sequence bits;
+
+             // Constructing an encoder
+             decoder dec(tree);
+
+             // Asking for the translation of a single char
+             std::string text = dec.decode( bits );
+           END
+          
+           <<-END
+             <p>
+               Create a class <code>decoder</code> that given a Huffman tree can use it to decode bit sequences.
+             </p>
+             #{show_source_editor}
+           END
+         end
+       %>
+
     </div>
   </body>
 
