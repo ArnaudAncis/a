@@ -141,7 +141,7 @@
          exercise do
            <<-END
              <p>
-               Find a way to create a 500&times;500 bitmap and write it to file.
+               Find a way to create a 500&times;500 bitmap and write it to file as a BMP.
              </p>
              <img class="center" src="ex1-solution.png" />
            END
