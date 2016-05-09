@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+    
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .message {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        width: 75%;
+        margin: 100px auto;
+        padding: 20px;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
+      }
+
+      .git {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .cake {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        font-weight: bold;
+        background: #FFAA77;
+      }
+
+      .cake .header {
+        display: block;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 10px auto;      
+        text-align: center;
+        cursor: help;
+      }
+
+      .explanation {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
+
+      img.center {
+        display: block;
+        margin: 10px auto;
+        width: 90%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">RLE</div>
+    </header>
+    <div id="contents">
+      <div class="message" title="You better be reading this!">
+	As always, update your git repo.
+      </div>
+
+      <p>
+        All exercises are to be made within the same solution, which
+        can be found here:
+      </p>
+      <%=
+         module GitLink
+           extend Contracts::TypeChecking
+           extend GitMixin
+         end
+
+         GitLink.git_link 'rle/rle.sln'
+      %>
+
+      <%=
+	exercise do
+          <<-END
+          <p>
+            Implement RLE compression and decompression by writing these functions:
+          </p>
+          <ul>
+            <li><code>std::vector&lt;uint8_t&gt; rle(uint8_t* input, unsigned size);</code></li>
+            <li><code>std::vector&lt;uint8_t&gt; unrle(uint8_t* input, unsigned size);</code></li>
+          </ul>
+          <p>
+            The algorithm should use a single byte to encode frequencies.
+          </p>
+          <p>
+            The tests for <code>rle</code> and <code>unrle</code> have been put in separate
+            files. In order to test one specific function, you can exclude the unwanted tests.
+          </p>
+          <ul>
+            <li>
+              To exclude a file: right click on it in the solution explorer and pick "Exclude From Project".
+            </li>
+            <li>
+              To include a file: in the solution explorer's tool bar, click "shown all files".
+              Right click on the file you wish to include in the project and pick "Include In Project".
+            </li>
+          </ul>
+	  END
+	end
+      %>
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>

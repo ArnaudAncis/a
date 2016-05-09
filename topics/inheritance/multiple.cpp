@@ -8,6 +8,5 @@ struct Bird {
 
 class Duck : public Bird, public Quackable {
   void fly() override { ... }
-
   void quack() override { ... }
 }

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+      
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 10px auto;      
+        text-align: center;
+        cursor: help;
+      }
+
+      .hint {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
+
+      .message {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        width: 75%;
+        margin: 100px auto;
+        padding: 20px;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
+      }
+
+      .git {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Inheritance</div>
+    </header>
+    <div id="contents">
+      <div class="message" title="You better be reading this!">
+        Update your git repo.
+      </div>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               void m() { std::cout << "F"; }
+             };
+
+             struct Bar : public Foo {
+               void m() { std::cout << "B"; }
+             };
+
+             int main()
+             {
+               Foo foo;
+               Bar bar;
+
+               foo.m();
+               bar.m();
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               void m() { std::cout << "F"; }
+             };
+
+             struct Bar : public Foo {
+               void m() { std::cout << "B"; }
+             };
+
+             int main()
+             {
+               Foo* pFoo = new Foo;
+               Bar* pBar = new Bar;
+               Foo* qBar = new Bar;
+
+               pFoo->m();
+               pBar->m();
+               qBar->m();
+
+               delete pFoo;
+               delete pBar;
+               delete qBar;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               virtual void m() { std::cout << "F"; }
+             };
+
+             struct Bar : public Foo {
+               void m() override { std::cout << "B"; }
+             };
+
+             int main()
+             {
+               Foo* pFoo = new Foo;
+               Bar* pBar1 = new Bar;
+               Foo* pBar2 = new Bar;
+
+               pFoo->m();
+               pBar1->m();
+               pBar2->m();
+
+               delete pFoo;
+               delete pBar1;
+               delete pBar2;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               Foo()  { std::cout << "FD"; }
+               ~Foo() { std::cout << "FX"; }
+             };
+
+             struct Bar : public Foo {
+               Bar()  { std::cout << "BD"; }
+               ~Bar() { std::cout << "BX"; }
+             };
+
+             int main()
+             {
+               Foo foo;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               Foo()  { std::cout << "FD"; }
+               ~Foo() { std::cout << "FX"; }
+             };
+
+             struct Bar : public Foo {
+               Bar()  { std::cout << "BD"; }
+               ~Bar() { std::cout << "BX"; }
+             };
+
+             int main()
+             {
+               Bar bar;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               Foo()  { std::cout << "FD"; }
+               ~Foo() { std::cout << "FX"; }
+             };
+
+             struct Bar : public Foo {
+               Bar()  { std::cout << "BD"; }
+               ~Bar() { std::cout << "BX"; }
+             };
+
+             int main()
+             {
+               new Foo;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               Foo()  { std::cout << "FD"; }
+               ~Foo() { std::cout << "FX"; }
+             };
+
+             struct Bar : public Foo {
+               Bar()  { std::cout << "BD"; }
+               ~Bar() { std::cout << "BX"; }
+             };
+
+             int main()
+             {
+               new Bar;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               Foo()  { std::cout << "FD"; }
+               ~Foo() { std::cout << "FX"; }
+             };
+
+             struct Bar : public Foo {
+               Bar()  { std::cout << "BD"; }
+               ~Bar() { std::cout << "BX"; }
+             };
+
+             int main()
+             {
+               delete (new Bar);
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               Foo()           { std::cout << "FD"; }
+               Foo(const Foo&) { std::cout << "FC"; }
+               ~Foo()          { std::cout << "FX"; }
+             };
+
+             void qux(Foo) { std::cout << "Q"; }
+
+             int main()
+             {
+               Foo foo;
+               qux(foo);
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               Foo()           { std::cout << "FD"; }
+               Foo(const Foo&) { std::cout << "FC"; }
+               ~Foo()          { std::cout << "FX"; }
+             };
+
+             struct Bar : public Foo {
+               Bar()                          { std::cout << "BD"; }
+               Bar(const Bar& bar) : Foo(bar) { std::cout << "BC"; }
+               ~Bar()                         { std::cout << "BX"; }
+             };
+
+             void qux(Bar) { std::cout << "Q"; }
+
+             int main()
+             {
+               Bar bar;
+               qux(bar);
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               Foo()           { std::cout << "FD"; }
+               Foo(const Foo&) { std::cout << "FC"; }
+               ~Foo()          { std::cout << "FX"; }
+             };
+
+             struct Bar : public Foo {
+               Bar()                          { std::cout << "BD"; }
+               Bar(const Bar& bar) : Foo(bar) { std::cout << "BC"; }
+               ~Bar()                         { std::cout << "BX"; }
+             };
+
+             void qux(Foo) { std::cout << "Q"; }
+
+             int main()
+             {
+               Bar bar;
+               qux(bar);
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               Foo()           { std::cout << "FD"; }
+               Foo(const Foo&) { std::cout << "FC"; }
+               ~Foo()          { std::cout << "FX"; }
+             };
+
+             struct Bar : public Foo {
+               Bar()                          { std::cout << "BD"; }
+               Bar(const Bar& bar) : Foo(bar) { std::cout << "BC"; }
+               ~Bar()                         { std::cout << "BX"; }
+             };
+
+             void qux(Foo*) { std::cout << "Q"; }
+
+             int main()
+             {
+               Bar bar;
+               qux(&bar);
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Zab
+             {
+               Zab() { std::cout << "ZD"; }
+             };
+
+             struct Foo {
+               Zab zab;
+
+               Foo() { std::cout << "FD"; }
+             };
+
+             struct Bar : public Foo {
+               Bar() { std::cout << "BD"; }
+             };
+
+             int main()
+             {
+               Bar bar;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Zab
+             {
+               ~Zab() { std::cout << "ZX"; }
+             };
+
+             struct Foo {
+               Zab zab;
+
+               ~Foo() { std::cout << "FX"; }
+             };
+
+             struct Bar : public Foo {
+               ~Bar() { std::cout << "BX"; }
+             };
+
+             int main()
+             {
+               Bar bar;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+
+       <%=
+         exercise do 
+           extend GitMixin         
+           <<-END
+             <p>
+               Translate the Java code at
+             </p>
+             #{git_link 'animals/java'}
+             <p>
+               into C++. The Java project has been made using IntelliJ,
+               so if you do not use this IDE, it might be easier to
+               look at the <code>.java</code> files using a simple text editor such
+               as emacs.
+             </p>
+           END
+         end
+       %>
+
+       <%=
+         exercise do 
+           extend GitMixin         
+           <<-END
+             <p>
+               Translate the Java code at
+             </p>
+             #{git_link 'sorting/java'}
+             <p>
+               into C++.
+             </p>
+           END
+         end
+       %>
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>

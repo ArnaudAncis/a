@@ -47,7 +47,7 @@
 \begin{frame}
   \frametitle{Casts in \cpp}
   \begin{itemize}
-    \item \cpp~has 5 casts
+    \item \cpp~has a few more casts
           \begin{itemize}
             \item C-style cast: {\tt (T) x}
             \item {\tt static\_cast<T>(x)}
@@ -55,7 +55,14 @@
             \item {\tt reinterpret\_cast<T>(x)}
             \item {\tt const\_cast<T>(x)}
           \end{itemize}
-    \item Most important for us: {\tt dynamic\_cast<T>(x)}
+          \vskip5mm
+    \item Standard Library adds a few more
+          \begin{itemize}
+            \item {\tt std::static\_pointer\_cast<T>(x)}
+            \item {\tt std::dynamic\_pointer\_cast<T>(x)}
+          \end{itemize}
+          \vskip5mm
+    \item Most important for us: {\tt dynamic\_pointer\_cast<T>(x)}
   \end{itemize}
 \end{frame}
 
@@ -70,7 +77,7 @@
   \end{itemize}
 \end{frame}
 
-\section{{\tt static\_cast} and {\tt dynamic\_cast}}
+\section{Static and Dynamic Casts}
 
 \frame{\tableofcontents[currentsection]}
 
@@ -109,6 +116,17 @@
 \begin{frame}
   \frametitle{Examples}
   \code[font size=\small]{static-vs-dynamic-casts4.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Smart Pointers}
+  \begin{itemize}
+    \item We said not to use regular pointers {\tt T*}
+    \item Use {\tt std::unique\_ptr} and {\tt std::shared\_ptr} instead
+    \item Library offers specialised cast operators for {\tt std::shared\_ptr}
+    \item \emph{No} specialised casts for {\tt std::unique\_ptr} (AFAICT)
+  \end{itemize}
+  \code[font size=\small,width=.9\linewidth]{shared-ptr-casts.cpp}
 \end{frame}
 
 \section{{\tt reinterpret\_cast}}

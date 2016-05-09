@@ -4,7 +4,7 @@ private:
   std::string name;
   int age;
 
-  // Password is private
+  // Password is secret
   std::string password;
 
 public:

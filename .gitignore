@@ -14,3 +14,6 @@ Release/
 *.opendb
 *.user
 *.db
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+*.class

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+    
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .message {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        width: 75%;
+        margin: 100px auto;
+        padding: 20px;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
+      }
+
+      .git {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .cake {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        font-weight: bold;
+        background: #FFAA77;
+      }
+
+      .cake .header {
+        display: block;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 10px auto;      
+        text-align: center;
+        cursor: help;
+      }
+
+      .explanation {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
+
+      img.center {
+        display: block;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Huffman</div>
+    </header>
+    <div id="contents">
+      <div class="message" title="You better be reading this!">
+        Update your repo!
+      </div>
+
+      <p>
+        All exercises are to be made within the same solution, which
+        can be found here:
+      </p>
+      <%=
+         module GitLink
+           extend Contracts::TypeChecking
+           extend GitMixin
+         end
+
+         GitLink.git_link 'huffman/huffman.sln'
+       %>
+
+       <p>
+         For this assigment, you will implement Huffman coding.
+         Do not put your code in a single file but instead
+         spread it across several <code>.cpp</code> and <code>.h</code> files.
+         You cannot choose the names of the header files yourself.
+         Take a look at the test files so as to know what headers they expect to find.
+       </p>
+       <p>
+         Note that some parts of this assignment are relatively difficult.
+         If you manage to complete it without peeking at the solution,
+         you have a good grasp on C++.
+       </p>
+
+       <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             // Create empty frequency_map
+             frequency_map freqs;
+
+             // Initial frequency of all bytes is zero
+             // Getting frequency is done using operator []
+             assert( freqs['A'] == 0 );
+             assert( freqs['B'] == 0 );
+             // ...
+
+             // Updating frequency, also using operator []
+             freqs['A']++;
+             freqs['B'] = 2;
+
+             assert( freqs['A'] == 1 );
+             assert( freqs['B'] == 2 );
+           END
+          
+           <<-END
+             <p>
+               Create a class <code>frequency_map</code> that can be used to count frequencies of bytes.
+               Use the type <code>uint8_t</code> to represent a single byte.
+               <code>frequency_map</code>s should be able to be used as follows:
+             </p>
+             #{show_source_editor}
+           END
+         end
+       %>
+
+       <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             frequency_map freqs = frequencies("ABBCCC");
+
+             assert( freqs['A'] == 1 );
+             assert( freqs['B'] == 2 );
+             assert( freqs['C'] == 3 );
+             assert( freqs['D'] == 0 );
+           END
+          
+           <<-END
+             <p>
+               Define a global function (i.e. not part of a class) named <code>frequencies</code>
+               that, given a <code>std::string</code>, counts each character in this string
+               and returns the restults as a <code>frequency_map</code>.
+             </p>
+             #{show_source_editor}
+           END
+         end
+       %>
+
+       <%=
+         exercise do
+           <<-END
+             <p>
+               We need to define a Huffman tree data structure. Each node is associated with a weight, which
+               is a positive integral number. We distinguish two
+               kinds of nodes: the branches (= inner nodes) and the leaf nodes.
+             </p>
+             <ul>
+               <li>
+                 A branch node has exactly two children. Its weight equals the sum of its children's weight.
+               </li>
+               <li>
+                 A leaf node has no children. Apart from its weight, it also carries a "datum", which is a <code>uint8_t</code>.
+               </li>
+             </ul>
+             <img src="huffman-tree.png" width="50%" class="center" />
+             <p>
+               Define the following class hierarchy:
+             </p>
+             <ul>
+               <li>
+                 An abstract superclass <code>huffman_tree</code> which holds
+                 a field <code>unsigned m_weight</code> that can be queried
+                 using the public member function <code>weight()</code>.
+               </li>
+               <li>
+                 A subclass <code>leaf</code> with an extra field <code>uint8_t m_datum</code>
+                 that can be queried with the public member function <code>datum()</code>.
+                 <code>leaf</code> should have a constructor <code>leaf(unsigned weight, uint8_t datum)</code>.
+               </li>
+               <li>
+                 A second subclass <code>branch</code> that carries
+                 two fields <code>std::shared_ptr&lt;huffman_tree&gt; m_left</code> and <code>m_right</code>.
+                 Make two public methods <code>left()</code> and <code>right()</code>
+                 that give access to these fields.
+               </li>
+             </ul>
+           END
+         end
+       %>
+
+       <%=
+         exercise do
+           <<-END
+             Define a function <code>build_tree</code> that given a <code>frequency_map</code> constructs a huffman tree.
+             We refer you to the slides for the algorithm.
+           END
+         end
+       %>
+
+       <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             // Default constructor creates zero length bit sequence
+             // Also, a length() method returning the length of the bit sequence
+             bit_sequence bs;
+             assert( bs.length() == 0 );
+
+             // A copy constructor
+             bit_sequence xs;
+             bit_sequence ys = xs;
+             assert( ys == xs );
+
+             // A constructor taking a bool, creating a one-length bit sequence
+             // operator [] should allow us to read bits
+             bit_sequence xs = true;
+             assert( xs.length() == 1 );
+             assert( xs[0] == true );
+
+             // An assignment operator
+             bit_sequence xs;
+             bit_sequence ys;
+             xs = ys;
+             assert( xs == ys );
+
+             // Operators + and += for concatenation
+             bit_sequence xs;
+             bit_sequence ys;
+             bit_sequence zs = xs + ys;
+             zs += xs;
+             
+             // Operators == and != for comparison
+             bit_sequence xs;
+             bit_sequence ys;
+             assert( xs == ys );
+
+             // Operator <<(std::ostream&, const bit_sequence&)
+             bit_sequence bs;
+             std::cout << bs;
+           END
+          
+           <<-END
+             <p>
+               Create a class <code>bit_sequence</code>, which, as the name suggests, is a sequence of bits.
+               It should provide the following operations:
+             </p>
+             #{show_source_editor}
+           END
+         end
+       %>
+
+       <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             huffman_tree tree;
+
+             // Constructing an encoder
+             encoder enc(tree);
+
+             // Asking for the translation of a single char
+             bit_sequence bits_for_A = enc['A'];
+
+             // Asking for the translation of an entire string
+             bit_sequence bits = enc["ABCD"];
+           END
+          
+           <<-END
+             <p>
+               Create a class <code>encoder</code> that given a Huffman tree can use it to encode strings.
+             </p>
+             #{show_source_editor}
+           END
+         end
+       %>
+
+       <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             huffman_tree tree;
+             bit_sequence bits;
+
+             // Constructing an encoder
+             decoder dec(tree);
+
+             // Asking for the translation of a single char
+             std::string text = dec.decode( bits );
+           END
+          
+           <<-END
+             <p>
+               Create a class <code>decoder</code> that given a Huffman tree can use it to decode bit sequences.
+             </p>
+             #{show_source_editor}
+           END
+         end
+       %>
+
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>

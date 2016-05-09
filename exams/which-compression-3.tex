@@ -1,0 +1,28 @@
+\begin{question}
+  Welke compressiealgoritmes werken het best op volgende inputs?
+  Ga ervan uit dat we niet per byte, maar per nibble (4 bits) werken, m.a.w.~er
+  zijn slechts 16 mogelijke waarden: \texttt{0123456789ABCDEF}.
+  \begin{center}
+    \begin{tabular}{ll}
+      \toprule
+      \textbf{Input} & \textbf{Algoritme} \\
+      \midrule
+      \parbox[c]{12cm}{%
+        \texttt{AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA}} &%
+      \parbox[c]{2cm}{
+        \checkbox[checked,if solution] RLE \\
+        \checkbox[checked,if solution] Huffman \\
+        \checkbox[checked,if solution] LZ77
+      } \\
+      \midrule
+      \textbf{Uitleg} \\[2mm]
+      \multicolumn{2}{l}{%
+        \parbox[c][5cm][l]{14cm}{%
+          \ifsolution{RLE werkt uitstekend. Huffman zal 1 bit per teken kunnen toekennen,
+          maar voor lange reeksen zullen RLE en LZ77 meer winst opleveren. Hoe langer de reeks,
+          hoe meer winst LZ77 zal opleveren.
+          }}} \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{question}
