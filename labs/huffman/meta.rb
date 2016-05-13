@@ -39,6 +39,7 @@ meta_object do
 
   
   uploadable('assignment.html')
+  uploadable('huffman-tree.png')
   upload_action
 
   group_action(:all, [:img, :html])

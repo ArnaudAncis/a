@@ -432,6 +432,7 @@
                ~Bar()                         { std::cout << "BX"; }
              };
 
+             // The parameter type is different from the one in the previous exercise
              void qux(Foo) { std::cout << "Q"; }
 
              int main()
