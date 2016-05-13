@@ -1,0 +1,57 @@
+<%=
+
+  Dir['translate-*'].sort do |f1, f2|
+    /translate-(\d+)/ =~ f1
+    n1 = $1.to_i
+
+    /translate-(\d+)/ =~ f2
+    n2 = $1.to_i
+
+    n1 <=> n2
+  end.map do |dir|
+    java_file = "#{dir}/code.java"
+    cpp_files = Dir["#{dir}/*.cpp"].sort
+    h_files = Dir["#{dir}/*.h"].sort
+
+    code_files = []
+
+    # Group .h and .cpp together
+    h_files.each do |h_file|
+       %r{/(\w+)\.h$} =~ h_file or abort "Failed to parse #{h_file}"
+       basename = $1
+       corresponding_cpp = "#{dir}/#{basename}.cpp"
+
+       code_files << h_file
+
+       if cpp_files.include? corresponding_cpp
+       then
+         code_files << corresponding_cpp
+         cpp_files.delete corresponding_cpp
+       end
+    end
+
+    # Add remaining cpp files
+    code_files += cpp_files
+
+    tex_solutions = code_files.map do |code_file|
+      path = Pathname.new code_file
+      "\\code[language=C++,title=#{path.basename.to_s}]{#{code_file}}"
+    end.join("\n")
+
+    <<-END
+      \\begin{question}
+        Vertaal onderstaande Java code naar \\cpp.
+        Maak maximaal gebruik van \\cpp~features zoals default parameter values,
+        constructor initialiser lists, operator overloading, const correctness, \dots
+        Plaats elke klasse in eigen .h/.cpp bestanden.
+        \\vskip1cm
+        \\code[language=java]{#{java_file}}
+        \\vskip1cm
+      \\end{question}
+\\begin{solutionblock}
+        #{tex_solutions}
+\\end{solutionblock}
+    END
+  end.join("\n\n")
+
+%>

@@ -81,5 +81,6 @@ meta_object do
   uploadable(*pdf_paths)
   upload_action
 
+  group_action(:all, [:tex, :pdf])
   group_action(:full, [:tex, :pdf, :upload])
 end
