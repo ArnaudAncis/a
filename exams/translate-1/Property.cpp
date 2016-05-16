@@ -7,7 +7,7 @@ std::string Property::read() const
   return value;  
 }
 
-void write(std::string value)
+void Property::write(std::string value)
 {
   this->value = value;
 }
