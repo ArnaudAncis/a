@@ -4,7 +4,7 @@ std::shared_ptr<InfiniteSequence> InfiniteSequence::getNext() {
   if ( m_next == nullptr )
     m_next = std::make_shared<InfiniteSequence>();
 
-  return next;
+  return m_next;
 }
 
 

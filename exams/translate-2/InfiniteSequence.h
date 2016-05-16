@@ -5,7 +5,7 @@
 
 class InfiniteSequence {
   std::shared_ptr<InfiniteSequence> m_next;
-  int value;
+  int m_value;
 
 public:
   std::shared_ptr<InfiniteSequence> getNext();
