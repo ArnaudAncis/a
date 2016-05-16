@@ -35,7 +35,7 @@
 
     tex_solutions = code_files.map do |code_file|
       path = Pathname.new code_file
-      "\\code[language=C++,title=\\textbf{Solution} #{path.basename.to_s},frame=shadowbox,font=\\small]{#{code_file}}"
+      "\\code[language=C++,title=\\textsc{oplossing} #{path.basename.to_s},frame=shadowbox,font=\\small]{#{code_file}}"
     end.join("\n")
 
     <<-END
