@@ -1,5 +1,4 @@
-switch ( `\textit{expression}` )
-{
+switch ( `\textit{expression}` ) {
 case `\textit{integral-value}`:
   `\textit{statements}`
   break;

@@ -1,5 +1,7 @@
 struct Foo : `\textit{access-modifier}` `\textit{supertype}`
 {
+  Foo() : `\textit{supertype}`(`\textit{args}`) { ... }
+  
   // Virtual destructor
   virtual ~Foo() { }
 

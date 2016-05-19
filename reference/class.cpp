@@ -1,18 +1,22 @@
 class Foo
 {
   // Private members
+  int x;
   
 public:
-  Foo() : `\textit{initialiser list}` { ... }
+  Foo() : x(0) { ... }
 
   // Copy constructor
-  Foo(const Foo&) : `\textit{initialiser list}` { ... }
+  Foo(const Foo& foo) : x(foo.x) { ... }
 
   // Move constructor
-  Foo(Foo&&) : `\textit{initialiser list}` { ... }
+  Foo(Foo&& foo) : x(foo.x)  { ... }
 
   // Destructor
   ~Foo() { ... }
+
+  // Constant member function
+  void f() const { ... }
 
 protected:
   ...

@@ -1,8 +1,6 @@
-if ( `\textit{condition}` )
-{
+if ( `\textit{condition}` ) {
   `\textit{statements}`
 }
-else
-{
+else {
   `\textit{statements}`
 }
