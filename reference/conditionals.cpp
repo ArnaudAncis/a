@@ -1,3 +1,10 @@
+if ( `\textit{condition}` ) {
+  `\textit{statements}`
+}
+else {
+  `\textit{statements}`
+}
+
 switch ( `\textit{expression}` ) {
 case `\textit{integral-value}`:
   `\textit{statements}`

@@ -1,24 +1,20 @@
-require 'MetaData'
-require 'LaTeX'
-require 'Upload'
+require 'Log'
+require 'Dynamic'
+require 'MetaData2'
+require 'LaTeX2'
+require 'Upload2'
 
 
 meta_object do
-  extend MetaData::Actions
-  extend LaTeX::Actions
-  extend Upload::Mixin
+  extend MetaData2
+  extend LaTeX2::Actions
+  extend Upload2::Actions
+  
+  inherit_remote_directory 'reference'
 
-  tex_files = [ 'full-edition.tex', 'limited-edition.tex' ]
-  tex_paths = tex_files.map { |tex_file| Pathname.new tex_file }
-  tex_actions(*tex_files, group_name: :tex)
-  pdf_paths = tex_paths.map { |tex| tex.sub_ext '.pdf' }
+  pdf_action = tex_actions('full-edition.tex', 'limited-edition.tex')
+  
+  uploadable(*pdf_action.child_actions.map(&:output_path))
 
-  def remote_directory
-    world.parent.remote_directory + 'reference'
-  end
-
-  uploadable(*pdf_paths)
-  upload_action
-
-  group_action(:full, [:tex, :upload])
+  bind({ :upload => upload_action })
 end
