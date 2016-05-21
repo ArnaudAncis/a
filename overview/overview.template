@@ -119,7 +119,7 @@
             <td><%= lab('declarations', 'Declarations') %></td>
           </tr>
           <tr>
-            <td><%= topic('preprocessor', 'The Preprocessor') %></td>
+            <td><%= topic('preprocessor', 'The Preprocessor', handouts: true) %></td>
             <td><%= lab('preprocessor', 'The Preprocessor') %></td>
           </tr>
           <tr>
@@ -139,19 +139,19 @@
             <td><%= lab('arrays', 'Arrays') %></td>
           </tr>
           <tr>
-            <td><%= topic('const', 'Const') %></td>
+            <td><%= topic('const', 'Const', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
-            <td><%= topic('references', 'References') %></td>
+            <td><%= topic('references', 'References', handouts: true) %></td>
             <td><%= lab('references', 'References') %></td>
           </tr>
           <tr>
-            <td><%= topic('classes-overview', 'Classes (overview)') %></td>
+            <td><%= topic('classes-overview', 'Classes (overview)', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
-            <td><%= topic('constructors', 'Constructors') %></td>
+            <td><%= topic('constructors', 'Constructors', handouts: true) %></td>
             <td><%= lab('classes', 'Classes') %></td>
           </tr>
           <tr>

@@ -1,0 +1,269 @@
+\usepackage{../pvm}
+\usetikzlibrary{shadows,shapes.multipart}
+
+\title{Classes: Overview}
+\author{Fr\'ed\'eric Vogels}
+
+\newcommand{\highlightbox}[2][]{
+  \draw[opacity=.75,ultra thick,red,#1] ($ (#2.south west) + (-.1,-.1) $) rectangle ($ (#2.north east) + (.1,.1) $)
+}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Classes}
+  \begin{itemize}
+    \item Member variables (fields)
+    \item Member functions (methods)
+    \item Access modifiers ({\tt public}, {\tt protected}, {\tt private})
+    \item Constructors
+    \item \emph{Destructor}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Classes: Basic Syntax}
+  \code[frame=lines]{basic-syntax.cpp}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<handout:1|2>{
+      \highlightbox{private};
+      \highlightbox{public};
+    }
+    \only<handout:2|3>{
+      \highlightbox{semicolon};
+    }
+  \end{tikzpicture}
+  \begin{overprint}
+    \onslide<handout:1|2>
+    \begin{itemize}
+      \item Members with same access are grouped
+      \item You can alternate as many times you you want
+      \item Default: {\tt private}
+    \end{itemize}
+    \onslide<handout:2|3>
+    \begin{itemize}
+      \item Class declaration ends with {\tt ;}
+      \item Reason: you can put a list of identifiers there
+    \end{itemize}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Member Functions Inside Class Declaration}
+  \code[frame=lines]{member-functions.cpp}
+  \begin{itemize}
+    \item Preferably only for (very) short methods
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Member Functions Outside Class Declaration}
+  \code[frame=lines]{member-functions2.cpp}
+  \begin{tikzpicture}[overlay,remember picture]
+    \only<2>{
+      \highlightbox{class designator};
+    }
+  \end{tikzpicture}
+  \begin{itemize}
+    \item<2> Indicates the member function's class
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Constructors}
+  \code[frame=lines,font size=\small]{constructors.cpp}
+  \begin{tikzpicture}[overlay,remember picture,ref/.style={red,ultra thick,-latex,opacity=.75}]
+    \only<2>{
+      \draw[ref] (name field ref) -- (name field);
+      \draw[ref] (name param ref) -- (name param);
+    }
+    \only<3>{
+      \draw[ref] (age field ref) -- (age field);
+      \draw[ref] (age param ref) -- (age param);
+    }
+  \end{tikzpicture}
+  \begin{itemize}
+    \item Make use of initialiser list \cake
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Delegating To Other Constructor}
+  \code[frame=lines]{construction-delegation.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quick Intermezzo: Better Solution}
+  \code[frame=lines]{default-arguments.cpp}
+  \begin{itemize}
+    \item Why reverse order? \cake
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Instantiating Classes (Stack)}
+  \code[frame=lines]{instantiatation-stack.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Instantiating Classes (Heap)}
+  \begin{overprint}
+    \onslide<handout:1|1>
+    \code[frame=lines]{instantiatation-heap.cpp}
+    \onslide<handout:2|2>
+    \code[frame=lines]{instantiatation-heap2.cpp}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Arrow Operator}
+  \begin{itemize}
+    \item Comes from C
+    \item Objects tend to be large (larger than register size)
+    \item Large objects passed around by pointer \\ (references do not exist in C)
+    \item When by pointer: clumsy syntax ({\tt (*p).member})
+    \item Shorthand syntax: {\tt p->member}
+    \item \cpp\ inherited this arrow operator and (see later) does fancy stuff with it
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Destructors}
+  \begin{center}
+    \begin{tabular}{lll}
+      & \textbf{Constructor} & \textbf{Destructor} \\
+      \toprule
+      \textbf{Called} & at creation & on destruction \\
+      \textbf{Name} & {\tt classname()} & {\tt \~{}classname()} \\
+      \textbf{Parameters} & No restrictions & None \\
+      \textbf{Overloads} & Yes & No \\
+    \end{tabular}
+  \end{center}
+  \vskip5mm
+  \code[frame=lines,width=.6\linewidth]{destructor.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reason for Destructors}
+  \begin{itemize}
+    \item Object requires resources (memory, files, \dots)
+    \item When object dies, resources need to be freed
+    \item Constructor acquires resources
+    \item Destructor frees resources
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Destructors in Java}
+  \begin{itemize}
+    \item Java needs not free memory thanks to garbage collection
+    \item Files/streams/\dots need to be released
+    \item Java went through several solutions
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Java Approach \#1: {\tt finalize}}
+  \begin{itemize}
+    \item Object has {\tt finalize} method ({\tt protected})
+    \item Can be overriden in subclasses
+    \item Called when garbage collector sees object became unreachable
+  \end{itemize}
+  \vskip5mm
+  \structure{Problems}
+  \begin{itemize}
+    \item Nondeterministic: you never know when the GC will notice object has become unreachable
+    \item {\tt finalize()} itself could make the object reachable again
+    \item Zombie objects
+    \item Do not make use of {\tt finalize}, it's a bad idea
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Java Approach \#2: {\tt close}}
+  \begin{itemize}
+    \item Object has to be closed manually by calling {\tt close()}
+    \item Should be used with {\tt try/finally}
+  \end{itemize}
+  \vskip5mm
+  \structure{Problems}
+  \begin{itemize}
+    \item Easy to forget
+    \item Compiler does not remind you
+    \item Consistent naming not enforced (every class can use different name, e.g.\ {\tt close}, {\tt destroy}, {\tt dispose}, \dots)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Java Approach \#3: {\tt Closeable}}
+  \begin{itemize}
+    \item Interface with {\tt close} method
+    \item \link{https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html}{\tt try-with-resources}
+    \item Introduced in Java 7
+  \end{itemize}
+  \vskip5mm
+  \code[frame=lines,language=java,font size=\small,width=.9\linewidth]{try-with-resources.java}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\cpp\ Approach}
+  \begin{itemize}
+    \item Destructors are similar to {\tt finalize}
+    \item Called when object gets destroyed
+    \item Important difference: destructors are fully deterministic
+  \end{itemize}
+  \vskip5mm
+  \begin{overprint}
+    \onslide<handout:1|1>
+    \code[frame=lines,width=.9\linewidth]{out-of-scope.cpp}
+
+    \onslide<handout:2|2>
+    \code[frame=lines,width=.9\linewidth]{delete.cpp}
+
+    \onslide<handout:3|3>
+    \code[frame=lines,width=.9\linewidth]{delete-array.cpp}
+
+    \onslide<handout:4|4>
+    \code[frame=lines,width=.9\linewidth]{pointer-out-of-scope.cpp}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What To Put In Destructor?}
+  \begin{itemize}
+    \item Destructor will always implicitly call destructor of each member variable
+          (generated by compiler for you)
+    \item So don't start calling destructors on each member variable yourself
+    \item In fact, never explicitly call a destructor yourself
+    \item Only clean up stuff that does not clean itself up
+    \item Example: {\tt int*} allocated with {\tt new} needs to be {\tt delete}d in destructor
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Destructors: Example}
+  \code[frame=lines,font size=\small]{destructor-example.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{File Layout}
+  \begin{columns}
+    \column{6cm}
+    \code[frame=lines,font size=\small,width=.99\linewidth,title={Foo.cpp}]{layout.cpp}
+    \column{6cm}
+    \code[frame=lines,font size=\small,width=.99\linewidth,title={Foo.h}]{layout.h}
+  \end{columns}
+\end{frame}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "classes-overview"
+%%% End:
