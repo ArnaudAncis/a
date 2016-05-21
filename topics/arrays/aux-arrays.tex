@@ -69,24 +69,32 @@
         }
       }
 
-      \visible<3>{
+      \visible<3|handout:0>{
         \draw[-latex] (3.5,-1.5) -- ++(0,1.5) node[anchor=north,at start] {\tt p};
       }
 
-      \visible<4>{
+      \visible<4|handout:0>{
         \draw[-latex] (3.5,-1.5) -- ++(0,1.5) node[anchor=north,at start] {\tt q};
       }
 
-      \visible<5>{
+      \visible<5|handout:0>{
         \draw[|-|] (11,2) -- ++(4,0) node[midway,above,font=\tiny] {\tt p[2]};;
       }
 
-      \visible<6>{
+      \visible<6|handout:0>{
         \draw[|-|] (15,2) -- ++(4,0) node[midway,above,font=\tiny] {\tt q[3]};;
       }
 
       \visible<7>{
         \draw[|-|] (23,2) -- ++(4,0) node[midway,above,font=\tiny] {\tt p[5]};;
+      }
+      
+      \visible<0|handout:1>{
+      	\draw[-latex] (3.5,-1.5) -- ++(0,1.5) node[anchor=north,at start] {\tt p \& q};
+      	
+      	\node[draw=none,fill=none,font=\tiny] at (13,4) {\tt p[2]};
+      	
+      	\node[draw=none,fill=none,font=\tiny] at (17,4) {\tt q[3]};
       }
 
       \draw (0,0) grid (30,1);
