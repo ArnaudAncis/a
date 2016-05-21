@@ -346,75 +346,75 @@
       \begin{tikzpicture}[allocation/.style={-latex,thick},remember picture,overlay,scale=.5]
         \coordinate (start) at (-4,4);
 
-        \only<3->{
+        \only<handout:1-|3->{
           \draw[fill=red!50] (start) rectangle ++(4,-1);
         }
-        \only<3>{
+        \only<handout:1|3>{
           \draw[allocation] (var a) to [bend left=30] ($ (start) + (0,-.5) $);
         }
 
-        \only<4->{
+        \only<handout:1-|4->{
           \draw[fill=green!50] ($ (start) + (4,0) $) rectangle ++(4,-1);
         }
-        \only<4>{
+        \only<handout:1|4>{
           \draw[allocation] (var b) to [bend left=30] ($ (start) + (4,-0.5) $);
         }
 
-        \only<5->{
+        \only<handout:1-|5->{
           \draw[fill=blue!50] ($ (start) + (0,-1) $) rectangle ++(4,-1);
         }
-        \only<5>{
+        \only<handout:1|5>{
           \draw[allocation] (var c) to [bend left=30] ($ (start) + (0,-1.5) $);
         }
 
-        \only<6->{
+        \only<handout:1-|6->{
           \draw[fill=yellow!50] ($ (start) + (4,-1) $) rectangle ++(4,-1);
         }
-        \only<6>{
+        \only<handout:1|6>{
           \draw[allocation] (var d) to [bend left=30] ($ (start) + (4,-1.5) $);
         }
 
-        \only<7-11>{
+        \only<handout:2|7-11>{
           \draw[fill=red!50] ($ (start) + (0,-2) $) rectangle ++(8,-1);
         }
-        \only<7>{
+        \only<handout:2|7>{
           \draw[allocation] (mem a) to [bend right=30] ($ (start) + (0,-2.5) $);
         }
 
-        \only<8-10>{
+        \only<handout:2|8-10>{
           \draw[fill=green!50] ($ (start) + (0,-3) $) rectangle ++(8,-3);
         }
-        \only<8>{
+        \only<handout:2|8>{
           \draw[allocation] (mem b) to [bend right=30] ($ (start) + (0,-3.5) $);
         }
 
-        \only<9-12>{
+        \only<handout:2|9-12>{
           \draw[fill=blue!50] ($ (start) + (0,-6) $) rectangle ++(8,-2);
         }
-        \only<9>{
+        \only<handout:2|9>{
           \draw[allocation] (mem b) to [bend right=30] ($ (start) + (0,-6.5) $);
         }
 
-        \only<10-13>{
+        \only<handout:2|10-13>{
           \draw[fill=yellow!50] ($ (start) + (0,-8) $) rectangle ++(8,-2);
         }
-        \only<10>{
+        \only<handout:2|10>{
           \draw[allocation] (mem d) to [bend right=30] ($ (start) + (0,-8.5) $);
         }
 
-        \only<11>{
+        \only<handout:3|11>{
           \draw[->,thick] (del b) ++(2,0) -- ++(-1,0);
         }
 
-        \only<12>{
+        \only<handout:3|12>{
           \draw[->,thick] (del a) ++(2,0) -- ++(-1,0);
         }
 
-        \only<13>{
+        \only<handout:3|13>{
           \draw[->,thick] (del c) ++(2,0) -- ++(-1,0);
         }
 
-        \only<14>{
+        \only<handout:3|14>{
           \draw[->,thick] (del d) ++(2,0) -- ++(-1,0);
         }
 
@@ -424,12 +424,12 @@
   \end{columns}
   \vskip2cm
   \begin{overprint}
-    \onslide<2-6>
+    \onslide<handout:1|2-6>
     \begin{center}
       \textbf{Compilation stage} \\ Compiler assigns memory locations to each variable \\ (this is still static allocation)
     \end{center}
 
-    \onslide<7->
+    \onslide<handout:2-3|7->
     \begin{center}
       \textbf{At runtime}
     \end{center}
