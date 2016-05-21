@@ -57,6 +57,9 @@
         background: #DDDDDD;
       }
 
+      a.handout {
+        font-size: 0.5em;
+      }
     </style>
   </head>
 
@@ -120,7 +123,7 @@
             <td><%= lab('preprocessor', 'The Preprocessor') %></td>
           </tr>
           <tr>
-            <td><%= topic('allocation-methods', 'Allocation Methods') %></td>
+            <td><%= topic('allocation-methods', 'Allocation Methods', handouts:true) %></td>
             <td></td>
           </tr>
           <tr>

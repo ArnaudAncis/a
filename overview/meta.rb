@@ -6,7 +6,7 @@ require 'Contracts'
 class Context
   include Contracts::TypeChecking
   
-  def topic(name, description)
+  def topic(name, description, handouts: false)
     typecheck binding do
       assert(name: string, description: string)
     end
@@ -15,7 +15,13 @@ class Context
     then abort "ERROR: No directory #{name}"
     end
 
-    %{<a href="topics/#{name}.pdf">#{description}</a>}
+    slides_link = %{<a href="topics/#{name}.pdf">#{description}</a>}
+    handout_link = if handouts
+                   then %{ <a class="handout" href="topics/#{name}-handouts.pdf">(handouts)</a>}
+                   else ''
+                   end
+    
+    "#{slides_link}#{handout_link}"
   end
 
   def lab(name, description)
