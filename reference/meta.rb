@@ -15,5 +15,5 @@ meta_object do
   inherit_remote_directory 'reference'
 
   quick_tex('full-edition.tex', 'limited-edition.tex')
-  quick_all(:pdf, :upload)
+  quick_all(:pdf)
 end
