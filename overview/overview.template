@@ -119,7 +119,7 @@
             <td><%= lab('declarations', 'Declarations') %></td>
           </tr>
           <tr>
-            <td><%= topic('preprocessor', 'The Preprocessor') %></td>
+            <td><%= topic('preprocessor', 'The Preprocessor', handouts: true) %></td>
             <td><%= lab('preprocessor', 'The Preprocessor') %></td>
           </tr>
           <tr>
