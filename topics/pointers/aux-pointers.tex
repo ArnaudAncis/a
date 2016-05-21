@@ -47,7 +47,7 @@
         \draw[fill=red!50] (7,0) rectangle ++(4,1);
       }
 
-      \visible<3>{
+      \visible<3|handout:1>{
         \foreach \i in {0,...,39} {
           \node[anchor=west,rotate=90] at ($ (\i,1) + (.5,0) $) {
             \tikzmath{
@@ -59,7 +59,7 @@
         }
       }
 
-      \visible<4->{
+      \visible<4-|handout:0>{
         \foreach \i in {0,...,39} {
           \node[anchor=west,rotate=90] at ($ (\i,1) + (.5,0) $) {
             \tikzmath{
@@ -69,6 +69,18 @@
             }
           };
         }
+      }
+      
+      \visible<0|handout:1>{
+      	\foreach \i in {0,...,39} {
+      		\node[anchor=west,rotate=90] at ($ (\i,2.5) + (.5,0) $) {
+      			\tikzmath{
+      				int \address;
+      				\address = hex(4684 + \i);
+      				print {\tt0x\address};
+      			}
+      		};
+      	}
       }
 
       \draw (0,0) grid (40,1);
@@ -214,15 +226,15 @@
   \code[frame=lines,width=.4\linewidth]{pointer-syntax2.cpp}
 
   \begin{tikzpicture}[overlay,remember picture,box/.style={red,thick}]
-    \only<2>{
+    \only<2|handout:0>{
       \drawboxaround{address of int}
       \drawboxaround{int pointer}
     }
-    \only<3>{
+    \only<3|handout:0>{
       \drawboxaround{address of}
       \drawboxaround{address of operator}
     }
-    \only<4>{
+    \only<4|handout:0>{
       \drawboxaround{write to}
       \drawboxaround{write to syntax}
     }
