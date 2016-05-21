@@ -131,7 +131,7 @@
             <td><%= lab('pointers', 'Pointers') %></td>
           </tr>
           <tr>
-            <td><%= topic('heap-allocation', 'Heap Allocation') %></td>
+            <td><%= topic('heap-allocation', 'Heap Allocation', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
