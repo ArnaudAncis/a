@@ -5,4 +5,4 @@ int sum(int n)
   else return n + sum(n - 1);
 }
 
-sum(5); // returns `\only<1>{?}\only<2>{0}`
+sum(5); // returns `\only<handout:0|1>{?}\only<handout:1|2>{0}`
