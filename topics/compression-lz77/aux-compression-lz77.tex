@@ -316,7 +316,7 @@
   \begin{center}
     \tt\only<handout:0|1->{\alert<1-2>{m}\alert<3-4>{u}\alert<5-6>{x}{\only<7-8>{\color{green}}mux}\alert<7-8>{b}\alert<9-10>{a}\alert<11-12>{r}{\only<13-14>{\color{green}}bar}\alert<13-14>{m}%
     {\only<15-16>{\color{green}}uxbarbarm}\alert<15-16>{u}{\only<17-18>{\color{green}}xmuxbarbarmuxbarbar}\alert<17-18>{b}{\only<19-20>{\color{green}}armu}\alert<19-20>{x}}
-    \tt\only<handout:1->{\alert<handout:1>{m}\alert<handout:2>{u}\alert<handout:3>{x}{\only<handout:4>{\color{green}}mux}\alert<handout:4>{b}\alert<handout:5>{a}\alert<handout:6>{r}{\only<handout:7>{\color{green}}bar}\alert<handout:7>{m}%
+    \tt\only<handout:1-|0>{\alert<handout:1>{m}\alert<handout:2>{u}\alert<handout:3>{x}{\only<handout:4>{\color{green}}mux}\alert<handout:4>{b}\alert<handout:5>{a}\alert<handout:6>{r}{\only<handout:7>{\color{green}}bar}\alert<handout:7>{m}%
     {\only<handout:8>{\color{green}}uxbarbarm}\alert<handout:8>{u}{\only<handout:9>{\color{green}}xmuxbarbarmuxbarbar}\alert<handout:9>{b}{\only<handout:10>{\color{green}}armu}\alert<handout:10>{x}}
   \end{center}
   \structure{Explanation}
@@ -427,10 +427,30 @@
     \item LZ77 uses a ``sliding window''
     \item Matches are only looked for inside this window, i.e. the last $N$ bytes
   \end{itemize}
-  \begin{center}
-    \begin{tikzpicture}
-      \foreach[count=\i] \x in {0,0.25,...,9.75} {
-        \only<\i>{
+  \only<handout:0>{
+    \begin{center}
+      \begin{tikzpicture}
+        \foreach[count=\i] \x in {0,0.25,...,9.75} {
+          \only<\i>{
+            \tikzmath{
+              real \windowstart;
+              real \windowend;
+              \windowend=\x;
+              \windowstart=max(0,\windowend-2.5);
+            }
+            \draw[-latex] ($ (\x,-0.5) + (0.125,0) $) -- ++ (0,0.5);
+            \draw[fill=red,opacity=0.5,ultra thick] (\windowstart,0) rectangle (\windowend,0.25);
+          }
+
+          \draw (0,0) grid[xstep=0.25cm,ystep=0.25cm] (10,0.25);
+        }
+      \end{tikzpicture}
+    \end{center}
+  }
+  \only<0|handout:1>{
+    \begin{center}
+      \begin{tikzpicture}
+        \foreach \x in {5} {
           \tikzmath{
             real \windowstart;
             real \windowend;
@@ -439,12 +459,12 @@
           }
           \draw[-latex] ($ (\x,-0.5) + (0.125,0) $) -- ++ (0,0.5);
           \draw[fill=red,opacity=0.5,ultra thick] (\windowstart,0) rectangle (\windowend,0.25);
-        }
 
-        \draw (0,0) grid[xstep=0.25cm,ystep=0.25cm] (10,0.25);
-      }
-    \end{tikzpicture}
-  \end{center}
+          \draw (0,0) grid[xstep=0.25cm,ystep=0.25cm] (10,0.25);
+        }
+      \end{tikzpicture}
+    \end{center}
+  }
 \end{frame}
 
 \begin{frame}
@@ -493,9 +513,32 @@
     \item 2 bits for size $\rightarrow$ $2^2 = 4$ bytes lookahead buffer
   \end{itemize}
   \begin{center}
-    \begin{tikzpicture}
-      \foreach[count=\i] \x in {0,0.25,...,9.75} {
-        \only<\i>{
+    \only<handout:0>{
+      \begin{tikzpicture}
+        \foreach[count=\i] \x in {0,0.25,...,9.75} {
+          \only<\i>{
+            \tikzmath{
+              real \windowstart;
+              real \windowend;
+              real \bufferstart;
+              real \bufferend;
+              \windowend=\x;
+              \windowstart=max(0,\windowend-0.25*16);
+              \bufferstart=\x;
+              \bufferend=min(10,\bufferstart+0.25*4);
+            }
+            \draw[-latex] ($ (\x,-0.5) + (0.125,0) $) -- ++ (0,0.5);
+            \draw[fill=red,opacity=0.5,ultra thick] (\windowstart,0) rectangle (\windowend,0.25);
+            \draw[fill=green,opacity=0.5,ultra thick] (\bufferstart,0) rectangle (\bufferend,0.25);
+          }
+
+          \draw (0,0) grid[xstep=0.25cm,ystep=0.25cm] (10,0.25);
+        }
+      \end{tikzpicture}
+    }
+    \only<handout:1|0>{
+      \begin{tikzpicture}
+        \foreach \x in {5} {
           \tikzmath{
             real \windowstart;
             real \windowend;
@@ -509,11 +552,11 @@
           \draw[-latex] ($ (\x,-0.5) + (0.125,0) $) -- ++ (0,0.5);
           \draw[fill=red,opacity=0.5,ultra thick] (\windowstart,0) rectangle (\windowend,0.25);
           \draw[fill=green,opacity=0.5,ultra thick] (\bufferstart,0) rectangle (\bufferend,0.25);
-        }
 
-        \draw (0,0) grid[xstep=0.25cm,ystep=0.25cm] (10,0.25);
-      }
-    \end{tikzpicture}
+          \draw (0,0) grid[xstep=0.25cm,ystep=0.25cm] (10,0.25);
+        }
+      \end{tikzpicture}
+    }
   \end{center}
 \end{frame}
 
