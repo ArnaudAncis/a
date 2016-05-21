@@ -179,7 +179,7 @@
             <td></td>
           </tr>
           <tr>
-            <td><%= topic('smart-pointers', 'Smart Pointers') %></td>
+            <td><%= topic('smart-pointers', 'Smart Pointers', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
