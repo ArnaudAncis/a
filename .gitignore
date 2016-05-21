@@ -17,3 +17,4 @@ Release/
 **/.idea/workspace.xml
 **/.idea/tasks.xml
 *.class
+*.synctex.gz
