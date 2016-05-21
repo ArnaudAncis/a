@@ -199,7 +199,7 @@
             <td></td>
           </tr>
           <tr>
-            <td><%= topic('compression-theory', 'Compression: Theory') %></td>
+            <td><%= topic('compression-theory', 'Compression: Theory', handouts:true) %></td>
             <td></td>
           </tr>
           <tr>
