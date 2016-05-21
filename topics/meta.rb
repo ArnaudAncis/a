@@ -1,10 +1,14 @@
-require 'MetaData'
-require 'Upload'
+require 'MetaData2'
+require 'Upload2'
+require 'Shortcuts'
 
 
 meta_object do
-  extend MetaData::Actions
-  extend Upload::Mixin
+  extend MetaData2
+  extend Upload2::Actions
+  extend Shortcuts::Actions
 
-  inherit_remote_directory('topics')
+  inherit_remote_directory 'topics'
+
+  quick_recursive_all
 end
