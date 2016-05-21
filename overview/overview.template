@@ -183,12 +183,12 @@
             <td></td>
           </tr>
           <tr>
-            <td><%= topic('inheritance', 'Inheritance') %></td>
+            <td><%= topic('inheritance', 'Inheritance', handouts: true) %></td>
             <td><%= lab('image-manipulation', 'Image Generation: Filters') %></td>
           </tr>
           <tr>
             <td></td>
-            <td><%= lab('inheritance', 'Inheritance', handouts: true) %></td>
+            <td><%= lab('inheritance', 'Inheritance') %></td>
           </tr>
           <tr>
             <td><%= topic('casts', 'Casting', handouts: true) %></td>
