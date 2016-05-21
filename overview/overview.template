@@ -135,7 +135,7 @@
             <td></td>
           </tr>
           <tr>
-            <td><%= topic('arrays', 'Arrays') %></td>
+            <td><%= topic('arrays', 'Arrays', handouts: true) %></td>
             <td><%= lab('arrays', 'Arrays') %></td>
           </tr>
           <tr>
