@@ -188,7 +188,7 @@
           </tr>
           <tr>
             <td></td>
-            <td><%= lab('inheritance', 'Inheritance') %></td>
+            <td><%= lab('inheritance', 'Inheritance', handouts: true) %></td>
           </tr>
           <tr>
             <td><%= topic('casts', 'Casting', handouts: true) %></td>
