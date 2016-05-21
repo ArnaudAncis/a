@@ -203,7 +203,7 @@
             <td></td>
           </tr>
           <tr>
-            <td><%= topic('compression-rle', 'Compression: RLE') %></td>
+            <td><%= topic('compression-rle', 'Compression: RLE', handouts:true) %></td>
             <td><%= lab('rle', 'RLE') %></td>
           </tr>
           <tr>
