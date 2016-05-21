@@ -1,7 +1,7 @@
 class int_array {
   int* ns;
 public:
-  `\only<3->{\tt\bfseries const }`int& at(int index)`\only<2->{ \tt\bfseries const}`
+  `\only<handout:3|3->{\tt\bfseries const }`int& at(int index)`\only<handout:2-|2->{ \tt\bfseries const}`
   {
     return ns[index];
   }
