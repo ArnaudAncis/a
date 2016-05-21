@@ -155,7 +155,7 @@
             <td><%= lab('classes', 'Classes') %></td>
           </tr>
           <tr>
-            <td><%= topic('structs', 'Structs') %></td>
+            <td><%= topic('structs', 'Structs', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
