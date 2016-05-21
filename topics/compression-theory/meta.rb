@@ -12,6 +12,6 @@ meta_object do
 
   inherit_remote_directory
   
-  quick_single_tex
+  quick_all_tex
   quick_all(:pdf)
 end
