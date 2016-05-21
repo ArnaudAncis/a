@@ -1,0 +1,253 @@
+\usepackage{../pvm}
+\usepackage{siunitx}
+\usepackage{ifthen}
+
+\usetikzlibrary{positioning}
+
+\makeatletter
+\def\light@caption@on{on}
+\def\light@caption@off{off}
+\def\light@caption@neutral{}
+\makeatother
+
+\tikzset{
+  light/.pic={\draw node[circle,#1,minimum size=7mm,font=\tiny] {\csname light@caption@#1\endcsname};},
+  light/.style={draw},
+  on/.style={light,fill=yellow},
+  off/.style={light,fill=gray!50},
+  neutral/.style={light}
+}
+
+\title{Data Compression: RLE}
+\author{Fr\'ed\'eric Vogels}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Run Length Encoding}
+  \begin{itemize}
+    \item RLE is very simple compression algorithm
+    \item In order to compress, it must make some assumptions about input data
+    \item The \texttt{GQU} compression algorithm assumed certain pairs appear more often than others
+    \item RLE assumes that long runs of the same bytes occur often
+    \item RLE is used in some image formats: drawn images do have long stretches of the same colour
+          (TGA, PCX, fax machines)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Run Length Encoding}
+  \begin{center}
+    \tt aaaaabbbbccccccccaaaaaaaaddd
+  \end{center}
+  \begin{itemize}
+    \item How to make use of this structure to compress the data?
+    \item Why not encode each series
+         \[
+           \underbrace{\texttt{xxx\dots x}}_{n \; \times}
+         \]
+         as
+         \[
+           n\texttt{x}
+         \]
+    \item This yields
+          \begin{center}
+            \tt 5a4b8c8a3d
+          \end{center}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Compressing Lonely Bytes}
+  \begin{center}
+    abcd
+  \end{center}
+  \begin{itemize}
+    \item How to encode this using RLE?
+    \item Can't we just compress this to \texttt{abcd}?
+    \item This is rather dubious: it would mean that there is no input data
+          that would be ``compressed'' to something larger
+    \item RLE would be usable on all data: in the worst case, the compressed
+          form would be as large as the original data
+    \item This breaks a fundamental principe of compression
+    \item What's the problem? Did we break maths?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Compressing Lonely Bytes}
+  \begin{center}
+    abcd
+  \end{center}
+  \begin{itemize}
+    \item Text must be encoded using ASCII/Unicode/\dots
+          \begin{center} \small
+            \begin{tabular}{cc}
+              \textbf{character} & \textbf{ASCII code} \\
+              \toprule
+              \tt a & 97 \\
+              \tt b & 98 \\
+              \tt c & 99 \\
+              \tt d & 100 \\
+            \end{tabular}
+          \end{center}
+    \item {\tt abcd} is represented by the bytes
+          \begin{center}
+            97 98 99 100
+          \end{center}
+    \item The decompression algorithm will interpret this as
+          \begin{itemize}
+            \item Repeat \texttt{b} 97 times
+            \item Repeat \texttt{d} 99 times
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Compressing Lonely Bytes}
+  \begin{itemize}
+    \item Decompressor cannot make difference between
+          \begin{itemize}
+            \item Byte representing how many times next byte needs to be repeated
+            \item Byte representing actual data
+          \end{itemize}
+    \item Decompressor expects that compressed data
+          is structured as pairs of bytes $n,B$, meaning
+          ``repeat $B$ $n$ times''.
+    \item \texttt{abcd} needs to be compressed to
+          \begin{center}
+            \tt 1a1b1c1d
+          \end{center}
+          or, in bytes (decimal)
+          \begin{center}
+            \tt 1 97 1 98 1 99 1 100 
+          \end{center}
+          or, in bytes (hexadecimal)
+          \begin{center}
+            \tt 01 61 01 62 01 63 01 64 
+          \end{center}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Shortcomings of RLE}
+  \begin{itemize}
+    \item We found the Achilles heel of RLE
+    \item It can compress runs of bytes well
+    \item It utterly fails on solitary bytes
+    \item Maths were right all along
+    \item Huzzah for maths!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Variations}
+  \begin{itemize}
+    \item Many variations possible
+    \item For example, how to encode $n$
+    \item Currently, we encode $n$ as a single byte
+    \item Two problems
+          \begin{itemize}
+            \item $n = 0$ is useless: inefficient
+            \item $n$ can't be greater than 255: longer series to be split up
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Variations: Dealing with $n = 0$}
+  \begin{itemize}
+    \item $n = 0$ is useless
+    \item We waste a perfectly good code
+    \item We can adapt the algorithm so as to make $n = 0$ useful
+    \item One possibility: interpret $n = 0$ as $n = 256$, so that
+          you can support runs of 256 long
+    \item Other possibility: use $n = 0$ to deal with solitary bytes by
+          saying that $n = 0$ means that the following two bytes are solitary
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Variations: Dealing with $n$'s Maximum Value}
+  \begin{itemize}
+    \item We could use more bytes for $n$
+    \item 1 byte: $n$ can go up to 255
+    \item 2 bytes: $n$ can go up to 65535
+    \item 4 bytes: $n$ can go up to $2^{32}-1$
+    \item Is this interesting?
+    \item Using 1: good
+          when there are many short runs
+    \item Using 4: good
+          when there are at least a few very long runs
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Variations: Dealing with $n$'s Maximum Value}
+  \begin{itemize}
+    \item We could use variable length $n$
+    \item $n = 255$ could mean that the next byte should be interpreted as a count-byte and added to the current $n$
+    \item For example, consider text
+          \[
+            \underbrace{\texttt{aaa\dots a}}_{50\times}\underbrace{\texttt{aaa\dots b}}_{(260)\times}
+          \]
+    \item In our original encoding, this would become (in decimal)
+          \[
+            \underbrace{\tt 50 \quad 97}_{50\times\tt a} \quad \underbrace{\tt 255 \quad 98}_{255\times\tt b} \quad \underbrace{\tt 5 \quad 98}_{5\times\tt b}
+          \]
+    \item In our variable length $n$ encoding, we would get
+          \[
+            \underbrace{\tt 50 \quad 97}_{50\times\tt a} \quad \underbrace{\tt 255 \quad 5 \quad 98}_{(255+5)\times\tt b}
+          \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Variations: Variable Length $n$}
+  \structure{MIDI and UT8}
+  \begin{itemize}
+    \item Support integers of arbitrary length
+    \item Bits of the integers are split in groups of 7 bits
+    \item Each encoded byte contains a first group of 7 bit. The eighth bit is used to indicate whether
+          the following byte also belongs to the same integer
+  \end{itemize}
+  \begin{overprint}
+    \onslide<handout:1|1>
+    \structure{Encoding 100}
+    \begin{itemize}
+      \item 100 in binary: \texttt{1100100}
+      \item 7 bits needed
+      \item Only one byte needed: \texttt{{\color{red} 0}\kern1pt {\bfseries 1100100}}
+      \item {\color{red}\tt 0} means ``integer ends here''
+    \end{itemize}
+
+    \onslide<handout:2|2>
+    \structure{Encoding 1000}
+    \begin{itemize}
+      \item 1000 in binary: \texttt{111\kern2pt 1101000}
+      \item 10 bits needed
+      \item Two bytes needed: \texttt{{\color{red} 1}\kern1pt {\bfseries 0000111} {\color{red} 0}\kern1pt {\bfseries 1101000}}
+      \item {\color{red}\tt 1} means ``integer continues in next byte''
+    \end{itemize}
+
+    \onslide<handout:3|3>
+    \structure{Encoding 100000}
+    \begin{itemize}
+      \item 100000 in binary: \texttt{110\kern2pt 0001101\kern2pt 0100000}
+      \item 17 bits needed
+      \item Three bytes needed: \texttt{{\color{red} 1}\kern1pt {\bfseries 0000110} {\color{red} 1}\kern1pt {\bfseries 0001101} {\color{red} 0}\kern1pt {\bfseries 0100000}}
+    \end{itemize}
+  \end{overprint}
+\end{frame}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "compression-rle"
+%%% End:
