@@ -211,7 +211,7 @@
             <td><%= lab('huffman', 'Huffman compression') %></td>
           </tr>
           <tr>
-            <td><%= topic('compression-lz77', 'Compression: LZ77') %></td>
+            <td><%= topic('compression-lz77', 'Compression: LZ77', handouts: true) %></td>
             <td></td>
           </tr>
         </ul>
