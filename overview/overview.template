@@ -147,7 +147,7 @@
             <td><%= lab('references', 'References') %></td>
           </tr>
           <tr>
-            <td><%= topic('classes-overview', 'Classes (overview)') %></td>
+            <td><%= topic('classes-overview', 'Classes (overview)', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
