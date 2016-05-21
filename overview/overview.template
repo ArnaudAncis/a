@@ -163,7 +163,7 @@
             <td></td>
           </tr>
           <tr>
-            <td><%= topic('operator-overloading', 'Operator Overloading') %></td>
+            <td><%= topic('operator-overloading', 'Operator Overloading', handouts: true) %></td>
             <td><%= lab('complex', 'Complex numbers') %></td>
           </tr>
           <tr>
