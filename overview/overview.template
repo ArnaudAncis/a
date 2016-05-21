@@ -139,7 +139,7 @@
             <td><%= lab('arrays', 'Arrays') %></td>
           </tr>
           <tr>
-            <td><%= topic('const', 'Const') %></td>
+            <td><%= topic('const', 'Const', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
