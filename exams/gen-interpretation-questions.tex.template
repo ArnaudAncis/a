@@ -1,10 +1,10 @@
 <%=
 
   Dir['interpret-*.cpp'].sort do |f1, f2|
-    /interpret-(\d+)/ =~ f1
+    /interpret-(\d+)/ =~ f1 or abort "Failed on #{f1}"
     n1 = $1.to_i
 
-    /interpret-(\d+)/ =~ f2
+    /interpret-(\d+)/ =~ f2 or abort "Failed on #{f2}"
     n2 = $1.to_i
 
     n1 <=> n2
