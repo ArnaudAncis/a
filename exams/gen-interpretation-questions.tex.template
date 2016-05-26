@@ -17,7 +17,7 @@
       \\begin{question}
         Wat is de uitvoer van volgend programma?
         \\vskip1cm
-        \\code[first line=2]{#{file}}
+        \\code[first line=2,width=.95\\linewidth]{#{file}}
         \\vskip1cm
         #{ send(type, output, arg) }
       \\end{question}
