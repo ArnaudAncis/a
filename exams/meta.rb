@@ -1,6 +1,7 @@
 require 'MetaData2'
 require 'LaTeX2'
 require 'Template2'
+require 'Upload2'
 require 'Shortcuts'
 require 'Cpp'
 
@@ -60,6 +61,7 @@ meta_object do
   extend LaTeX2::Actions
   extend Template2::Actions
   extend Shortcuts::Actions
+  extend Upload2::Actions
 
   template_actions = Dir['*.template'].map do |template_file|
     template(input: template_file, context: Context.new)
@@ -68,7 +70,11 @@ meta_object do
   
   
   tex_files = [ 'with-solutions.tex', 'without-solutions.tex' ]
-  tex_actions(*tex_files, action_name: :pdf)
+  texs = tex_actions(*tex_files, action_name: :pdf).child_actions
 
   quick_all( :tex, :pdf )
+
+  inherit_remote_directory 'exams'
+
+  uploadable( *texs.map { |tex| tex.output_path } )
 end
