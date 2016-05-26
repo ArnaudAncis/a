@@ -1,5 +1,5 @@
 class TimeSpan {
-  int seconds;
+  int totalSeconds;
 
 public:
   TimeSpan(int hours,
@@ -10,7 +10,7 @@ public:
                 seconds ) { }
 
   TimeSpan(int seconds)
-    : seconds(seconds) { }
+    : totalSeconds(seconds) { }
 
   // TODO Implement functionality
 };

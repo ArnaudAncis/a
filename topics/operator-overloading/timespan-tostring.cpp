@@ -5,7 +5,7 @@ std::ostream& operator <<(std::ostream& out,
       << ":"
       << ts.minutes()
       << ":"
-      << ts.seconds;
+      << ts.seconds();
 
   return out;
 }

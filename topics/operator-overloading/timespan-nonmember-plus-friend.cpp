@@ -1,5 +1,4 @@
-class TimeSpan
-{
+class TimeSpan {
   // ...
 
   friend TimeSpan operator +(const TimeSpan& ts1,
@@ -7,8 +6,8 @@ class TimeSpan
 };
 
 TimeSpan operator +(const TimeSpan& ts1,
-                    const TimeSpan& ts2)
-{
+                    const TimeSpan& ts2) {
   // Can access private members
-  return TimeSpan(ts1.seconds + ts2.seconds);
+  return TimeSpan(ts1.totalSeconds +
+                  ts2.totalSeconds);
 }

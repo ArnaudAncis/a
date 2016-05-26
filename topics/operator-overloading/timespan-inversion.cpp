@@ -2,6 +2,6 @@ class TimeSpan
 {
   TimeSpan operator -() const
   {
-    return TimeSpan(-seconds);
+    return TimeSpan(-totalSeconds);
   }
 };
