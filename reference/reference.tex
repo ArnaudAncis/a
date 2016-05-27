@@ -14,6 +14,7 @@
 \usepackage{comment}
 \usepackage{ucllcode}
 \usepackage{bbding}
+\usepackage{titlesec}
 
 \ifdefined\fulledition
   \includecomment{extra}
@@ -27,6 +28,9 @@
 
 \newcommand{\hex}[1]{\texttt{\bfseries #1}}
 
+\titleformat{\section}[display]{\sc\bfseries\Large}{}{0.5ex}{\begin{minipage}{\textwidth}\rule{\textwidth}{1pt}\vspace{1mm}\begin{center}}[\end{center}\vspace{-0.5ex}\rule{\textwidth}{1pt}\end{minipage}]
+\titleformat{\subsection}[display]{\sc\large\bfseries}{}{0ex}{\begin{minipage}{\textwidth}\begin{center}}[\end{center}\end{minipage}]
+
 \begin{document}
 
 \begin{extra}
@@ -38,13 +42,14 @@
 \input{source-organisation.tex}
 \input{primitive-types.tex}
 \input{pointers-and-references.tex}
+\input{io.tex}
 \input{operators.tex}
 \input{control-flow.tex}
-\input{io.tex}
+\input{casts.tex}
 \input{classes.tex}
 \input{preprocessor.tex}
-\input{casts.tex}
 \input{ascii.tex}
+\clearpage
 \input{standard-library.tex}
 
 \end{document}
