@@ -18,6 +18,9 @@ public:
   // Constant member function
   void f() const { ... }
 
+  // Friend function
+  friend int bar();
+
 protected:
   ...
 };
