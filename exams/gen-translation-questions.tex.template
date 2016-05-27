@@ -42,8 +42,8 @@
       \\begin{question}
         Vertaal onderstaande Java code naar \\cpp.
         Maak maximaal gebruik van \\cpp~features zoals default parameter values,
-        constructor initialiser lists, operator overloading, const correctness, \dots
-        Plaats elke klasse in eigen .h/.cpp bestanden.
+        constructor initialiser lists, operator overloading, const correctness, smart pointers, \dots
+        Plaats elke klasse in eigen .h/.cpp bestanden. \\textbf{Schrijf je antwoord op aparte bladen.}
         \\vskip1cm
         \\code[language=java]{#{java_file}}
         \\vskip1cm
