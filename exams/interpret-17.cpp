@@ -12,15 +12,10 @@ struct Foo {
   }
 };
 
-Foo bar()
-{
-  return Foo();
-}
-
 int main() {
-  Foo a = bar();
+  Foo a;
   Foo b = a;
-  Foo c;
+  Foo& c = a;
 
-  c = bar();
+  c = b;
 }
