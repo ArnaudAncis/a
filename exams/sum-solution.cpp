@@ -1,4 +1,4 @@
-void sum(const std::vector<double>& ns) {
+double sum(const std::vector<double>& ns) {
   double total = 0;
 
   for ( double n : ns )
