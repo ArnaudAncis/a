@@ -80,6 +80,15 @@
   \end{overprint}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Returning Heap Objects by Reference}
+  \code{return-heap-by-reference.cpp}
+  \begin{itemize}
+    \item This works, but it's rather unidiomatic
+    \item It makes more sense to return a pointer
+    \item Or better yet, a {\tt std::shared\_ptr}
+  \end{itemize}
+\end{frame}
 
 
 %%% Local Variables:
