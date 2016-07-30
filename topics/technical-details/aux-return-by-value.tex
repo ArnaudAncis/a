@@ -3,13 +3,13 @@
   \code[frame=lines,width=.5\linewidth,font size=\small]{return-by-value.cpp}
   \begin{itemize}
     \item {\tt foo} returns a {\tt Bar}
-    \item This means it returns it by value
+    \item This means it returns it \emph{by value}
     \item A copy must be made
     \item This copy is made using a copy constructor
     \item In reality, things are more complex
           \begin{itemize}
             \item Compiler can optimise: have {\tt foo} directly write to {\tt bar}
-            \item Move constructors can be used in certain circumstances
+            \item Move constructors can be used under certain circumstances
           \end{itemize}
   \end{itemize}
 \end{frame}
@@ -124,8 +124,9 @@
 
     \onslide<5>
     \begin{center}
+      We can continue initialising {\tt bar}. \\
       If declaration and assignment occur on the same line (as is the case here),
-      the copy constructor is called
+      the copy constructor is called.
     \end{center}
 
     \onslide<6-8>
@@ -189,7 +190,7 @@
 
     \onslide<2-4>
     \begin{center}
-      The copy constructor initialising {\tt bar} is called with {\tt b}
+      The copy constructor initialising {\tt bar} is called with a reference to {\tt b} as argument
     \end{center}
 
     \onslide<5-7>
@@ -239,9 +240,8 @@
   \begin{overprint}
     \onslide<1>
     \begin{center}
-      It is possible for the compiler to not even
-      have an object {\tt b}, but to have
-      {\tt b} actually refer directly to {\tt bar}
+      It is not necessary for {\tt foo} to have its own object {\tt b}.
+      Instead, it can operate directly on {\tt bar}.
     \end{center}
 
     \onslide<2>
@@ -259,8 +259,8 @@
     \onslide<6-7>
     \begin{center}
       When {\tt foo} ends, {\tt b} is cleaned up.
-      Since it was never constructed, it cannot be destructed either.
-      In other words, it just disappears. {\tt b} can be seen as a reference to {\tt bar}.
+      Since {\tt b} was never constructed as a separate object, {\tt b} cannot be destructed either.
+      In other words, {\tt b} just disappears. {\tt b} can be seen as a reference to {\tt bar}.
     \end{center}
   \end{overprint}
 \end{frame}
@@ -284,6 +284,7 @@
                   It ``steals'' {\tt b}'s data
             \item {\tt b} is destructed
           \end{enumerate}
+    \item We don't discuss move constructors in detail for this course
   \end{itemize}
 \end{frame}
 

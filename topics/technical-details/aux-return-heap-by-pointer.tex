@@ -69,13 +69,13 @@
     \onslide<10-11>
     \begin{center}
       {\tt foo} returns {\tt q} \\
-      Its contents get assigned to {\tt p}
+      The address it contains gets copied to {\tt p}
     \end{center}
 
     \onslide<12-13>
     \begin{center}
       {\tt foo}'s locals get cleaned up \\
-      {\tt q} is the only local, and since it is a {\tt Bar*}, nothing happens
+      {\tt q} is the only local, and since it is a {\tt Bar*}, nothing happens (i.e.~no destructors)
     \end{center}
   \end{overprint}
 \end{frame}

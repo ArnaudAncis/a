@@ -1,7 +1,7 @@
 \begin{frame}
   \frametitle{Different Meanings of Assignment}
   \begin{itemize}
-    \item The {\tt =} operator's meaning depends very much on how you use it
+    \item The {\tt =} operator's meaning depends on how you use it
     \item We distinguish four cases
           \begin{itemize}
             \item Assignment at declaration
@@ -41,7 +41,7 @@
     \item {\tt q} and {\tt r} point to the same object
     \item Writing {\tt p = r} would make {\tt p} also point to the same object as {\tt q} and {\tt r}.
           {\tt bar} would remain untouched.
-    \item No copy constructors or {\tt Bar::operator =} are called
+    \item Neither copy constructor nor {\tt Bar::operator =} is called
   \end{itemize}
 \end{frame}
 
