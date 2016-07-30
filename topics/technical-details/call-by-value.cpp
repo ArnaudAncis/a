@@ -1,7 +1,6 @@
-void foo(Bar b)
-{
+void foo(Bar b) {
   b.x++;
 }
 
-Bar bar();
+Bar bar;
 foo(bar);

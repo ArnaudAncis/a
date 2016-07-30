@@ -8,8 +8,8 @@ struct Bar {
     : x(b.x), y(b.y) { }
 
   Bar& operator =(const Bar& b) {
-    this->x = b.x * 2;
-    this->y = b.y * 2;
+    this->x = b.x * 3;
+    this->y = b.y * 3;
     return *this;
   }
 };
