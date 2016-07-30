@@ -17,6 +17,7 @@
   id/.initial=sf,
   node style/.initial=unknown,
   stack frame/.style={minimum width=2cm,fill=red!50,font=\sc,draw},
+  invisible stack frame/.style={minimum width=2cm,draw=none},
   heap object/.style={minimum width=2cm,fill=blue!50,draw},
 }
 \newcommand{\alloc@block}[1][]{
@@ -42,6 +43,9 @@
 }
 \newcommand{\stackframe}[1][]{
   \alloc@block[node style=/ucll/pvm/stack frame,#1]
+}
+\newcommand{\invisiblestackframe}[1][]{
+  \alloc@block[node style=/ucll/pvm/invisible stack frame,#1,contents={}]
 }
 \newcommand{\heapobject}[1][]{
   \begin{scope}[xshift=2.3cm]
@@ -69,7 +73,9 @@
 % \input{aux-call-by-value.tex}
 % \input{aux-call-by-pointer.tex}
 % \input{aux-call-by-reference.tex}
-\input{aux-return-by-value.tex}
+% \input{aux-return-by-value.tex}
+% \input{aux-return-local-by-pointer.tex}
+\input{aux-return-heap-by-pointer.tex}
 
 % return by value
 % return by pointer
