@@ -195,6 +195,10 @@
             <td></td>
           </tr>
           <tr>
+            <td><%= topic('technical-details', 'Technical Details', handouts: false) %></td>
+            <td></td>
+          </tr>
+          <tr>
             <td><%= topic('compression-intro', 'Compression: Introduction', handouts: true) %></td>
             <td></td>
           </tr>
