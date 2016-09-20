@@ -8,17 +8,17 @@ struct Foo {
   int x;
 };
 
-Foo bar(Foo foo) {
-  foo.x++;
-  return foo;
+void bar(Foo foo1, Foo& foo2) {
+  foo2.x += foo1.x;
 }
 
 int main() {
   Foo foo1;
   Foo foo2 = foo1;
+  Foo foo3;
 
   std::cout << "A:" << foo1.x << std::endl;
   std::cout << "B:" << foo2.x << std::endl;
-  Foo foo3 = bar(foo1);
+  bar(foo1, foo3);
   std::cout << "C:" << foo3.x << std::endl;
 }
