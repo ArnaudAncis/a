@@ -1,0 +1,3 @@
+Use ucll-slides class in slides
+Use ucll-code
+Replace [font size=...] by [font=...]

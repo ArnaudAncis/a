@@ -1,0 +1,10 @@
+Question type: what would be a sensible function signature?
+Example: a function twice that doubles the value of a variable.
+Possible answers:
+  twice(int*)
+  twice(int&)
+
+Compression: also ask parameters
+How many bits, etc.
+
+Fill in types
