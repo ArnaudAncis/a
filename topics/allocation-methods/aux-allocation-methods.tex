@@ -1,4 +1,5 @@
 \usepackage{../pvm}
+\usepackage{ucll-code}
 \usepackage{fourier}
 \usepackage{bbding}
 
@@ -182,7 +183,7 @@
   \notrealcpp
   \begin{columns}
     \column{5cm}
-    \code[font size=\small,frame=none]{stack-allocation.cpp}
+    \code[font=\small,frame=none]{stack-allocation.cpp}
     \column{4cm}
     \begin{center}
       \begin{tikzpicture}[allocation/.style={-latex,thick},remember picture,overlay,scale=.5]
@@ -255,7 +256,7 @@
     \item Why not deallocate unused memory?
     \item Problem: can only deallocate what's on top of the stack
   \end{itemize}
-  \code[font size=\small,width=6cm]{stack-deallocation.cpp}
+  \code[font=\small,width=6cm]{stack-deallocation.cpp}
 \end{frame}
 
 \begin{frame}
@@ -339,7 +340,7 @@
   \notrealcpp
   \begin{columns}
     \column{5cm}
-    \code[font size=\small,frame=none]{heap-allocation.cpp}
+    \code[font=\small,frame=none]{heap-allocation.cpp}
     \column{4cm}
     \begin{center}
       \begin{tikzpicture}[allocation/.style={-latex,thick},remember picture,overlay,scale=.5]
