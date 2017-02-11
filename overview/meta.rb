@@ -1,7 +1,9 @@
-require 'MetaData'
-require 'Html'
-require 'Upload'
+require 'MetaData2'
+require 'Html2'
+require 'Template2'
+require 'Upload2'
 require 'Contracts'
+
 
 class Context
   include Contracts::TypeChecking
@@ -39,18 +41,17 @@ end
 
 
 meta_object do
-  extend MetaData::Actions
-  extend Html::Actions
-  extend Upload::Mixin
+  extend MetaData2
+  extend Template2::Actions
+  extend Upload2::Actions
 
-  def remote_directory
-    world.parent.remote_directory
-  end
+  inherit_remote_directory
 
-  html_template('overview', group_name: 'html', context: Context.new)
+  # html_template('overview', group_name: 'html', context: Context.new)
+  bind( { :html => template(input: 'overview.html.template', context: Context.new) } )
   
   uploadable('overview.html')
-  upload_action
+  # upload_action
 
-  group_action(:full, [:html, :upload])
+  # group_action(:full, [:html, :upload])
 end
