@@ -1,6 +1,7 @@
 \usepackage{../pvm}
 \usepackage{emerald}
 \usepackage[T1]{fontenc}
+\usepackage{ucll-code}
 
 \title{\cpp: Introduction}
 \author{Fr\'ed\'eric Vogels}
@@ -192,302 +193,286 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Efficiency \"Uber Alles!}
-  \begin{itemize}
-    \item \cpp\ was developed in them good ol' days
-          \begin{itemize}
-            \item Speed was very important
-            \item Memory usage to be kept at a minimum
-            \item Many different platforms
-          \end{itemize}
-    \item Efficiency required during both compilation and execution
-    \item Has many consequences on the design of the language
-    \item Understanding the reasons makes it easier to understand the language
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \begin{center}
-    \Huge How large is an {\tt int}?
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Answer}
-  \begin{quote}
-    There are five standard signed integer types : {\tt signed char}, {\tt short int}, {\tt int}, {\tt long int}, and {\tt long long int}.
-    In this list, each type provides at least as much storage as those preceding it in the list.
-    [...] Plain {\tt int}s have the natural size suggested by the architecture of the execution environment. \\
-    \hfill \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\cpp11 \S 3.9.1/2}
-  \end{quote}
-  \begin{center}
-    \begin{tabular}{lccccc}
-      & \rotatebox{90}{\tt char} & \rotatebox{90}{\tt short} & \rotatebox{90}{\tt int} & \rotatebox{90}{\tt long} & \rotatebox{90}{\tt long long} \\
-      \toprule
-      MSVC (32 bit) & 1 & 2 & 4 & 4 & 8 \\
-      MSVC (64 bit) & 1 & 2 & 4 & 4 & 8 \\
-      GCC (32 bit)  & 1 & 2 & 4 & 4 & 8 \\
-      GCC (64 bit)  & 1 & 2 & 4 & 8 & 8 \\
-    \end{tabular}
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Rationale}
-  \begin{itemize}
-    \item A 16 bit CPU cannot deal efficiently with 32 bit integers
-    \item Java: {\tt int} means ``give me a 32 bit signed integer''
-    \item \cpp: {\tt int} means ``give me the largest most efficient integral type on this platform''
-    \item Why 4 byte {\tt int}s on 64 bit platforms on MSVC and GCC?
-          \begin{itemize}
-            \item Probably to keep programs from breaking
-          \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{In Practice}
-  \begin{itemize}
-    \item You will generally use {\tt int}s.
-    \item You will generally assume it is 32 bit.
-    \item If important, you can use \link{http://en.cppreference.com/w/cpp/language/static_assert}{{\tt static\_assert}}
-    \item If size matters, \cpp11 introduced \link{http://en.cppreference.com/w/cpp/types/integer}{{\tt int32\_t}} and other such types
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \begin{center}
-    \Large Assuming {\tt sizeof(int) = 4}, what happens?
-    \code[width=5cm]{mult.cpp}
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Answer}
-  \begin{quote}
-    If during the evaluation of an expression, the result is not mathematically defined or not in the range of
-    representable values for its type, the behavior is undefined. \\
-    \hfill \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\cpp11 \S 5/4}
-  \end{quote}
-  \vskip5mm
-  Note that it is not just the result that is undefined but the behaviour of the entire program.
-\end{frame}
-
-\begin{frame}
-  \frametitle{Rationale}
-  \begin{itemize}
-    \item Many different representations for negative numbers
-    \item If \cpp\ standard makes promises regarding internal representation,
-          extra computations would be required on architectures not using that representation
-    \item Related example: Java and \link{https://en.wikipedia.org/wiki/Strictfp}{strictfp}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
   \frametitle{Java vs \cpp}
   \structure{Java}
   \begin{itemize}
-    \item Defines many aspects of VM in detail
-    \item Every ``real'' machine must emulate this VM perfectly
-    \item If VM disagrees with target machine: inefficient emulation
-    \item Luckily, today's architectures are very similar
+    \item Primary design goal: security
+    \item Ease of use
+    \item Programmers are fallible mentality
   \end{itemize}
   \vskip5mm
   \structure{\cpp}
   \begin{itemize}
-    \item Developed when architectures were very diverse
-    \item \cpp\ is determined to be efficient
-    \item \cpp's VM is the intersection of existing machines
-    \item Where two architectures differ, \cpp's VM remains vague
-    \item VM's specification has many undefined areas
+    \item Primary design goal: efficiency
+    \item Programmers are gods mentality
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Quiz}
-  \begin{center}
-    {\Large What happens?}\vskip1cm
-    \code[width=5cm]{array-out-of-bounds.cpp}
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Answer}
-  \begin{quote}
-    If both the pointer operand and the result point to elements of the same array object, or one past
-    the last element of the array object, the evaluation shall not produce an overflow; otherwise, the behavior is
-    undefined.\\
-    \hfill \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\cpp11 \S 5.7/6}
-  \end{quote}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Rationale}
+  \frametitle{Java vs \cpp: Array Indexing}
+  \code[language=c++14,width=5cm]{array-out-of-bounds.cpp}
+  \structure{Java}
   \begin{itemize}
-    \item Java checks every array indexing and throws an {\tt ArrayIndexOutOfBoundsException}
-          when you wander outside the array's bounds.
-    \item This checking requires extra CPU instructions.
-    \item \cpp\ does not check at all. You can use negative indices, or indices that
-          go beyond the end of the array, but the resulting behaviour is undefined.
-    \item Arrays are not safe, but neither are other containers
+    \item No array indexing goes unchecked
+    \item \texttt{ArrayIndexOutOfBounds} thrown in your face
+  \end{itemize}
+  \vskip2mm
+  \structure{\cpp}
+  \begin{itemize}
+    \item No checks whatsoever
+    \item Undefined behaviour
+    \item Possibly overwrites a random other variable
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{In Practice}
+  \frametitle{Java vs \cpp: Null Pointers}
+  \code[language=java,width=5cm]{null.java}
+  \structure{Java}
   \begin{itemize}
-    \item Generally, you'll assume your code is correct
-    \item For safety, you can use assertions (see later)
-    \item In debug mode, compilers can add safety measures
+    \item No member access goes unchecked
+    \item \texttt{NullPointereException} thrown in your face
+  \end{itemize}
+  \vskip2mm
+  \structure{\cpp}
+  \begin{itemize}
+    \item No checks whatsoever
+    \item Undefined behaviour
+    \item Possibly runs some random code
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Quiz}
-  \begin{center}
-    {\Large What happens?}\vskip2cm
-    \code[width=8cm]{missing-return.cpp}  
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Answer}
-  \begin{quote}
-    Flowing off the end of a function is equivalent to a return with no value; this results in undefined
-    behavior in a value-returning function. \\
-    \hfill \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\cpp11 \S6.6.3/2}
-  \end{quote}
+  \frametitle{Java vs \cpp: Null Pointers}
+  \code[language=java,width=5cm]{private.java}
+  \structure{Java}
   \begin{itemize}
-    \item Compiler is allowed (but not required!) to complain about missing {\tt return}.
-    \item If it compiles, running it results in undefined behavior.
+    \item \texttt{x} is safely locked away
+    \item No way to access it (in Java)
+  \end{itemize}
+  \vskip2mm
+  \structure{\cpp}
+  \begin{itemize}
+    \item Very easy to circumvent
+    \item It's more what you'd call a guideline than an actual rule
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Rationale}
+  \frametitle{Java vs \cpp: Null Pointers}
+  \structure{Java}
   \begin{itemize}
-    \item \cpp\ allows for such complicated constructs
-          that it becomes effectively \emph{impossible}
-          to determine whether every execution path ends in {\tt return}.
-    \item Since it is impossible to determine for \emph{every} program,
-          there is no requirement to detect it for \emph{any} program.
+    \item Memory safe
+    \item Can't peek nor poke around in arbitrary memory
+  \end{itemize}
+  \vskip2mm
+  \structure{\cpp}
+  \code[language=c++14]{memory.cpp}
+  \begin{itemize}
+    \item Whoops!
+    \item Overwrites entire memory space
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{In Practice}
+  \frametitle{Java vs \cpp: Garbage Collection}
+  \code[language=java]{allocation.java}
+  \structure{Java}
   \begin{itemize}
-    \item You \emph{will} encounter this kind of bugs
-    \item Using MSVC, debug mode seems to check more
+    \item Lost object
+    \item Garbage collector will find and recycle it
+  \end{itemize}
+  \vskip2mm
+  \structure{\cpp}
+  \begin{itemize}
+    \item Lost is lost, no safe way to recuperate it
+    \item Memory leak
+    \item You need to manually free the object's memory
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Quiz}
-  \begin{center}
-    {\Large What happens?}
-    \code[width=8cm]{type-system.cpp}  
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Answer}
-  \begin{quote}
-    A prvalue of type {\tt bool} can be converted to a prvalue of type {\tt int}, with {\tt false} becoming zero and {\tt true}
-    becoming one. \\
-    \hfill \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\cpp11 \S4.5/6}
-  \end{quote}
+  \frametitle{Java vs \cpp: Casting}
+  \code[language=java]{casting.java}
+  \structure{Java}
   \begin{itemize}
-    \item Passing along {\tt false} where {\tt int[]} is expected is allowed and well defined!
-    \item Function will receive null pointer.
+    \item Every object knows its (dynamic) type
+    \item Casts are checked at runtime
+    \item \texttt{ClassCastException} if wrong cast
+  \end{itemize}
+  \vskip2mm
+  \structure{\cpp}
+  \begin{itemize}
+    \item Many different casts
+    \item Some check, some don't
+    \item You \emph{can} force a cast to any type you want
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Rationale}
+  \frametitle{Java vs \cpp: Primitive/Fundamental Types}
+  \code[language=java]{primitive-types.java}
+  \structure{Java}
   \begin{itemize}
-    \item The type system's main purpose is to allow optimisations
-    \item Consider the expression {\tt x + y} 
-          \begin{itemize}
-            \item If you know the types of both {\tt x} and {\tt y}, you know
-                  which assembly instructions to use
-            \item If you don't know the types, you need runtime {\tt if}s that check
-                  the types at runtime ({\tt int}, {\tt double}, {\tt string}, \dots)
-                  and use the appropriate instructions to perform the addition
-          \end{itemize}
-    \item Type system is rather flexible
-    \item Defending against Murphy/Defending against Machiavelli
+    \item Integers are guaranteed to be two-complement 32 bit
+    \item Effect of overflow are predictable
+  \end{itemize}
+  \vskip2mm
+  \structure{\cpp}
+  \begin{itemize}
+    \item No specific internal representation guaranteed \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\tiny\cpp11 \S 3.9.1/2}
+    \item Undefined behaviour
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Quiz}
-  \begin{center}
-    {\Large What happens?}
-    \code[width=8cm]{uninitialized.cpp}  
-  \end{center}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Answer}
+  \frametitle{Java vs \cpp: Type Safety}
+  \code[language=java]{primitive-types.java}
+  \structure{Java}
   \begin{itemize}
-    \item If you do not initialise variables explicitly, they might contain random values
-    \item Some variables are guaranteed to be initialised to zero if you do not specify an initial value yourself
-    \item Better be safe than sorry: do not forget to initialise all your variables
+    \item Integers are guaranteed to be two-complement 32 bit
+    \item Effects of overflow are predictable
   \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{\cpp's Rationale}
+  \vskip2mm
+  \structure{\cpp}
   \begin{itemize}
-    \item Initialisation takes time
-    \item Only those variables that can be initialised for free, are automatically initialised
-    \item All other variables have undefined initial values
-          \begin{itemize}
-            \item Local variables
-            \item Object's member variables
-            \item Arrays
-            \item Allocated memory using {\tt new}
-            \item \dots
-          \end{itemize}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Java's Rationale}
-  \begin{itemize}
-    \item Uninitialised memory = recycled memory
-    \item Memory might contain sensitive information (e.g.\ passwords)
-    \item JVM zeroes memory to ensure apps cannot access such information
-  \end{itemize}
-  \code[width=.9\linewidth]{security.java}
-\end{frame}
-
-\begin{frame}
-  \frametitle{In Practice}
-  \begin{itemize}
-    \item You \emph{will} encounter this kind of bugs
-    \item MSVC's debug mode uses ``magic numbers''
-          \begin{itemize}
-            \item {\tt CCCCCCCC}: uninitialised stack memory
-            \item {\tt CDCDCDCD}: uninitialised heap memory
-            \item {\tt FDFDFDFD}: around heap allocated memory
-            \item {\tt FEEEFEEE}: freed memory
-          \end{itemize}
-    \item If your variables contain one of these values,
-          you know you probably are in trouble
+    \item No specific internal representation guaranteed \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\tiny\cpp11 \S 3.9.1/2}
+    \item Undefined behaviour
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Morality of this Presentation}
   \begin{itemize}
-    \item When encountering errors, don't make assumptions
-    \item Do check for missing returns
-    \item Do check for uninitialised variables
-    \item Watch out for special values while debugging
+    \item \cpp\ makes no compromises: efficiency \"uber alles
+    \item Throw all your assumptions overboard
+    \item Take necessary safety precautions
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Why \cpp?}
+  \begin{center}
+    \begin{tabular}{cc}
+      \textbf{Ranking} & \textbf{Taal} \\
+      \toprule
+      1 & Java \\
+      2 & C \\
+      3 & C++ \\
+      4 & C$^\sharp$ \\
+      5 & Python \\
+    \end{tabular}
+    \vskip5mm
+    \link{http://www.tiobe.com/tiobe-index/}{\tiny TIOBE Index for January 2017}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Applications Written in \cpp}
+  \begin{columns}
+    \column{5cm}
+    \begin{itemize}
+      \item Browsers
+            \begin{itemize}
+              \item Chrome
+              \item Internet Explorer
+              \item Firefox
+              \item Safari
+              \item Opera
+            \end{itemize}
+      \item MS Office
+            \begin{itemize}
+              \item Word
+              \item Excel
+              \item Access
+              \item Powerpoint
+              \item Outlook
+            \end{itemize}
+    \end{itemize}
+    \column{5cm}
+    \begin{itemize}
+      \item Windows/Linux GUIs
+      \item JVM
+      \item MySQL
+      \item MS SQL Server
+      \item MongoDB
+      \item Photoshop
+      \item Games
+            \begin{itemize}
+              \item Id Tech 5, 6
+              \item Unreal Engine
+              \item Most games
+            \end{itemize}
+    \end{itemize}
+  \end{columns}
+  \vskip4mm
+  \structure{In summary}
+  \begin{center}
+    Most desktop applications
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Why \cpp}
+  \begin{itemize}
+    \item Java takes many choices away from you
+    \item \cpp\ gives you more options
+    \item \cpp\ allows you to better understand the why behind things
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example}
+  \code[language=java]{arguments.java}
+  \begin{itemize}
+    \item Java always passes arguments by value
+    \item Functions receive a \emph{copy}
+    \item Impossible to write a \texttt{swap} function
+  \end{itemize}
+  \code[language=java]{swap.java}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example}
+  \code[language=c++14]{swap.cpp}
+  \begin{itemize}
+    \item \cpp\ allows you to choose
+    \item You can pass by value, by pointer or by reference
+    \item You can give readonly access
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Other Examples}
+  \structure{Inheritance}
+  \begin{itemize}
+    \item Java only supports single inheritance
+    \item \cpp\ offers multiple inheritance
+    \item \cpp\ offers public, protected, private inheritance
+  \end{itemize}
+  \vskip5mm
+  \structure{Overriding}
+  \begin{itemize}
+    \item In Java all methods are overridable
+    \item \cpp\ there are ``regular'' and virtual methods
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Other Examples}
+  \structure{Generics}
+  \begin{itemize}
+    \item Java only class types
+    \item \cpp\ allows any type to be used
+    \item \cpp\ supports specialisation
+    \item \cpp\ supports template metaprogramming
+  \end{itemize}
+  \vskip5mm
+  \structure{Allocation}
+  \begin{itemize}
+    \item Three types of allocation
+    \item Java picks which type is used for what
+    \item \cpp\ allows you to choose yourself
   \end{itemize}
 \end{frame}
 
