@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 \usetikzlibrary{shadows,shapes.multipart}
 
 \title{Classes: Overview}
@@ -76,7 +76,7 @@
 
 \begin{frame}
   \frametitle{Constructors}
-  \code[frame=lines,font size=\small]{constructors.cpp}
+  \code[frame=lines,font=\small]{constructors.cpp}
   \begin{tikzpicture}[overlay,remember picture,ref/.style={red,ultra thick,-latex,opacity=.75}]
     \only<2>{
       \draw[ref] (name field ref) -- (name field);
@@ -207,7 +207,7 @@
     \item Introduced in Java 7
   \end{itemize}
   \vskip5mm
-  \code[frame=lines,language=java,font size=\small,width=.9\linewidth]{try-with-resources.java}
+  \code[frame=lines,language=java,font=\small,width=.9\linewidth]{try-with-resources.java}
 \end{frame}
 
 \begin{frame}
@@ -247,16 +247,16 @@
 
 \begin{frame}
   \frametitle{Destructors: Example}
-  \code[frame=lines,font size=\small]{destructor-example.cpp}
+  \code[frame=lines,font=\small]{destructor-example.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{File Layout}
   \begin{columns}
     \column{6cm}
-    \code[frame=lines,font size=\small,width=.99\linewidth,title={Foo.cpp}]{layout.cpp}
+    \code[frame=lines,font=\small,width=.99\linewidth,title={Foo.cpp}]{layout.cpp}
     \column{6cm}
-    \code[frame=lines,font size=\small,width=.99\linewidth,title={Foo.h}]{layout.h}
+    \code[frame=lines,font=\small,width=.99\linewidth,title={Foo.h}]{layout.h}
   \end{columns}
 \end{frame}
 
