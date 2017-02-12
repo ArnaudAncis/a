@@ -57,28 +57,6 @@
       </p>
 
       <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-
-             int main()
-             {
-               std::cout << "Hello world" << std::endl;
-
-               return 0;
-             }
-           END
-
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-           END
-         end                                  
-      %>
-
-      <%=
          interpretation(<<-END)
            #include <iostream>
 
@@ -296,8 +274,9 @@
             produce_output('grade-average')
             <<-END
               <p>
-                Write a program that computes the average grade for courses. The input is structured
-                as follows:
+                Write a program that computes the average grade for courses. The input comes from a file
+                but you can assume it's being piped in through STDIN, i.e. you should read it in using <code>std::cin</code>.
+                The input is structured as follows:
               </p>
               <ul>
                 <li>An integer describing the number of courses.</li>

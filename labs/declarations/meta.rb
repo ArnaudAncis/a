@@ -1,8 +1,9 @@
-require 'MetaData'
-require 'Html'
+require 'MetaData2'
+require 'Html2'
+require 'Template2'
 require 'Code'
 require 'Cpp'
-require 'Upload'
+require 'Upload2'
 require 'Html'
 require 'Environment'
 require 'pathname'
@@ -62,20 +63,17 @@ end
 
 
 meta_object do
-  extend MetaData::Actions
-  extend Html::Actions
-  extend Upload::Mixin
+  extend MetaData2
+  extend Template2::Actions
+  extend Upload2::Actions
 
   def remote_directory
     world.parent.remote_directory + Pathname.pwd.basename.to_s
   end
 
-  html_template('assignment', context: Context.new, group_name: 'html')
+  bind( { :html => template(input: 'assignment.html.template', context: Context.new) } )
   
   uploadable('assignment.html')
   uploadable( *Dir['*.cpp'].select { |file| /temp/ !~ file } )
-  uploadable_globs('*.txt')
-  upload_action
-
-  group_action(:full, [:html, :upload])
+  uploadable( *Dir['*.txt'] )
 end
