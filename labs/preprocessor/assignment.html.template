@@ -203,82 +203,15 @@
       </div>
                                   
       <%= format_exercise do
-            source = <<-END
-              #include <iostream>
-
-              // Belongs in main.cpp
-              int main()
-              {
-                  std::cout << "Enter a value: ";
-                  unsigned n = next_unsigned();
-
-                  if (is_prime(n))
-                  {
-                      std::cout << n << " is prime" << std::endl;
-                  }
-                  else
-                  {
-                      std::cout << n << " is not prime" << std::endl;
-                  }
-              }
-
-              // Belongs in ioutil.cpp
-              unsigned next_unsigned()
-              {
-                  unsigned x;
-                  std::cin >> x;
-                  return x;
-              }
-
-              // Belongs in primes.cpp
-              bool is_prime(unsigned n)
-              {
-                  if (n < 2)
-                  {
-                      return false;
-                  }
-                  else
-                  {
-                      unsigned k = 2;
-
-                      while (sqr(k) <= n)
-                      {
-                          if (is_divisible_by(n, k))
-                          {
-                              return false;
-                          }
-
-                          ++k;
-                      }
-
-                      return true;
-                  }
-              }
-
-              // Belongs in arithmetic.cpp
-              bool is_divisible_by(unsigned a, unsigned b)
-              {
-                  return b != 0 ? a % b == 0 : false;
-              }
-
-              // Belongs in arithmetic.cpp
-              unsigned sqr(unsigned x)
-              {
-                  return x * x;
-              }
-            END
-
-            <<-END
+          <<-END
               <p>
-                Split the source code below in several smaller files. Make use of header
-                files and include guards.
+                Open the <code>split-in-files</code> solution.
+                All code has been grouped within a single file named <code>app.cpp</code>.
+                Split it up so that each function receives its own <code>.cpp</code> file.
+                Also create the necessary header files and add the appropriate <code>#include</code>s.
               </p>
-              
-              #{source_editor source}
-             
-              #{solution_link 'split-solution.txt'}
-            END
-          end
+          END
+        end
       %>
 
     </div>
