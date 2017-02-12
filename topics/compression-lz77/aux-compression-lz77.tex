@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 \usepackage{siunitx}
 \usepackage{ifthen}
 
@@ -61,7 +61,7 @@
   \newcommand{\drawbox}[1]{\draw (#1.south west) rectangle (#1.north east);}
   \begin{frame}
     \frametitle{Example Input}
-    \code[language={},font size=\small,width=\linewidth,frame=none]{singer.txt}
+    \code[language={},font=\small,width=\linewidth,frame=none]{singer.txt}
     \begin{tikzpicture}[overlay,remember picture,ref/.style={-latex,thick}]
       \visible<2->{
         \drawbox{inger1}
