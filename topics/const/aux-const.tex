@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 \usetikzlibrary{shadows,shapes.multipart}
 
 \title{Const}
@@ -18,11 +18,15 @@
   \begin{itemize}
     \item Allows function to modify variables (e.g.\ out parameters)
     \item Efficiency (e.g.\ with arrays/vectors)
+          \begin{itemize}
+            \item Pointer to data structure is much smaller than data structure itself
+          \end{itemize}
   \end{itemize}
   \vskip5mm
   \structure{Problem}
   \begin{itemize}
-    \item What if we want efficiency, but not allow changes?
+    \item By passing pointer, we are also giving write access
+    \item What if we want an efficient way to give \emph{readonly} access?
   \end{itemize}
 \end{frame}
 
