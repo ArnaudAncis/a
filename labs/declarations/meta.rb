@@ -74,6 +74,4 @@ meta_object do
   bind( { :html => template(input: 'assignment.html.template', context: Context.new) } )
   
   uploadable('assignment.html')
-  uploadable( *Dir['*.cpp'].select { |file| /temp/ !~ file } )
-  uploadable( *Dir['*.txt'] )
 end
