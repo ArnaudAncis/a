@@ -205,62 +205,19 @@
                 so that writes the numbers starting with <code>from</code> until <code>1</code>
                 to <code>std::cout</code>.
               </p>
+              <p>
+                Tests are provided: run them with CTRL + F5.
+              </p>
             END
           end
       %>
 
       <%= format_exercise do
             <<-END
-              <p>
-                Write a program that asks for an integer N and outputs
-                the Nth prime.
-              </p>
-
-              #{solution_link 'prime.cpp'}
-            END
-          end
-      %>
-
-      <%= format_exercise do
-            produce_output('grade-average')
-            <<-END
-              <p>
-                Write a program that computes the average grade for courses. The input comes from a file
-                but you can assume it's being piped in through STDIN, i.e. you should read it in using <code>std::cin</code>.
-                The input is structured as follows:
-              </p>
-              <ul>
-                <li>An integer describing the number of courses.</li>
-                <li>For each course:
-                    <ul>
-                      <li>The name of the course</li>
-                      <li>The number of grades N as an integer</li>
-                      <li>N grades as doubles</li>
-                    </ul>
-                </li>
-              </ul>
-              <p>
-                The output should be structured as follows:
-              </p>
-              <ul>
-                <li>One line per course. Each line contains
-                    <ul>
-                      <li>The name of the course</li>
-                      <li>A single space</li>
-                      <li>The average rounded to two decimals.</li>
-                    </ul>
-                </li>
-              </ul>
-              <p>
-                These <a href="grade-average-input.txt">inputs</a> should
-                produce these <a href="grade-average-output.txt">outputs</a>.
-              </p>
-
-              <p>
-                Do not put everything in a single function.
-              </p>
-
-              #{solution_link 'grade-average.cpp'}
+                <p>
+                  Open the solution in <code>labs/declarations/countdown</code>.
+                  Write the function <code>nth_prime</code> that returns the nth prime.
+                </p>
             END
           end
       %>
