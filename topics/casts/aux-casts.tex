@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 \usetikzlibrary{shadows,shapes.multipart}
 
 \title{Casts}
@@ -99,22 +99,22 @@
 
 \begin{frame}
   \frametitle{Examples}
-  \code[font size=\small]{static-vs-dynamic-casts1.cpp}
+  \code[font=\small]{static-vs-dynamic-casts1.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Examples}
-  \code[font size=\small]{static-vs-dynamic-casts2.cpp}
+  \code[font=\small]{static-vs-dynamic-casts2.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Examples}
-  \code[font size=\small]{static-vs-dynamic-casts3.cpp}
+  \code[font=\small]{static-vs-dynamic-casts3.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Examples}
-  \code[font size=\small]{static-vs-dynamic-casts4.cpp}
+  \code[font=\small]{static-vs-dynamic-casts4.cpp}
 \end{frame}
 
 \begin{frame}
@@ -125,7 +125,7 @@
     \item Library offers specialised cast operators for {\tt std::shared\_ptr}
     \item \emph{No} specialised casts for {\tt std::unique\_ptr} (AFAICT)
   \end{itemize}
-  \code[font size=\small,width=.9\linewidth]{shared-ptr-casts.cpp}
+  \code[font=\small,width=.9\linewidth]{shared-ptr-casts.cpp}
 \end{frame}
 
 \section{{\tt reinterpret\_cast}}
@@ -141,7 +141,7 @@
     \item No runtime checks
     \item Bad casts lead to undefined behaviour
   \end{itemize}
-  \code[font size=\small]{reinterpret_cast.cpp}
+  \code[font=\small]{reinterpret_cast.cpp}
 \end{frame}
 
 \begin{frame}
@@ -152,11 +152,11 @@
   \end{itemize}
   \begin{overprint}
     \onslide<handout:0|1>
-    \code[font size=\small]{find-password1.cpp}
+    \code[font=\small]{find-password1.cpp}
     \onslide<handout:0|2>
-    \code[font size=\tiny,width=.9\linewidth]{find-password2.cpp}
+    \code[font=\tiny,width=.9\linewidth]{find-password2.cpp}
     \onslide<handout:0|3>
-    \code[font size=\tiny,width=.8\linewidth]{find-password3.cpp}
+    \code[font=\tiny,width=.8\linewidth]{find-password3.cpp}
   \end{overprint}
 \end{frame}
 
@@ -210,7 +210,7 @@
 
 \begin{frame}
   \frametitle{FAT12}
-  \code[font size=\small,width=\linewidth]{read-data.cpp}
+  \code[font=\small,width=\linewidth]{read-data.cpp}
 \end{frame}
 
 \begin{frame}
@@ -230,7 +230,7 @@
             \item \dots
           \end{itemize}
   \end{itemize}
-  \code[font size=\small]{reinterpret.cpp}
+  \code[font=\small]{reinterpret.cpp}
 \end{frame}
 
 \section{{\tt const\_cast}}
@@ -244,7 +244,7 @@
     \item Only used for old C libraries
     \item Just don't use it
   \end{itemize}
-  \code[font size=\small,width=.95\linewidth]{const-cast.cpp}
+  \code[font=\small,width=.95\linewidth]{const-cast.cpp}
 \end{frame}
 
 \end{document}
