@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 
 \usetikzlibrary{arrows.meta}
 
@@ -183,12 +183,12 @@
 
 \begin{frame}
   \frametitle{Public Inheritance: Example}
-  \code[font size=\small]{public-inheritance.cpp}
+  \code[font=\small]{public-inheritance.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Private Inheritance: Example}
-  \code[font size=\small]{private-inheritance.cpp}
+  \code[font=\small]{private-inheritance.cpp}
 \end{frame}
 
 \begin{frame}
@@ -231,7 +231,7 @@
     \item {\tt B} is then a \emph{subtype} of {\tt A}
     \item Everywhere an {\tt A} is needed, a {\tt B} will work too
   \end{itemize}
-  \code[font size=\small,language=java]{subtype.java}
+  \code[font=\small,language=java]{subtype.java}
 \end{frame}
 
 \begin{frame}
@@ -240,7 +240,7 @@
     \item Public inheritance: {\tt B} is a subtype of {\tt A}
     \item Nonpublic inheritance: {\tt B} is \emph{not} a subtype of {\tt A}
   \end{itemize}
-  \code[font size=\small]{subtype.cpp}
+  \code[font=\small]{subtype.cpp}
 \end{frame}
 
 \section{Virtual Methods}
@@ -314,7 +314,7 @@
 
 \begin{frame}
   \frametitle{Example}
-  \code[font size=\small]{abstract-example.cpp}
+  \code[font=\small]{abstract-example.cpp}
 \end{frame}
 
 \section{Multiple Inheritance}
@@ -336,17 +336,17 @@
 
 \begin{frame}
   \frametitle{Multiple Inheritance: Example}
-  \code[title={Java version},language=java,font size=\small,width=.9\linewidth]{multiple.java}
+  \code[title={Java version},language=java,font=\small,width=.9\linewidth]{multiple.java}
 \end{frame}
 
 \begin{frame}
   \frametitle{Multiple Inheritance: Example}
-  \code[title={\cpp\ version},font size=\small,width=.9\linewidth]{multiple.cpp}
+  \code[title={\cpp\ version},font=\small,width=.9\linewidth]{multiple.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Problems With Multiple Inheritance}
-  \code[font size=\small]{multiple-inheritance.cpp}
+  \code[font=\small]{multiple-inheritance.cpp}
   \begin{center}
     \begin{tikzpicture}[class/.style={draw,circle,minimum size=1cm},
                         inherits/.style={-{Triangle[open,length=5pt,width=10pt]}}]
@@ -364,7 +364,7 @@
 
 \begin{frame}
   \frametitle{Problems With Multiple Inheritance}
-  \code[font size=\small]{multiple-inheritance.cpp}
+  \code[font=\small]{multiple-inheritance.cpp}
   \begin{itemize}
     \item {\tt C} inherits from {\tt A} twice
     \item $\rightarrow$ {\tt C} inherits {\tt x} twice!
@@ -375,7 +375,7 @@
 
 \begin{frame}
   \frametitle{Preventing Inheriting Member Variables Twice}
-  \code[font size=\small]{virtual-inheritance-example.cpp}
+  \code[font=\small]{virtual-inheritance-example.cpp}
   \begin{itemize}
     \item \link{https://en.wikipedia.org/wiki/Virtual_inheritance}{Virtual inheritance}
     \item {\tt A} is only inherited once by {\tt C}
@@ -430,7 +430,7 @@
   \begin{itemize}
     \item Just don't do it
   \end{itemize}
-  \code[font size=\small]{virtual-calls.cpp}
+  \code[font=\small]{virtual-calls.cpp}
 \end{frame}
 
 \begin{frame}
@@ -469,7 +469,7 @@
 
 \begin{frame}
   \frametitle{Destructors: Important}
-  \code[font size=\small]{virtual-destructors.cpp}
+  \code[font=\small]{virtual-destructors.cpp}
 \end{frame}
 
 \begin{frame}
@@ -479,10 +479,10 @@
           call the correct destructor
     \item Destructor must be virtual
           \vskip2mm
-          \code[font size=\small]{virtual-destructors2.cpp}
+          \code[font=\small]{virtual-destructors2.cpp}
     \item Why not abstract? \cake
           \vskip2mm
-          \code[font size=\small]{virtual-destructors3.cpp}
+          \code[font=\small]{virtual-destructors3.cpp}
     \item Rule of thumb: add virtual destructor to each class
   \end{itemize}
 \end{frame}

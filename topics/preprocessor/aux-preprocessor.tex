@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 \usetikzlibrary{shadows,shapes.multipart}
 
 \title{Preprocessor}
@@ -544,9 +544,9 @@
   \frametitle{Summary}
   \begin{columns}
     \column{6cm}
-    \code[title=X.cpp,frame=lines,font size=\small]{summary.cpp}
+    \code[title=X.cpp,frame=lines,font=\small]{summary.cpp}
     \column{6cm}
-    \code[title=X.h,frame=lines,font size=\small]{summary.h}
+    \code[title=X.h,frame=lines,font=\small]{summary.h}
   \end{columns}
 \end{frame}
 
@@ -572,10 +572,10 @@
   \begin{columns}[t]
     \column{5cm}
     \begin{center} Before preprocessing \end{center}
-    \code[font size=\small,frame=lines,width=5cm]{constant.cpp}
+    \code[font=\small,frame=lines,width=5cm]{constant.cpp}
     \column{5cm}
     \begin{center} After preprocessing \\ (what the compiler sees) \end{center}
-    \code[font size=\small,frame=lines,width=5cm]{constant-result.cpp}
+    \code[font=\small,frame=lines,width=5cm]{constant-result.cpp}
   \end{columns}
 \end{frame}
 
@@ -586,9 +586,9 @@
   \end{itemize}
   \begin{overprint}
     \onslide<1|handout:1>
-    \code[font size=\small,frame=lines,title=Before preprocessing]{nullcheck.cpp}
+    \code[font=\small,frame=lines,title=Before preprocessing]{nullcheck.cpp}
     \onslide<2|handout:2>
-    \code[font size=\small,frame=lines,title=After preprocessing]{nullcheck-result.cpp}
+    \code[font=\small,frame=lines,title=After preprocessing]{nullcheck-result.cpp}
   \end{overprint}
 \end{frame}
 
@@ -600,9 +600,9 @@
   \end{itemize}
   \begin{overprint}
     \onslide<1|handout:1>
-    \code[font size=\small,frame=lines,title=Before preprocessing]{forrange.cpp}
+    \code[font=\small,frame=lines,title=Before preprocessing]{forrange.cpp}
     \onslide<2|handout:2>
-    \code[font size=\small,frame=lines,title=After preprocessing]{forrange-result.cpp}
+    \code[font=\small,frame=lines,title=After preprocessing]{forrange-result.cpp}
   \end{overprint}
 \end{frame}
 
@@ -614,9 +614,9 @@
   \end{itemize}
   \begin{overprint}
     \onslide<1|handout:1>
-    \code[font size=\small,frame=lines,title=Before preprocessing]{nullcheck2.cpp}
+    \code[font=\small,frame=lines,title=Before preprocessing]{nullcheck2.cpp}
     \onslide<2|handout:2>
-    \code[font size=\small,frame=lines,title=After preprocessing]{nullcheck2-result.cpp}
+    \code[font=\small,frame=lines,title=After preprocessing]{nullcheck2-result.cpp}
   \end{overprint}
 \end{frame}
 
@@ -630,9 +630,9 @@
   \end{itemize}
   \begin{overprint}
     \onslide<1|handout:1>
-    \code[font size=\small,frame=lines,title=Before preprocessing]{nullcheck3.cpp}
+    \code[font=\small,frame=lines,title=Before preprocessing]{nullcheck3.cpp}
     \onslide<2|handout:2>
-    \code[font size=\small,frame=lines,title=After preprocessing]{nullcheck3-result.cpp}
+    \code[font=\small,frame=lines,title=After preprocessing]{nullcheck3-result.cpp}
   \end{overprint}
 \end{frame}
 
@@ -644,9 +644,9 @@
   \vskip1cm
   \begin{overprint}
     \onslide<1|handout:1>
-    \code[font size=\small,frame=lines,title=Before preprocessing]{min1.cpp}
+    \code[font=\small,frame=lines,title=Before preprocessing]{min1.cpp}
     \onslide<2|handout:2>
-    \code[font size=\small,frame=lines,title=After preprocessing]{min2.cpp}
+    \code[font=\small,frame=lines,title=After preprocessing]{min2.cpp}
   \end{overprint}
 \end{frame}
 
@@ -667,7 +667,7 @@
 
 \begin{frame}
   \frametitle{Important Usage: Debug and Release Builds}
-  \code[font size=\small]{assert.cpp}
+  \code[font=\small]{assert.cpp}
   \begin{itemize}
     \item {\tt assert} macro to check assumptions
     \item Comes in very handy in  \cpp

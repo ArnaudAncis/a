@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 
 \usetikzlibrary{shadows,shapes.multipart}
 
@@ -25,7 +25,7 @@
 
 \begin{frame}
   \frametitle{Heap Allocation}
-  \code[font size=\small]{heap-allocation.cpp}
+  \code[font=\small]{heap-allocation.cpp}
   \begin{procontralist}
     \con Memory leak
   \end{procontralist}
@@ -33,7 +33,7 @@
 
 \begin{frame}
   \frametitle{Heap Allocation}
-  \code[font size=\small]{delete-person.cpp}
+  \code[font=\small]{delete-person.cpp}
   \begin{procontralist}
     \pro Memory gets deleted if all goes well
     \con Memory leak in case of exceptions
@@ -44,7 +44,7 @@
 
 \begin{frame}
   \frametitle{Heap Allocation}
-  \code[font size=\small]{person-deleter.cpp}
+  \code[font=\small]{person-deleter.cpp}
   \begin{procontralist}
     \pro Memory guaranteed to be freed
     \con Need to remember to always use {\tt Person\_deleter}
@@ -54,7 +54,7 @@
 
 \begin{frame}
   \frametitle{Heap Allocation}
-  \code[font size=\small]{deleter.cpp}
+  \code[font=\small]{deleter.cpp}
   \begin{procontralist}
     \pro Memory guaranteed to be freed
     \pro {\tt deleter} usable on all types
@@ -64,7 +64,7 @@
 
 \begin{frame}
   \frametitle{Heap Allocation}
-  \code[font size=\small,width=.9\linewidth]{smart_pointer.cpp}
+  \code[font=\small,width=.9\linewidth]{smart_pointer.cpp}
   \begin{procontralist}
     \pro Memory guaranteed to be freed
     \pro {\tt smart\_pointer} usable on all types
@@ -74,7 +74,7 @@
 
 \begin{frame}
   \frametitle{Solving The Syntax Issue}
-  \code[font size=\small]{smart_pointer2.cpp}
+  \code[font=\small]{smart_pointer2.cpp}
   \begin{itemize}
     \item We want {\tt p} to look as much like a regular pointer as possible
   \end{itemize}
@@ -82,7 +82,7 @@
 
 \begin{frame}
   \frametitle{Solving The Syntax Issue}
-  \code[font size=\small]{overload-member-access.cpp}
+  \code[font=\small]{overload-member-access.cpp}
   \begin{itemize}
     \item Overloading {\tt ->} operator is possible
   \end{itemize}
@@ -100,7 +100,7 @@
 
 \begin{frame}
   \frametitle{Dereferencing Smart Pointers}
-  \code[font size=\small]{overload-dereference.cpp}
+  \code[font=\small]{overload-dereference.cpp}
   \begin{itemize}
     \item Overloading {\tt ->} operator is possible
   \end{itemize}
@@ -125,7 +125,7 @@
 
 \begin{frame}
   \frametitle{Problem}
-  \code[font size=\small,width=.9\linewidth]{duplication.cpp}
+  \code[font=\small,width=.9\linewidth]{duplication.cpp}
   \begin{enumerate}
     \item We create a new person {\tt q}, aged 20
     \item We call {\tt make\_older}, passing the smart pointer by value.
@@ -168,7 +168,7 @@
 
 \begin{frame}
   \frametitle{Fix to the Problem}
-  \code[font size=\small,width=.9\linewidth]{duplication2.cpp}
+  \code[font=\small,width=.9\linewidth]{duplication2.cpp}
 \end{frame}
 
 \begin{frame}
@@ -177,7 +177,7 @@
     \item For every object, we want exactly one owner
     \item We need to prohibit copying smart pointers
   \end{itemize}
-  \code[font size=\small,width=.9\linewidth]{prohibiting-copies.cpp}
+  \code[font=\small,width=.9\linewidth]{prohibiting-copies.cpp}
 \end{frame}
 
 \begin{frame}
@@ -186,7 +186,7 @@
     \item Remove copy constructor
     \item Remove assignment operator
   \end{itemize}
-  \code[font size=\small,width=.9\linewidth]{prohibiting-copies-solution.cpp}
+  \code[font=\small,width=.9\linewidth]{prohibiting-copies-solution.cpp}
 \end{frame}
 
 \begin{frame}
@@ -196,12 +196,12 @@
     \item Possible to write {\tt transfer} function
     \item Technical details not important (\link{http://thbecker.net/articles/rvalue_references/section_01.html}{r-value references})
   \end{itemize}
-  \code[font size=\small]{transfer.cpp}
+  \code[font=\small]{transfer.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Transferring Ownership: Example}
-  \code[font size=\small,width=.9\linewidth]{transfer-example.cpp}
+  \code[font=\small,width=.9\linewidth]{transfer-example.cpp}
 \end{frame}
 
 \begin{frame}
@@ -224,7 +224,7 @@
 
 \begin{frame}
   \frametitle{{\tt std::unique\_ptr} Example}
-  \code[font size=\small,width=.95\linewidth]{unique-ptr-example.cpp}
+  \code[font=\small,width=.95\linewidth]{unique-ptr-example.cpp}
 \end{frame}
 
 \begin{frame}
@@ -232,7 +232,7 @@
   \begin{itemize}
     \item {\tt std::make\_unique<T>} can take the same arguments as {\tt T}'s constructors
   \end{itemize}
-  \code[font size=\small]{magic-make-unique.cpp}
+  \code[font=\small]{magic-make-unique.cpp}
 \end{frame}
 
 \begin{frame}

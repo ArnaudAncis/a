@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 
 \usetikzlibrary{shadows,shapes.multipart}
 
@@ -115,7 +115,7 @@
 
 \begin{frame}
   \frametitle{Explicit Release}
-  \code[font size=\small]{explicit-delete.cpp}
+  \code[font=\small]{explicit-delete.cpp}
   \begin{itemize}
     \item Horribly fragile
     \item What if {\tt ...} throws exception?
@@ -124,7 +124,7 @@
 \end{frame}
 
 \begin{frame}
-  \code[font size=\small]{using-deleter.cpp}
+  \code[font=\small]{using-deleter.cpp}
 \end{frame}
 
 \begin{frame}
@@ -143,7 +143,7 @@
 \end{frame}
 
 \begin{frame}
-  \code[font size=\small]{intarray.cpp}
+  \code[font=\small]{intarray.cpp}
 \end{frame}
 
 \begin{frame}
@@ -157,7 +157,7 @@
 
 \begin{frame}
   \frametitle{Example: Memory Resource}
-  \code[font size=\small]{vector.cpp}
+  \code[font=\small]{vector.cpp}
   \begin{itemize}
     \item {\tt ns} allocates memory
     \item This memory is deallocated automatically by {\tt ns}'s destructor
@@ -167,7 +167,7 @@
 
 \begin{frame}
   \frametitle{Example: File Resource}
-  \code[font size=\small,width=.9\linewidth]{file.cpp}
+  \code[font=\small,width=.9\linewidth]{file.cpp}
 \end{frame}
 
 \end{document}

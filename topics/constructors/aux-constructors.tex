@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 \usetikzlibrary{shadows,shapes.multipart}
 
 \title{Classes: Constructors}
@@ -62,10 +62,10 @@
   \begin{itemize}
     \item Forcing no default constructor
           \vskip1mm
-          \code[frame=lines,font size=\small]{no-default-constructor.cpp}
+          \code[frame=lines,font=\small]{no-default-constructor.cpp}
     \item Force default constructor generation
           \vskip1mm
-          \code[frame=lines,font size=\small]{force-default-constructor.cpp}
+          \code[frame=lines,font=\small]{force-default-constructor.cpp}
   \end{itemize}
 \end{frame}
 
@@ -74,7 +74,7 @@
   \begin{itemize}
     \item Custom default constructor
           \vskip1mm
-          \code[frame=lines,font size=\small]{custom-default-constructor.cpp}
+          \code[frame=lines,font=\small]{custom-default-constructor.cpp}
   \end{itemize}
 \end{frame}
 
@@ -122,7 +122,7 @@
     \item Can be explicitly generated (using {\tt = default})
     \item Can be explicitly omitted (using {\tt = delete})
   \end{itemize}
-  \code[frame=lines,font size=\small]{implicit-copy-constructor.cpp}
+  \code[frame=lines,font=\small]{implicit-copy-constructor.cpp}
 \end{frame}
 
 \begin{frame}
@@ -198,7 +198,7 @@
 
 \begin{frame}
   \frametitle{Example}
-  \code[frame=lines,font size=\small]{move-constructor.cpp}
+  \code[frame=lines,font=\small]{move-constructor.cpp}
 \end{frame}
 
 \begin{frame}
@@ -297,9 +297,9 @@
   \vskip5mm
   \begin{overprint}
     \onslide<handout:1|1>
-    \code[frame=lines,font size=\small]{implicit1.cpp}
+    \code[frame=lines,font=\small]{implicit1.cpp}
     \onslide<handout:2|2>
-    \code[frame=lines,font size=\small]{implicit2.cpp}
+    \code[frame=lines,font=\small]{implicit2.cpp}
   \end{overprint}
 \end{frame}
 
@@ -309,7 +309,7 @@
     \item Generally, you don't want implicit casts
     \item Add {\tt explicit} before unary constructor
   \end{itemize}
-  \code[frame=lines,font size=\small]{explicit.cpp}
+  \code[frame=lines,font=\small]{explicit.cpp}
 \end{frame}
 
 \end{document}

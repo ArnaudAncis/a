@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 \usetikzlibrary{shadows,shapes.multipart}
 
 \title{Operator Overloading}
@@ -40,11 +40,11 @@
 {
   \newcommand{\showcode}[1]{
     \onslide<#1|handout:0>
-    \code[font size=\small,width=.9\linewidth]{rsa#1.cpp}
+    \code[font=\small,width=.9\linewidth]{rsa#1.cpp}
   }
   \newcommand{\showcodehandout}[2]{
     \onslide<0|handout:#1>
-    \code[font size=\small,width=.9\linewidth]{rsa#2.cpp}
+    \code[font=\small,width=.9\linewidth]{rsa#2.cpp}
   }
 
   \begin{frame}
@@ -90,7 +90,7 @@
 
 \begin{frame}
   \frametitle{Example: {\tt TimeSpan}}
-  \code[font size=\small]{timespan.cpp}
+  \code[font=\small]{timespan.cpp}
 \end{frame}
 
 \begin{frame}
@@ -100,7 +100,7 @@
 
 \begin{frame}
   \frametitle{{\tt TimeSpan} Addition}
-  \code[font size=\small,width=\linewidth]{timespan-addition.cpp}
+  \code[font=\small,width=\linewidth]{timespan-addition.cpp}
 
   \begin{tikzpicture}[overlay,remember picture,box/.style={red,thick}]
     \only<handout:1|2>{\drawboxaround{operator}}
@@ -139,12 +139,12 @@
 
 \begin{frame}
   \frametitle{Other binary operators}
-  \code[font size=\small,width=\linewidth]{timestamp-binary.cpp}
+  \code[font=\small,width=\linewidth]{timestamp-binary.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{{\tt TimeSpan} Addition and Assignment}
-  \code[font size=\small,width=\linewidth]{timespan-additioneq.cpp}
+  \code[font=\small,width=\linewidth]{timespan-additioneq.cpp}
 
   \begin{tikzpicture}[overlay,remember picture,box/.style={red,thick}]
     \only<handout:1|2>{\drawboxaround{operator}}
@@ -192,7 +192,7 @@
 
 \begin{frame}
   \frametitle{{\tt TimeSpan}: Assignment}
-  \code[font size=\small,width=\linewidth]{timespan-assignment.cpp}
+  \code[font=\small,width=\linewidth]{timespan-assignment.cpp}
 
   \begin{tikzpicture}[overlay,remember picture,box/.style={red,thick}]
     \only<handout:1|2>{\drawboxaround{operator}}
@@ -251,7 +251,7 @@
   \begin{itemize}
     \item It's possible to define operators as non-member functions
   \end{itemize}
-  \code[font size=\small,width=\linewidth]{timespan-nonmember-mult.cpp}
+  \code[font=\small,width=\linewidth]{timespan-nonmember-mult.cpp}
 \end{frame}
 
 \begin{frame}
@@ -260,7 +260,7 @@
     \item You can define most operators as nonmember functions
     \item Problem: implementation would often like to access private members
   \end{itemize}
-  \code[font size=\small,width=\linewidth]{timespan-nonmember-plus.cpp}
+  \code[font=\small,width=\linewidth]{timespan-nonmember-plus.cpp}
 \end{frame}
 
 \begin{frame}
@@ -269,7 +269,7 @@
     \item A class can give access to its private parts
     \item It can declare functions to be {\tt friend}s
   \end{itemize}
-  \code[font size=\small,width=\linewidth]{timespan-nonmember-plus-friend.cpp}
+  \code[font=\small,width=\linewidth]{timespan-nonmember-plus-friend.cpp}
 \end{frame}
 
 \begin{frame}
@@ -306,7 +306,7 @@
     \item {\tt std::cout << x}
     \item Possible through overloading of {\tt <<} and {\tt >>}
   \end{itemize}
-  \code[font size=\small,width=\linewidth]{cin-cout.cpp}
+  \code[font=\small,width=\linewidth]{cin-cout.cpp}
 \end{frame}
 
 \begin{frame}
@@ -315,7 +315,7 @@
     \item No {\tt toString()} in \cpp
     \item To make printable, define how to write to {\tt std::ostream}
   \end{itemize}
-  \code[font size=\small,width=\linewidth]{timespan-tostring.cpp}
+  \code[font=\small,width=\linewidth]{timespan-tostring.cpp}
 \end{frame}
 
 \end{document}
