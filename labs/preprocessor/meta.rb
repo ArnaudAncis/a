@@ -129,5 +129,4 @@ meta_object do
   bind( { :html => template(input: 'assignment.html.template', context: Context.new) } )
 
   uploadable('assignment.html')
-  uploadable('split-solution.txt')
 end
