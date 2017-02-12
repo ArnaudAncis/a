@@ -180,69 +180,23 @@
       %>
 
       <%= format_exercise do
-            source = <<-END
-              #include <iostream>
-
-              int main()
-              {
-                  std::cout << "Enter a value: ";
-                  unsigned n = next_unsigned();
-
-                  if (is_prime(n))
-                  {
-                      std::cout << n << " is prime" << std::endl;
-                  }
-                  else
-                  {
-                      std::cout << n << " is not prime" << std::endl;
-                  }
-              }
-
-              unsigned next_unsigned()
-              {
-                  unsigned x;
-                  std::cin >> x;
-                  return x;
-              }
-
-              bool is_prime(unsigned n)
-              {
-                  if (n < 2)
-                  {
-                      return false;
-                  }
-                  else
-                  {
-                      unsigned k = 2;
-
-                      while (sqr(k) <= n)
-                      {
-                          if (is_divisible_by(n, k))
-                          {
-                              return false;
-                          }
-
-                          ++k;
-                      }
-
-                      return true;
-                  }
-              }
-
-              bool is_divisible_by(unsigned a, unsigned b)
-              {
-                  return b != 0 ? a % b == 0 : false;
-              }
-
-              unsigned sqr(unsigned x)
-              {
-                  return x * x;
-              }
-            END
-
             <<-END
-              <p>Add the necessary declarations so as to make this code compile.</p>
-              #{source_editor source}
+              <ul>
+                <li>
+                  Open to the directory <code>labs/declarations/projects/missing-declarations</code>.
+                </li>
+                <li>
+                  Double click on the solution file <code>missing-declarations.sln</code>.
+                </li>
+                <li>
+                  Compile the code (CTRL + SHIFT + B). Errors should appear. These are
+                  due to missing declarations, i.e. code is referring
+                  to functions that only appear later in the code.
+                </li>
+                <li>
+                  Add the necessary forward declarations to make the code compile.
+                </li>
+              </ul>
             END
           end
       %>
