@@ -52,10 +52,6 @@
       <div class="center-vertically">Declarations</div>
     </header>
     <div id="contents">
-      <p>
-        Reminder: you might need the reference to find out what code does.
-      </p>
-
       <%=
          interpretation(<<-END)
            #include <iostream>
@@ -183,7 +179,7 @@
             <<-END
               <ul>
                 <li>
-                  Open to the directory <code>labs/declarations/projects/missing-declarations</code>.
+                  Open to the directory <code>labs/declarations/missing-declarations</code>.
                 </li>
                 <li>
                   Double click on the solution file <code>missing-declarations.sln</code>.
@@ -204,10 +200,11 @@
       <%= format_exercise do
             <<-END
               <p>
-                Write a program that produces the numbers 1 to 100, one per line.
+                Open the solution in <code>labs/declarations/countdown</code>.
+                Finish the function <code>countdown(int from)</code> (in <code>student.cpp</code>)
+                so that writes the numbers starting with <code>from</code> until <code>1</code>
+                to <code>std::cout</code>.
               </p>
-
-              #{solution_link 'count100.cpp'}
             END
           end
       %>
