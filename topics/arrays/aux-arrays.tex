@@ -1,4 +1,4 @@
-\usepackage{../pvm}
+\usepackage{ucll-code}
 
 \usetikzlibrary{shadows,shapes.multipart}
 
@@ -30,12 +30,12 @@
     \item Can be used to find out size
     \item Works on \emph{static} type
   \end{itemize}
-  \code[font size=\small,frame=lines,width=.9\linewidth]{sizeof-examples.cpp}
+  \code[font=\small,frame=lines,width=.9\linewidth]{sizeof-examples.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Quiz: What's the Output?}
-  \code[font size=\small,frame=lines,width=.9\linewidth]{sizeof-array.cpp}
+  \code[font=\small,frame=lines,width=.9\linewidth]{sizeof-array.cpp}
 \end{frame}
 
 \begin{frame}
@@ -105,18 +105,18 @@
 
 \begin{frame}
   \frametitle{Old Version}
-  \code[font size=\small,frame=lines,width=.9\linewidth]{sizeof-array2.cpp}
+  \code[font=\small,frame=lines,width=.9\linewidth]{sizeof-array2.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Improved Version}
-  \code[font size=\small,frame=lines,width=.9\linewidth]{sizeof-array2-improved.cpp}
+  \code[font=\small,frame=lines,width=.9\linewidth]{sizeof-array2-improved.cpp}
 \end{frame}
 
 
 \begin{frame}
   \frametitle{Quiz: What's the Problem?}
-  \code[font size=\small,frame=lines,width=.9\linewidth]{return-array.cpp}
+  \code[font=\small,frame=lines,width=.9\linewidth]{return-array.cpp}
   \begin{tikzpicture}[overlay,remember picture]
     \only<2>{
       \draw[ultra thick,red] (rettype) circle (.5);
@@ -136,7 +136,7 @@
 
 \begin{frame}
   \frametitle{Quiz: What's the Problem?}
-  \code[font size=\small,frame=lines,width=.9\linewidth]{return-array2.cpp}
+  \code[font=\small,frame=lines,width=.9\linewidth]{return-array2.cpp}
 \end{frame}
 
 \begin{frame}
@@ -180,7 +180,7 @@
 
 \begin{frame}
   \frametitle{Improved Version}
-  \code[font size=\small,frame=lines,width=.9\linewidth]{return-array2-improved.cpp}
+  \code[font=\small,frame=lines,width=.9\linewidth]{return-array2-improved.cpp}
 \end{frame}
 
 \begin{frame}
@@ -211,12 +211,12 @@
 
 \begin{frame}
   \frametitle{\tt std::array<T, N>}
-  \code[frame=lines,font size=\small,width=.9\linewidth]{array-usage.cpp}
+  \code[frame=lines,font=\small,width=.9\linewidth]{array-usage.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Quiz}
-  \code[frame=lines,font size=\small,width=.9\linewidth]{by-value.cpp}
+  \code[frame=lines,font=\small,width=.9\linewidth]{by-value.cpp}
 \end{frame}
 
 \begin{frame}
@@ -226,7 +226,7 @@
     \item {\tt std::array}s are passed by value
     \item For more efficiency: pass by pointer
   \end{itemize}
-  \code[frame=lines,font size=\small,width=.9\linewidth]{by-pointer.cpp}
+  \code[frame=lines,font=\small,width=.9\linewidth]{by-pointer.cpp}
 \end{frame}
 
 \begin{frame}
@@ -236,7 +236,7 @@
     \item Quite limiting
     \item Make functions polymorphic in size
   \end{itemize}
-  \code[frame=lines,font size=\small,width=.9\linewidth]{polymorphic.cpp}
+  \code[frame=lines,font=\small,width=.9\linewidth]{polymorphic.cpp}
 \end{frame}
 
 \begin{frame}
@@ -259,7 +259,7 @@
 
 \begin{frame}
   \frametitle{\tt std::vector<T>}
-  \code[frame=lines,font size=\small,width=.9\linewidth]{vector-usage.cpp}
+  \code[frame=lines,font=\small,width=.9\linewidth]{vector-usage.cpp}
 \end{frame}
 
 \begin{frame}
