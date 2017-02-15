@@ -242,7 +242,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Java vs \cpp: Null Pointers}
+  \frametitle{Java vs \cpp: Memory Safety}
   \code[language=java,width=5cm]{private.java}
   \structure{Java}
   \begin{itemize}
@@ -315,22 +315,6 @@
   \begin{itemize}
     \item Integers are guaranteed to be two-complement 32 bit
     \item Effect of overflow are predictable
-  \end{itemize}
-  \vskip2mm
-  \structure{\cpp}
-  \begin{itemize}
-    \item No specific internal representation guaranteed \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{\tiny\cpp11 \S 3.9.1/2}
-    \item Undefined behaviour
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Java vs \cpp: Type Safety}
-  \code[language=java]{primitive-types.java}
-  \structure{Java}
-  \begin{itemize}
-    \item Integers are guaranteed to be two-complement 32 bit
-    \item Effects of overflow are predictable
   \end{itemize}
   \vskip2mm
   \structure{\cpp}
