@@ -77,26 +77,6 @@
             </tr>
             <tr>
               <th><a href="reference/full-edition.pdf">Full Edition</a></th>
-              <th><a href="reference/limited-edition.pdf">Limited Edition</a></th>
-            </tr>
-            <tr>
-              <td>This is the complete reference.</td>
-              <td>
-                This is the document you'll get at the exam.
-                It lacks examples, model exam questions, etc.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <table class="center" id="link-table">
-          <tbody>
-            <tr class="header">
-              <td colspan="2">Model Exams</td>
-            </tr>
-            <tr>
-              <th><a href="exams/without-solutions.pdf">Without Solutions</a></th>
-              <th><a href="exams/with-solutions.pdf">With Solutions</a></th>
             </tr>
           </tbody>
         </table>
