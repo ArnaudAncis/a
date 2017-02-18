@@ -61,6 +61,17 @@
         width: 75%;
         margin: 10px auto;
       }
+
+      .message {
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+        width: 75%;
+        margin: 100px auto;
+        padding: 20px;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
+      }
     </style>
   </head>
 
@@ -69,6 +80,9 @@
       <div class="center-vertically">Preprocessor</div>
     </header>
     <div id="contents">
+      <div class="message">
+        Use CTRL + M inside a code editor box to toggle full screen mode.
+      </div>
 
       <%= interpretation <<-END
             #include <iostream>
@@ -201,7 +215,7 @@
           during preprocessing.
         </p>
       </div>
-                                  
+
       <%= format_exercise do
           <<-END
               <p>
@@ -214,6 +228,17 @@
         end
       %>
 
+      <%= format_exercise do
+          <<-END
+              <p>
+                Open the <code>string-switch</code> solution.
+                Add macro definitions to <code>app.cpp</code> so as to make
+                the code compile and behave as intended.
+              </p>
+          END
+        end
+      %>
+             
     </div>
   </body>
 
