@@ -40,12 +40,12 @@ namespace solution
 
         while (n > 0)
         {
+			k++;
+
             if (is_prime(k))
             {
                 n--;
             }
-
-            k++;
         }
 
         return k;

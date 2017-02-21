@@ -20,9 +20,12 @@
   \frametitle{Overview}
   \begin{itemize}
     \item Different ways to deal with RAM
-    \item Similar to data structures
     \item Trade flexibility for speed
-    \item Normally abstracted away as much as possible
+          \begin{itemize}
+            \item Flexible but slow
+            \item Rigid but fast
+          \end{itemize}
+    \item In most languages abstracted away as much as possible
     \item In \cpp: crucial to know about the details
   \end{itemize}
 \end{frame}
@@ -39,7 +42,7 @@
     \item Simplest allocation mechanism
     \item Fastest
     \item Most restrictive
-    \item Used in oldest programming language \\ (Fortran, early 1950s)
+    \item Was only available allocation method in first programming language (Fortran, early 1950s)
   \end{itemize}
   \vskip1cm
   \begin{center}
@@ -119,6 +122,7 @@
   \frametitle{Quick Intermezzo}
   \begin{itemize}
     \item You can actually make this work in \cpp
+    \item Static local variables remember their values
   \end{itemize}
   \code{static-locals-working.cpp}
 \end{frame}
@@ -138,7 +142,7 @@
   \begin{procontralist}
     \pro Very fast
     \pro No bookkeeping needed at runtime
-    \pro No out-of-memory errors possible
+    \pro No out-of-memory errors possible at runtime
     \pro Entire memory footprint known beforehand
     \con Data structure size must be known at compile time
     \con Full recompilation needed to allow larger data structures
@@ -156,13 +160,13 @@
 
 \begin{frame}
   \frametitle{Stack Allocation}
-  \begin{itemize}
+  \begin{enumerate}
     \item Allocate your variables using static allocation
     \item Introduce a {\tt new} keyword that allows for runtime allocation
     \item Take the remainder of RAM (what's left after static allocation)
     \item Act as if it were a stack of available bytes
     \item Allocation = take top $N$ bytes
-  \end{itemize}
+  \end{enumerate}
   \vskip5mm
   \begin{center}
     \begin{tikzpicture}
@@ -232,7 +236,7 @@
   \begin{overprint}
     \onslide<handout:1|2-5>
     \begin{center}
-      \textbf{Compilation stage} \\ 
+      \textbf{At compile time} \\ 
       Compiler assigns memory locations to each variable \\
       (this is still static allocation)
     \end{center}
@@ -255,7 +259,7 @@
     \item Why not deallocate unused memory?
     \item Problem: can only deallocate what's on top of the stack
   \end{itemize}
-  \code[font=\small,width=6cm]{stack-deallocation.cpp}
+  \code[font=\small,width=8cm]{stack-deallocation.cpp}
 \end{frame}
 
 \begin{frame}
@@ -301,7 +305,7 @@
     \pro Amount of memory to be allocated does not have to be known at compile time
     \pro Can allocate any amount of memory you want at runtime
     \pro Recursion made possible
-    \con Problematic deallocation
+    \con Problematic deallocation due to rigid order
   \end{procontralist}
 \end{frame}
 
@@ -313,11 +317,14 @@
 
 \begin{frame}
   \frametitle{Heap Allocation}
-  \begin{itemize}
-    \item Step 1: use static allocation where possible
-    \item Step 2: pick part of RAM and declare it stack
-    \item Step 3: remainder of RAM is heap
-  \end{itemize}
+  \begin{enumerate}
+    \item Use static allocation where possible
+    \item Pick part of RAM and declare it stack
+          \begin{itemize}
+            \item E.g.~Stack generally 1MB large
+          \end{itemize}
+    \item Remainder of RAM is heap
+  \end{enumerate}
   \vskip5mm
   \begin{center}
     \begin{tikzpicture}
@@ -391,7 +398,7 @@
           \draw[fill=blue!50] ($ (start) + (0,-6) $) rectangle ++(8,-2);
         }
         \only<handout:2|9>{
-          \draw[allocation] (mem b) to [bend right=30] ($ (start) + (0,-6.5) $);
+          \draw[allocation] (mem c) to [bend right=30] ($ (start) + (0,-6.5) $);
         }
 
         \only<handout:2|10-13>{
@@ -425,12 +432,12 @@
   \begin{overprint}
     \onslide<handout:1|2-6>
     \begin{center}
-      \textbf{Compilation stage} \\ Compiler assigns memory locations to each variable \\ (this is still static allocation)
+      \textbf{At compile time} \\ Compiler assigns memory locations to each variable \\ (this is still static allocation)
     \end{center}
 
     \onslide<handout:2-3|7->
     \begin{center}
-      \textbf{At runtime}
+      \textbf{At runtime} \\ Arrays allocated on heap
     \end{center}
   \end{overprint}
 \end{frame}
@@ -465,6 +472,11 @@
       \draw (0,0) grid (16,1);
     \end{tikzpicture}
   \end{center}
+  \visible<25>{
+    \begin{center}
+      8 bytes free yet cannot allocate array larger than 1 byte
+    \end{center}
+  }
 \end{frame}
 
 \begin{frame}

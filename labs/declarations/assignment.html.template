@@ -220,7 +220,7 @@
       <%= format_exercise do
             <<-END
                 <p>
-                  Open the solution in <code>labs/declarations/countdown</code>.
+                  Open the solution in <code>labs/declarations/nth_prime</code>.
                   Write the function <code>nth_prime</code> that returns the nth prime.
                 </p>
             END
