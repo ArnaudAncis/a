@@ -2,5 +2,5 @@
 int ns[5];
 
 // Size computed at runtime: not ok
-int size = readIntFromFile();
-int* ns = new int[size];
+int array_size = readIntFromFile();
+int* ns = new int[array_size];

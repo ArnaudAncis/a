@@ -1,4 +1,4 @@
-// Computes sum 1...n
+// Should compute sum 1...n
 int sum(int n)
 {
   if ( n == 0 ) return 0;

@@ -1,7 +1,8 @@
-void foo()
+int main()
 {
-  // Creates person object
+  // Allocates object on stack
   Person p;
 
-  p.setName("Mario");
+  // p is ready for use
+  int n = p.getAge();
 }

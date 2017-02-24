@@ -1,6 +1,6 @@
-int x;
+`\pgfmark{int on static start}`int x`\pgfmark{int on static end}`;
 
-void foo()
+int main()
 {
   x = 5;
 }
