@@ -3,4 +3,4 @@ int* p = &x;
 int** q = &p;
 int*** r = &q;
 
-// How to increment x through r?
+// How to increment x given only r?

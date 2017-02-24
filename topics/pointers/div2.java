@@ -4,5 +4,5 @@ class DivResult {
 
 DivResult div(int x, int y) {
     // ...    
-    return new DivResult(x, y);
+    return new DivResult(q, r);
 }

@@ -5,5 +5,5 @@ class Pair<T1, T2> {
 
 Pair<Integer, Integer> div(int x, int y) {
     // ...
-    return new Pair<>(x, y);
+    return new Pair<>(q, r);
 }
