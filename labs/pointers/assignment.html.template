@@ -46,11 +46,14 @@
       }
 
       .message {
+        font-size: 1.2em;
+        font-weight: bold;
         text-align: center;
         width: 75%;
-        margin: 20px auto;
+        margin: 100px auto;
         padding: 20px;
-        border: 1px solid black;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
       }
     </style>
   </head>
@@ -71,14 +74,12 @@
            self.source = <<-END
              #include <iostream>
 
-             int main()
+             void main()
              {
                int x = 5;
                int* px = &x;
 
                std::cout << *px << std::endl;
-
-               return 0;
              }
            END
 
@@ -96,43 +97,11 @@
            self.source = <<-END
              #include <iostream>
 
-             int main()
+             void main()
              {
-               int x = 5;
-               int* px = &x;
+               int x = 97;
 
-               x = 10;
-
-               std::cout << *px << std::endl;
-
-               return 0;
-             }
-           END
-
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-           END
-         end                                  
-      %>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-
-             int main()
-             {
-               int x = 5;
-               int* px = &x;
-
-               ++*px;
-
-               std::cout << x << std::endl;
-
-               return 0;
+               std::cout << *&*&*&*&x << std::endl;
              }
            END
 
@@ -155,15 +124,12 @@
                *x *= 2;
              }
 
-             int main()
+             void main()
              {
                int x = 5;
-
                foo(&x);
 
                std::cout << x << std::endl;
-
-               return 0;
              }
            END
 
@@ -187,15 +153,94 @@
                return &x;
              }
 
-             int main()
+             void main()
              {
                std::cout << *foo() << std::endl;
-
-               return 0;
              }
            END
 
            self.output = '???'
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             void main()
+             {
+               int x = 5, y = 9;
+
+               int* p = &x;
+               ++*p;
+               
+               p = &y;
+               --*p;
+                             
+               std::cout << x << " " << y << " " << *p << std::endl;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             void main()
+             {
+               int x = 5, y = 9;
+               int* p = &x;
+               int* q = &y;
+               
+               p = q;
+               *p = *q;
+                             
+               std::cout << x << " " << y << " " << *p << " " << *q << std::endl;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end                                  
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             void main()
+             {
+               int x = 0, y = 1;
+               int* p = &y;
+               int* q = &x;
+               int** pp = &q;
+               int** qq = &p;
+               
+               std::cout << x << " " << y << " " << *p << " " << *q << " " << **pp << " " << **qq << std::endl;
+             }
+           END
 
            <<-END
              <p>What is the output of the following code?</p>
@@ -213,28 +258,34 @@
           self.source = <<-END
             #include <iostream>
 
-            int main()
+            void main()
             {
               int x = 56, y = 10;
               int q, r;
 
-              // function call on x, y, q, r
+              quotrest(x, y, &q, &r);
 
               std::cout << q << " " << r << std::endl;
-
-              return 0;
             }
           END
 
           <<-END
             <p>
               Write a function <code>quotrest</code> that
-              can be used to compute the quotient and the
-              rest of two integers. Use pointers to be able
-              to return the two results. For example,
+              returns both the quotient and the rest of two integers.
+              Use out-parameters to be able to return these two results. For example,
               the code below should print <code>5&nbsp;6</code>.
             </p>
             #{show_source_editor}
+            <p>
+              Open the solution at <code>labs/pointers/quotrest</code>.
+              It contains two projects: <code>student</code> and <code>solution</code>.
+              Add files <code>quotrest.cpp</code> and <code>quotrest.h</code>
+              to the <code>student</code> project and write the necessary code to make the tests work.
+            </p>
+            <p>
+              If you cannot find the solution in the repo, you need to <code>git pull</code> first.
+            </p>
           END
         end
       %>
@@ -246,20 +297,20 @@
           self.source = <<-END
             #include <iostream>
 
-            int main()
+            void main()
             {
               int x = 3, y = 4;
 
-              // function call to swap x and y
+              swap(&x, &y);
 
               std::cout << x << " " << y << std::endl;
-
-              return 0;
             }
           END
 
           <<-END
             <p>
+              Open the solution at <code>labs/pointers/swap</code>.
+              Add files <code>swap.cpp</code> and <code>swap.h</code>.
               Write a function <code>swap</code> that can be used
               to exchange the values of two variables. Use pointers to make this possible.
               For example, the code below should output <code>4&nbsp;3</code>.
@@ -276,27 +327,23 @@
           self.source = <<-END
             #include <iostream>
 
-            int main()
+            void main()
             {
-              int x = 8, y = 1;
+              int x = 8, y = 1, z = 5;
+              int* p = min(&x, &y, &z);
+         
+              ++*p;
 
-              // function call to minmax on x and y
-
-              std::cout << x << " " << y << std::endl;
-
-              // function call to minmax on x and y
-
-              std::cout << x << " " << y << std::endl;
-
-              return 0;
+              // Prints 8 2 5
+              std::cout << x << " " << y << " " << z << std::endl;
             }
           END
 
           <<-END
             <p>
-              Write a function <code>minmax</code> that can be used
-              to find the minimum and maximum of two <code>int</code>s.
-              For example, the code below should output <code>1&nbsp;8&nbsp;1&nbsp;8</code>.
+              Open the solution at <code>labs/pointers/min</code>.
+              Write a function <code>min</code> that returns
+              a pointer to the lesser of three arguments.
             </p>
             #{show_source_editor}
           END
