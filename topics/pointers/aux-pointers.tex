@@ -16,35 +16,8 @@
 \input{aux-refs.tex}
 \input{aux-intro.tex}
 \input{aux-examples.tex}
-
-\begin{frame}
-  \frametitle{Summary}
-  \begin{center}
-    \begin{tabular}{ll}
-      \textbf{Syntax}  & \textbf{Description} \\
-      \toprule
-      {\it type}*      & Pointer to a {\it type} \\
-      \&{\it variable} & Address of {\it variable} \\
-      *{\it pointer}   & Dereference pointer \\
-    \end{tabular}
-  \end{center}
-  \structure{Typical Usage}
-  \begin{enumerate}
-    \item Introduce some variable \texttt{x} of type \texttt{T}
-    \item Take the address of \texttt{x} using \texttt{\&x}
-    \item Save the address of \texttt{x} in a pointer variable \texttt{p} of type \texttt{T*}
-    \item You can access \texttt{x} using \texttt{*p}
-  \end{enumerate}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Summary: Use Cases}
-  \structure{Use Pointers When\dots}
-  \begin{itemize}
-    \item You need to pass large objects
-    \item When you want to give access to your objects
-  \end{itemize}
-\end{frame}
+\input{aux-danger.tex}
+\input{aux-summary.tex}
 
 \end{document}
 
