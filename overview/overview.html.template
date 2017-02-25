@@ -83,118 +83,147 @@
 
         <table id="course-material" class="center" style="margin-top: 50px;">
           <tr>
-            <th>Slides</td>
+            <th style="width: 10%;">Week</th>
+            <th>Slides</th>
             <th>Lab Assignments</th>
           </tr>
           <tr>
+            <td>2</td>
             <td><%= topic('pvm', 'Course Introduction') %></td>
             <td></td>
           </tr>
           <tr>
+            <td>2</td>
             <td><%= topic('cpp-intro', 'C++ Introduction', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td>2</td>
             <td><%= topic('declarations', 'Declarations', handouts: true) %></td>
             <td><%= lab('declarations', 'Declarations') %></td>
           </tr>
           <tr>
+            <td>2</td>
             <td><%= topic('preprocessor', 'The Preprocessor', handouts: true) %></td>
             <td><%= lab('preprocessor', 'The Preprocessor') %></td>
           </tr>
           <tr>
+            <td>3</td>
             <td><%= topic('allocation-methods', 'Allocation Methods', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td>3</td>
             <td><%= topic('pointers', 'Pointers', handouts: true) %></td>
             <td><%= lab('pointers', 'Pointers') %></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('heap-allocation', 'Heap Allocation', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('arrays', 'Arrays', handouts: true) %></td>
             <td><%= lab('arrays', 'Arrays') %></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('const', 'Const', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('references', 'References', handouts: true) %></td>
             <td><%= lab('references', 'References') %></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('classes-overview', 'Classes (overview)', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('constructors', 'Constructors', handouts: true) %></td>
             <td><%= lab('classes', 'Classes') %></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('structs', 'Structs', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('const-correctness', 'Const Correctness', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('operator-overloading', 'Operator Overloading', handouts: true) %></td>
             <td><%= lab('complex', 'Complex numbers') %></td>
           </tr>
           <tr>
             <td></td>
+            <td></td>
             <td><%= lab('fractals', 'Image Generation: Fractals') %></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('default-parameter-values', 'Default Parameter Values', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('raii', 'RAII', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('smart-pointers', 'Smart Pointers', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('inheritance', 'Inheritance', handouts: true) %></td>
             <td><%= lab('image-manipulation', 'Image Generation: Filters') %></td>
           </tr>
           <tr>
             <td></td>
+            <td></td>
             <td><%= lab('inheritance', 'Inheritance') %></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('casts', 'Casting', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('technical-details', 'Technical Details', handouts: false) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('compression-intro', 'Compression: Introduction', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('compression-theory', 'Compression: Theory', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('compression-rle', 'Compression: RLE', handouts: true) %></td>
             <td><%= lab('rle', 'RLE') %></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('compression-huffman', 'Compression: Huffman', handouts: true) %></td>
             <td><%= lab('huffman', 'Huffman compression') %></td>
           </tr>
           <tr>
+            <td></td>
             <td><%= topic('compression-lz77', 'Compression: LZ77', handouts: true) %></td>
             <td></td>
           </tr>
