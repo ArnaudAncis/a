@@ -8,6 +8,7 @@ struct linked_list
 };
 
 unsigned length(linked_list*);
+void make_cyclic(linked_list*);
 bool has_cycle(linked_list*);
 
 #endif

@@ -14,6 +14,18 @@ unsigned length(linked_list* lst)
     return result;
 }
 
+void make_cyclic(linked_list* lst)
+{
+    linked_list* head = lst;
+
+    while ((*lst).next != nullptr)
+    {
+        lst = (*lst).next;
+    }
+
+    (*lst).next = head;
+}
+
 bool has_cycle(linked_list* lst)
 {
     if (lst == nullptr)

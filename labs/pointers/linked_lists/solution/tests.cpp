@@ -64,6 +64,42 @@ TEST_CASE("Length of {1, 2, 3}")
     REQUIRE(ns.size() == length(lst.get()));
 }
 
+TEST_CASE("Making {1} cyclic")
+{
+    linked_list a{ 1, nullptr };
+
+    make_cyclic(&a);
+
+    REQUIRE(a.next == &a);
+}
+
+TEST_CASE("Making {1, 2} cyclic")
+{
+    linked_list a{ 1, nullptr };
+    linked_list b{ 2, nullptr };
+    a.next = &b;
+
+    make_cyclic(&a);
+
+    REQUIRE(a.next == &b);
+    REQUIRE(b.next == &a);
+}
+
+TEST_CASE("Making {1, 2, 3} cyclic")
+{
+    linked_list a{ 1, nullptr };
+    linked_list b{ 2, nullptr };
+    linked_list c{ 3, nullptr };
+    a.next = &b;
+    b.next = &c;
+
+    make_cyclic(&a);
+
+    REQUIRE(a.next == &b);
+    REQUIRE(b.next == &c);
+    REQUIRE(c.next == &a);
+}
+
 TEST_CASE("{} has no cycle")
 {
     std::vector<int> ns{};
