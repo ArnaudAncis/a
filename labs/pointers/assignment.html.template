@@ -45,6 +45,11 @@
         text-align: center;
       }
 
+      @keyframes message-animation {
+        from { color: white; }
+        to { color: black; }
+      }
+
       .message {
         font-size: 1.2em;
         font-weight: bold;
@@ -54,6 +59,10 @@
         padding: 20px;
         background: #F44;
         box-shadow: 0px 0px 50px 30px #F44;
+        animation-name: message-animation;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
       }
     </style>
   </head>
@@ -64,6 +73,9 @@
     </header>
     <div id="contents">
       <div class="message">
+        <p style="font-size: 5em; text-align: center;">
+          READ THIS FIRST
+        </p>
         <p>
           Some code fragments below have undefined results. If you think this is the case for a particular
           exercise, fill in <code>???</code>.
@@ -350,6 +362,77 @@
         end
       %>
 
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Open the solution at <code>labs/pointers/minmax</code>.
+              You will need to write the following functions:
+            </p>
+            <ol>
+              <li>
+                <code>max</code> which operates similarly to the <code>min</code>-function
+                from a previous exercise: given 3 parameters, it must return a pointer
+                to the one with the highest value.
+              </li>
+              <li>
+                <code>minmax</code> must look for pointers to both the minimum
+                and maximum of three numbers. This means it will receive 5 parameters:
+                3 parameters giving the 3 values for which to find the minimum and maximum,
+                and 2 extra out-parameters ready to receive pointers to the minimum and maximum.
+              </li>
+              <li>
+                <code>swap_min_and_max</code> that given three parameters,
+                swaps the minimum and maximum. For example, <code>1 2 3</code> should be transformed
+                into <code>3 2 1</code>.
+              </li>
+            </ol>
+            <p>
+              Take a look at the tests in <code>tests.cpp</code>
+              if you need some examples of how the functions are expected
+              to behave.
+            </p>
+            <p>
+              Code for <code>min</code> and <code>swap</code> is given because you already made
+              these in previous exercises and they will come in handy for this exercise.
+            </p>
+          END
+        end
+            %>
+         
+      <%=
+        exercise do
+          extend SourceCodeMixin
+
+          self.source = <<-END
+            struct Foo
+            {
+                // Single public field
+                int x;
+            };
+
+            // Creation Foo object on stack
+            Foo foo;
+
+            // Accessing field
+            foo.x = 5;
+          END
+          
+          <<-END
+            <p>
+              Open the solution at <code>labs/pointers/linked_list</code>.
+              You will need to write a number of linked list related functions.
+            </p>
+            <p>
+              For this exercise, we will need <code>struct</code>s.
+              You can assume these are classes whose members are public for now;
+              they will be discussed in more detail in later sessions.
+            </p>
+            #{show_source_editor}
+          END
+        end
+      %>
+         
     </div>
   </body>
 
