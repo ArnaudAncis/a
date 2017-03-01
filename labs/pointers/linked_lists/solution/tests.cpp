@@ -42,7 +42,7 @@ TEST_CASE("Length of empty list")
 
 TEST_CASE("Length of {1}")
 {
-    std::vector<int> ns{1};
+    std::vector<int> ns{ 1 };
     auto lst = create(ns);
 
     REQUIRE(ns.size() == length(lst.get()));
@@ -64,6 +64,45 @@ TEST_CASE("Length of {1, 2, 3}")
     REQUIRE(ns.size() == length(lst.get()));
 }
 
+TEST_CASE("Penultimate of {}")
+{
+    REQUIRE(penultimate(nullptr) == nullptr);
+}
+
+TEST_CASE("Penultimate of {1}")
+{
+    linked_list a{ 1, nullptr };
+
+    REQUIRE(penultimate(&a) == nullptr);
+}
+
+TEST_CASE("Penultimate of {1, 2}")
+{
+    linked_list b{ 2, nullptr };
+    linked_list a{ 1, &b };
+
+    REQUIRE(penultimate(&a) == &a);
+}
+
+TEST_CASE("Penultimate of {1, 2, 3}")
+{
+    linked_list c{ 3, nullptr };
+    linked_list b{ 2, &c };
+    linked_list a{ 1, &b };
+
+    REQUIRE(penultimate(&a) == &b);
+}
+
+TEST_CASE("Penultimate of {1, 2, 3, 4}")
+{
+    linked_list d{ 4, nullptr };
+    linked_list c{ 3, &d };
+    linked_list b{ 2, &c };
+    linked_list a{ 1, &b };
+
+    REQUIRE(penultimate(&a) == &c);
+}
+
 TEST_CASE("Making {1} cyclic")
 {
     linked_list a{ 1, nullptr };
@@ -75,9 +114,8 @@ TEST_CASE("Making {1} cyclic")
 
 TEST_CASE("Making {1, 2} cyclic")
 {
-    linked_list a{ 1, nullptr };
     linked_list b{ 2, nullptr };
-    a.next = &b;
+    linked_list a{ 1, &b };
 
     make_cyclic(&a);
 
@@ -87,11 +125,9 @@ TEST_CASE("Making {1, 2} cyclic")
 
 TEST_CASE("Making {1, 2, 3} cyclic")
 {
-    linked_list a{ 1, nullptr };
-    linked_list b{ 2, nullptr };
     linked_list c{ 3, nullptr };
-    a.next = &b;
-    b.next = &c;
+    linked_list b{ 2, &c };
+    linked_list a{ 1, &b };
 
     make_cyclic(&a);
 
@@ -110,7 +146,7 @@ TEST_CASE("{} has no cycle")
 
 TEST_CASE("{1} has no cycle")
 {
-    std::vector<int> ns{1};
+    std::vector<int> ns{ 1 };
     auto lst = create(ns);
 
     REQUIRE(!has_cycle(lst.get()));
@@ -142,9 +178,8 @@ TEST_CASE("{[1]} has a cycle")
 
 TEST_CASE("{[1, 2]} has a cycle")
 {
-    linked_list a{ 1, nullptr };
     linked_list b{ 2, nullptr };
-    a.next = &b;
+    linked_list a{ 1, &b };
     b.next = &a;
 
     REQUIRE(has_cycle(&a));
@@ -152,11 +187,9 @@ TEST_CASE("{[1, 2]} has a cycle")
 
 TEST_CASE("{[1, 2, 3]} has a cycle")
 {
-    linked_list a{ 1, nullptr };
-    linked_list b{ 2, nullptr };
     linked_list c{ 3, nullptr };
-    a.next = &b;
-    b.next = &c;
+    linked_list b{ 2, &c };
+    linked_list a{ 1, &b };
     c.next = &a;
 
     REQUIRE(has_cycle(&a));
@@ -164,11 +197,9 @@ TEST_CASE("{[1, 2, 3]} has a cycle")
 
 TEST_CASE("{1, 2, [3]} has a cycle")
 {
-    linked_list a{ 1, nullptr };
-    linked_list b{ 2, nullptr };
     linked_list c{ 3, nullptr };
-    a.next = &b;
-    b.next = &c;
+    linked_list b{ 2, &c };
+    linked_list a{ 1, &b };
     c.next = &c;
 
     REQUIRE(has_cycle(&a));
@@ -176,11 +207,9 @@ TEST_CASE("{1, 2, [3]} has a cycle")
 
 TEST_CASE("{1, [2, 3]} has a cycle")
 {
-    linked_list a{ 1, nullptr };
-    linked_list b{ 2, nullptr };
     linked_list c{ 3, nullptr };
-    a.next = &b;
-    b.next = &c;
+    linked_list b{ 2, &c };
+    linked_list a{ 1, &b };
     c.next = &b;
 
     REQUIRE(has_cycle(&a));
@@ -188,13 +217,10 @@ TEST_CASE("{1, [2, 3]} has a cycle")
 
 TEST_CASE("{1, [2, 3, 4]} has a cycle")
 {
-    linked_list a{ 1, nullptr };
-    linked_list b{ 2, nullptr };
-    linked_list c{ 3, nullptr };
     linked_list d{ 4, nullptr };
-    a.next = &b;
-    b.next = &c;
-    c.next = &d;
+    linked_list c{ 3, &d };
+    linked_list b{ 2, &c };
+    linked_list a{ 1, &b };
     d.next = &b;
 
     REQUIRE(has_cycle(&a));
@@ -202,13 +228,10 @@ TEST_CASE("{1, [2, 3, 4]} has a cycle")
 
 TEST_CASE("{1, 2, [3, 4]} has a cycle")
 {
-    linked_list a{ 1, nullptr };
-    linked_list b{ 2, nullptr };
-    linked_list c{ 3, nullptr };
     linked_list d{ 4, nullptr };
-    a.next = &b;
-    b.next = &c;
-    c.next = &d;
+    linked_list c{ 3, &d };
+    linked_list b{ 2, &c };
+    linked_list a{ 1, &b };
     d.next = &c;
 
     REQUIRE(has_cycle(&a));
@@ -216,13 +239,10 @@ TEST_CASE("{1, 2, [3, 4]} has a cycle")
 
 TEST_CASE("{1, 2, 3, [4]} has a cycle")
 {
-    linked_list a{ 1, nullptr };
-    linked_list b{ 2, nullptr };
-    linked_list c{ 3, nullptr };
     linked_list d{ 4, nullptr };
-    a.next = &b;
-    b.next = &c;
-    c.next = &d;
+    linked_list c{ 3, &d };
+    linked_list b{ 2, &c };
+    linked_list a{ 1, &b };
     d.next = &d;
 
     REQUIRE(has_cycle(&a));

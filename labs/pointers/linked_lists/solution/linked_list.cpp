@@ -14,6 +14,29 @@ unsigned length(linked_list* lst)
     return result;
 }
 
+linked_list* penultimate(linked_list* lst)
+{
+    if (lst == nullptr || (*lst).next == nullptr)
+    {
+        return nullptr;
+    }
+    else
+    {
+        linked_list* p = lst;
+        linked_list* q = (*lst).next;
+
+        while ((*q).next != nullptr)
+        {
+            p = (*p).next;
+            q = (*q).next;
+        }
+
+        return p;
+    }
+}
+
+// linked_list* longest()
+
 void make_cyclic(linked_list* lst)
 {
     linked_list* head = lst;
