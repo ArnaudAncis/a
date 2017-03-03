@@ -37,13 +37,22 @@
         background: #FAA
       }
 
-      .solution {
+      .revealer {
         border: 1px solid black;
         padding: 10px;
         width: 25%;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 20px auto;
         text-align: center;
+        cursor: help;
+        box-shadow: 10px 10px 5px #AAA;
+      }
+
+      .explanation {
+        border: 1px solid black;
+        box-shadow: 5px 5px 5px #AAA;
+        padding: 10px;
+        width: 90%;
+        margin: 10px auto;
       }
 
       .message {
@@ -65,22 +74,6 @@
         text-align: center;
         font-weight: bold;
       }
-
-      .cake {
-        border: 1px solid black;
-        padding: 10px;
-        width: 80%;
-        margin: 10px auto;
-        font-weight: bold;
-        background: #FFAA77;
-      }
-
-      .cake .header {
-        display: block;
-        text-align: center;
-        font-size: 2em;
-        font-weight: bold;
-      }
     </style>
   </head>
 
@@ -89,210 +82,32 @@
       <div class="center-vertically">Arrays</div>
     </header>
     <div id="contents">
-      <div class="message" title="You better be reading this!">
-        Assume all code has been compiled targetting a 32 bit platform.
-      </div>
-
-      <div class="message" title="You better be reading this!">
-        You will need access to the git-repository of this course.
-        Use <code>git clone https://bitbucket.org/fvogels/ucll-pvm.git</code> to
-        download it.
-      </div>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-             #include <vector>
-
-             void foo(std::vector<int> ns)
-             {
-               for ( int i = 0; i != ns.size(); ++i )
-                 ns[i] *= 2;
-             }
-
-             int main()
-             {
-               std::vector<int> ns = { 1, 2, 3 };
-               foo(ns);
-
-               for ( int n : ns )
-                 std::cout << n;
-
-               std::cout << std::endl;
-             }
-           END
-
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-           END
-         end
-      %>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-             #include <vector>
-
-             void foo(std::vector<int>* ns)
-             {
-               for ( int i = 0; i != (*ns).size(); ++i )
-                 (*ns)[i] *= 2;
-             }
-
-             int main()
-             {
-               std::vector<int> ns = { 1, 2, 3 };
-               foo(&ns);
-
-               for ( int n : ns )
-                 std::cout << n;
-
-               std::cout << std::endl;
-             }
-           END
-
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-           END
-         end
-      %>
-
       <%=
          exercise(Lib::Interpretation) do
            self.source = <<-END
              #include <iostream>
 
-             int main()
+             int* create_range(int a, int b)
              {
-               std::cout << sizeof(int) << std::endl;
-             }
-           END
+               int size = b - a + 1;
+               int* result = new int[size];
 
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-           END
-         end
-      %>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-
-             int main()
-             {
-               std::cout << sizeof(int*) << std::endl;
-             }
-           END
-
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-           END
-         end
-      %>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-
-             int main()
-             {
-               std::cout << sizeof(int[10]) << std::endl;
-             }
-           END
-
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-           END
-         end
-      %>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-
-             int main()
-             {
-               int ns[5];
-
-               std::cout << sizeof(ns) << std::endl;
-             }
-           END
-
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-           END
-         end
-      %>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-
-             void foo(int ns[6])
-             {
-               std::cout << sizeof(ns) << std::endl;
-             }
-
-             int main()
-             {
-               int ns[] = { 1, 2, 3, 4, 5, 6 };
-               foo(ns);
-             }
-           END
-
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-           END
-         end
-      %>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-
-             void foo(int ns[], int size)
-             {
                for ( int i = 0; i != size; ++i )
-                 ns[i] *= 2;
+               {
+                 result[i] = a + i;
+               }
+
+               return result;
              }
 
              int main()
              {
-               int ns[] = { 1, 2, 3 };
-               foo(ns, sizeof(ns) / sizeof(int));
+               int* ns = create_range(1, 5);
 
-               for ( int i = 0; i != sizeof(ns) / sizeof(int); ++i )
+               for ( int i = 0; i != 5; ++i )
                  std::cout << ns[i];
 
-               std::cout << std::endl;
+               delete[] ns;
              }
            END
 
@@ -305,6 +120,379 @@
          end
       %>
 
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int* create_range(int a, int b)
+             {
+               int size = b - a + 1;
+               int* result = new int[size];
+
+               for ( int i = 0; i != size; ++i )
+               {
+                 result[i] = a + i;
+               }
+
+               return result;
+             }
+
+             void process(int* ns, int size)
+             {
+               for ( int i = 0; i != size; ++i )
+               {
+                 ns[i] *= 2;
+               }
+             }
+
+             int main()
+             {
+               int* ns = create_range(1, 5);
+
+               process(ns, 5);
+
+               for ( int i = 0; i != 5; ++i )
+                 std::cout << ns[i];
+
+               delete[] ns;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 It is important to note that the <code>process</code> function receives
+                 a pointer to the array. Therefore, any modifications it makes
+                 to the array are felt by <code>main</code>.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int main()
+             {
+               int* ns = new int[5];
+
+               for ( int i = 0; i != 5; ++i )
+                 std::cout << ns[i];
+
+               delete[] ns;
+             }
+           END
+
+           self.output = '???'
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 The contents of a freshly allocated array are unknown.
+                 Memory is not "cleared" or reset to 0 for you behind the scenes.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int* create_range(int a, int b)
+             {
+               int size = b - a + 1;
+               int* result = new int[size];
+
+               for ( int i = 0; i != size; ++i )
+               {
+                 result[i] = a + i;
+               }
+
+               return result;
+             }
+
+             int main()
+             {
+               int* ns = create_range(1, 5);
+
+               ns[3] = 0;
+
+               for ( int i = 0; i != 5; ++i )
+                 std::cout << ns[i];
+
+               delete[] ns;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int* create_range(int a, int b)
+             {
+               int size = b - a + 1;
+               int* result = new int[size];
+
+               for ( int i = 0; i != size; ++i )
+               {
+                 result[i] = a + i;
+               }
+
+               return result;
+             }
+
+             int main()
+             {
+               int* ns = create_range(1, 5);
+               int* p = &ns[2];
+
+               *p = 0;
+
+               for ( int i = 0; i != 5; ++i )
+                 std::cout << ns[i];
+
+               delete[] ns;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>p</code> contains the address of the element
+                 with index 2. Writing to <code>p</code> has the same
+                 effect as writing to <code>ns[2]</code>.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int* create_range(int a, int b)
+             {
+               int size = b - a + 1;
+               int* result = new int[size];
+
+               for ( int i = 0; i != size; ++i )
+               {
+                 result[i] = a + i;
+               }
+
+               return result;
+             }
+
+             int main()
+             {
+               int* ns = create_range(1, 5);
+               int* p = &ns[1];
+
+               p[0] = 0;
+
+               for ( int i = 0; i != 5; ++i )
+                 std::cout << ns[i];
+
+               delete[] ns;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>p[0]</code> means "take the first element
+                 of the array starting at address <code>p</code>".
+                 Even though we never actually created an array at that address,
+                 we can pretend we did.
+                 Since <code>p</code> points to <code>ns[1]</code>,
+                 the array pointed at by <code>p</code> starts there too, meaning
+                 <code>p[0]</code> and <code>ns[1]</code> are the same.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int* create_range(int a, int b)
+             {
+               int size = b - a + 1;
+               int* result = new int[size];
+
+               for ( int i = 0; i != size; ++i )
+               {
+                 result[i] = a + i;
+               }
+
+               return result;
+             }
+
+             int main()
+             {
+               int* ns = create_range(1, 5);
+               int* p = &ns[2];
+
+               p[1] = 0;
+
+               for ( int i = 0; i != 5; ++i )
+                 std::cout << ns[i];
+
+               delete[] ns;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>p</code> can be seen as an array overlapping
+                 with <code>ns</code>: it's shifted three items
+                 to the right with respect to <code>ns</code>.
+                 <code>p[0]</code> coincides with <code>ns[2]</code>, and similarly,
+                 <code>p[1]</code> with <code>ns[3]</code>.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int* create_range(int a, int b)
+             {
+               int size = b - a + 1;
+               int* result = new int[size];
+
+               for ( int i = 0; i != size; ++i )
+               {
+                 result[i] = a + i;
+               }
+
+               return result;
+             }
+
+             int main()
+             {
+               int* ns = create_range(1, 5);
+               int* p = &ns[2];
+
+               p[-2] = 0;
+
+               for ( int i = 0; i != 5; ++i )
+                 std::cout << ns[i];
+
+               delete[] ns;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 There's nothing wrong with negative indices as long
+                 as you end up inside the array.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int* create_range(int a, int b)
+             {
+               int size = b - a + 1;
+               int* result = new int[size];
+
+               for ( int i = 0; i != size; ++i )
+               {
+                 result[i] = a + i;
+               }
+
+               return result;
+             }
+
+             int main()
+             {
+               int* ns = create_range(1, 5);
+               int* p = &ns[1];
+
+               p[-2] = 0;
+
+               for ( int i = 0; i != 5; ++i )
+                 std::cout << ns[i];
+
+               delete[] ns;
+             }
+           END
+
+           self.output = '???'
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 You're not allowed to go beyond the array's bounds.
+               </p>
+             </div>
+           END
+         end
+      %>
+              
       <%=
         exercise do
           extend SolutionMixin
@@ -402,17 +590,6 @@
         exercise do
           extend SolutionMixin
           extend GitMixin
-          extend CakeMixin
-
-          cake_description = <<-END
-            <p>
-              Implement the function such that
-            </p>
-            <ul>
-              <li>it is fast: each <code>n</code> of <code>ns</code> is only read once.</li>
-              <li>it consumes little memory: no extra data structures are necessary.</li>
-            </ul>
-          END
 
           <<-END
             #{git_link 'lone-wolf/lone-wolf.sln'}
@@ -432,7 +609,13 @@
               not have to work correctly if given the list <code>1 2 3</code>. Feel free to use any data structure you want (e.g. <a href="http://www.cplusplus.com/reference/map/"><code>std::map</code></a>,
               <a href="http://www.cplusplus.com/reference/set/set/"><code>std::set</code></a>, &hellip;)
             </p>
-            #{cake cake_description}
+            <p>
+              Implement the function such that
+            </p>
+            <ul>
+              <li>it is fast: each <code>n</code> of <code>ns</code> is only read once.</li>
+              <li>it consumes little memory: no extra data structures are necessary.</li>
+            </ul>
           END
         end
       %>
@@ -441,17 +624,6 @@
         exercise do
           extend SolutionMixin
           extend GitMixin
-          extend CakeMixin
-
-          cake_description = <<-END
-            <p>
-              Implement the function such that
-            </p>
-            <ul>
-              <li>it is fast: it must work in linear time.</li>
-              <li>memory is accessed sequentially (better cache performance): you can only read the <code>i+1</code>th element after reading the <code>i</code>th, and analogously for writes.</li>
-            </ul>
-          END
 
           <<-END
             #{git_link 'bitsort/bitsort.sln'}
@@ -460,7 +632,13 @@
               contains only <code>0</code>s and <code>1</code>s, sorts this list in place (i.e. the function modifies the list pointed to by <code>ns</code>).
               For example, the list 0 1 0 1 must be transformed into 0 0 1 1.
             </p>
-            #{cake cake_description}
+            <p>
+              Implement the function such that
+            </p>
+            <ul>
+              <li>it is fast: it must work in linear time.</li>
+              <li>memory is accessed sequentially (better cache performance): you can only read the <code>i+1</code>th element after reading the <code>i</code>th, and analogously for writes.</li>
+            </ul>
           END
         end
       %>
