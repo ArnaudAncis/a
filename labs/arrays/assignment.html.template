@@ -499,6 +499,28 @@
           extend GitMixin
 
           <<-END
+            #{git_link 'split/split.sln'}
+            <p>
+              Write the function <code>void split(int* ns, unsigned size, int** odds, unsigned* n_odds, int** evens, unsigned* n_evens)</code> that splits
+              the array <code>ns</code> into two arrays <code>odds</code> and <code>evens</code>, which contains the odd and even value from <code>ns</code>, respectively.
+              Order is preserved. <code>n_odds</code> and <code>n_evens</code> must receive the size of the arrays <code>odds</code> and <code>evens</code>, respectively.
+            </p>
+            <p>
+              For example, say <code>ns = {1, 2, 3, 4}</code>, then <code>odds</code> must be overwritten with a pointer
+              to a newly heap-allocated array containing <code>{1, 3}</code>, <code>evens</code> must be overwritten
+              with a pointer to a newly allocated array containing <code>{2, 4}</code>, and both <code>n_odds</code>
+              and <code>n_evens</code> must be overwritten with <code>2</code>.
+            </p>
+          END
+        end
+      %>
+             
+      <%=
+        exercise do
+          extend SolutionMixin
+          extend GitMixin
+
+          <<-END
             #{git_link 'length/length.sln'}
             <p>
               Write the function <code>unsigned length(int* p, int* q)</code> that, given pointers <code>p</code> and <code>q</code>
