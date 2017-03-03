@@ -18,9 +18,15 @@
     <ClInclude Include="Catch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="most-frequent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="most-frequent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
