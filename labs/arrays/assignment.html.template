@@ -499,88 +499,22 @@
           extend GitMixin
 
           <<-END
-            #{git_link 'minmax/minmax.sln'}
-            <p>
-              A Visual Studio solution is available at the location shown above.
-              Look for <code>TODO</code> tags to find out where you need to write code.
-            </p>
-            <p>
-              Write three overloads of a <code>minmax</code>:
-            </p>
-            <ul>
-              <li>
-                <code>void minmax(const int* ns, int size, int* min, int* max);</code>
-              </li>
-              <li>
-                <code>void minmax(const std::vector&lt;int&gt;* ns, int* min, int* max);</code>
-              </li>
-              <li>
-                <code>template&lt;unsigned N&gt; void minmax(const std::array&lt;int, N&gt;* ns, int* min, int* max);</code>
-              </li>
-            </ul>
-            <p>
-              These functions must each, given a sequence of integers,
-              return both the minimum and maximum using out-parameters.
-              Try to make each overload share as much code as possible (i.e. minimise copy pasting).
-            </p>
-          END
-        end
-      %>
-
-      <%=
-        exercise do
-          extend SolutionMixin
-          extend GitMixin
-
-          <<-END
             #{git_link 'most-frequent/most-frequent.sln'}
             <p>
-              Write the function <code>int most_frequent(std::vector&lt;int&gt;* ns)</code> that
+              Write the function <code>int most_frequent(int* ns, unsigned size)</code> that
               returns the element of <code>ns</code> that appears the most often. For example,
               given a sequence <code>1 2 2 3 3 3</code>, <code>3</code> appears most often.
-              If <code>ns</code> is empty, the function should return <code>-1</code>.
             </p>
-          END
-        end
-      %>
-
-      <%=
-        exercise do
-          extend SolutionMixin
-          extend GitMixin
-
-          <<-END
-            #{git_link 'most-frequent/longest-increasing-subsequence.sln'}
             <p>
-              Write the function <code>bool longest_increasing_subsequence(const std::vector&lt;int&gt;* ns, int* start_index, int* end_index)</code>
-              that looks for the longest increasing subsequence. A few examples:
+              In case of a tie, return the element that appears earliest in the sequence.
+              E.g. <code>4 1 2 4 1</code> should lead to result <code>4</code>.
             </p>
-            <ul>
-              <li><span style="font-weight: bold;">0 1 2 3 4</span> 0 1</li>
-              <li>0 1 <span style="font-weight: bold;">0 1 2 3 4</span></li>
-              <li>0 1 2 <span style="font-weight: bold;">0 1 2 3</span> 0 1</li>
-              <li>0 10 100 <span style="font-weight: bold;">0 1 50 3000 30001</span> 0 -1</li>
-            </ul>
             <p>
-              If there are multiple longest subsequences, the one appearing first should be returned.
+              If <code>ns</code> is empty (<code>size == 0</code>), the result is undefined
+              (i.e. you can do whatever you want.)
             </p>
-             <p>
-               Equal values are also considered increasing: <code>5 5 5 5</code> is an increasing sequence of length 4,
-               <code>1 2 2 3 3 3</code> is an increasing sequence of length 6.
-             </p>
             <p>
-              The function <code>longest_increasing_subsequence</code> should return the start and end of this longest increasing subsequence
-              using out-parameters. Examples:
-            </p>
-            <ul>
-              <li><span style="font-weight: bold;">0 0 0</span>: start_index = 0, end_index = 2</li>
-              <li><span style="font-weight: bold;">0 1 2 3 4</span> 0 1: start_index = 0, end_index = 4</li>
-              <li>0 1 <span style="font-weight: bold;">0 1 2 3 4</span>: start_index = 2, end_index = 6</li>
-            </ul>
-            <p>
-              The function also returns a <code>bool</code>: it must return <code>true</code> whenever <code>ns</code> is nonempty,
-              and <code>false</code> when <code>ns</code> is empty. In the latter case, <code>start_index</code> and
-              <code>end_index</code> can contain arbitrary values, as there is no longest increasing subsequence to speak of.
+              Solve this problem making use only of arrays.
             </p>
           END
         end
@@ -594,9 +528,8 @@
           <<-END
             #{git_link 'lone-wolf/lone-wolf.sln'}
             <p>
-              Write the function <code>void lone_wolf(const std::vector&lt;unsigned&gt;* ns)</code> that, given a list of <code>unsigned int</code>s
-              (i.e. <code>int</code>s without sign bit, you can treat them the same as signed <code>int</code>s), looks for the "lone wolf":
-              the list <code>ns</code> contains pairs of integers plus one unpaired integer, which we call the lone wolf. For example,
+              Write the function <code>void lone_wolf(int* ns, int size)</code> that looks for the "lone wolf" in ns:
+              the list <code>ns</code> contains pairs of integers plus one unpaired integer, which is the lone wolf. For example,
             </p>
             <ul>
               <li>0 0 1 1 2 2 3: the lone wolf is 3.</li>
@@ -606,15 +539,14 @@
             </ul>
             <p>
               Your function is allowed to assume that the list does indeed contain N pairs + one unpaired integer, i.e. it does
-              not have to work correctly if given the list <code>1 2 3</code>. Feel free to use any data structure you want (e.g. <a href="http://www.cplusplus.com/reference/map/"><code>std::map</code></a>,
-              <a href="http://www.cplusplus.com/reference/set/set/"><code>std::set</code></a>, &hellip;)
+              not have to work correctly if given the list <code>1 2 3</code>.
             </p>
             <p>
-              Implement the function such that
+              For extra fun, find a way to implement it in such a way that
             </p>
             <ul>
-              <li>it is fast: each <code>n</code> of <code>ns</code> is only read once.</li>
-              <li>it consumes little memory: no extra data structures are necessary.</li>
+              <li>each <code>n</code> of <code>ns</code> is only read once.</li>
+              <li>it consumes little memory: you are only allowed to use one local variable, which must be of type <code>int</code>.</li>
             </ul>
           END
         end
@@ -626,19 +558,16 @@
           extend GitMixin
 
           <<-END
-            #{git_link 'bitsort/bitsort.sln'}
+            #{git_link 'veryquicksort/veryquicksort.sln'}
             <p>
-              Write the function <code>void bitsort(std::vector&lt;unsigned&gt;* ns)</code> that, given a list that
-              contains only <code>0</code>s and <code>1</code>s, sorts this list in place (i.e. the function modifies the list pointed to by <code>ns</code>).
-              For example, the list 0 1 0 1 must be transformed into 0 0 1 1.
+              Write the function <code>void veryquickort(int* ns, int size)</code> that, given a list that
+              contains only single digit decimal numbers (i.e. 0 to 9), sorts this list in place (i.e. the function modifies the list pointed to by <code>ns</code>).
+              For example, the array <code>5 4 2 5 1 9 8</code> must be transformed into <code>1 2 4 5 5 8 9</code>.
             </p>
             <p>
-              Implement the function such that
+              Implement the function such that it works in two linear passes, i.e. in a first pass it can read all values in <code>ns</code>
+              sequentially and in a second pass it can write values to <code>ns</code> sequentially.
             </p>
-            <ul>
-              <li>it is fast: it must work in linear time.</li>
-              <li>memory is accessed sequentially (better cache performance): you can only read the <code>i+1</code>th element after reading the <code>i</code>th, and analogously for writes.</li>
-            </ul>
           END
         end
       %>
