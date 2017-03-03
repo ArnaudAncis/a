@@ -18,9 +18,15 @@
     <ClInclude Include="Catch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lone-wolf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="lone-wolf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
