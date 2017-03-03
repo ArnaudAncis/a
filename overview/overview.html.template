@@ -45,11 +45,7 @@
         width: 50%;
       }
 
-      #course-material td:nth-child(1) {
-        text-align: center;
-      }
-
-      #course-material td:nth-child(2) {
+      #course-material td {
         text-align: center;
       }
 
@@ -120,7 +116,7 @@
           <tr>
             <td></td>
             <td><%= topic('heap-allocation', 'Heap Allocation', handouts: true) %></td>
-            <td></td>
+            <td><%= lab('heap-allocation', 'Heap Allocation') %></td>
           </tr>
           <tr>
             <td></td>
