@@ -492,7 +492,48 @@
            END
          end
       %>
+
+      <%=
+        exercise do
+          extend SolutionMixin
+          extend GitMixin
+
+          <<-END
+            #{git_link 'length/length.sln'}
+            <p>
+              Write the function <code>unsigned length(int* p, int* q)</code> that, given pointers <code>p</code> and <code>q</code>
+              that point to the start and one-beyond-the-end of the array, respectively, returns
+              the size of the array.
+            </p>
+            <p>
+              To clarify, <code>p</code> points to the first element in the array, while <code>q</code> points
+              to the first memory location that lies beyond the array. In other words, dereferencing <code>q</code>
+              is forbidden.
+            </p>
+          END
+        end
+      %>
               
+      <%=
+        exercise do
+          extend SolutionMixin
+          extend GitMixin
+
+          <<-END
+            #{git_link 'veryquicksort/veryquicksort.sln'}
+            <p>
+              Write the function <code>void veryquickort(int* ns, int size)</code> that, given a list that
+              contains only single digit decimal numbers (i.e. 0 to 9), sorts this list in place (i.e. the function modifies the list pointed to by <code>ns</code>).
+              For example, the array <code>5 4 2 5 1 9 8</code> must be transformed into <code>1 2 4 5 5 8 9</code>.
+            </p>
+            <p>
+              Implement the function such that it works in two linear passes, i.e. in a first pass it can read all values in <code>ns</code>
+              sequentially and in a second pass it can write values to <code>ns</code> sequentially.
+            </p>
+          END
+        end
+      %>
+
       <%=
         exercise do
           extend SolutionMixin
@@ -548,26 +589,6 @@
               <li>each <code>n</code> of <code>ns</code> is only read once.</li>
               <li>it consumes little memory: you are only allowed to use one local variable, which must be of type <code>int</code>.</li>
             </ul>
-          END
-        end
-      %>
-
-      <%=
-        exercise do
-          extend SolutionMixin
-          extend GitMixin
-
-          <<-END
-            #{git_link 'veryquicksort/veryquicksort.sln'}
-            <p>
-              Write the function <code>void veryquickort(int* ns, int size)</code> that, given a list that
-              contains only single digit decimal numbers (i.e. 0 to 9), sorts this list in place (i.e. the function modifies the list pointed to by <code>ns</code>).
-              For example, the array <code>5 4 2 5 1 9 8</code> must be transformed into <code>1 2 4 5 5 8 9</code>.
-            </p>
-            <p>
-              Implement the function such that it works in two linear passes, i.e. in a first pass it can read all values in <code>ns</code>
-              sequentially and in a second pass it can write values to <code>ns</code> sequentially.
-            </p>
           END
         end
       %>
