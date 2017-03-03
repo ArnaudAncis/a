@@ -226,6 +226,56 @@
         </p>
       </div>
 
+      <%=
+        exercise do
+          extend SourceCodeMixin
+
+          self.source = <<-END
+            struct linked_list
+            {
+              int x;
+              linked_list* next;
+            };
+
+            void free_list(linked_list* p)
+            {
+              if ( p != nullptr )
+              {
+                free_list( (*p).next );            
+                delete p;
+              }
+            }
+
+            int main()
+            {
+              linked_list lst;
+              lst.x = 5;
+              lst.next = nullptr;
+              linked_list* p = &lst;
+
+              // Use p
+
+              free_list(&lst);
+              free_list(&lst);
+            }
+          END
+          
+          <<-END
+            <p>
+              Find out what's wrong with this code.
+            </p>
+            #{show_source_editor}
+          END
+        end
+      %>
+      
+      <div data-revealer="Show solution" class="solution">
+        <p>
+          Of course you cannot delete the same list twice. But you are not even allowed to delete it once,
+          as the list is stack allocated, not heap allocated.
+        </p>
+      </div>
+
 
     </div>
   </body>
