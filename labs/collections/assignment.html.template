@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 20px auto;
+        text-align: center;
+        cursor: help;
+        box-shadow: 10px 10px 5px #AAA;
+      }
+
+      .explanation {
+        border: 1px solid black;
+        box-shadow: 5px 5px 5px #AAA;
+        padding: 10px;
+        width: 90%;
+        margin: 10px auto;
+      }
+
+      .message {
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+        width: 75%;
+        margin: 100px auto;
+        padding: 20px;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
+      }
+
+      .git {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Arrays</div>
+    </header>
+    <div id="contents">
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             int main()
+             {
+               std::vector<int> ns { 1, 3, 2, 4 };
+
+               for ( auto n : ns )
+                 std::cout << n;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             void foo(std::vector<int> ns)
+             {
+               for ( unsigned i = 0; i != ns.size(); ++i )
+               {
+                 ns[i] *= ns[i];
+               }
+             }
+
+             int main()
+             {
+                std::vector<int> ns { 1, 2, 3, 4 };
+
+                foo(ns);
+
+                for ( auto n : ns )
+                {
+                  std::cout << n;
+                }
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 Everything is passed by value in C++. This means
+                 that <code>foo</code> operates on a <em>copy</em>.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             void foo(std::vector<int>* ns)
+             {
+               for ( unsigned i = 0; i != (*ns).size(); ++i )
+               {
+                 (*ns)[i] *= (*ns)[i];
+               }
+             }
+
+             int main()
+             {
+                std::vector<int> ns { 1, 2, 3, 4 };
+
+                foo(&ns);
+
+                for ( auto n : ns )
+                {
+                  std::cout << n;
+                }
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>foo</code> receives a pointer to the vector, meaning
+                 it gets direct access to it and can modify it.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             int main()
+             {
+                std::vector<int> ns { 1, 2, 3, 4 };
+                std::vector<int> ms { 6, 7, 8 };
+
+                ns = ms;
+
+                for ( auto n : ns )
+                {
+                  std::cout << n;
+                }
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 Assignment between vectors clears the left hand vector and copies
+                 all elements from the right hand vector into it.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             int main()
+             {
+                std::vector<int> ns { 1, 2, 3, 4 };
+                std::vector<int> ms { 6, 7, 8 };
+
+                ns = ms;
+                ms.clear();
+
+                for ( auto n : ns )
+                {
+                  std::cout << n;
+                }
+                
+                std::cout << "|";
+                
+                for ( auto m : ms )
+                {
+                  std::cout << m;
+                }
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 Do not confuse this with Java semantics. In Java, assignment
+                 does not operate on objects but on references to objects.
+                 Setting one <code>ArrayList</code> equal to another
+                 (<code>ns = ms</code>) lets <code>ns</code> and
+                 <code>ms</code> point to the same object.
+               </p>
+               <p>
+                 No so in C++: <code>ns = ms</code> actually assigns
+                 the <em>object</em> <code>ms</code> to <code>ns</code>.
+                 In other words, you're asking "modify the list <code>ns</code>
+                 so that it is equal to <code>ms</code>", which has the effect
+                 that <code>ns</code> is cleared and all of <code>ms</code>'s
+                 items are copied to <code>ns</code>. Now you have two
+                 distinct lists in memory, containing the same elements.
+               </p>
+               <p>
+                 In the second step, <code>ms.clear()</code> removes all elements
+                 from <code>ms</code>, but <code>ns</code> is not affected by this.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             int main()
+             {
+                std::vector<int> ns { 1, 2, 3, 4 };
+                std::vector<int>* p = &ns;
+
+                for ( auto n : *p )
+                {
+                  std::cout << n;
+                }
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 Iterating over <code>*p</code> or <code>ns</code> is equivalent:
+                 <code>p</code> points to <code>ns</code>.
+               </p>
+             </div>
+           END
+         end
+      %>
+              
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             int main()
+             {
+                std::vector<int> ns { 1, 2, 3, 4 };
+                std::vector<int> ms { 5, 6, 7 };
+                
+                auto p = &ns;
+                auto q = &ms;
+
+                p = q;
+
+                for ( auto n : *p )
+                {
+                  std::cout << n;
+                }
+
+                std::cout << "|";
+
+                for ( auto m : *q )
+                {
+                  std::cout << m;
+                }
+              }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 First <code>p</code> points to <code>ns</code> and <code>q</code> to <code>ms</code>.
+                 Next, we assign <code>q</code> to <code>p</code>, i.e. we overwrite the <em>pointer</em>
+                 with another address. Both <code>p</code> and <code>q</code> now point to <code>ms</code>.
+               </p>
+             </div>
+           END
+         end
+      %>
+              
+
+      <%=
+        exercise do
+          extend SolutionMixin
+          extend GitMixin
+
+          <<-END
+            #{git_link 'coding-exercises/coding-exercises.sln'}
+            <p>
+              Write the function <code>void lone_wolf(int* ns, int size)</code> that looks for the "lone wolf" in ns:
+              the list <code>ns</code> contains pairs of integers plus one unpaired integer, which is the lone wolf. For example,
+            </p>
+            <ul>
+              <li>0 0 1 1 2 2 3: the lone wolf is 3.</li>
+              <li>0 1 2 1 0: the lone wolf is 2.</li>
+              <li>5: the lone wolf is 5.</li>
+              <li>5 5 5: the lone wolf is 5.</li>
+            </ul>
+            <p>
+              Your function is allowed to assume that the list does indeed contain N pairs + one unpaired integer, i.e. it does
+              not have to work correctly if given the list <code>1 2 3</code>.
+            </p>
+            <p>
+              For extra fun, find a way to implement it in such a way that
+            </p>
+            <ul>
+              <li>each <code>n</code> of <code>ns</code> is only read once.</li>
+              <li>it consumes little memory: you are only allowed to use one local variable, which must be of type <code>int</code>.</li>
+            </ul>
+          END
+        end
+      %>
+
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>
