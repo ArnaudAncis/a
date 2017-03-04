@@ -247,64 +247,6 @@
       %>
 
       <%=
-        exercise do
-          extend SolutionMixin
-
-          <<-END
-            <p>
-              Write a function <code>void rotate(std::vector&lt;int&gt;* ns, int delta)</code> that
-              moves the elements of <code>ns</code> around in a circle. For example,
-              <code>{1, 2, 3, 4, 5}</code> rotated by 1 should yield <code>{5, 1, 2, 3, 4}</code>.
-              Negative <code>delta</code>s are allowed: <code>{1, 2, 3, 4, 5}</code> rotated
-              by <code>-1</code> gives <code>{2, 3, 4, 5, 1}</code>.
-            </p>
-          END
-        end
-      %>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-             #include <vector>
-
-             std::vector<char> foo(std::vector<char>* cs)
-             {
-               return *cs;
-             }
-
-             int main()
-             {
-               std::vector<char> cs { 'a', 'b', 'c' };
-               auto ds = foo(&cs);
-
-               cs.clear();
-
-               for ( auto d : ds )
-               {
-                 std::cout << d;
-               }
-             }
-           END
-
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-             <div data-revealer="Show explanation" class="explanation">
-               <p>
-                 <code>foo</code> returns a <code>std::vector&lt;char&gt;</code>,
-                 not a <code>std::vector&lt;char&gt;*</code>, i.e. a copy.
-                 In other words, <code>ds</code> is a separate list and clearing
-                 <code>cs</code> does not affect <code>ds</code>.
-               </p>
-             </div>
-           END
-         end
-      %>
-
-      <%=
          exercise(Lib::Interpretation) do
            self.source = <<-END
              #include <iostream>
@@ -357,6 +299,77 @@
                <p>
                  In the second step, <code>ms.clear()</code> removes all elements
                  from <code>ms</code>, but <code>ns</code> is not affected by this.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+        exercise do
+          extend SolutionMixin
+
+          <<-END
+            <p>
+              Write a function <code>void rotate(std::vector&lt;int&gt;* ns, int delta)</code> that
+              moves the elements of <code>ns</code> around in a circle. For example,
+              <code>{1, 2, 3, 4, 5}</code> rotated by 1 should yield <code>{5, 1, 2, 3, 4}</code>.
+              Negative <code>delta</code>s are allowed: <code>{1, 2, 3, 4, 5}</code> rotated
+              by <code>-1</code> gives <code>{2, 3, 4, 5, 1}</code>.
+            </p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          extend SolutionMixin
+
+          <<-END
+            <p>
+              Write a function <code>void uniq(std::vector<int>* ns)</code> that
+              removes all duplicates from <code>ns</code>. The order is the remaining elements is unimportant.
+            </p>
+          END
+        end
+      %>
+             
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             std::vector<char> foo(std::vector<char>* cs)
+             {
+               return *cs;
+             }
+
+             int main()
+             {
+               std::vector<char> cs { 'a', 'b', 'c' };
+               auto ds = foo(&cs);
+
+               cs.clear();
+
+               for ( auto d : ds )
+               {
+                 std::cout << d;
+               }
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>foo</code> returns a <code>std::vector&lt;char&gt;</code>,
+                 not a <code>std::vector&lt;char&gt;*</code>, i.e. a copy.
+                 In other words, <code>ds</code> is a separate list and clearing
+                 <code>cs</code> does not affect <code>ds</code>.
                </p>
              </div>
            END
@@ -468,13 +481,48 @@
              #{show_output_field}
              <div data-revealer="Show explanation" class="explanation">
                <p>
-                 You can initialize a container using iterators. It will
+                 You can initialise a container using iterators. It will
                  then copy all items from the other container.
                </p>
              </div>
            END
          end
       %>
+
+      <%=
+        exercise do
+          extend SolutionMixin
+
+          <<-END
+            <p>
+              Write a function <code>std::vector&lt;int&gt; crop(std::vector&lt;int&gt; ns, unsigned n)</code>
+              that returns a list equal to <code>ns</code> but with <code>n</code> elements from the beginning and end of <code>ns</code>.              
+            </p>
+            <p>
+              Rely on iterators to implemented this.
+            </p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          extend SolutionMixin
+
+          <<-END
+            <p>
+              Write a function <code>template&lt;typename Iterator&gt; void clamp(Iterator start, Iterator end)</code>
+              that iterates through the elements and sets all negative values it encounters to zero. For example,
+              if given the vector <code>{ 1, -2, 3, -4, 5 }</code>, it transforms this vector into
+              <code>{1, 0, 3, 0, 5}</code>.
+            </p>
+            <p>
+              Write the code in the header file: this is a requirement for templated functions.
+            </p>
+          END
+        end
+      %>
+
               
       <%=
          exercise(Lib::Interpretation) do

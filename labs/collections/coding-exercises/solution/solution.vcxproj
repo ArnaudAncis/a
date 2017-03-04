@@ -146,6 +146,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="clamp\clamp-tests.cpp" />
+    <ClCompile Include="crop\crop-tests.cpp" />
+    <ClCompile Include="crop\crop.cpp" />
     <ClCompile Include="is-palindrome\is-palindrome-tests.cpp" />
     <ClCompile Include="is-palindrome\is-palindrome.cpp" />
     <ClCompile Include="rotate\rotate-tests.cpp" />
@@ -156,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Catch.h" />
+    <ClInclude Include="clamp\clamp.h" />
+    <ClInclude Include="crop\crop.h" />
     <ClInclude Include="is-palindrome\is-palindrome.h" />
     <ClInclude Include="rotate\rotate.h" />
     <ClInclude Include="uniq\uniq.h" />

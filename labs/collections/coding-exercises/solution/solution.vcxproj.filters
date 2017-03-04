@@ -36,6 +36,15 @@
     <ClCompile Include="uniq\uniq-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="crop\crop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crop\crop-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="clamp\clamp-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="is-palindrome\is-palindrome.h">
@@ -48,6 +57,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="uniq\uniq.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="crop\crop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clamp\clamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
