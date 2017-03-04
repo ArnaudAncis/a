@@ -102,6 +102,13 @@
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>auto</code> is similar to C#'s <code>var</code>:
+                 it lets the compiler deduce the type for you.
+                 <code>n</code> has actually type <code>int</code> in the above code.
+               </p>
+             </div>
            END
          end
       %>
@@ -362,7 +369,164 @@
            END
          end
       %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             std::vector<char> foo(std::vector<char>* cs)
+             {
+               return *cs;
+             }
+
+             int main()
+             {
+               std::vector<char> cs { 'a', 'b', 'c' };
+               auto ds = foo(&cs);
+
+               cs.clear();
+
+               for ( auto d : ds )
+               {
+                 std::cout << d;
+               }
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>foo</code> returns a <code>std::vector&lt;char&gt;</code>,
+                 not a <code>std::vector&lt;char&gt;*</code>, i.e. a copy.
+                 In other words, <code>ds</code> is a separate list and clearing
+                 <code>cs</code> does not affect <code>ds</code>.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+             #include <set>
+
+             int main()
+             {
+               std::vector<char> vec { 'x', 'y', 'z' };
+               std::set<char> set(vec.begin(), vec.end());
+
+               for ( auto c : set )
+               {
+                 std::cout << c;
+               }
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 You can initialize a container using iterators. It will
+                 then copy all items from the other container.
+               </p>
+             </div>
+           END
+         end
+      %>
               
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <set>
+             #include <algorithm>
+
+             bool is_odd(int x)
+             {
+               return x % 2;
+             }
+
+             int main()
+             {
+               std::set<int> set {1, 2, 3, 4, 5, 6, 7};
+
+               std::cout << std::count_if(set.begin(), set.end(), is_odd);
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 This code prints the number of odd numbers in the set.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+             #include <algorithm>
+
+             bool predicate(int x)
+             {
+               return x * x > 20;
+             }
+
+             int main()
+             {
+               std::vector<int> set {1, 2, 3, 4, 5, 6, 7};
+
+               *std::find_if(set.begin(), set.end(), predicate) = 0;
+
+               for ( auto c : set )
+               {
+                 std::cout << c;
+               }
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>find_if</code> looks for the first item that satisfies
+                 the predicate, i.e. the first number whose square is larger
+                 than 20. In our example, this is 5. <code>find_if</code> returns
+                 an <em>iterator</em> to this item.
+               </p>
+               <p>
+                 Given this iterator, we overwrite the item it points to
+                 using <code>*it = 0;</code>. In other words, 5 gets overwritten
+                 by <code>0</code>.
+               </p>
+             </div>
+           END
+         end
+      %>
+
 
       <%=
         exercise do
