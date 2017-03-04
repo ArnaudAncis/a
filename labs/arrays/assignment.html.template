@@ -56,7 +56,7 @@
       }
 
       .message {
-        font-size: 2em;
+        font-size: 1.2em;
         font-weight: bold;
         text-align: center;
         width: 75%;
@@ -493,13 +493,38 @@
          end
       %>
 
+      <div class="message">
+        <p>
+          For this lab, all exercises  have been grouped together in the same solution.
+          Since in order to run tests in C++, all code has to compile (which is not the
+          case until you make all excersises), we have told Visual Studio to exclude
+          all exercise-related files.
+        </p>
+        <p>
+          When starting a new exercise, your first step should be to include
+          all necessary files pack in the project:
+        </p>
+        <ul>
+          <li>
+            In the Solution Explorer's toolbar, select the <code>student</code> project and
+            click on the button "Show All Files". This gives you an alternative view
+            of the project where you get to see its actual directory structure.
+          </li>
+          <li>
+            Right click on the folder corresponding with the exercise you want to make
+            and select "Include In Project".
+          </li>
+        </ul>
+      </div>
+
       <%=
         exercise do
           extend SolutionMixin
           extend GitMixin
 
           <<-END
-            #{git_link 'split/split.sln'}
+            #{git_link 'coding-exercises/coding-exercises.sln'}
+            
             <p>
               Write the function <code>void split(int* ns, unsigned size, int** odds, unsigned* n_odds, int** evens, unsigned* n_evens)</code> that splits
               the array <code>ns</code> into two arrays <code>odds</code> and <code>evens</code>, which contains the odd and even value from <code>ns</code>, respectively.
@@ -521,7 +546,7 @@
           extend GitMixin
 
           <<-END
-            #{git_link 'length/length.sln'}
+            #{git_link 'coding-exercises/coding-exercises.sln'}
             <p>
               Write the function <code>unsigned length(int* p, int* q)</code> that, given pointers <code>p</code> and <code>q</code>
               that point to the start and one-beyond-the-end of the array, respectively, returns
@@ -542,7 +567,7 @@
           extend GitMixin
 
           <<-END
-            #{git_link 'veryquicksort/veryquicksort.sln'}
+            #{git_link 'coding-exercises/coding-exercises.sln'}
             <p>
               Write the function <code>void veryquickort(int* ns, int size)</code> that, given a list that
               contains only single digit decimal numbers (i.e. 0 to 9), sorts this list in place (i.e. the function modifies the list pointed to by <code>ns</code>).
@@ -562,7 +587,7 @@
           extend GitMixin
 
           <<-END
-            #{git_link 'most-frequent/most-frequent.sln'}
+            #{git_link 'coding-exercises/coding-exercises.sln'}
             <p>
               Write the function <code>int most_frequent(int* ns, unsigned size)</code> that
               returns the element of <code>ns</code> that appears the most often. For example,
@@ -589,7 +614,7 @@
           extend GitMixin
 
           <<-END
-            #{git_link 'lone-wolf/lone-wolf.sln'}
+            #{git_link 'coding-exercises/coding-exercises.sln'}
             <p>
               Write the function <code>void lone_wolf(int* ns, int size)</code> that looks for the "lone wolf" in ns:
               the list <code>ns</code> contains pairs of integers plus one unpaired integer, which is the lone wolf. For example,
