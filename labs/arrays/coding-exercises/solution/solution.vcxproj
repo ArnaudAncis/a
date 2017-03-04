@@ -152,6 +152,8 @@
     <ClCompile Include="lone-wolf\lone-wolf.cpp" />
     <ClCompile Include="most-frequent\most-frequent-tests.cpp" />
     <ClCompile Include="most-frequent\most-frequent.cpp" />
+    <ClCompile Include="range\range-tests.cpp" />
+    <ClCompile Include="range\range.cpp" />
     <ClCompile Include="split\split-tests.cpp" />
     <ClCompile Include="split\split.cpp" />
     <ClCompile Include="tests.cpp" />
@@ -163,6 +165,7 @@
     <ClInclude Include="length\length.h" />
     <ClInclude Include="lone-wolf\lone-wolf.h" />
     <ClInclude Include="most-frequent\most-frequent.h" />
+    <ClInclude Include="range\range.h" />
     <ClInclude Include="split\split.h" />
     <ClInclude Include="veryquicksort\veryquicksort.h" />
   </ItemGroup>

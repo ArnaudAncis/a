@@ -526,6 +526,25 @@
             #{git_link 'coding-exercises/coding-exercises.sln'}
             
             <p>
+              Write the function <code>int* range(int from, int to)</code> that returns a new array
+              containing the values going from <code>from</code> (inclusive) to <code>to</code> (exclusive).
+            </p>
+            <p>
+              <code>range</code> can assume that <code>from &lt; to</code>. In other cases, the result is undefined.
+            </p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          extend SolutionMixin
+          extend GitMixin
+
+          <<-END
+            #{git_link 'coding-exercises/coding-exercises.sln'}
+            
+            <p>
               Write the function <code>void split(int* ns, unsigned size, int** odds, unsigned* n_odds, int** evens, unsigned* n_evens)</code> that splits
               the array <code>ns</code> into two arrays <code>odds</code> and <code>evens</code>, which contains the odd and even value from <code>ns</code>, respectively.
               Order is preserved. <code>n_odds</code> and <code>n_evens</code> must receive the size of the arrays <code>odds</code> and <code>evens</code>, respectively.
