@@ -79,7 +79,7 @@
 
   <body>
     <header>
-      <div class="center-vertically">Arrays</div>
+      <div class="center-vertically">Collections</div>
     </header>
     <div id="contents">
       <%=
@@ -111,6 +111,20 @@
              </div>
            END
          end
+      %>
+
+      <%=
+        exercise do
+          extend SolutionMixin
+
+          <<-END
+            <p>
+              Write the function <code>bool is_palindrome(std::vector&lt;int&gt; ns)</code>
+              that checks whether the given sequence is a palindrome, i.e.
+              that it is equal to its reverse.
+            </p>
+          END
+        end
       %>
 
       <%=
@@ -226,6 +240,64 @@
                <p>
                  Assignment between vectors clears the left hand vector and copies
                  all elements from the right hand vector into it.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+        exercise do
+          extend SolutionMixin
+
+          <<-END
+            <p>
+              Write a function <code>void rotate(std::vector&lt;int&gt;* ns, int delta)</code> that
+              moves the elements of <code>ns</code> around in a circle. For example,
+              <code>{1, 2, 3, 4, 5}</code> rotated by 1 should yield <code>{5, 1, 2, 3, 4}</code>.
+              Negative <code>delta</code>s are allowed: <code>{1, 2, 3, 4, 5}</code> rotated
+              by <code>-1</code> gives <code>{2, 3, 4, 5, 1}</code>.
+            </p>
+          END
+        end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <vector>
+
+             std::vector<char> foo(std::vector<char>* cs)
+             {
+               return *cs;
+             }
+
+             int main()
+             {
+               std::vector<char> cs { 'a', 'b', 'c' };
+               auto ds = foo(&cs);
+
+               cs.clear();
+
+               for ( auto d : ds )
+               {
+                 std::cout << d;
+               }
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>foo</code> returns a <code>std::vector&lt;char&gt;</code>,
+                 not a <code>std::vector&lt;char&gt;*</code>, i.e. a copy.
+                 In other words, <code>ds</code> is a separate list and clearing
+                 <code>cs</code> does not affect <code>ds</code>.
                </p>
              </div>
            END
@@ -375,48 +447,6 @@
            self.source = <<-END
              #include <iostream>
              #include <vector>
-
-             std::vector<char> foo(std::vector<char>* cs)
-             {
-               return *cs;
-             }
-
-             int main()
-             {
-               std::vector<char> cs { 'a', 'b', 'c' };
-               auto ds = foo(&cs);
-
-               cs.clear();
-
-               for ( auto d : ds )
-               {
-                 std::cout << d;
-               }
-             }
-           END
-
-           <<-END
-             <p>What is the output of the following code?</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-             <div data-revealer="Show explanation" class="explanation">
-               <p>
-                 <code>foo</code> returns a <code>std::vector&lt;char&gt;</code>,
-                 not a <code>std::vector&lt;char&gt;*</code>, i.e. a copy.
-                 In other words, <code>ds</code> is a separate list and clearing
-                 <code>cs</code> does not affect <code>ds</code>.
-               </p>
-             </div>
-           END
-         end
-      %>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-             #include <vector>
              #include <set>
 
              int main()
@@ -525,39 +555,6 @@
              </div>
            END
          end
-      %>
-
-
-      <%=
-        exercise do
-          extend SolutionMixin
-          extend GitMixin
-
-          <<-END
-            #{git_link 'coding-exercises/coding-exercises.sln'}
-            <p>
-              Write the function <code>void lone_wolf(int* ns, int size)</code> that looks for the "lone wolf" in ns:
-              the list <code>ns</code> contains pairs of integers plus one unpaired integer, which is the lone wolf. For example,
-            </p>
-            <ul>
-              <li>0 0 1 1 2 2 3: the lone wolf is 3.</li>
-              <li>0 1 2 1 0: the lone wolf is 2.</li>
-              <li>5: the lone wolf is 5.</li>
-              <li>5 5 5: the lone wolf is 5.</li>
-            </ul>
-            <p>
-              Your function is allowed to assume that the list does indeed contain N pairs + one unpaired integer, i.e. it does
-              not have to work correctly if given the list <code>1 2 3</code>.
-            </p>
-            <p>
-              For extra fun, find a way to implement it in such a way that
-            </p>
-            <ul>
-              <li>each <code>n</code> of <code>ns</code> is only read once.</li>
-              <li>it consumes little memory: you are only allowed to use one local variable, which must be of type <code>int</code>.</li>
-            </ul>
-          END
-        end
       %>
 
     </div>
