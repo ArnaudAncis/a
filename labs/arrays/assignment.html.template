@@ -539,11 +539,8 @@
       <%=
         exercise do
           extend SolutionMixin
-          extend GitMixin
 
           <<-END
-            #{git_link 'coding-exercises/coding-exercises.sln'}
-            
             <p>
               Write the function <code>void split(int* ns, unsigned size, int** odds, unsigned* n_odds, int** evens, unsigned* n_evens)</code> that splits
               the array <code>ns</code> into two arrays <code>odds</code> and <code>evens</code>, which contains the odd and even value from <code>ns</code>, respectively.
@@ -562,10 +559,8 @@
       <%=
         exercise do
           extend SolutionMixin
-          extend GitMixin
 
           <<-END
-            #{git_link 'coding-exercises/coding-exercises.sln'}
             <p>
               Write the function <code>unsigned length(int* p, int* q)</code> that, given pointers <code>p</code> and <code>q</code>
               that point to the start and one-beyond-the-end of the array, respectively, returns
@@ -583,10 +578,8 @@
       <%=
         exercise do
           extend SolutionMixin
-          extend GitMixin
 
           <<-END
-            #{git_link 'coding-exercises/coding-exercises.sln'}
             <p>
               Write the function <code>void veryquickort(int* ns, int size)</code> that, given a list that
               contains only single digit decimal numbers (i.e. 0 to 9), sorts this list in place (i.e. the function modifies the list pointed to by <code>ns</code>).
@@ -603,10 +596,8 @@
       <%=
         exercise do
           extend SolutionMixin
-          extend GitMixin
 
           <<-END
-            #{git_link 'coding-exercises/coding-exercises.sln'}
             <p>
               Write the function <code>int most_frequent(int* ns, unsigned size)</code> that
               returns the element of <code>ns</code> that appears the most often. For example,
@@ -630,10 +621,8 @@
       <%=
         exercise do
           extend SolutionMixin
-          extend GitMixin
 
           <<-END
-            #{git_link 'coding-exercises/coding-exercises.sln'}
             <p>
               Write the function <code>void lone_wolf(int* ns, int size)</code> that looks for the "lone wolf" in ns:
               the list <code>ns</code> contains pairs of integers plus one unpaired integer, which is the lone wolf. For example,
