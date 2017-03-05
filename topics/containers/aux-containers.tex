@@ -153,7 +153,15 @@
   \end{itemize}
 \end{frame}
 
-
+\begin{frame}
+  \frametitle{Strings}
+  \begin{itemize}
+    \item Type of strings: \texttt{std::string}
+    \item Strings also acts as containers
+    \item \texttt{\#include <string>}
+    \item \link{http://www.cplusplus.com/reference/string/basic_string/}{Official documentation}
+  \end{itemize}
+\end{frame}
 
 
 \section{Iterators}
@@ -281,6 +289,16 @@
 \begin{frame}
   \frametitle{Example}
   \code[language=c++14]{count_if.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reverse Iterators}
+  \begin{itemize}
+    \item Useful for iterating backwards
+    \item Use \texttt{xs.rbegin()} and \texttt{xs.rend()} to get them
+    \item Use \texttt{it.base()} to turn it back into a forward iterator
+  \end{itemize}
+  \code[language=c++14,width=.9\linewidth]{reverse-iterators.cpp}
 \end{frame}
 
 \end{document}
