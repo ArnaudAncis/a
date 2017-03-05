@@ -512,8 +512,11 @@
           <<-END
             <p>
               Write a function <code>template&lt;typename Iterator&gt; void clamp(Iterator start, Iterator end)</code>
-              that iterates through the elements and sets all negative values it encounters to zero. For example,
-              if given the vector <code>{ 1, -2, 3, -4, 5 }</code>, it transforms this vector into
+              that iterates through the elements and sets all negative values it encounters to zero.
+              <code>start</code> points to the first element, <code>end</code> points to one past the last element.
+            </p>
+            <p>
+              For example, if given the vector <code>{ 1, -2, 3, -4, 5 }</code>, it transforms this vector into
               <code>{1, 0, 3, 0, 5}</code>.
             </p>
             <p>
@@ -523,6 +526,22 @@
         end
       %>
 
+      <%=
+        exercise do
+          extend SolutionMixin
+
+          <<-END
+            <p>
+              Write a function <code>template&lt;typename Iterator&gt; void reverse(Iterator start, Iterator end)</code>
+              that reverses the order of the elements delimited by the iterators. <code>start</code> points
+              to the first element, <code>end</code> points to one past the last element.
+            </p>
+            <p>
+              <code>reverse</code> should work on vectors and lists, and on any type of element.
+            </p>
+          END
+        end
+      %>
               
       <%=
          exercise(Lib::Interpretation) do
@@ -605,6 +624,17 @@
          end
       %>
 
+      <%=
+        exercise do
+          extend SolutionMixin
+
+          <<-END
+            <p>
+              
+            </p>
+          END
+        end
+      %>
     </div>
   </body>
 
