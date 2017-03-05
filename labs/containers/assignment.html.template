@@ -630,8 +630,25 @@
 
           <<-END
             <p>
-              
+              Write the function <code>void trim(std::string* str)</code> that
+              removes all whitespace in front and at the end of the string.
+              For example, <code>"  xyz    "</code> should be turned into <code>"xyz"</code>.
             </p>
+            <ul>
+              <li>
+                To find out whether a character is whitespace, use the function <a href="http://www.cplusplus.com/reference/cctype/isspace/"><code>isspace</code></a>
+                for which you need to include <code>cctype</code>.
+              </li>
+              <li>
+                Use <a href="http://www.cplusplus.com/reference/algorithm/find_if_not/"><code>std::find_if_not</code></a>
+                to find where the whitespace and both ends end.
+                Rely on reverse iterators to find the trailing whitespace.
+              </li>
+              <li>
+                Use <code>std::string</code>'s <a href="http://www.cplusplus.com/reference/string/basic_string/erase/"><code>erase</code></a>
+                member function to remove characters from a string.
+              </li>
+            </ul>
           END
         end
       %>

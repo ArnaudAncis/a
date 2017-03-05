@@ -155,6 +155,8 @@
     <ClCompile Include="rotate\rotate-tests.cpp" />
     <ClCompile Include="rotate\rotate.cpp" />
     <ClCompile Include="tests.cpp" />
+    <ClCompile Include="trim\trim-tests.cpp" />
+    <ClCompile Include="trim\trim.cpp" />
     <ClCompile Include="uniq\uniq-tests.cpp" />
     <ClCompile Include="uniq\uniq.cpp" />
   </ItemGroup>
@@ -165,6 +167,7 @@
     <ClInclude Include="is-palindrome\is-palindrome.h" />
     <ClInclude Include="reverse\reverse.h" />
     <ClInclude Include="rotate\rotate.h" />
+    <ClInclude Include="trim\trim.h" />
     <ClInclude Include="uniq\uniq.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
