@@ -114,14 +114,19 @@
             <td><%= lab('pointers', 'Pointers') %></td>
           </tr>
           <tr>
-            <td></td>
+            <td>4</td>
             <td><%= topic('heap-allocation', 'Heap Allocation', handouts: true) %></td>
             <td><%= lab('heap-allocation', 'Heap Allocation') %></td>
           </tr>
           <tr>
-            <td></td>
+            <td>4</td>
             <td><%= topic('arrays', 'Arrays', handouts: true) %></td>
             <td><%= lab('arrays', 'Arrays') %></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><%= topic('containers', 'Containers', handouts: true) %></td>
+            <td><%= lab('containers', 'Containers') %></td>
           </tr>
           <tr>
             <td></td>
