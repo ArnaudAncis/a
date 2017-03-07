@@ -23,14 +23,20 @@
     \con Clumsy syntax
   \end{procontralist}
   \vskip5mm
-  \structure{Example (peek into future)}
-  \code[width=.95\linewidth,font=\footnotesize,frame=lines]{operator-overloading-bad.cpp}
+  \begin{overprint}
+    \onslide<1>
+    \code[language=c++14]{clumsy1.cpp}
+
+    \onslide<2>
+    \code[language=c++14]{clumsy2.cpp}
+  \end{overprint}
 \end{frame}
 
 \begin{frame}
   \frametitle{References}
   \begin{itemize}
-    \item Not in C, new in \cpp
+    \item C has only pointers
+    \item \cpp\ introduced references
     \item Gives same ``power'' as pointers
     \item Uses pointers behind the scenes
     \item Much cleaner syntax
@@ -39,26 +45,27 @@
 
 \begin{frame}
   \frametitle{Syntax}
-  \begin{itemize}
-    \item {\tt T}: some type
-    \item {\tt T[]}: array of {\tt T}
-    \item {\tt const T}: readonly view of {\tt T}
-    \item {\tt T*}: pointer to {\tt T}
-    \item<2-> {\tt T\& }: reference to {\tt T}
-  \end{itemize}
-  \visible<3->{
-    \begin{framed}
-      \begin{center} \Large
-        \textbf{Warning} \\[2mm]
-        Do not confuse with address-of operator!
-      \end{center}
-    \end{framed}
-  }
+  \begin{center}
+    \begin{tabular}{cl}
+      \textbf{Syntax}       & \textbf{Semantic} \\
+      \toprule
+      \texttt{T[]}          & Array of \texttt{T}s \\
+      \texttt{const T}      & Readonly view of \texttt{T} \\
+      \texttt{T*}           & Pointer to \texttt{T} \\
+      \alert{\texttt{T\&}}  & \alert{Reference to \texttt{T}} \\
+    \end{tabular}
+  \end{center}
+  \begin{framed}
+    \begin{center} \Large
+      \textbf{Warning} \\[2mm]
+      Do not confuse with address-of operator!
+    \end{center}
+  \end{framed}
 \end{frame}
 
 \begin{frame}
   \frametitle{Semantics}
-  \code[frame=lines,width=.5\linewidth]{by-value.cpp}
+  \code[width=.5\linewidth,language=c++14]{by-value.cpp}
   \begin{itemize}
     \item {\tt foo} receives \emph{copy} of {\tt x}
     \item {\tt foo} only has access to the {\tt value} of the variable
@@ -68,148 +75,174 @@
 
 \begin{frame}
   \frametitle{Semantics}
-  \code[frame=lines,width=.5\linewidth]{by-pointer.cpp}
+  \code[width=.5\linewidth,language=c++14]{by-pointer.cpp}
   \begin{itemize}
-    \item {\tt foo} receives the \emph{address} of {\tt x}
-    \item {\tt foo} has access to the {\tt value} of {\tt x} (e.g.\ {\tt int y = *arg})
-    \item {\tt foo} can modify {\tt x} (e.g.\ {\tt *arg = 6})
+    \item \texttt{foo} receives the \emph{address} of \texttt{x}
+    \item \texttt{foo} has access to the {\tt value} of \texttt{x}
+          \begin{itemize}
+            \item Syntax: \texttt{int y = *arg}
+          \end{itemize}
+    \item \texttt{foo} can modify {\tt x}
+          \begin{itemize}
+            \item Syntax: \texttt{*arg = 6}
+          \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Semantics}
-  \code[frame=lines,width=.5\linewidth]{by-reference.cpp}
+  \code[width=.5\linewidth,language=c++14]{by-reference.cpp}
   \begin{itemize}
     \item {\tt foo} receives a \emph{reference} to {\tt x}
-    \item In essence, this is the same as receiving the address of {\tt x}
-    \item {\tt foo} has access to the {\tt value} of {\tt x} (e.g.\ {\tt int y = arg})
-    \item {\tt foo} can modify {\tt x} (e.g.\ {\tt arg = 6})
-    \item Whenever {\tt foo} interacts with {\tt arg}, it is interacting with {\tt x}
-    \item References offer pointer-functionality with cleaner syntax
+    \item Gives same access as when using pointer
+          \begin{itemize}
+            \item \texttt{foo} can read \texttt{x}
+            \item \texttt{foo} can modify \texttt{x}
+          \end{itemize}
+    \item What's the difference then except for the \texttt{\&}?
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Quiz}
-  \code[font=\small,frame=lines,width=.9\linewidth]{alias.cpp}
+  \frametitle{Syntax}
+  \code[language=c++14,width=.5\linewidth,font=\small]{reference-syntax.cpp}
+  \begin{itemize}
+    \item No need for dereferencing (no \texttt{*x}, just \texttt{x})
+    \item Cleaner syntax
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Quiz}
-  \code[font=\small,frame=lines,width=.9\linewidth]{byref.cpp}
+  \frametitle{Aliasing}
+  \begin{itemize}
+    \item Introducing another name for a variable
+  \end{itemize}
+  \vskip5mm
+  \begin{overprint}
+    \onslide<1>
+    \code[language=c++14,font=\small]{aliasing1.cpp}
+
+    \onslide<2>
+    \code[language=c++14,font=\small]{aliasing2.cpp}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Returning References}
+  \code[language=c++14]{max-reference.cpp}
+  \begin{itemize}
+    \item Intuition: \texttt{max} returns the variable itself, not just its value
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Returning References}
+  \code[language=c++14]{field-reference.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Limitations of References}
+  \begin{itemize}
+    \item References do not fully replace pointers
+          \begin{itemize}
+            \item References cannot be retargeted
+            \item References cannot be null
+          \end{itemize}
+  \end{itemize}
+  \vskip4mm
+  \code[language=c++14]{redirection.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{When To Use References}
   \begin{itemize}
-    \item Power of pointers
-    \item Without the ugliness
-    \item Why not always use references instead of pointers?
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Being Explicit About Intentions}
-  \code[frame=lines,width=.5\linewidth]{explicit.cpp}
-  \begin{itemize}
-    \item What guarantees do we have?
-    \item If {\tt foo} takes {\tt int}, we know {\tt x} will not change
-    \item If {\tt foo} takes {\tt int\&}, {\tt x} will probably change
-    \item We cannot infer which is true based on syntax of {\tt foo(x)}
-    \item Working with pointers is more explicit
+    \item Mostly used with functions
           \begin{itemize}
-            \item {\tt foo(x)}: {\tt x} will not change
-            \item {\tt foo(\&x)}: {\tt x} will probably change
+            \item \texttt{const T\&} parameters
+            \item \texttt{T\&} return values
           \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Rules of Thumb}
+  \frametitle{When Not To Use References}
+  \code[language=c++14]{out-params.cpp}
   \begin{itemize}
-    \item Readonly access to small data: use {\tt T}
-          \begin{itemize}
-            \item Value will be copied
-            \item Gives readonly access to variable
-            \item Only efficient if {\tt T}s are small
-          \end{itemize}
-    \item Readonly access to large data: use {\tt const T\&}
-          \begin{itemize}
-            \item {T\&} is as efficient as passing a pointer
-            \item {T\&} gives ``full access''
-            \item {const T\&} restricts access to readonly
-            \item Efficient and safe
-          \end{itemize}
-    \item Read/write access: use {\tt T*}
-          \begin{itemize}
-            \item Efficient
-            \item Gives full access (read + write)
-          \end{itemize}
-  \end{itemize}  
-\end{frame}
-
-\begin{frame}
-  \frametitle{Quiz}
-  \code[frame=lines]{return-reference.cpp}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Returning References}
-  \code[frame=lines,width=.5\linewidth]{return-value.cpp}
-  \begin{itemize}
-    \item Does not compile
-    \item Nonsensical
-    \item {\tt foo} returns value {\tt 5}
-    \item We are trying to assign {\tt 6} to {\tt 5}
-    \item What could this even mean?
+    \item It is important to know whether \texttt{x} could change
+    \item If signature is \texttt{void foo(int)}, \texttt{x} cannot change
+    \item If signature is \texttt{void foo(int\&)}, \texttt{x} could change
+    \item Whether \texttt{x} can change depends on \texttt{foo}'s signature
+    \item Signature not immediately visible above
+    \item We would have to look it up
+    \item Would seriously impede code reading
+    \item Ideally, it should be clear from above code alone whether \texttt{x} can change
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Returning References}
-  \code[frame=lines,width=.5\linewidth]{return-reference2.cpp}
+  \frametitle{When Not To Use References}
   \begin{itemize}
-    \item Compiles just perfectly
-    \item {\tt foo} does return a reference to {\tt x}
-    \item We do not just get the value of {\tt x}
-    \item We also get its location in memory
-    \item We receive a complete variable, not just a value
-    \item Assigning to a variable makes perfect sense
+    \item We introduce convention
+    \item If we write \texttt{foo(x)}, \texttt{x} should remain unmodified
+    \item If we write \texttt{foo(\&x)}, it signals \texttt{x} could change
+    \item The \& makes it explicit that \texttt{x} could change
+    \item No need to look up \texttt{foo}'s signature
+    \item This way, we are able to understand code quicker
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Use Cases}
-  \code[language=java,frame=lines,font=\small]{use-case-arraylist.java}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Use Cases (Advanced Example)}
-  \code[frame=lines]{use-case-vectors.cpp}
+  \frametitle{How To Pass Parameters}
+  \begin{center}
+    \begin{tabular}{ccc}
+      & \textbf{Small} & \textbf{Large} \\
+      \toprule
+      \textbf{Read} & \texttt{T} & \texttt{const T\&} \\
+      \textbf{Read+Write} & \texttt{T*} & \texttt{T*} \\
+    \end{tabular}
+  \end{center}
+  \vskip4mm
+  \structure{Readonly Access}
+  \begin{itemize}
+    \item Small values: pass by value
+    \item Large values: pass by const reference
+  \end{itemize}
+  \vskip4mm
+  \structure{Read and Write Access}
+  \begin{itemize}
+    \item Always by pointer
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Summary}
+  \structure{Types}
   \begin{center}
-    \Large Reference to {\tt T}, written {\tt T\&}
-  \end{center}
-  \begin{itemize}
-    \item Usage syntax same as ordinary variable
-    \item Works with pointer behind-the-scenes
-    \item Passes along the entire variable instead of just its value
-  \end{itemize}
-  \vskip5mm
-  \begin{center}
-    \begin{tabular}{lccc}
-      & \textbf{By value} & \textbf{By pointer} & \textbf{By reference} \\
+    \begin{tabular}{cc}
+      \textbf{Syntax} & \textbf{Semantics} \\
       \toprule
-      \textbf{Type} & {\tt T x = init} & {\tt T* x = \&init} & {\tt T\& x = init} \\
-      \textbf{Reading} & {y = x} & {\tt y = *x} & {\tt y = x} \\
-      \textbf{Writing} & {x = y} & {\tt *x = y} & {\tt x = y} \\
+      \texttt{T} & Plain old \texttt{T} \\
+      \texttt{T*} & Pointer to \texttt{T} \\
+      \texttt{T\&} & Reference to \texttt{T} \\
+    \end{tabular}
+  \end{center}
+  \vskip4mm
+  \structure{Operators}
+  \begin{center}
+    \begin{tabular}{cc}
+      \textbf{Syntax} & \textbf{Semantics} \\
+      \toprule
+      \texttt{x} & Value of \texttt{x} \\
+      \texttt{\&x} & Address of \texttt{x} \\
+      \texttt{*x} & Dereference \texttt{x}
     \end{tabular}
   \end{center}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Summary}
+  \code[language=c++14]{calling-syntax.cpp}
+\end{frame}
 
 \end{document}
 
