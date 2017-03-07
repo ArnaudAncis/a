@@ -1,5 +1,8 @@
-// Old style
-#define PI 3.141592
+const double x = 1;
 
-// Modern style
-const double PI = 3.141592;
+// Can read value
+int y = x;
+
+// Cannot change value
+x++;  // ERROR
+
