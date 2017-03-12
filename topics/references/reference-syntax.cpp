@@ -1,5 +1,4 @@
-void foo(int& x)
-{
+void foo(int& x) {
     // Reading x
     std::cout << x;
 
