@@ -129,12 +129,12 @@
             <td><%= lab('containers', 'Containers') %></td>
           </tr>
           <tr>
-            <td></td>
+            <td>5</td>
             <td><%= topic('const', 'Const', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
-            <td></td>
+            <td>5</td>
             <td><%= topic('references', 'References', handouts: true) %></td>
             <td><%= lab('references', 'References') %></td>
           </tr>
