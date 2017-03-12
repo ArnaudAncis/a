@@ -97,6 +97,20 @@
         width: 75%;
         margin: 10px auto;
       }
+
+      #nth-table {
+        margin: 0px auto;
+      }
+      
+      #nth-table th {
+        background: #AAA;
+        font-weight: bold;
+        min-width: 3em;
+      }
+
+      #nth-table td {
+        text-align: center;
+      }
     </style>
   </head>
 
@@ -174,6 +188,121 @@
              #{show_output_field}
            END
          end
+      %>
+
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Write the function <code>swap</code> that can swap the values
+              of two <code>int</code> variables using the following syntax: <code>swap(x, y)</code>.
+            </p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          extend SourceCodeMixin
+          
+          self.source = <<-END
+            std::vector<int> ns { 1, 2, 3, 4, 5 };
+
+            std::cout << nth(ns, 0) << std::endl;      // Prints 1
+            std::cout << nth(ns, -1) << std::endl;     // Prints 5
+
+            nth(ns, 5) = 0;                            // ns == { 0, 2, 3, 4, 5 }
+            nth(ns, -2)++;                             // ns == { 0, 2, 3, 5, 5 }
+          END
+
+          <<-END
+            <p>
+              You like the fact that in some languages, you can start indexing containers
+              from the end by using negative indices. For example, index <code>-1</code>
+              refers to the last element, <code>-2</code> to the penultimate one, etc.
+            </p>
+            <p>
+              You decide to replicate this behaviour in C++ in a more generalised way:
+              every index outside the bounds of the container must get remapped
+              to inside the container. Say the container has 10 elements,
+              then its "normal" indices are 0, 1, 2, &hellip;, 9.
+              Index 10, which is normally invalid, gets remapped to 0,
+              index 11 to 1, etc. Similarly for negative indices:
+              -1 gets remapped to 9, i.e. the last element, -2 to 8, etc.
+            </p>
+            <table id="nth-table">
+              <tbody>
+                <tr>
+                  <td>-20</td>
+                  <td>-19</td>
+                  <td>-18</td>
+                  <td>-17</td>
+                  <td>-16</td>
+                  <td>-15</td>
+                  <td>-14</td>
+                  <td>-13</td>
+                  <td>-12</td>
+                  <td>-11</td>
+                </tr>
+                <tr>
+                  <td>-10</td>
+                  <td>-9</td>
+                  <td>-8</td>
+                  <td>-7</td>
+                  <td>-6</td>
+                  <td>-5</td>
+                  <td>-4</td>
+                  <td>-3</td>
+                  <td>-2</td>
+                  <td>-1</td>        
+                </tr>
+                <tr>
+                  <th>0</th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>5</th>
+                  <th>6</th>
+                  <th>7</th>
+                  <th>8</th>
+                  <th>9</th>        
+                </tr>
+                <tr>
+                <tr>
+                  <td>10</td>
+                  <td>11</td>
+                  <td>12</td>
+                  <td>13</td>
+                  <td>14</td>
+                  <td>15</td>
+                  <td>16</td>
+                  <td>17</td>
+                  <td>18</td>
+                  <td>19</td>        
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>21</td>
+                  <td>22</td>
+                  <td>23</td>
+                  <td>24</td>
+                  <td>25</td>
+                  <td>26</td>
+                  <td>27</td>
+                  <td>28</td>
+                  <td>29</td>        
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              Write the function <code>nth</code> so that
+              you can index a <code>std::vector&lt;int&gt;</code>
+              using your new fancy indices. Usage should be as follows:
+            </p>
+            #{show_source_editor}
+          END
+        end
       %>
 
       <%=
@@ -459,22 +588,102 @@
       %>
 
       <%=
-        exercise do
-          extend GitMixin
+         exercise(Lib::Interpretation) do
+           extend RevealerMixin
+           
+           self.source = <<-END
+             #include <iostream>
 
-          <<-END
-            #{git_link 'swap/swap.sln'}
-            <p>
-              Write the function <code>swap</code> that can swap the values
-              of two <code>int</code> variables using the following syntax: <code>swap(x, y)</code>.
-            </p>
-          END
-        end
+             int global = 0;
+
+             int& foo()
+             {
+                return global;
+             }
+
+             int main()
+             {
+                 foo() += 5;
+
+                 std::cout << global;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           extend RevealerMixin
+           
+           self.source = <<-END
+             #include <iostream>
+
+             int global = 0;
+
+             int& foo()
+             {
+                return global;
+             }
+
+             int main()
+             {
+                 int x = foo();
+                 x++;
+
+                 std::cout << global;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           extend RevealerMixin
+           
+           self.source = <<-END
+             #include <iostream>
+
+             int global = 0;
+
+             int& foo()
+             {
+                return global;
+             }
+
+             int main()
+             {
+                 int& x = foo();
+                 x++;
+
+                 std::cout << global;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
       %>
 
       <%=
         exercise do
-          extend GitMixin
           extend SourceCodeMixin
 
           self.source = <<-END
@@ -486,7 +695,6 @@
           END
 
           <<-END
-            #{git_link 'max/max.sln'}
             <p>
               Write the function <code>max</code> that, given a <code>std::vector&lt;int&gt;</code>,
               returns a reference to the maximum element. If more than one maximum exists,
