@@ -133,3 +133,23 @@ TEST_CASE("nth({1, 2, 3, 4, 5}, -15432) should return reference to 4")
     REQUIRE(ref == ns[3]);
     REQUIRE(&ref == &ns[3]);
 }
+
+TEST_CASE("nth({1, 2, 3}, 0) with const vector should return 1")
+{
+	const std::vector<int> ns{ 1,2,3 };
+	int index = 0;
+
+	int ref = nth(ns, index);
+
+	REQUIRE(ref == ns[index]);
+}
+
+TEST_CASE("nth({1, 2, 3}, -1 with const vector should return 3")
+{
+	const std::vector<int> ns{ 1,2,3 };
+	int index = -1;
+
+	int ref = nth(ns, index);
+
+	REQUIRE(ref == ns[2]);
+}
