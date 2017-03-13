@@ -206,7 +206,7 @@
       <%=
          exercise(Lib::TypeInference) do
            self.source = <<-END
-             int foo()
+             void foo()
              {
                auto a = 5.0;
                auto b = &a;
@@ -222,6 +222,54 @@
                                   [ 'b', 'double*' ],
                                   [ 'c', 'double**' ],
                                   [ 'd', 'double***' ] )}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
+             void foo(int** xs)
+             {
+               auto a = xs[0];
+               auto b = &a;
+               auto c = &xs[1];
+               auto d = *xs[2];
+               auto e = &d;
+               auto f = &e;
+               auto g = f[0][1];
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'a', 'int*' ],
+                                  [ 'b', 'int**' ],
+                                  [ 'c', 'int**' ],
+                                  [ 'd', 'int' ],
+                                  [ 'e', 'int*' ],
+                                  [ 'f', 'int**' ],
+                                  [ 'g', 'int' ] )}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
+             void foo(const int* xs)
+             {
+               auto x = xs[0];
+               auto y = *&xs;
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'x', 'int' ],
+                                  [ 'y', 'const int*' ] )}
            END
          end
       %>
