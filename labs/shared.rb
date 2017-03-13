@@ -137,8 +137,18 @@ module Lib
     include Contracts::TypeChecking
     include SourceCodeMixin
 
-    def ask_type_of(expression, expected_answer)
-      %{Type of <code>#{Html.escape(expression)}</code>: #{Quiz.validated_input { verbatim expected_answer }}}
+    # Pairs of [ expression, type ]
+    def ask_type_of_table(*pairs)
+      pairs_html = pairs.map do |expression, type|
+        %{<tr><td><code>#{Html.escape(expression)}</code></td><td>#{Quiz.validated_input { verbatim type }}</td>}
+      end.join("\n")
+
+      <<-END
+        <table class="type-inference">
+          <tr><th>Expression</th><th>Type</th></tr>
+          #{pairs_html}
+        </table>
+      END
     end
   end
 end
