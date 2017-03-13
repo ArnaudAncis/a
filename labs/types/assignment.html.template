@@ -113,7 +113,7 @@
 
       table.type-inference td {
         text-align: center;
-        padding: 1em;
+        padding: 0.2em 1em;
       }
 
       table.type-inference input {
@@ -147,17 +147,85 @@
            self.source = <<-END
              int main()
              {
-               auto x = 5;
+               int x = 1;
+               auto y = x;
              }
            END
 
            <<-END
              #{show_source_editor}
              <p>What are the types of the following expressions?</p>
-             #{ask_type_of_table( [ 'x', 'int' ] )}
+             #{ask_type_of_table( [ 'x', 'int' ],
+                                  [ 'y', 'int' ] )}
            END
          end
       %>
+
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
+             int main()
+             {
+               int x = 5;
+               auto y = &x;
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'x', 'int' ],
+                                  [ 'y', 'int*' ] )}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
+             int main()
+             {
+               auto a = 5.0;
+               auto b = &a;
+               auto c = &b;
+               auto d = &c;
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'a', 'double' ],
+                                  [ 'b', 'double*' ],
+                                  [ 'c', 'double**' ],
+                                  [ 'd', 'double***' ] )}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
+             int foo()
+             {
+               auto a = 5.0;
+               auto b = &a;
+               auto c = &b;
+               auto d = &c;
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'a', 'double' ],
+                                  [ 'b', 'double*' ],
+                                  [ 'c', 'double**' ],
+                                  [ 'd', 'double***' ] )}
+           END
+         end
+      %>
+
     </div>
   </body>
 
