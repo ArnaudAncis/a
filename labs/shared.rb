@@ -132,6 +132,15 @@ module Lib
       %{<p>Output: #{Quiz.validated_input { verbatim out }}</p>}
     end
   end
+
+  class TypeInference < Exercise
+    include Contracts::TypeChecking
+    include SourceCodeMixin
+
+    def ask_type_of(expression, expected_answer)
+      %{Type of <code>#{Html.escape(expression)}</code>: #{Quiz.validated_input { verbatim expected_answer }}}
+    end
+  end
 end
 
 
