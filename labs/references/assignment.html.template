@@ -197,6 +197,10 @@
               Write the function <code>swap</code> that can swap the values
               of two <code>int</code> variables using the following syntax: <code>swap(x, y)</code>.
             </p>
+            <p>
+              From now on, you will have to create the necessary <code>.cpp</code>/<code>.h</code> files yourself.
+              Put them in the project's <code>swap</code> subdirectory otherwise the tests may not work.
+            </p>
           END
         end
       %>
