@@ -45,11 +45,7 @@
         width: 50%;
       }
 
-      #course-material td:nth-child(1) {
-        text-align: center;
-      }
-
-      #course-material td:nth-child(2) {
+      #course-material td {
         text-align: center;
       }
 
@@ -118,22 +114,27 @@
             <td><%= lab('pointers', 'Pointers') %></td>
           </tr>
           <tr>
-            <td></td>
+            <td>4</td>
             <td><%= topic('heap-allocation', 'Heap Allocation', handouts: true) %></td>
-            <td></td>
+            <td><%= lab('heap-allocation', 'Heap Allocation') %></td>
           </tr>
           <tr>
-            <td></td>
+            <td>4</td>
             <td><%= topic('arrays', 'Arrays', handouts: true) %></td>
             <td><%= lab('arrays', 'Arrays') %></td>
           </tr>
           <tr>
-            <td></td>
+            <td>4</td>
+            <td><%= topic('containers', 'Containers', handouts: true) %></td>
+            <td><%= lab('containers', 'Containers') %></td>
+          </tr>
+          <tr>
+            <td>5</td>
             <td><%= topic('const', 'Const', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
-            <td></td>
+            <td>5</td>
             <td><%= topic('references', 'References', handouts: true) %></td>
             <td><%= lab('references', 'References') %></td>
           </tr>

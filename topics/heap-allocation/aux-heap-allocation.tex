@@ -56,7 +56,7 @@
   \end{itemize}
   \vskip5mm
   \structure{Example}
-  \code[frame=lines,width=.75\linewidth]{allocation-example.cpp}
+  \code[frame=lines,width=.75\linewidth,language=c++14]{allocation-example.cpp}
 \end{frame}
 
 \begin{frame}
@@ -70,7 +70,7 @@
   \end{itemize}
   \vskip5mm
   \structure{Example}
-  \code[frame=lines,width=.75\linewidth]{initialisation-example.cpp}  
+  \code[frame=lines,width=.75\linewidth,language=c++14]{initialisation-example.cpp}  
 \end{frame}
 
 \begin{frame}
@@ -84,7 +84,19 @@
   \end{itemize}
   \vskip5mm
   \structure{Example}
-  \code[frame=lines,width=.75\linewidth]{delete-example.cpp}  
+  \code[frame=lines,width=.75\linewidth,language=c++14]{delete-example.cpp}  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Memory Leaks}
+  \code[frame=lines,width=.75\linewidth,language=c++14]{memory-leak.cpp}
+  \begin{itemize}
+    \item Don't forget to \texttt{delete}
+    \item Leads to memory leaks
+    \item No way to find out if a pointer has already been deleted
+    \item Design often affected by manual memory management
+    \item Need for many helper classes to deal with complexity
+  \end{itemize}
 \end{frame}
 
 \end{document}
