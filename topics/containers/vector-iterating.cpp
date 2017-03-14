@@ -1,6 +1,6 @@
 std::vector<int> ns;
 
-for ( int n in ns )
+for ( int n : ns )
 {
     ...
 }
