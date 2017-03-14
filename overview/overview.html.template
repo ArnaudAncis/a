@@ -135,6 +135,11 @@
           </tr>
           <tr>
             <td>5</td>
+            <td></td>
+            <td><%= lab('types', 'Types') %></td>
+          </tr>
+          <tr>
+            <td>5</td>
             <td><%= topic('references', 'References', handouts: true) %></td>
             <td><%= lab('references', 'References') %></td>
           </tr>
