@@ -30,6 +30,12 @@
     <ClCompile Include="nth\nth-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rewrite\rewrite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rewrite\rewrite-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Catch.h">
@@ -39,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="nth\nth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rewrite\rewrite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

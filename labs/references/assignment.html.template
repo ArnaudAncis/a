@@ -397,17 +397,6 @@
       %>
 
       <%=
-        exercise do
-          <<-END
-            <p>
-              Write the function <code>swap</code> that can swap the values
-              of two <code>int</code> variables using the following syntax: <code>swap(x, y)</code>.
-            </p>
-          END
-        end
-      %>
-
-      <%=
          exercise(Lib::Interpretation) do
            extend RevealerMixin
            
@@ -736,6 +725,59 @@
               using your new fancy indices. Usage should be as follows:
             </p>
             #{show_source_editor}
+          END
+        end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           extend RevealerMixin
+           
+           self.source = <<-END
+             #include <iostream>
+
+             void foo(const int& x, int& y)
+             {
+               std::cout << x;
+               y++;
+               std::cout << x;
+             }
+
+             int main()
+             {
+               int x = 5;
+               foo(x, x);
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code?</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+        exercise do
+          extend SourceCodeMixin
+          
+          self.source = <<-END
+            std::vector<int> ns { 1, 2, 3, 4, 5 };
+
+            std::cout << nth(ns, 0) << std::endl;      // Prints 1
+            std::cout << nth(ns, -1) << std::endl;     // Prints 5
+
+            nth(ns, 5) = 0;                            // ns == { 0, 2, 3, 4, 5 }
+            nth(ns, -2)++;                             // ns == { 0, 2, 3, 5, 5 }
+          END
+
+          <<-END
+            <p>
+              Open the <code>rewrite</code> exercise in Visual Studio. Rewrite
+              all functions so as to make use of references instead of pointers.
+            </p>
           END
         end
       %>

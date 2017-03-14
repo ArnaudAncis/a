@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5C993EA4-5763-4AD7-82C8-0519F5D8C2A7}</ProjectGuid>
+    <ProjectGuid>{6D31F2A1-7AA4-4743-8EA8-D11AA2672CE7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>solution</RootNamespace>
+    <RootNamespace>student</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -146,19 +146,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="nth\nth-tests.cpp" />
-    <ClCompile Include="nth\nth.cpp" />
-    <ClCompile Include="rewrite\rewrite-tests.cpp" />
-    <ClCompile Include="rewrite\rewrite.cpp" />
-    <ClCompile Include="swap\swap-tests.cpp" />
-    <ClCompile Include="swap\swap.cpp" />
-    <ClCompile Include="tests.cpp" />
+    <ClInclude Include="Catch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Catch.h" />
-    <ClInclude Include="nth\nth.h" />
-    <ClInclude Include="rewrite\rewrite.h" />
-    <ClInclude Include="swap\swap.h" />
+    <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
