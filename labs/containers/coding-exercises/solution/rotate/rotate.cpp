@@ -7,7 +7,7 @@ void rotate(std::vector<int>* ns, int delta)
     {
         std::vector<int> temp((*ns).size());
         
-        while (delta < 0) delta += (*ns).size();
+        while (delta < 0) delta += int((*ns).size());
 
         for (int i = 0; i != (*ns).size(); ++i)
         {
