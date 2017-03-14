@@ -527,7 +527,7 @@
             
             <p>
               Write the function <code>int* range(int from, int to)</code> that returns a new array
-              containing the values going from <code>from</code> (inclusive) to <code>to</code> (exclusive).
+              containing the values going from <code>from</code> (inclusive) to <code>to</code> (also inclusive).
             </p>
             <p>
               <code>range</code> can assume that <code>from &lt; to</code>. In other cases, the result is undefined.
