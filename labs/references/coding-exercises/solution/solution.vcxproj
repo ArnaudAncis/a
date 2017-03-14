@@ -148,6 +148,8 @@
   <ItemGroup>
     <ClCompile Include="nth\nth-tests.cpp" />
     <ClCompile Include="nth\nth.cpp" />
+    <ClCompile Include="rewrite\rewrite-tests.cpp" />
+    <ClCompile Include="rewrite\rewrite.cpp" />
     <ClCompile Include="swap\swap-tests.cpp" />
     <ClCompile Include="swap\swap.cpp" />
     <ClCompile Include="tests.cpp" />
@@ -155,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="Catch.h" />
     <ClInclude Include="nth\nth.h" />
+    <ClInclude Include="rewrite\rewrite.h" />
     <ClInclude Include="swap\swap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
