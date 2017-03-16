@@ -28,7 +28,7 @@
 
 \begin{frame}
   \frametitle{Classes: Basic Syntax}
-  \code[frame=lines]{basic-syntax.cpp}
+  \code[language=c++14]{basic-syntax.cpp}
   \begin{tikzpicture}[overlay,remember picture]
     \only<handout:1|2>{
       \highlightbox{private};
@@ -55,7 +55,7 @@
 
 \begin{frame}
   \frametitle{Member Functions Inside Class Declaration}
-  \code[frame=lines]{member-functions.cpp}
+  \code[language=c++14]{member-functions.cpp}
   \begin{itemize}
     \item Preferably only for (very) short methods
   \end{itemize}
@@ -63,7 +63,7 @@
 
 \begin{frame}
   \frametitle{Member Functions Outside Class Declaration}
-  \code[frame=lines]{member-functions2.cpp}
+  \code[language=c++14]{member-functions2.cpp}
   \begin{tikzpicture}[overlay,remember picture]
     \only<2>{
       \highlightbox{class designator};
@@ -76,7 +76,7 @@
 
 \begin{frame}
   \frametitle{Constructors}
-  \code[frame=lines,font=\small]{constructors.cpp}
+  \code[language=c++14,font=\small]{constructors.cpp}
   \begin{tikzpicture}[overlay,remember picture,ref/.style={red,ultra thick,-latex,opacity=.75}]
     \only<2>{
       \draw[ref] (name field ref) -- (name field);
@@ -94,12 +94,12 @@
 
 \begin{frame}
   \frametitle{Delegating To Other Constructor}
-  \code[frame=lines]{construction-delegation.cpp}
+  \code[language=c++14]{construction-delegation.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Quick Intermezzo: Better Solution}
-  \code[frame=lines]{default-arguments.cpp}
+  \code[language=c++14]{default-arguments.cpp}
   \begin{itemize}
     \item Why reverse order? \cake
   \end{itemize}
@@ -107,16 +107,16 @@
 
 \begin{frame}
   \frametitle{Instantiating Classes (Stack)}
-  \code[frame=lines]{instantiatation-stack.cpp}
+  \code[language=c++14]{instantiatation-stack.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{Instantiating Classes (Heap)}
   \begin{overprint}
     \onslide<handout:1|1>
-    \code[frame=lines]{instantiatation-heap.cpp}
+    \code[language=c++14]{instantiatation-heap.cpp}
     \onslide<handout:2|2>
-    \code[frame=lines]{instantiatation-heap2.cpp}
+    \code[language=c++14]{instantiatation-heap2.cpp}
   \end{overprint}
 \end{frame}
 
@@ -145,7 +145,7 @@
     \end{tabular}
   \end{center}
   \vskip5mm
-  \code[frame=lines,width=.6\linewidth]{destructor.cpp}
+  \code[language=c++14,width=.6\linewidth]{destructor.cpp}
 \end{frame}
 
 \begin{frame}
@@ -207,7 +207,7 @@
     \item Introduced in Java 7
   \end{itemize}
   \vskip5mm
-  \code[frame=lines,language=java,font=\small,width=.9\linewidth]{try-with-resources.java}
+  \code[language=java,font=\small,width=.9\linewidth]{try-with-resources.java}
 \end{frame}
 
 \begin{frame}
@@ -220,16 +220,16 @@
   \vskip5mm
   \begin{overprint}
     \onslide<handout:1|1>
-    \code[frame=lines,width=.9\linewidth]{out-of-scope.cpp}
+    \code[language=c++14,width=.9\linewidth]{out-of-scope.cpp}
 
     \onslide<handout:2|2>
-    \code[frame=lines,width=.9\linewidth]{delete.cpp}
+    \code[language=c++14,width=.9\linewidth]{delete.cpp}
 
     \onslide<handout:3|3>
-    \code[frame=lines,width=.9\linewidth]{delete-array.cpp}
+    \code[language=c++14,width=.9\linewidth]{delete-array.cpp}
 
     \onslide<handout:4|4>
-    \code[frame=lines,width=.9\linewidth]{pointer-out-of-scope.cpp}
+    \code[language=c++14,width=.9\linewidth]{pointer-out-of-scope.cpp}
   \end{overprint}
 \end{frame}
 
@@ -247,16 +247,16 @@
 
 \begin{frame}
   \frametitle{Destructors: Example}
-  \code[frame=lines,font=\small]{destructor-example.cpp}
+  \code[language=c++14,font=\small]{destructor-example.cpp}
 \end{frame}
 
 \begin{frame}
   \frametitle{File Layout}
   \begin{columns}
     \column{6cm}
-    \code[frame=lines,font=\small,width=.99\linewidth,title={Foo.cpp}]{layout.cpp}
+    \code[language=c++14,font=\small,width=.99\linewidth,title={Foo.cpp}]{layout.cpp}
     \column{6cm}
-    \code[frame=lines,font=\small,width=.99\linewidth,title={Foo.h}]{layout.h}
+    \code[language=c++14,font=\small,width=.99\linewidth,title={Foo.h}]{layout.h}
   \end{columns}
 \end{frame}
 
