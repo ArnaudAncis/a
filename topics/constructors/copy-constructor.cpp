@@ -1,4 +1,6 @@
-class C {
+class Foo
+{
 public:
-  C(const C&);
+    // Copy constructor
+    C(const Foo&);
 };

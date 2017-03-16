@@ -1,13 +1,8 @@
-#include <iostream>
-
-class Foo {
-public:
-  Foo() : x(5) { }
+class Foo
+{
   int x;
+
+public:
+  // Default constructor
+  Foo() : x(5) { }
 };
-
-int main() {
-  Foo foo();
-
-  std::cout << foo.x << std::endl;
-}
