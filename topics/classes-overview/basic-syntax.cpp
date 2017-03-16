@@ -1,10 +1,10 @@
 // Declaration of Person
 class Person
 {
-`\NODE{\tt{\bfseries private}:}{private}`
+`\pgfmark{basic syntax private start}`private:`\pgfmark{basic syntax private end}`
   std::string name;
   int age;
 
-`\NODE{\tt{\bfseries public}:}{public}`
-  Person(std::string name, int age);
-}`\NODE{;}{semicolon}`
+`\pgfmark{basic syntax public start}`public:`\pgfmark{basic syntax public end}`
+  Person(const std::string&, int);
+}`\pgfmark{basic syntax semicolon start}`;`\pgfmark{basic syntax semicolon end}`

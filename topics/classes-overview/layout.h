@@ -3,14 +3,10 @@
 
 class Foo
 {
-private:
-  int* data;
+  int _x;
 
 public:
-  Foo(int);
-  ~Foo();
-
-  int& at(int i);
+  int& x();
 };
 
 #endif

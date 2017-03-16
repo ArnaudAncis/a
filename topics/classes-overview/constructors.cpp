@@ -1,14 +1,14 @@
-class Person
-{
-private:
-  std::string `\NODE{name}{name field}`;
-  int `\NODE{age}{age field}`;
+class Person {
+  std::string `\pgfmark{constructor field name start}`name`\pgfmark{constructor field name end}`;
+  int `\pgfmark{constructor field age start}`age`\pgfmark{constructor field age end}`;
 
 public:
-  Person(std::string name, int age);
+  Person(const std::string&, int);
 };
 
-Person::Person(std::string `\NODE{name}{name param}`, int `\NODE{age}{age param}`)
-  : `\NODE{name}{name field ref}`(`\NODE{name}{name param ref}`), `\NODE{age}{age field ref}`(`\NODE{age}{age param ref}`)
+Person::Person(const std::string& `\pgfmark{constructor parameter name start}`name`\pgfmark{constructor parameter name end}`,
+               int `\pgfmark{constructor parameter age start}`age`\pgfmark{constructor parameter age end}`)
+    : `\pgfmark{constructor initlist name start}`name`\pgfmark{constructor initlist name end}`(`\pgfmark{constructor initlist name value start}`name`\pgfmark{constructor initlist name value end}`),
+      `\pgfmark{constructor initlist age start}`age`\pgfmark{constructor initlist age end}`(`\pgfmark{constructor initlist age value start}`age`\pgfmark{constructor initlist age value end}`)
 {
 }

@@ -1,0 +1,47 @@
+\section{Constructors}
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}
+  \frametitle{Constructors}
+  \code[language=c++14,font=\small]{constructors.cpp}
+  \begin{tikzpicture}[overlay,remember picture,ref/.style={-latex,thick,red}]
+    \visible<1>{
+      \codeunderlinex{constructor field name}
+      \codeoverlinex{constructor initlist name}
+      \draw[ref] (constructor initlist name) -- ++(0,1) -| (constructor field name);
+    }
+    \visible<2>{
+      \codeunderlinex{constructor parameter name}
+      \codeoverlinex{constructor initlist name value}
+      \draw[ref] (constructor initlist name value) -- ++(0,0.2) -| (constructor parameter name);
+    }
+    \visible<3>{
+      \codeunderlinex{constructor field age}
+      \codeoverlinex{constructor initlist age}
+      \draw[ref] (constructor initlist age) -- (constructor field age);
+    }
+    \visible<4>{
+      \codeunderlinex{constructor parameter age}
+      \codeoverlinex{constructor initlist age value}
+      \draw[ref] (constructor initlist age value) -- ++(0,0.2) -| (constructor parameter age);
+    }
+  \end{tikzpicture}
+  \vskip-5mm
+  \begin{itemize}
+    \item Initialise member variables using initialiser list
+    \item Possible performance gain. Why? \cake
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Delegating To Other Constructor}
+  \code[language=c++14]{construction-delegation.cpp}
+  \codeunderlinex{constructor delegation nullary}
+  \codeunderlinex{constructor delegation unary}
+\end{frame}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "classes-overview"
+%%% End:

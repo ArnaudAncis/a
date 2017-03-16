@@ -1,13 +1,12 @@
 class Person
 {
-private:
   int age;
 
 public:
   int getAge();
 };
 
-int `\NODE{Person::}{class designator}`getAge()
+int `\pgfmark{basic syntax class designator start}`Person::`\pgfmark{basic syntax class designator end}`getAge()
 {
   return age;
 }

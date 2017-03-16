@@ -1,6 +1,5 @@
 class Person
 {
-private:
   int age;
 
 public:
