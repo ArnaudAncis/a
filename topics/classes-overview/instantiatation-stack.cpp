@@ -1,13 +1,12 @@
-#include <iostream>
+class Foo {
+public:
+    int x;
+};
 
-int main()
-{
-  Person p("Jan", 20);
-  Person q; // Default constructor
+int main() {
+    // Creates object on stack
+    // Immediately ready for use
+    Foo foo;
 
-  std::cout << p.getName()
-            << " is "
-            << p.getAge()
-            << " years old"
-            << std::endl;
+    foo.x = 5;
 }

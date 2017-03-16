@@ -1,0 +1,31 @@
+\section{Objects}
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}
+  \frametitle{Objects on the Stack}
+  \code[language=c++14]{instantiatation-stack.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Objects on the Stack}
+  \code[language=c++14,font=\small,width=.95\linewidth]{instantiatation-stack-wrong-syntax.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Object on the Heap}
+  \begin{overprint}
+    \onslide<handout:1|1>
+    \code[language=c++14]{instantiatation-heap.cpp}
+    \onslide<handout:2|2>
+    \code[language=c++14]{instantiatation-heap2.cpp}
+  \end{overprint}
+  \begin{itemize}
+    \item \texttt{(*p).member}: clumsy syntax
+    \item Shorthand: \texttt{p->member} means same thing
+  \end{itemize}
+\end{frame}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "classes-overview"
+%%% End:

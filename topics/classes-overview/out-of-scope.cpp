@@ -1,4 +1,4 @@
-X foo()
+void foo()
 {
   T t;
   U u;
@@ -6,5 +6,5 @@ X foo()
   
   // ...
 
-  return x; // t, u, x get destroyed
+  return; // t, u, x get destroyed
 }

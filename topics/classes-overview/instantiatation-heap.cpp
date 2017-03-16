@@ -1,12 +1,11 @@
 #include <iostream>
 
-int main()
-{
+int main() {
   Person* p = new Person("Jan", 20);
 
   std::cout << (*p).getName()
             << " is "
-            << (*p).getAge()
+            << (*p).age
             << " years old"
             << std::endl;
 
