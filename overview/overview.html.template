@@ -160,6 +160,11 @@
           </tr>
           <tr>
             <td>6</td>
+            <td><%= topic('sizeof', 'sizeof', handouts: true) %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>6</td>
             <td><%= topic('const-correctness', 'Const Correctness', handouts: true) %></td>
             <td></td>
           </tr>
