@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+    
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .message {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        width: 75%;
+        margin: 100px auto;
+        padding: 20px;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
+      }
+
+      .git {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .cake {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        font-weight: bold;
+        background: #FFAA77;
+      }
+
+      .cake .header {
+        display: block;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 10px auto;      
+        text-align: center;
+        cursor: help;
+      }
+
+      .explanation {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
+
+      table.type-inference {
+        margin: 10px auto;
+        border-collapse: collapse;
+      }
+
+      table.type-inference tr:nth-child(1) {
+        background: #AAA;
+      }
+
+      table.type-inference th {
+        min-width: 10em;
+      }
+
+      table.type-inference td {
+        text-align: center;
+        padding: 0.2em 1em;
+      }
+
+      table.type-inference input {
+        width: 10em;
+        text-align: center;
+      }
+
+      #nth-table {
+        margin: 0px auto;
+      }
+      
+      #nth-table th {
+        background: #AAA;
+        font-weight: bold;
+        min-width: 3em;
+      }
+
+      #nth-table td {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Types</div>
+    </header>
+    <div id="contents">
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
+             struct Foo
+             {
+               int x;
+             };
+             
+             int main()
+             {
+               auto foo = new Foo;
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'foo',      'Foo*' ],
+                                  [ '*foo',     'Foo' ],
+                                  [ '(*foo).x', 'int' ],
+                                  [ 'foo->x',   'int' ] )}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
+             struct Foo
+             {
+               int x;
+             };
+             
+             int main()
+             {
+               const Foo foo;
+               auto p = &foo;
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'foo',      'const Foo' ],
+                                  [ 'p',        'const Foo*' ],
+                                  [ 'foo->x',   'const int' ],
+                                  [ '&foo->x',  'const int*' ] )}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
+             int main()
+             {
+               std::vector<int> ns {1, 2, 3};
+               const std::vector<int>& ms = ns;
+
+               auto x = ns[0];
+               auto y = &ns[0];
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'x', 'int' ],
+                                  [ 'y', 'const int*' ] )}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
+             struct Node {
+               Node* next;
+             };
+
+             Node* create(int n) {
+               if ( n == 0 )
+               {
+                 return nullptr;
+               }
+               else
+               {
+                 Node* node = new Node;
+                 node->next = create(n-1);
+                 return node;
+               }
+             }
+
+             int main()
+             {
+               auto p = create(10);
+               auto q = *(p->next->next->next->next);
+               auto r = &(p->next);
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'p', 'Node*' ],
+                                  [ 'q', 'Node' ],
+                                  [ 'r', 'Node**' ] )}
+           END
+         end
+      %>
+
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>
