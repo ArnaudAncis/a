@@ -2,16 +2,16 @@
 
 class Foo {
 public:
-  void bar() { print("nonconst"); }
-  void bar() const { print("const"); }
+  void bar() { std::cout << "A"; }
+  void bar() const { std::cout << "B"; }
 };
 
 int main() {
   Foo* p = new Foo();
   const Foo* q = p;
 
-  p->bar(); `\only<2->{\tt // prints nonconst}`
-  q->bar(); `\only<3->{\tt // prints const}`
+  p->bar(); // prints A
+  q->bar(); // prints B
 
   delete p;
 }

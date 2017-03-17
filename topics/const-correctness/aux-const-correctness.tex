@@ -19,10 +19,10 @@
   \vskip5mm
   \begin{overprint}
     \onslide<handout:1|1>
-    \code{const-int.cpp}
+    \code[language=c++14]{const-int.cpp}
 
     \onslide<handout:2|2->
-    \code{const-vector.cpp}
+    \code[language=c++14]{const-vector.cpp}
   \end{overprint}
   \vskip5mm
   \visible<handout:2|3->{
@@ -34,38 +34,70 @@
 
 \begin{frame}
   \frametitle{Defining {\tt const} members}
-  \code[font=\small]{example.cpp}
+  \code[font=\small,language=c++14]{example.cpp}
+  \onslide<1>{
+    \codeunderlinex{oiltank getContents}
+    \codeunderlinex{oiltank getCapacity}
+    \codeunderlinex{oiltank getFreeCapacityLeft}
+  }
+  \onslide<2>{
+    \codeunderlinex{oiltank fill}
+    \codeunderlinex{oiltank drain}
+    \codeunderlinex{oiltank transfer}
+  }
+  \begin{overprint}
+    \onslide<1>
+    \begin{center}
+      These member functions do not modify the object
+      and \\ therefore should be callable on a \texttt{const Oiltank}
+    \end{center}
+
+    \onslide<2>
+    \begin{center}
+      These member functions do modify the object
+      and \\ therefore should be not callable on a \texttt{const Oiltank}
+    \end{center}
+
+    \onslide<3>
+    \begin{center}
+      Non-modifying functions should be suffixed with \texttt{const},\\
+      telling the compiler these do not change the object
+    \end{center}
+  \end{overprint}
 \end{frame}
 
 \begin{frame}
   \frametitle{{\tt const} members}
   \begin{itemize}
-    \item Suffixing a method with {\tt const} means it's
-          a readonly method
-    \item In non{\tt const} method: {\tt this} has type {\tt T*}
-    \item In {\tt const} method: {\tt this} has type {\tt const T*}
-    \item Trying to modify object in {\tt const} method $\rightarrow$ error
+    \item Suffixing a function with {\tt const} means it's readonly
+          \begin{itemize}
+            \item In non{\tt const} method: {\tt this} has type {\tt T*}
+            \item In {\tt const} method: {\tt this} has type {\tt const T*}
+          \end{itemize}
+    \item Compiler enfores \texttt{const}ness
+          \begin{itemize}
+            \item Trying to modify fields in {\tt const} method $\rightarrow$ error
+          \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Overloading}
   \begin{itemize}
-    \item It is possible to define a {\tt const} and non{\tt const} version
-          of a method
-    \item The {\tt const} version will be called if accessed through {\tt const} variable
-    \item The non{\tt const} version will be called if accessed through non{\tt const} variable
+    \item Possible to define a {\tt const} and non{\tt const} version of a method
+    \item {\tt const} version called if accessed through {\tt const} variable
+    \item non{\tt const} version called if through non{\tt const} variable
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Overloading: Example}
-  \code[font=\small]{overload.cpp}
+  \code[font=\small,language=c++14]{overload.cpp}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Overloading}
-  \code[font=\small,width=.9\linewidth]{container.cpp}
+  \frametitle{Overloading: Usage}
+  \code[language=c++14,font=\small,width=.9\linewidth]{container.cpp}
   \begin{overprint}
     \onslide<handout:1|1>
     \begin{center}
@@ -87,8 +119,13 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Overloading}
-  \code[font=\small,width=.9\linewidth]{container2.cpp}
+  \frametitle{Overloading: Usage}
+  \code[language=c++14,font=\small,width=.9\linewidth]{container2.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overloading: Usage}
+  \code[language=c++14,font=\small,width=.9\linewidth]{container3.cpp}
 \end{frame}
 
 \end{document}
