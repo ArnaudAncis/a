@@ -151,7 +151,7 @@
           <tr>
             <td>6</td>
             <td><%= topic('constructors', 'Constructors', handouts: true) %></td>
-            <td><%= lab('classes', 'Classes') %></td>
+            <td></td>
           </tr>
           <tr>
             <td>6</td>
@@ -166,7 +166,7 @@
           <tr>
             <td>6</td>
             <td><%= topic('const-correctness', 'Const Correctness', handouts: true) %></td>
-            <td></td>
+            <td><%= lab('classes', 'Classes') %></td>
           </tr>
           <tr>
             <td></td>
