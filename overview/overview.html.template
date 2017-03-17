@@ -144,22 +144,22 @@
             <td><%= lab('references', 'References') %></td>
           </tr>
           <tr>
-            <td></td>
+            <td>6</td>
             <td><%= topic('classes-overview', 'Classes (overview)', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
-            <td></td>
+            <td>6</td>
             <td><%= topic('constructors', 'Constructors', handouts: true) %></td>
             <td><%= lab('classes', 'Classes') %></td>
           </tr>
           <tr>
-            <td></td>
+            <td>6</td>
             <td><%= topic('structs', 'Structs', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
-            <td></td>
+            <td>6</td>
             <td><%= topic('const-correctness', 'Const Correctness', handouts: true) %></td>
             <td></td>
           </tr>
