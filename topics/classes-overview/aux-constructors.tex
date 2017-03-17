@@ -3,34 +3,81 @@
 
 \begin{frame}
   \frametitle{Constructors}
-  \code[language=c++14,font=\small]{constructors.cpp}
-  \begin{tikzpicture}[overlay,remember picture,ref/.style={-latex,thick,red}]
-    \visible<1>{
-      \codeunderlinex{constructor field name}
-      \codeoverlinex{constructor initlist name}
-      \draw[ref] (constructor initlist name) -- ++(0,1) -| (constructor field name);
-    }
-    \visible<2>{
-      \codeunderlinex{constructor parameter name}
-      \codeoverlinex{constructor initlist name value}
-      \draw[ref] (constructor initlist name value) -- ++(0,0.2) -| (constructor parameter name);
-    }
-    \visible<3>{
-      \codeunderlinex{constructor field age}
-      \codeoverlinex{constructor initlist age}
-      \draw[ref] (constructor initlist age) -- (constructor field age);
-    }
-    \visible<4>{
-      \codeunderlinex{constructor parameter age}
-      \codeoverlinex{constructor initlist age value}
-      \draw[ref] (constructor initlist age value) -- ++(0,0.2) -| (constructor parameter age);
-    }
-  \end{tikzpicture}
-  \vskip-5mm
   \begin{itemize}
-    \item Initialise member variables using initialiser list
-    \item Possible performance gain. Why? \cake
+    \item Called upon object creation
+    \item Which constructor depends on context
+          \begin{itemize}
+            \item When explicitly creating object: same rules as Java
+            \item There are other situations where objects are created
+            \item Details discussed in separate set of slides
+          \end{itemize}
+    \item Constructor initialises all member variables
+          \begin{itemize}
+            \item Different rules than Java!
+          \end{itemize}
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Initialiser List}
+  \code[language=c++14]{initialiser-list.cpp}
+  \begin{tikzpicture}[remember picture,overlay,link/.style={-latex,red,thick}]
+    \codeunderlinex{constructor field a}
+    \codeunderlinex{constructor field b}
+    \codeunderlinex{constructor field c}
+    \codeoverlinex{constructor parameter a}
+    \codeoverlinex{constructor parameter b}
+    \codeoverlinex{constructor parameter c}
+    \draw[link] (constructor parameter a) -- ++(0,0.25) -| (constructor field a);
+    \draw[link] (constructor parameter b) -- ++(0,0.5) -| (constructor field b);
+    \draw[link] (constructor parameter c) -- ++(0,0.75) -| (constructor field c);
+  \end{tikzpicture}
+  \begin{itemize}
+    \item Initialiser list gets executed first
+          \begin{itemize}
+            \item Sets \texttt{a = 1}, \texttt{b = 2}, \texttt{c = 3}
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Initialiser List}
+  \code[language=c++14]{initialiser-list2.cpp}
+  \begin{itemize}
+    \item Initialiser list is series of constructor calls
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Initialiser List}
+  \code[language=c++14]{initialiser-list3.cpp}
+  \begin{itemize}
+    \item Compiler completes list with default constructor calls
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Initialiser List}
+  \code[language=c++14]{initialiser-list4.cpp}
+  \begin{itemize}
+    \item Omitting field initialisation is error if no default constructor
+          \begin{itemize}
+            \item In example: \texttt{foo2} requires explicit initialisation
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Constructor Body}
+  \begin{itemize}
+    \item Only after initialiser list does body get executed
+    \item Initialise as much as possible in initialiser list
+          \begin{itemize}
+            \item Otherwise field will get initialised twice
+            \item In example, field \texttt{foo} gets initialised twice
+          \end{itemize}
+  \end{itemize}
+  \code[language=c++14,font=\scriptsize]{double-initialisation.cpp}
 \end{frame}
 
 \begin{frame}

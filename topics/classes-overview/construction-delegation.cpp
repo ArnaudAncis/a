@@ -3,10 +3,10 @@ class OilTank {
 
 public:
   OilTank()
-    `\pgfmark{constructor delegation nullary start}`: OilTank(0, 1000)`\pgfmark{constructor delegation nullary end}` { }
+    : `\pgfmark{constructor delegation nullary start}`OilTank(0, 1000)`\pgfmark{constructor delegation nullary end}` { }
 
   OilTank(int capacity)
-    `\pgfmark{constructor delegation unary start}`: OilTank(0, capacity)`\pgfmark{constructor delegation unary end}` { }
+    : `\pgfmark{constructor delegation unary start}`OilTank(0, capacity)`\pgfmark{constructor delegation unary end}` { }
   
   OilTank(int contents, int capacity)
     : contents(contents),
