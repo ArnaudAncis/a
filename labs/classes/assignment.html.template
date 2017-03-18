@@ -620,8 +620,6 @@
 
       <%=
         exercise do
-          extend SourceCodeMixin
-          
           <<-END
             <p>
               Open the solution <code>coding-exercises</code>. In the <code>student</code>'s project <code>counter/java</code> folder
@@ -631,7 +629,27 @@
           END
         end
       %>
+
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Translate the code in <code>person/java</code> to C++. Only free what you allocate yourself.
+            </p>
+          END
+        end
+      %>
       
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Make the tests in the <code>bitmap</code> project succeed. To know what code to write, let yourself be guided by the tests' code
+              and your common sense.
+            </p>
+          END
+        end
+      %>
     </div>
   </body>
 
