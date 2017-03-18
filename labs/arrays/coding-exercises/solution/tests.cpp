@@ -1,7 +1,11 @@
-#define CATCH_CONFIG_MAIN
+#define CATCH_CONFIG_RUNNER
 #include "Catch.h"
 
-// It's perfectly normal this file is empty
-// No worries
-// Everything is fine
-// Carry on with your work
+
+int main(int argc, char* const argv[])
+{
+    std::cout << "WARNING: YOU ARE RUNNING THE SOLUTION'S TESTS" << std::endl;
+    std::cout << "RIGHT CLICK ON THE STUDENT PROJECT AND SET IT AS STARTUP PROJECT" << std::endl;
+
+    Catch::Session().run(argc, argv);
+}
