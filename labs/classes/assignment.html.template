@@ -617,6 +617,21 @@
            END
          end
       %>
+
+      <%=
+        exercise do
+          extend SourceCodeMixin
+          
+          <<-END
+            <p>
+              Open the solution <code>coding-exercises</code>. In the <code>student</code>'s project <code>counter/java</code> folder
+              you will find the file <code>Counter.java</code>. Translate this into C++. Make sure to pick the right types,
+              and think of <code>const</code>-correctness!
+            </p>
+          END
+        end
+      %>
+      
     </div>
   </body>
 
