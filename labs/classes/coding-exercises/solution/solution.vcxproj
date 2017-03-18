@@ -146,11 +146,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bitmap\bitmap-tests.cpp" />
+    <ClCompile Include="bitmap\bitmap.cpp" />
+    <ClCompile Include="bitmap\color-tests.cpp" />
+    <ClCompile Include="bitmap\color.cpp" />
     <ClCompile Include="counter\counter-tests.cpp" />
     <ClCompile Include="counter\counter.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bitmap\bitmap.h" />
+    <ClInclude Include="bitmap\color.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="counter\counter.h" />
   </ItemGroup>
