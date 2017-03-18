@@ -152,6 +152,8 @@
     <ClCompile Include="bitmap\color.cpp" />
     <ClCompile Include="counter\counter-tests.cpp" />
     <ClCompile Include="counter\counter.cpp" />
+    <ClCompile Include="person\person-tests.cpp" />
+    <ClCompile Include="person\person.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +161,7 @@
     <ClInclude Include="bitmap\color.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="counter\counter.h" />
+    <ClInclude Include="person\person.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
