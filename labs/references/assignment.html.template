@@ -763,16 +763,6 @@
         exercise do
           extend SourceCodeMixin
           
-          self.source = <<-END
-            std::vector<int> ns { 1, 2, 3, 4, 5 };
-
-            std::cout << nth(ns, 0) << std::endl;      // Prints 1
-            std::cout << nth(ns, -1) << std::endl;     // Prints 5
-
-            nth(ns, 5) = 0;                            // ns == { 0, 2, 3, 4, 5 }
-            nth(ns, -2)++;                             // ns == { 0, 2, 3, 5, 5 }
-          END
-
           <<-END
             <p>
               Open the <code>rewrite</code> exercise in Visual Studio. Rewrite
