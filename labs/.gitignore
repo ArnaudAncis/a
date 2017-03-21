@@ -3,3 +3,4 @@
 *.obj
 temp*.cpp
 *-output.txt
+.vs
