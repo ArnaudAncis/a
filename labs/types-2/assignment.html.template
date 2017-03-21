@@ -185,10 +185,10 @@
            <<-END
              #{show_source_editor}
              <p>What are the types of the following expressions?</p>
-             #{ask_type_of_table( [ 'foo',      'const Foo' ],
-                                  [ 'p',        'const Foo*' ],
-                                  [ 'foo->x',   'const int' ],
-                                  [ '&foo->x',  'const int*' ] )}
+             #{ask_type_of_table( [ 'foo',        'const Foo' ],
+                                  [ 'p',          'const Foo*' ],
+                                  [ 'foo->x',     'const int' ],
+                                  [ '&(foo->x)',  'const int*' ] )}
            END
          end
       %>
@@ -202,7 +202,7 @@
                const std::vector<int>& ms = ns;
 
                auto x = ns[0];
-               auto y = &ns[0];
+               auto y = &ms[0];
              }
            END
 
