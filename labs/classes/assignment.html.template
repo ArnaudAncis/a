@@ -553,7 +553,10 @@
              #{show_output_field}
              <div data-revealer="Show explanation" class="explanation">
                <p>
-                 The <code>Foo</code> object 
+                 The <code>Foo</code> object is a temporary object, therefore
+                 its destructor gets called after the statement <code>Foo();</code>
+                 has been executed. In other words, destruction is not postponed
+                 until <code>main</code> returns.
                </p>
              </div>
            END
