@@ -147,6 +147,37 @@
            self.source = <<-END
              int main()
              {
+               int* x, y;
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'x', 'int*' ],
+                                  [ 'y', 'int' ] )}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 This is a weird syntactic thing inherited from C.
+                 <code>int *x, y</code> declares a pointer-to-<code>int</code> <code>x</code>
+                 and an <code>int</code> <code>y</code>. If you want both
+                 <code>x</code> and <code>y</code> to be pointers,
+                 you have to repeat the asterisk: <code>int *x, *y;</code>.
+               </p>
+               <p>
+                 It is therefore safer to declare each variable on its own line.
+                 You will be less astonished as a result.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
+             int main()
+             {
                auto foo = new int;
              }
            END
@@ -157,7 +188,7 @@
              #{ask_type_of_table( [ 'foo',      'int*' ],
                                   [ 'foo[1]',   'int' ],
                                   [ '&foo',     'int**' ],
-                                  [ '2 **foo',  'int' ] )}
+                                  [ '2 **foo',  'int' ] ) }
            END
          end
       %>
