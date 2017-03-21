@@ -1,0 +1,34 @@
+\section{Examples}
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}
+  \frametitle{\tt Indexing}
+  \begin{itemize}
+    \item Indexing \texttt{[]} only defined on pointers/arrays
+    \item However, you can overload \texttt{[]} for your own containers
+    \item For example, \texttt{std::vector} overloads \texttt{[]}
+  \end{itemize}
+  \code[font=\small]{vector.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\texttt{toString} in \cpp}
+  \code{cout.cpp}
+  \begin{itemize}
+    \item How to make this work?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\texttt{toString} in \cpp}
+  \code[font=\small,width=.9\linewidth]{cout-sol.cpp}
+  \begin{itemize}
+    \item Solution: overload \texttt{<<} on \texttt{std::ostream}
+  \end{itemize}
+\end{frame}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "operator-overloading"
+%%% End:
