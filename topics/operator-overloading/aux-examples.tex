@@ -1,5 +1,6 @@
 \section{Examples}
-\frame{\tableofcontents[currentsection]}
+\subsection{Indexing}
+\frame{\tableofcontents[currentsubsection]}
 
 \begin{frame}
   \frametitle{\tt Indexing}
@@ -10,6 +11,9 @@
   \end{itemize}
   \code[font=\small]{vector.cpp}
 \end{frame}
+
+\subsection{\texttt{toString}}
+\frame{\tableofcontents[currentsubsection]}
 
 \begin{frame}
   \frametitle{\texttt{toString} in \cpp}
@@ -27,6 +31,43 @@
   \end{itemize}
 \end{frame}
 
+\subsection{Assignment}
+\frame{\tableofcontents[currentsubsection]}
+
+\begin{frame}
+  \frametitle{Assignment}
+  \code{assignment.cpp}
+  \begin{itemize}
+    \item By default, assignment \emph{between objects} overwrites the fields of the left operand
+          with the values of the fields of the right operand
+    \item \texttt{x} and \texttt{y} are still distinct objects after assignment
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Assignment}
+  \begin{itemize}
+    \item Do not confuse with assignment in Java!
+    \item Java assignment operates on pointers
+  \end{itemize}
+  \code[width=.9\linewidth]{assignment-comparison.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Assignment}
+  \code{intlist-assignment.cpp}
+  \begin{itemize}
+    \item Default behaviour is not always what we want
+    \item \texttt{xs} and \texttt{ys} would share same internal array
+    \item We need \texttt{xs} and \texttt{ys} to have separate internal arrays
+    \item We need to redefine \texttt{=} on \texttt{IntList}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Assignment}
+  \code[font=\small,width=.9\linewidth]{intlist-assignment-corrected.cpp}
+\end{frame}
 
 %%% Local Variables:
 %%% mode: latex
