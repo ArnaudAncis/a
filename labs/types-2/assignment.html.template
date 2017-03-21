@@ -145,6 +145,26 @@
       <%=
          exercise(Lib::TypeInference) do
            self.source = <<-END
+             int main()
+             {
+               auto foo = new int;
+             }
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>What are the types of the following expressions?</p>
+             #{ask_type_of_table( [ 'foo',      'int*' ],
+                                  [ 'foo[1]',   'int' ],
+                                  [ '&foo',     'int**' ],
+                                  [ '2 **foo',  'int' ] )}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::TypeInference) do
+           self.source = <<-END
              struct Foo
              {
                int x;
