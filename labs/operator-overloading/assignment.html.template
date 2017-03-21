@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+    
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .message {
+        font-size: 2em;
+        font-weight: bold;
+        text-align: center;
+        width: 75%;
+        margin: 100px auto;
+        padding: 20px;
+        background: #F44;
+        box-shadow: 0px 0px 50px 30px #F44;
+      }
+
+      .git {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .cake {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        font-weight: bold;
+        background: #FFAA77;
+      }
+
+      .cake .header {
+        display: block;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+      }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 10px auto;      
+        text-align: center;
+        cursor: help;
+      }
+
+      .explanation {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Classes</div>
+    </header>
+    <div id="contents">
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+               int x;
+
+               Foo(int x) : x(x) { }
+             };
+
+             Foo operator -(const Foo& foo)
+             {
+               return Foo(-foo.x);
+             }
+
+             int main()
+             {
+               Foo a(15), b(5);
+               Foo c = a - b;
+
+               std::cout << c.x;
+             }
+           END
+
+           self.output = 'DNC'
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 The code above overloads the <em>unary</em> operator -, not the binary one. In other words,
+                 given the operator overload above, you can write <code>-a</code> and <code>-b</code>, but not <code>a-b</code>.
+               </p>
+             </div>
+           END
+         end
+      %>
+      
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+               int x;
+
+               Foo(int x) : x(x) { }
+             };
+
+             Foo operator -(const Foo& a, const Foo& b)
+             {
+               return Foo(a.x - b.x);
+             }
+
+             int main()
+             {
+               Foo a(15), b(5);
+               Foo c = a - b;
+
+               std::cout << c.x;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 The code above overloads the <em>unary</em> operator -, not the binary one. In other words,
+                 given the operator overload above, you can write <code>-a</code> and <code>-b</code>, but not <code>a-b</code>.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+               int x;
+
+               Foo(int x) : x(x) { }
+             };
+
+             int operator &(const Foo& a)
+             {
+               return a.x * 2;
+             }
+
+             int main()
+             {
+               Foo a(15);
+
+               std::cout << &a;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 This example is particularly vile: we overload the <code>&amp;</code> operator, which is generally expected to return the address of the variable.
+                 However, it is possible to give it a different behaviour, which is what we do here: <code>&amp;a</code> has now
+                 become a way of getting twice the value of <code>a.x</code>. We cannot write <code>&amp;a</code> to get <code>a</code>'s address anymore.
+                 (It is still possible to get its address, but it requires some serious hoop-jumping.)
+               </p>
+             </div>
+           END
+         end
+      %>
+
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>
