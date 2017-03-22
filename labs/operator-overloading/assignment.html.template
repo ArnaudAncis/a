@@ -226,10 +226,224 @@
                  become a way of getting twice the value of <code>a.x</code>. We cannot write <code>&amp;a</code> to get <code>a</code>'s address anymore.
                  (It is still possible to get its address, but it requires some serious hoop-jumping.)
                </p>
+               <p>
+                 It is very important that you only use operator overloading when it fits expectations, i.e. use <code>+</code> for addition-like operations,
+                 but don't start using it on <code>OilTank</code>s.
+               </p>
              </div>
            END
          end
       %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             class Foo {
+               int c;
+
+             public:
+               Foo() : c(0) { }
+
+               int operator ()() { return c++; }
+             };
+
+             int main()
+             {
+               Foo foo;
+
+               std::cout << foo();
+               std::cout << foo();
+               std::cout << foo();
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             class Foo {
+               int c;
+
+             public:
+               Foo() : c(0) { }
+
+               int operator ()() { return c++; }
+             };
+
+             int main()
+             {
+               Foo foo;
+
+               std::cout << foo() << foo() << foo();
+             }
+           END
+
+           self.output = '???'
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 Within two "sequence points", the compiler has the freedom to reorder operations as it sees fit.
+                 The rules about sequence points are a bit complicated (and even outdated since C++11, they've been
+                 replaced by something probably even more confusing), but suffice it to say that it's a bad idea
+                 to put multiple state modifying operations on the same line. Here, each <code>foo()</code>
+                 operations modifies the value of some variable (hence it is state modifying),
+                 and since they appear on the same line, you have no way of knowing in what order
+                 it will be executed. For example, on this compiler, the program printed 210.
+               </p>
+               <p>
+                 This is not operator overloading specific. For example, when calling a normal function <code>bar(x++, x++, x++)</code>
+                 the actual result also remains a surprise.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             class Foo {
+               int c;
+
+             public:
+               Foo() : c(0) { }
+
+               int operator ()() { return c++; }
+             };
+
+             int main()
+             {
+               Foo foo;
+
+               std::cout << foo() << foo() << foo();
+             }
+           END
+
+           self.output = '???'
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 Within two "sequence points", the compiler has the freedom to reorder operations as it sees fit.
+                 The rules about sequence points are a bit complicated (and even outdated since C++11, they've been
+                 replaced by something probably even more confusing), but suffice it to say that it's a bad idea
+                 to put multiple state modifying operations on the same line. Here, each <code>foo()</code>
+                 operations modifies the value of some variable (hence it is state modifying),
+                 and since they appear on the same line, you have no way of knowing in what order
+                 it will be executed. For example, on this compiler, the program printed 210.
+               </p>
+               <p>
+                 This is not operator overloading specific. For example, when calling a normal function <code>bar(x++, x++, x++)</code>
+                 the actual result also remains a surprise.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo {
+               int x;
+
+               Foo() : x(5) { }
+             };
+
+             std::ostream& operator <<(std::ostream& out, const Foo& foo)
+             {
+               return out << foo.x << foo.x+1 << foo.x+2;
+             }
+
+             int main()
+             {
+               Foo foo;
+               
+               std::cout << foo << foo << foo;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 In case you expected undefined behaviour: no variable changes value anywhere. Whatever order <code>foo.x</code>, <code>foo.x+1</code>
+                 and <code>foo.x+2</code> are evaluated in, the results are the same.
+               </p>
+               <p>
+                 Each <code>out &lt;&lt; expr</code> is supposed to return <code>out</code> (hence the <code>std::ostream&amp;</code>
+                 return value for <code>operator &lt;&lt;</code>). This makes it possible to chain multiple <code>&lt;&lt;</code> operations.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             int operator <<(int x, int y)
+             {
+               int result = 1;
+
+               while ( y-- ) result *= x;
+
+               return result;
+             }
+
+             int main()
+             {
+               std::cout << (2 << 8);
+             }
+           END
+
+           self.output = 'DNC'
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               You are not allowed to redefine operators on primitive types. At least one of the operands must be a non-primitive type.
+             </div>
+           END
+         end
+      %>
+
+      +=
+      not necessarily consistent
+      == !=
 
     </div>
   </body>
