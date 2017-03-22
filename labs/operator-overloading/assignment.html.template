@@ -441,9 +441,84 @@
          end
       %>
 
-      +=
-      not necessarily consistent
+      <%=
+        exercise do
+          extend SourceCodeMixin
 
+          self.source = <<-END
+            auto alpha = 80_degrees;
+            auto beta = 3_rad;
+            auto gamma = alpha + beta;
+
+            if ( gamma < 180_degrees )
+            {
+                // ...
+            }
+          END
+
+          <<-END
+            <p>
+              Ordinarily, you would use a <code>double</code> to represent an angle. A problem with this approach
+              is that angles can be expressed in degrees or in radians. Using <code>double</code>s is therefore
+              rather fragile, because you always need to make sure not mixing up both.
+            </p>
+            <p>
+              A simple way of dealing with this is to introduce an <code>Angle</code> class whose
+              purpose it is to automatically convert from degrees to radians and back where necessary.
+              For those worried that introducing a whole new type might impact performance
+              negatively: C++ provides zero-cost abstractions, which means that you can
+              introduce small helper classes without incurring any penalties. The compiler
+              will realise that <code>Angle</code> is just a <code>double</code> and compile it that way.
+            </p>
+            <p>
+              Using the <code>Angle</code> class should go as follows:
+            </p>
+            #{show_source_editor}
+            <p>
+              Base yourself on the tests to see what operators you need to implement.
+            </p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          extend SourceCodeMixin
+
+          self.source = <<-END
+            auto alpha = 80_degrees;
+            auto beta = 3_rad;
+            auto gamma = alpha + beta;
+
+            if ( gamma < 180_degrees )
+            {
+                // ...
+            }
+          END
+
+          <<-END
+            <p>
+              Comparing <code>double</code>s using <code>==</code> is generally a bad idea,
+              as it doesn't take into account the possibility of rounding errors.
+              Instead, you need to check how large the difference between two
+              <code>double</code>s is, and if it is small enough, you can
+              assume they are equal.
+            </p>
+            <p>
+              Writing this in code gives <code>fabs(x - y) &lt; epsilon</code>,
+              with <code>x</code> and <code>y</code> the <code>double</code>s
+              to be compared, and <code>epsilon</code> a small value (e.g. <code>0.00001</code>)
+              that represents the maximum difference allowed. However, this code
+              is nog very readable; you would rather use <code>==</code>.
+            </p>
+            <p>
+              Write a class <code>approx</code> that allows you to write
+              <code>x == approx(5)</code> or <code>x == approx(5, 0.00001)</code>
+              to allow for self chosen <code>epsilon</code>.
+            </p>  
+          END
+        end
+      %>
 
     </div>
   </body>
