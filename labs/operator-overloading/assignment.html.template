@@ -442,6 +442,102 @@
       %>
 
       <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+                 int x;
+
+                 Foo(int x) : x(x) { }
+                 
+                 Foo operator *(const Foo& foo)
+                 {
+                     return Foo(x * foo.x);
+                 }
+             };
+
+             int main()
+             {
+                 Foo foo(1);
+                 Foo goo(2);
+
+                 foo *= goo;
+
+                 std::cout << foo.x;
+             }
+           END
+
+           self.output = 'DNC'
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 In C++ the operators <code>*</code> and <code>*=</code> are unrelated and are separately overloadable.
+                 The code above only specifies meaning for <code>Foo * Foo</code>, but leaves
+                 <code>Foo *= Foo</code> undefined, hence the compiler error.
+               </p>
+               <p>
+                 It is important to keep <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, etc.
+                 consistent with <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, etc. respectively.
+                 The compiler does not care, but you might value your life: keep in mind that you
+                 have to assume your code will be maintained by a homicidable maniac.
+               </p>
+               <p>
+                 C# takes a more sensible approach: in this language, you are only allowed to overload <code>+</code>, <code>-</code>, etc.
+                 Expressions like <code>a += b</code> are internally transformed to <code>a = a + b</code>, hence there
+                 is no need to define <code>+=</code> separately, nor is there opportunity for inconsistencies to arise.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+                 int x, y;
+
+                 Foo(int x, int y) : x(x), y(y) { }
+                 
+                 Foo& operator *=(const Foo& foo)
+                 {
+                     x *= foo.x;
+                     
+                     return *this;
+                 }
+             };
+
+             int main()
+             {
+                 Foo foo(1, 2);
+                 Foo goo(4, 5);
+
+                 foo *= goo;
+
+                 std::cout << foo.x << foo.y;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+              
+      <%=
         exercise do
           extend SourceCodeMixin
 
