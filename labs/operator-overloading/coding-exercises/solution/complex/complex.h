@@ -10,6 +10,7 @@ public:
     Complex(double re, double im) : re(re), im(im) { }
 
     double abs_sqr() const;
+    double abs() const;
     Complex conjugate() const;
 };
 

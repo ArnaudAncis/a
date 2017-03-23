@@ -616,6 +616,35 @@
         end
       %>
 
+      <%=
+        exercise do
+          extend SourceCodeMixin
+
+          self.source = <<-END
+            auto alpha = 80_degrees;
+            auto beta = 3_rad;
+            auto gamma = alpha + beta;
+
+            if ( gamma < 180_degrees )
+            {
+                // ...
+            }
+          END
+
+          <<-END
+            <p>
+              Write a class <code>Complex</code> whose instances
+              represent complex numbers. A complex number consists
+              of a real and imaginary part, commonly referred to
+              as <code>re</code> and <code>im</code>. Both <code>re</code> and
+              <code>im</code> are doubles.
+            </p>
+            <p>
+              Look up the necessary formulas for addition, subtraction, multiplication, etc. online.
+            </p>
+          END
+        end
+      %>
     </div>
   </body>
 

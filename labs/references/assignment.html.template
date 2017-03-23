@@ -761,8 +761,6 @@
 
       <%=
         exercise do
-          extend SourceCodeMixin
-          
           <<-END
             <p>
               Open the <code>rewrite</code> exercise in Visual Studio. Rewrite
