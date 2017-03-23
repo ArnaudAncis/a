@@ -18,9 +18,15 @@
     <ClInclude Include="Catch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="counter\counter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="counter\counter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

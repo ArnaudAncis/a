@@ -140,8 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Catch.h" />
+    <ClInclude Include="counter\counter.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="counter\counter.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
