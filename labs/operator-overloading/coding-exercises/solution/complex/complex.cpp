@@ -12,6 +12,16 @@ Complex Complex::conjugate() const
     return Complex(re, -im);
 }
 
+Complex operator"" _i(long long unsigned im)
+{
+	return Complex(0, (double)im);
+}
+
+Complex operator"" _i(long double im)
+{
+	return Complex(0, (double)im);
+}
+
 Complex operator +(const Complex& a, const Complex& b)
 {
     double re = a.re + b.re;

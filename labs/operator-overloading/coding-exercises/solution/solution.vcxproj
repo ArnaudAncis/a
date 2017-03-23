@@ -149,6 +149,7 @@
     <ClCompile Include="angle\angle.cpp" />
     <ClCompile Include="approx\approx-tests.cpp" />
     <ClCompile Include="approx\approx.cpp" />
+    <ClCompile Include="complex\complex-tests.cpp" />
     <ClCompile Include="complex\complex.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
