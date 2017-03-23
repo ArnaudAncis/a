@@ -581,17 +581,6 @@
         exercise do
           extend SourceCodeMixin
 
-          self.source = <<-END
-            auto alpha = 80_degrees;
-            auto beta = 3_rad;
-            auto gamma = alpha + beta;
-
-            if ( gamma < 180_degrees )
-            {
-                // ...
-            }
-          END
-
           <<-END
             <p>
               Comparing <code>double</code>s using <code>==</code> is generally a bad idea,
@@ -619,17 +608,6 @@
       <%=
         exercise do
           extend SourceCodeMixin
-
-          self.source = <<-END
-            auto alpha = 80_degrees;
-            auto beta = 3_rad;
-            auto gamma = alpha + beta;
-
-            if ( gamma < 180_degrees )
-            {
-                // ...
-            }
-          END
 
           <<-END
             <p>
