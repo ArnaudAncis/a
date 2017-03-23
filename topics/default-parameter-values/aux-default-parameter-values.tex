@@ -6,6 +6,9 @@
 \author{Fr\'ed\'eric Vogels}
 
 
+\lstset{language=c++14}
+
+
 \begin{document}
 
 \begin{frame}
@@ -31,12 +34,12 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Solution \#1: Overloading}
+  \frametitle{Typical Solution: Overloading}
   \code[font=\small,width=.9\linewidth]{overloading.cpp}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Solution \#1: Problems}
+  \frametitle{Overloading: Problems}
   \code[font=\small,width=.9\linewidth]{overloading-clash.cpp}
   \begin{itemize}
     \item Overloads are not allowed to have same signatures
@@ -45,25 +48,27 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Solution \#1: Problems}
+  \frametitle{Overloading: Problems}
   \code[font=\small,width=.9\linewidth]{overloading-order.cpp}
   \begin{itemize}
     \item Order of parameters often arbitrary
     \item Unclear from call syntax which parameter gets which value
     \item Need IDE help/documentation to make sense of arguments
+    \item Code should be self-documenting
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Solution \#1: Problems}
+  \frametitle{Overloading: Problems}
   \begin{center}
     \begin{tikzpicture}
       \path[use as bounding box,clip] (-1,-1) rectangle (5,5);
       \draw[-latex] (0,0) -- (5,0) node[at end,anchor=north east,font=\tiny] {number of optional parameters};
       \draw[-latex] (0,0) -- (0,5) node[at end,anchor=south east,font=\tiny,rotate=90] {number of overloads};
-      \draw plot[domain=0:4,samples=50,smooth] (\x,1.75^\x-0.8);
+      \draw plot[domain=0:4,samples=50,smooth] (\x,1.5^\x-0.8);
     \end{tikzpicture}
   \end{center}
+  \vskip-5mm
   \begin{itemize}
     \item Exponential number of overloads required
     \item Lots of boilerplate code
@@ -71,15 +76,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Solution \#2: Builder Design Pattern}
-  \code[font=\small,width=.9\linewidth]{builder.cpp}
-  \begin{itemize}
-    \item Problem: lots of boilerplate code
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Solution \#3: Default Parameter Values}
+  \frametitle{Default Parameter Values}
   \code[font=\small,width=.9\linewidth]{default-parameter-values.cpp}
   \begin{itemize}
     \item Missing parameters are filled in for you using default values
@@ -87,7 +84,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Solution \#3: Limitations}
+  \frametitle{Limitations}
   \code[font=\small,width=.9\linewidth]{default-parameter-values-shortcomings.cpp}
   \begin{itemize}
     \item Cannot ``skip'' parameters
@@ -97,8 +94,12 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Solution \#3: Limitations}
+  \frametitle{Caution Advised}
   \code[font=\small,width=.9\linewidth]{default-parameter-values-shortcomings2.cpp}
+  \begin{itemize}
+    \item No smart type matching
+    \item Parameters can never be skipped in \cpp
+  \end{itemize}
 \end{frame}
 
 \begin{frame}

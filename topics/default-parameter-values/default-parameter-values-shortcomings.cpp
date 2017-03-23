@@ -2,8 +2,10 @@ file open_file( const std::string& filename,
                 bool writeable = true,
                 bool createIfMissing = true );
 
+// Intention: open writeable file,
+// but do not create if missing
 open_file(fn, false);
-// is same as
+// but this is interpreted as
 open_file(fn, false, true);
-// but I want
+// and I want
 open_file(fn, true, false);
