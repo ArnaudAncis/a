@@ -349,7 +349,48 @@
                gets reset to <code>nullptr</code> during the transfer. When <code>main</code> prints <code>p-&gt;x</code>, <code>p</code> is <code>nullptr</code>.
              </div>
            END
-         end       
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <memory>
+
+             struct Foo
+             {
+               int x;
+               
+               Foo()             { std::cout << "D"; }
+               Foo(const Foo&)   { std::cout << "C"; }
+               ~Foo()            { std::cout << "X"; }
+             };
+
+             void bar(std::shared_ptr<Foo> p)
+             {
+               std::cout << "!";
+             }
+
+             int main()
+             {
+               std::cout << "[";
+               auto p = std::make_shared<Foo>();
+               bar(std::move(p));
+               std::cout << "]";
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               You can't move ownership when working with <code>std::shared_ptr</code>. Simply use <code>bar(p)</code>.
+             </div>
+           END
+         end
       %>
 
       <%=
