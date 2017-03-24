@@ -360,8 +360,6 @@
 
              struct Foo
              {
-               int x;
-               
                Foo()             { std::cout << "D"; }
                Foo(const Foo&)   { std::cout << "C"; }
                ~Foo()            { std::cout << "X"; }
@@ -376,7 +374,44 @@
              {
                std::cout << "[";
                auto p = std::make_shared<Foo>();
-               bar(std::move(p));
+               bar(p);
+               std::cout << "]";
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <memory>
+
+             struct Foo
+             {
+               std::shared_ptr<Foo> other;
+               
+               Foo()             { std::cout << "D"; }
+               Foo(const Foo&)   { std::cout << "C"; }
+               ~Foo()            { std::cout << "X"; }
+             };
+
+             int main()
+             {
+               std::cout << "[";
+               auto p = std::make_shared<Foo>();
+               auto q = std::make_shared<Foo>();
+
+               p->other = q;
+               q->other = p;
+               
                std::cout << "]";
              }
            END
@@ -387,7 +422,8 @@
              #{if input then show_input else '' end}
              #{show_output_field}
              <div data-revealer="Show explanation" class="explanation">
-               You can't move ownership when working with <code>std::shared_ptr</code>. Simply use <code>bar(p)</code>.
+               The two <code>Foo</code> objects keep each other alive. If you make a cycle of shared pointers, you have
+               two remove one link somewhere yourself lest you have a memory leak.
              </div>
            END
          end
