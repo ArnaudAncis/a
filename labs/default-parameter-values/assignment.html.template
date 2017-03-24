@@ -102,7 +102,7 @@
 
   <body>
     <header>
-      <div class="center-vertically">Classes</div>
+      <div class="center-vertically">Default Parameter Values</div>
     </header>
     <div id="contents">
       <%=
