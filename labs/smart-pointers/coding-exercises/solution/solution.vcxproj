@@ -139,19 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="angle\angle.h" />
-    <ClInclude Include="approx\approx.h" />
     <ClInclude Include="Catch.h" />
-    <ClInclude Include="complex\complex.h" />
+    <ClInclude Include="train\train.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="angle\angle-tests.cpp" />
-    <ClCompile Include="angle\angle.cpp" />
-    <ClCompile Include="approx\approx-tests.cpp" />
-    <ClCompile Include="approx\approx.cpp" />
-    <ClCompile Include="complex\complex-tests.cpp" />
-    <ClCompile Include="complex\complex.cpp" />
     <ClCompile Include="tests.cpp" />
+    <ClCompile Include="train\train-tests.cpp" />
+    <ClCompile Include="train\train.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

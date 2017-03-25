@@ -18,13 +18,7 @@
     <ClInclude Include="Catch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="angle\angle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="approx\approx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="complex\complex.h">
+    <ClInclude Include="train\train.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,22 +26,10 @@
     <ClCompile Include="tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="angle\angle.cpp">
+    <ClCompile Include="train\train.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="angle\angle-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="approx\approx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="approx\approx-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="complex\complex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="complex\complex-tests.cpp">
+    <ClCompile Include="train\train-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
