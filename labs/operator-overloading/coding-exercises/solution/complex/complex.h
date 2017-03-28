@@ -6,10 +6,10 @@ class Complex
 public:
     double re, im;
 
-	Complex(double re) : Complex(re, 0) { }
-    Complex(double re, double im) : re(re), im(im) { }
+    Complex(double re, double im = 0) : re(re), im(im) { }
 
     double abs_sqr() const;
+    double abs() const;
     Complex conjugate() const;
 };
 

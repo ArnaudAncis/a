@@ -1,4 +1,5 @@
 #include "complex.h"
+#include <cmath>
 
 
 double Complex::abs_sqr() const
@@ -6,6 +7,10 @@ double Complex::abs_sqr() const
     return re * re + im * im;
 }
 
+double Complex::abs() const
+{
+    return sqrt(abs_sqr());
+}
 
 Complex Complex::conjugate() const
 {

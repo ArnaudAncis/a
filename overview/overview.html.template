@@ -166,22 +166,27 @@
           <tr>
             <td>6</td>
             <td><%= topic('const-correctness', 'Const Correctness', handouts: true) %></td>
+            <td><%= lab('types-2', 'Types 2') %></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td></td>
             <td><%= lab('classes', 'Classes') %></td>
           </tr>
           <tr>
-            <td></td>
+            <td>7</td>
+            <td><%= topic('default-parameter-values', 'Default Parameter Values', handouts: true) %></td>
+            <td><%= lab('default-parameter-values', 'Default Parameter Values') %></td>
+          </tr>
+          <tr>
+            <td>7</td>
             <td><%= topic('operator-overloading', 'Operator Overloading', handouts: true) %></td>
-            <td><%= lab('complex', 'Complex numbers') %></td>
+            <td><%= lab('operator-overloading', 'Operator Overloading') %></td>
           </tr>
           <tr>
             <td></td>
             <td></td>
             <td><%= lab('fractals', 'Image Generation: Fractals') %></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><%= topic('default-parameter-values', 'Default Parameter Values', handouts: true) %></td>
-            <td></td>
           </tr>
           <tr>
             <td></td>

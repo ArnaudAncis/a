@@ -6,9 +6,7 @@ class approx
 	double x, epsilon;
 
 public:
-	approx(double x) : approx(x, 0.00001) { }
-
-	approx(double x, double epsilon)
+	approx(double x, double epsilon = 0.00001)
 		: x(x), epsilon(epsilon) { }
 
 	friend bool operator ==(const approx& approx, double x);

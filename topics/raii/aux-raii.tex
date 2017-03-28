@@ -6,6 +6,8 @@
 \author{Fr\'ed\'eric Vogels}
 
 
+\lstset{language=c++14}
+
 \begin{document}
 
 \begin{frame}
@@ -17,7 +19,7 @@
   \structure{What are resources?}
   \begin{itemize}
     \item Can be acquired
-    \item While acquired, can often not be shared
+    \item While acquired, can generally not be shared
     \item Must be released so that others can use it
   \end{itemize}
   \vskip5mm
@@ -65,7 +67,7 @@
   \begin{itemize}
     \item Correct resource management is important
     \item Always free your resources
-    \item Resource exhaustion is a Bad Thing$^{\textrm{TM}}$
+    \item Resource exhaustion is a Bad Thing
     \item Keep exceptions in mind!
   \end{itemize}
   \vskip5mm
@@ -106,6 +108,7 @@
 \begin{frame}
   \frametitle{\cpp}
   \begin{itemize}
+    \item \cpp\ has no \texttt{try/finally} or try-with-resources
     \item RAII: Resource Acquisition is Initialisation
     \item Resource is represented by object
     \item Object has destructor

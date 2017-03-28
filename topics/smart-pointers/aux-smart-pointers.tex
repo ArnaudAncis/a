@@ -6,11 +6,16 @@
 \author{Fr\'ed\'eric Vogels}
 
 
+\lstset{language=c++14}
+
 \begin{document}
 
 \begin{frame}
   \titlepage
 \end{frame}
+
+\section{Smart Pointers}
+\frame{\tableofcontents[currentsection]}
 
 \begin{frame}
   \frametitle{RAII}
@@ -43,28 +48,21 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Heap Allocation}
-  \code[font=\small]{person-deleter.cpp}
-  \begin{procontralist}
-    \pro Memory guaranteed to be freed
-    \con Need to remember to always use {\tt Person\_deleter}
-    \con {\tt Person\_deleter} works only on {\tt Person}s
-  \end{procontralist}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Heap Allocation}
-  \code[font=\small]{deleter.cpp}
-  \begin{procontralist}
-    \pro Memory guaranteed to be freed
-    \pro {\tt deleter} usable on all types
-    \con Need to remember to always use {\tt deleter}
-  \end{procontralist}
+  \frametitle{RAII To The Rescue}
+  \begin{itemize}
+    \item What if we relied on destructurs?
+    \item Give pointer to helper object
+    \item Helper object becomes responsible for freeing memory
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Heap Allocation}
   \code[font=\small,width=.9\linewidth]{smart_pointer.cpp}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Heap Allocation}
   \begin{procontralist}
     \pro Memory guaranteed to be freed
     \pro {\tt smart\_pointer} usable on all types
@@ -76,7 +74,7 @@
   \frametitle{Solving The Syntax Issue}
   \code[font=\small]{smart_pointer2.cpp}
   \begin{itemize}
-    \item We want {\tt p} to look as much like a regular pointer as possible
+    \item {\tt p} should look as much like a regular pointer as possible
   \end{itemize}
 \end{frame}
 
@@ -85,7 +83,90 @@
   \code[font=\small]{overload-member-access.cpp}
   \begin{itemize}
     \item Overloading {\tt ->} operator is possible
+    \item Note: \texttt{smart\_ptr} is our own creation, not part of \cpp
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overloading The Arrow Operator}
+  \begin{itemize}
+    \item Overloading \texttt{->} has special rules
+    \item \texttt{operator ->} must return either
+          \begin{itemize}
+            \item a pointer
+            \item an object with \texttt{->} defined on it
+          \end{itemize}
+    \item When using \texttt{obj->m}:
+          \begin{itemize}
+            \item If \texttt{obj} is pointer, standard meaning
+            \item If \texttt{obj} is object, \texttt{operator ->} is called, and
+                  \texttt{->} is again called on its return value
+          \end{itemize}
+    \item In other words, \texttt{->} is called repeatedly on results until
+          a pointer is returned
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example}
+  \code[font=\small,width=.9\linewidth]{arrow-operator.cpp}
+  \begin{overprint}
+    \onslide<1>
+    \begin{center}
+      A \texttt{Qux} is created
+    \end{center}
+    \codeunderlinex{qux creation}
+
+    \onslide<2>
+    \begin{center}
+      We call \texttt{->} on \texttt{Qux}
+    \end{center}
+    \codeunderlinex{qux arrow}
+
+    \onslide<3>
+    \begin{center}
+      \texttt{->} return a \texttt{Baz}
+    \end{center}
+    \codeunderlinex{qux arrow return type}
+
+    \onslide<4>
+    \begin{center}
+      \texttt{Baz} is no pointer, so \texttt{->} is called again
+    \end{center}
+
+    \onslide<5>
+    \begin{center}
+      \texttt{->} on \texttt{Baz} returns a \texttt{Bar}
+    \end{center}
+    \codeunderlinex{baz arrow return type}
+
+    \onslide<6>
+    \begin{center}
+      \texttt{Bar} is not a pointer, the process must be repeated once more
+    \end{center}
+
+    \onslide<7>
+    \begin{center}
+      \texttt{->} is called on \texttt{Bar}, it returns \texttt{Foo*}
+    \end{center}
+    \codeunderlinex{bar arrow return type}
+
+    \onslide<8>
+    \begin{center}
+      \texttt{Foo*} is a pointer, so the \texttt{->} chaining stops
+    \end{center}
+
+    \onslide<9>
+    \begin{center}
+      \texttt{Foo::hello} is called, and \texttt{Hello} is printed
+      \codeunderlinex{foo hello}
+    \end{center}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Arrow Operator on Smart Pointers}
+  \code{arrow-smart-pointers.cpp}
 \end{frame}
 
 \begin{frame}
@@ -93,7 +174,6 @@
   \begin{itemize}
     \item Dereferencing: given pointer {T* p}, get pointee using {\tt *p}
     \item We want to be able to use {\tt *p} on smart pointers too
-    \item Again, we want smart pointers to behave the same as regular pointers
   \end{itemize}
   \code{dereferencing.cpp}
 \end{frame}
@@ -101,13 +181,10 @@
 \begin{frame}
   \frametitle{Dereferencing Smart Pointers}
   \code[font=\small]{overload-dereference.cpp}
-  \begin{itemize}
-    \item Overloading {\tt ->} operator is possible
-  \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Dumb Pointers vs Smart Pointers}
+  \frametitle{Summary: Dumb Pointers vs Smart Pointers}
   \begin{itemize}
     \item Dumb pointer {\tt T*}
     \item Smart pointer {\tt smart\_ptr<T>}
@@ -122,6 +199,9 @@
           \end{itemize}
   \end{itemize}
 \end{frame}
+
+\section{Ownership}
+\frame{\tableofcontents[currentsection]}
 
 \begin{frame}
   \frametitle{Problem}
@@ -158,10 +238,11 @@
 \begin{frame}
   \frametitle{Ownership}
   \begin{itemize}
-    \item Ownership: you're responsible for freeing the object
-    \item No ownership: you're forbidden to free the object
-    \item A {\tt smart\_ptr} has ownership
-    \item We use {\tt T*} to indicate no ownership
+    \item We introduce the concept ``ownership''
+    \item If someone ``owns'' an object, he must free it
+    \item Someone who does not own an object, he must never free it
+    \item A {\tt smart\_ptr} gives ownership
+    \item A regular {\tt T*} gives no ownership
     \item Problem with previous code: we had two smart pointers, hence two owners, which is bad
   \end{itemize}
 \end{frame}
@@ -169,6 +250,9 @@
 \begin{frame}
   \frametitle{Fix to the Problem}
   \code[font=\small,width=.9\linewidth]{duplication2.cpp}
+  \begin{center}
+    \texttt{make\_older} will not free memory, since it is not given ownership over the \texttt{Person}
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -193,7 +277,7 @@
   \frametitle{Transferring Ownership}
   \begin{itemize}
     \item Sometimes we do want to transfer ownership
-    \item Possible to write {\tt transfer} function
+    \item It is possible to write {\tt transfer} function
     \item Technical details not important (\link{http://thbecker.net/articles/rvalue_references/section_01.html}{r-value references})
   \end{itemize}
   \code[font=\small]{transfer.cpp}
@@ -230,10 +314,14 @@
 \begin{frame}
   \frametitle{The Magic of {\tt std::make\_unique<T>}}
   \begin{itemize}
-    \item {\tt std::make\_unique<T>} can take the same arguments as {\tt T}'s constructors
+    \item {\tt std::make\_unique<T>} takes the same arguments as {\tt T}'s constructors
   \end{itemize}
   \code[font=\small]{magic-make-unique.cpp}
 \end{frame}
+
+\section{Shared Ownership}
+\frame{\tableofcontents[currentsection]}
+
 
 \begin{frame}
   \frametitle{Problems With Single Ownership}
@@ -261,7 +349,7 @@
   \begin{itemize}
     \item Give one cook ownership?
     \item This cook takes oven with him to his grave
-    \item We have to make sure the oven owning cook dies last
+    \item We have to make sure the oven-owning cook dies last
     \item Otherwise, all other cooks would be using a phantom oven
   \end{itemize}
   \vskip5mm
@@ -295,7 +383,7 @@
   \begin{itemize}
     \item Introduce shared ownership
     \item Each cook owns oven
-    \item Oven keeps track of number of ovens
+    \item Oven keeps track of number of owners
     \item New cook increments count
     \item Dead cook decrements count
     \item When no cooks left, oven self destructs
@@ -321,6 +409,18 @@
     \item When refcount reaches 0, memory is freed
     \item We'll be using this pointer most from now on
     \item No more {\tt T*}
+  \end{itemize}
+\end{frame}
+
+\section{Summary}
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}
+  \frametitle{Summary}
+  \begin{itemize}
+    \item Stay away from dumb pointers as much as you can
+    \item Use \texttt{std::shared\_ptr<T>} instead of \texttt{T}
+    \item Use \texttt{std::make\_shared<T>} instead of \texttt{new}
   \end{itemize}
 \end{frame}
 
