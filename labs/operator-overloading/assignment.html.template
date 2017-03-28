@@ -179,12 +179,6 @@
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
-             <div data-revealer="Show explanation" class="explanation">
-               <p>
-                 The code above overloads the <em>unary</em> operator -, not the binary one. In other words,
-                 given the operator overload above, you can write <code>-a</code> and <code>-b</code>, but not <code>a-b</code>.
-               </p>
-             </div>
            END
          end
       %>
