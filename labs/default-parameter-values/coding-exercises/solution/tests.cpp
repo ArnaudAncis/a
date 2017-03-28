@@ -4,8 +4,9 @@
 
 int main(int argc, char* const argv[])
 {
-    std::cout << "WARNING: YOU ARE RUNNING THE SOLUTION'S TESTS" << std::endl;
-    std::cout << "RIGHT CLICK ON THE STUDENT PROJECT AND SET IT AS STARTUP PROJECT" << std::endl;
+	std::cout << "Unfortunately, there are no tests for this exercise" << std::endl;
+	std::cout << "If anyone has an idea of how to write tests that check you" << std::endl;
+	std::cout << "rely on default parameter values instead of overloads, please let me know" << std::endl;
 
-    Catch::Session().run(argc, argv);
+	Catch::Session().run(argc, argv);
 }
