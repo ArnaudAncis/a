@@ -540,7 +540,7 @@
               with <code>x</code> and <code>y</code> the <code>double</code>s
               to be compared, and <code>epsilon</code> a small value (e.g. <code>0.00001</code>)
               that represents the maximum difference allowed. However, this code
-              is nog very readable; you would rather use <code>==</code>.
+              is not very readable; you would rather use <code>==</code>.
             </p>
             <p>
               Write a class <code>approx</code> that allows you to write
