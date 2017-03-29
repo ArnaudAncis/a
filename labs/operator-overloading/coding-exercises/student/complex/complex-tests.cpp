@@ -209,12 +209,12 @@ TEST_CASE("Operator /=")
 /*
 TEST_CASE("Chaining operator +=")
 {
-    Complex a = 5 + 3_i;
-    const Complex b = 1 + 2_i;
+	Complex a = 5 + 3_i;
+	const Complex b = 1 + 2_i;
 
-    a += b;
+	(a += b) += b;
 
-    CHECK(a.re == Approx(6));
-    CHECK(a.im == Approx(5));
+	CHECK(a.re == Approx(7));
+	CHECK(a.im == Approx(7));
 }
 /**/

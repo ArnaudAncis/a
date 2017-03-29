@@ -179,12 +179,6 @@
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
-             <div data-revealer="Show explanation" class="explanation">
-               <p>
-                 The code above overloads the <em>unary</em> operator -, not the binary one. In other words,
-                 given the operator overload above, you can write <code>-a</code> and <code>-b</code>, but not <code>a-b</code>.
-               </p>
-             </div>
            END
          end
       %>
@@ -279,55 +273,7 @@
              public:
                Foo() : c(0) { }
 
-               int operator ()() { return c++; }
-             };
-
-             int main()
-             {
-               Foo foo;
-
-               std::cout << foo() << foo() << foo();
-             }
-           END
-
-           self.output = '???'
-
-           <<-END
-             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
-             #{show_source_editor}
-             #{if input then show_input else '' end}
-             #{show_output_field}
-             <div data-revealer="Show explanation" class="explanation">
-               <p>
-                 Within two "sequence points", the compiler has the freedom to reorder operations as it sees fit.
-                 The rules about sequence points are a bit complicated (and even outdated since C++11, they've been
-                 replaced by something probably even more confusing), but suffice it to say that it's a bad idea
-                 to put multiple state modifying operations on the same line. Here, each <code>foo()</code>
-                 operations modifies the value of some variable (hence it is state modifying),
-                 and since they appear on the same line, you have no way of knowing in what order
-                 it will be executed. For example, on this compiler, the program printed 210.
-               </p>
-               <p>
-                 This is not operator overloading specific. For example, when calling a normal function <code>bar(x++, x++, x++)</code>
-                 the actual result also remains a surprise.
-               </p>
-             </div>
-           END
-         end
-      %>
-
-      <%=
-         exercise(Lib::Interpretation) do
-           self.source = <<-END
-             #include <iostream>
-
-             class Foo {
-               int c;
-
-             public:
-               Foo() : c(0) { }
-
-               int operator ()() { return c++; }
+               int operator ()() { return ++c; }
              };
 
              int main()
@@ -594,7 +540,7 @@
               with <code>x</code> and <code>y</code> the <code>double</code>s
               to be compared, and <code>epsilon</code> a small value (e.g. <code>0.00001</code>)
               that represents the maximum difference allowed. However, this code
-              is nog very readable; you would rather use <code>==</code>.
+              is not very readable; you would rather use <code>==</code>.
             </p>
             <p>
               Write a class <code>approx</code> that allows you to write
