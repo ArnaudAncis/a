@@ -184,19 +184,14 @@
             <td><%= lab('operator-overloading', 'Operator Overloading') %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td><%= lab('fractals', 'Image Generation: Fractals') %></td>
-          </tr>
-          <tr>
-            <td></td>
+            <td>7</td>
             <td><%= topic('raii', 'RAII', handouts: true) %></td>
             <td></td>
           </tr>
           <tr>
-            <td></td>
+            <td>7</td>
             <td><%= topic('smart-pointers', 'Smart Pointers', handouts: true) %></td>
-            <td></td>
+            <td><%= lab('smart-pointers', 'Smart Pointers') %></td>
           </tr>
           <tr>
             <td></td>
