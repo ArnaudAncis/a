@@ -662,6 +662,17 @@
          end
       %>
          
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Write a class hierarchy containing <code>Shape</code>, <code>Rectangle</code> and <code>Square</code>.
+              A <code>Shape</code> has two abstract methods <code>circumference</code> and <code>area</code>,
+              which are implemented in <code>Rectangle</code> and <code>Square</code>.
+            </p>
+          END
+        end
+      %>
     </div>
   </body>
 
