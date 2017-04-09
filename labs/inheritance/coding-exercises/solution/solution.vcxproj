@@ -146,12 +146,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ast\addition.cpp" />
+    <ClCompile Include="ast\ast-tests.cpp" />
+    <ClCompile Include="ast\literal.cpp" />
+    <ClCompile Include="ast\multiplication.cpp" />
+    <ClCompile Include="ast\operator.cpp" />
+    <ClCompile Include="ast\rpn-builder.cpp" />
+    <ClCompile Include="ast\variable.cpp" />
     <ClCompile Include="shapes\rectangle.cpp" />
     <ClCompile Include="shapes\shape-tests.cpp" />
     <ClCompile Include="shapes\square.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ast\addition.h" />
+    <ClInclude Include="ast\expression.h" />
+    <ClInclude Include="ast\literal.h" />
+    <ClInclude Include="ast\multiplication.h" />
+    <ClInclude Include="ast\operator.h" />
+    <ClInclude Include="ast\rpn-builder.h" />
+    <ClInclude Include="ast\variable.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="shapes\rectangle.h" />
     <ClInclude Include="shapes\shape.h" />

@@ -673,6 +673,17 @@
           END
         end
       %>
+
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Translate the <code>Expression</code> hierarchy from Java to C++.
+            </p>
+          END
+        end
+      %>
+         
     </div>
   </body>
 
