@@ -196,11 +196,6 @@
           <tr>
             <td></td>
             <td><%= topic('inheritance', 'Inheritance', handouts: true) %></td>
-            <td><%= lab('image-manipulation', 'Image Generation: Filters') %></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
             <td><%= lab('inheritance', 'Inheritance') %></td>
           </tr>
           <tr>
@@ -209,6 +204,11 @@
             <td></td>
           </tr>
           <tr>
+            <td></td>
+            <td><%= topic('templates', 'Templates', handouts: true) %></td>
+            <td></td>
+          </tr> 
+         <tr>
             <td></td>
             <td><%= topic('technical-details', 'Technical Details', handouts: false) %></td>
             <td></td>
