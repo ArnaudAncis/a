@@ -520,6 +520,143 @@
                    type of whatever <code>p</code> points to (in our case that would be <code>Bar</code>)
                    and call that type's <code>f</code> (i.e. <code>Bar::f()</code>).
                  </li>
+               </ol>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+               virtual void f() { std::cout << "foo"; }
+             };
+
+             struct Bar : public Foo
+             {
+               void f() override { std::cout << "bar"; }
+             };
+
+             int main()
+             {
+               Foo* p = new Bar;
+               p->f();
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 The compiler sees that <code>f</code> is virtual, so the dynamic type (<code>Bar</code>) is used to determine which version of <code>f</code> to call.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+               Foo() { f(); }
+               
+               virtual void f() { std::cout << "foo"; }
+             };
+
+             struct Bar : public Foo
+             {
+               void f() override { std::cout << "bar"; }
+             };
+
+             struct Qux : public Bar
+             {
+               void f() override { std::cout << "qux"; }
+             };
+
+             int main()
+             {
+               Foo* p = new Qux;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 At the time <code>Foo::Foo()</code> calls <code>f()</code>, the <code>Qux</code> object is not fully constructed yet:
+                 only the <code>Foo</code> layer is ready. Virtual method calls in constructors can only go so "deep" as the object is constructed.
+                 In our case, the only available version of <code>f</code> is <code>Foo::f()</code> (the <code>Bar</code> and <code>Qux</code>
+                 layers not yet having been constructed), so this is the one being called.                 
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+               Foo() { f(); }
+               
+               virtual void f() { std::cout << "foo"; }
+             };
+
+             struct Bar : public Foo
+             {
+               Bar() { f(); }
+               
+               void f() override { std::cout << "bar"; }
+             };
+
+             struct Qux : public Bar
+             {
+               Qux() { f(); }
+               
+               void f() override { std::cout << "qux"; }
+             };
+
+             int main()
+             {
+               Foo* p = new Qux;
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 When <code>Foo::Foo()</code> calls <code>f()</code>, only the <code>Foo</code> layer
+                 has been constructed, so the "deepest" method to call is <code>Foo:f()</code>.
+               </p>
+               <p>
+                 Next, <code>Bar::Bar()</code> calls <code>f()</code>. At that time, both the <code>Foo</code> and <code>Bar</code> layer
+                 are ready, so <code>f()</code> will execute <code>Bar::f()</code>.
+               </p>
+               <p>
+                 Lastly, <code>Qux::Qux()</code> calls <code>f()</code>, and by this time all layers have been constructed, meaning
+                 <code>Qux::f()</code> gets called.
+               </p>                 
              </div>
            END
          end
