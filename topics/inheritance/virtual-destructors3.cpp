@@ -1,4 +1,3 @@
-class A {
-public:
+struct A {
   virtual ~A() = 0; // wrong!
 };

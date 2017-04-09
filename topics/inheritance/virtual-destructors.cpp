@@ -1,16 +1,16 @@
-class A { };
+struct A { };
 
-class B1 : public A {
+struct B : public A {
   int* data;
-public:
-  ~B1() { delete[] data; }
+
+  ~B() { delete[] data; }
 };
 
-class B2 : public A {
-public:
-  ~B2() {  }
-};
+A* p = new B();
 
-void destroy(A* a) {
-  delete a; // Which destructor?
-}
+// Would call A::~A(), not B::~B()
+// due to the fact that A::~A() is
+// not virtual
+delete p;
+
+// Memory leak! data never freed

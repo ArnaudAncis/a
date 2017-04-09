@@ -5,6 +5,8 @@
 \title{Inheritance}
 \author{Fr\'ed\'eric Vogels}
 
+\lstset{language=c++14}
+
 
 \begin{document}
 
@@ -31,33 +33,24 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{{\tt protected} in Java}
-  \structure{Who can reach a {\tt protected} member?}
+  \frametitle{{\tt protected}}
+  \begin{center}
+    Who can access \texttt{protected} fields?
+  \end{center}
+  \structure{In Java}
   \begin{itemize}
     \item Objects of the same class
     \item Objects of a class from the same package
     \item Objects of a subclass
   \end{itemize}
   \vskip5mm
-  \structure{Who cannot reach a {\tt protected} member?}
-  \begin{itemize}
-    \item Objects of a class not in the same package and not a subclass
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{{\tt protected} in \cpp}
-  \structure{Who can reach a {\tt protected} member?}
+  \structure{In \cpp}
   \begin{itemize}
     \item Objects of the same class
     \item Objects of a subclass
   \end{itemize}
-  \vskip5mm
-  \structure{Who cannot reach a {\tt protected} member?}
-  \begin{itemize}
-    \item Objects of a class that is not a subclass
-  \end{itemize}
 \end{frame}
+
 
 \section{Types of inheritance}
 
@@ -253,8 +246,8 @@
   \frametitle{Virtual Methods}
   \begin{itemize}
     \item Virtual methods: methods that are overridable
-    \item When calling a virtual method, dynamic type determines which version is called
-    \item When calling a nonvirtual method, static type determines which version is called
+    \item When calling a virtual method, \emph{dynamic type} determines which version is called
+    \item When calling a nonvirtual method, \emph{static type} determines which version is called
     \item In Java, all (nonprivate) object methods are virtual
   \end{itemize}
 \end{frame}
@@ -283,12 +276,14 @@
 
 \begin{frame}
   \frametitle{Inheritance in \cpp}
+  \begin{center} \Large
+    \alert{Important}
+  \end{center}
   \begin{itemize}
     \item When working with inheritance, always use pointers/references
     \item When working by-value, inheritance won't work correctly
     \item Why would that be? \cake
   \end{itemize}
-  \code{inheritance-by-value.cpp}
 \end{frame}
 
 \begin{frame}
@@ -299,6 +294,7 @@
     \item \cpp\ has no {\tt abstract} keyword
     \item To declare abstract method: {\tt = 0}
   \end{itemize}
+  \vskip5mm
   \structure{Syntax}
   \code{abstract-syntax.cpp}
 \end{frame}
@@ -310,6 +306,7 @@
     \item \cpp: class is automatically abstract when it contains 1+ abstract methods
     \item Abstract classes cannot be instantiated
   \end{itemize}
+  \code{abstract-creation.cpp}
 \end{frame}
 
 \begin{frame}
@@ -326,7 +323,7 @@
 \begin{frame}
   \frametitle{Multiple Inheritance}
   \begin{itemize}
-    \item One class can have multiple superclasses
+    \item One class can have \emph{multiple} superclasses
     \item Has many problems
     \item Java simplified things by introducing interfaces
     \item \cpp\ has no interfaces
@@ -347,30 +344,30 @@
 \begin{frame}
   \frametitle{Problems With Multiple Inheritance}
   \code[font=\small]{multiple-inheritance.cpp}
-  \begin{center}
-    \begin{tikzpicture}[class/.style={draw,circle,minimum size=1cm},
-                        inherits/.style={-{Triangle[open,length=5pt,width=10pt]}}]
-      \node[class] (A) at (0,0) {A};
-      \node[class] (B1) at (-2,-1) {B1};
-      \node[class] (B2) at (2,-1) {B2};
-      \node[class] (C) at (0,-2) {C};
-      \draw[inherits] (B1) -- (A);
-      \draw[inherits] (B2) -- (A);
-      \draw[inherits] (C) -- (B1);
-      \draw[inherits] (C) -- (B2);
-    \end{tikzpicture}
-  \end{center}
-\end{frame}
+  \begin{overprint}
+    \onslide<1>
+    \begin{center}
+      \begin{tikzpicture}[class/.style={draw,circle,minimum size=1cm},
+                          inherits/.style={-{Triangle[open,length=5pt,width=10pt]}}]
+        \node[class] (A) at (0,0) {A};
+        \node[class] (B1) at (-2,-1) {B1};
+        \node[class] (B2) at (2,-1) {B2};
+        \node[class] (C) at (0,-2) {C};
+        \draw[inherits] (B1) -- (A);
+        \draw[inherits] (B2) -- (A);
+        \draw[inherits] (C) -- (B1);
+        \draw[inherits] (C) -- (B2);
+      \end{tikzpicture}
+    \end{center}
 
-\begin{frame}
-  \frametitle{Problems With Multiple Inheritance}
-  \code[font=\small]{multiple-inheritance.cpp}
-  \begin{itemize}
-    \item {\tt C} inherits from {\tt A} twice
-    \item $\rightarrow$ {\tt C} inherits {\tt x} twice!
-    \item Each {\tt C} object has two {\tt x} variables
-    \item Called \link{http://www.cprogramming.com/tutorial/virtual_inheritance.html}{Diamond Problem}
-  \end{itemize}
+    \onslide<2>
+    \begin{itemize}
+      \item {\tt C} inherits from {\tt A} twice
+      \item $\rightarrow$ {\tt C} inherits {\tt x} twice!
+      \item Each {\tt C} object has \emph{two} {\tt x} variables
+      \item Called \link{http://www.cprogramming.com/tutorial/virtual_inheritance.html}{Diamond Problem}
+    \end{itemize}
+  \end{overprint}
 \end{frame}
 
 \begin{frame}
@@ -379,7 +376,7 @@
   \begin{itemize}
     \item \link{https://en.wikipedia.org/wiki/Virtual_inheritance}{Virtual inheritance}
     \item {\tt A} is only inherited once by {\tt C}
-    \item Has some weird consequences
+    \item Has some really weird consequences
     \item Generally discouraged
     \item Just know that it exists
   \end{itemize}
@@ -485,6 +482,16 @@
           \code[font=\small]{virtual-destructors3.cpp}
     \item Rule of thumb: add virtual destructor to each class
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Destructors and Smart Pointers}
+  \begin{itemize}
+    \item Smart pointers remove the need for virtual destructors
+    \item A smart pointer keeps track internally of which destructor to call
+    \item Still safer to always add virtual destructors in case someone works with your class through dumb pointers
+  \end{itemize}
+  \code[font=\small,width=.9\linewidth]{smart-pointers.cpp}
 \end{frame}
 
 \end{document}
