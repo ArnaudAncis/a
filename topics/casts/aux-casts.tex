@@ -4,9 +4,7 @@
 \title{Casts}
 \author{Fr\'ed\'eric Vogels}
 
-\newcommand{\highlightbox}[2][]{
-  \draw[opacity=.75,ultra thick,red,#1] ($ (#2.south west) + (-.1,-.1) $) rectangle ($ (#2.north east) + (.1,.1) $)
-}
+\lstset{language=c++14}
 
 
 \begin{document}
@@ -30,7 +28,7 @@
     \item Upcasts are always safe
     \item Downcasts can go wrong
   \end{itemize}
-  \code{wrong-downcast.cpp}
+  \code[font=\small,width=.9\linewidth]{wrong-downcast.cpp}
 \end{frame}
 
 \begin{frame}
@@ -71,6 +69,12 @@
 
 \begin{frame}
   \frametitle{C-style Casts}
+  \structure{Syntax}
+  \begin{center} \ttfamily
+    (T) x
+  \end{center}
+  \vskip5mm
+  \structure{Usage}
   \begin{itemize}
     \item Just don't use them
   \end{itemize}
@@ -91,9 +95,9 @@
   \vskip5mm
   \structure{{\tt dynamic\_cast<T>(x)}}
   \begin{itemize}
-    \item Checked at compile and runtime
+    \item Checked at compile \emph{and} runtime
     \item Wrong casts give {\tt nullptr}
-    \item Requires RTII (overhead)
+    \item Is a bit slower due to runtime checks
   \end{itemize}
 \end{frame}
 
@@ -165,7 +169,7 @@
   \newcommand{\fatentry}[3]{\HEX{#1} & #2 & #3 \\}
 
   \begin{frame}
-    \frametitle{{\tt reinterpret\_cast<T>(x): What's It Good For?}}
+    \frametitle{\texttt{reinterpret\_cast<T>(x)}: What's It Good For?}
     \begin{center} \Large
       Remember this?
     \end{center}
@@ -244,7 +248,7 @@
     \item Only used for old C libraries
     \item Just don't use it
   \end{itemize}
-  \code[font=\small,width=.95\linewidth]{const-cast.cpp}
+  \code[font=\scriptsize,width=.95\linewidth]{const-cast.cpp}
 \end{frame}
 
 \end{document}

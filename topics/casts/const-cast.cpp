@@ -9,6 +9,5 @@ void foo(const Person& person) {
   int length = string_length(person);
 
   // Works
-  int length =
-    string_length(const_cast<Person&>(person));
+  int length = string_length(const_cast<Person&>(person));
 }
