@@ -24,6 +24,9 @@
     <ClCompile Include="max\max-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="grid\grid-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Catch.h">
@@ -33,6 +36,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="max\max.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="grid\grid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="grid\position.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

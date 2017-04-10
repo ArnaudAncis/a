@@ -331,6 +331,19 @@
         end
       %>
 
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Write the <code>Grid<T></code> class, which represents a grid (2D array) with elements of type <code>T</code>.
+              To access elements of the grid, overload the <code>[]</code> operator with a <code>Position</code> object, whose
+              code is given. For example, <code>grid[Position(0,0)] = 5</code> should set the value of
+              the item at position (0, 0) to <code>5</code>.
+            </p>
+          END
+        end
+      %>
+             
     </div>
   </body>
 

@@ -146,12 +146,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="grid\grid-tests.cpp" />
     <ClCompile Include="max\max-tests.cpp" />
     <ClCompile Include="pair\pair-tests.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Catch.h" />
+    <ClInclude Include="grid\grid.h" />
+    <ClInclude Include="grid\position.h" />
     <ClInclude Include="max\max.h" />
     <ClInclude Include="pair\pair.h" />
   </ItemGroup>
