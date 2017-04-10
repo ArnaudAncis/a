@@ -553,8 +553,6 @@
 
       <%=
         exercise do
-          extend SourceCodeMixin
-
           <<-END
             <p>
               Write a class <code>Complex</code> whose instances
