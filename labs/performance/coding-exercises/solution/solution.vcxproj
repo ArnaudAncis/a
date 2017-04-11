@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="branch-prediction.cpp" />
+    <ClCompile Include="cache.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="memory-alignment.cpp" />
     <ClCompile Include="sequential-access.cpp" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="branch-prediction.h" />
+    <ClInclude Include="cache.h" />
     <ClInclude Include="memory-alignment.h" />
     <ClInclude Include="sequential-access.h" />
     <ClInclude Include="shared.h" />
