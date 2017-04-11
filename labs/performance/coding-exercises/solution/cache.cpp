@@ -6,7 +6,7 @@
 
 namespace
 {
-    void process(std::vector<uint64_t>& ns, unsigned block_size, unsigned repeats_per_block)
+    void process(std::vector<uint64_t>& ns, unsigned block_size, unsigned repeats_per_block, const std::vector<unsigned>& indices)
     {
         if (ns.size() % block_size)
         {
@@ -22,7 +22,7 @@ namespace
 
             for (unsigned k = 0; k != repeats_per_block; ++k)
             {
-                for (unsigned i = 0; i != block_size; ++i)
+                for (auto i : indices)
                 {
                     ns[start_i + i]++;
                 }
@@ -32,11 +32,14 @@ namespace
 
     void test(std::vector<uint64_t>& ns, unsigned block_size, unsigned repeats_per_block)
     {
+        auto indices = range<unsigned>(0, block_size);
+        shuffle(indices);
+
         std::cout
             << "Block size " << block_size * sizeof(uint64_t) << " bytes"
             << ", repeat " << repeats_per_block
             << ", " << ns.size() / block_size << " blocks"
-            << " --> " << measure_time([&]() {process(ns, block_size, repeats_per_block);})
+            << " --> " << measure_time([&]() {process(ns, block_size, repeats_per_block, indices);})
             << std::endl;
     }
 }
@@ -50,6 +53,6 @@ void test_cache()
     {
         unsigned block_size = 8 * (1 << i);
 
-        test(ns, block_size, 8);
+        test(ns, block_size, 4);
     }
 }
