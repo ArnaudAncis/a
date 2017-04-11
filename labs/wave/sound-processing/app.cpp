@@ -11,10 +11,6 @@
 
 
 
-
-
-
-
 class SpeederUpper : public Wave
 {
 private:

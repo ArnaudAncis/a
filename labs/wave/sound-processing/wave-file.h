@@ -6,11 +6,6 @@
 #include <string>
 
 
-class WaveFile
-{
-
-};
-
 void read_wave_file(const std::string& filename);
 void write_wave(const std::string& filename, const uint8_t* buffer, unsigned size);
 
