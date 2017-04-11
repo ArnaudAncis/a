@@ -147,7 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
-    <ClCompile Include="buffer.cpp" />
+    <ClCompile Include="bytes-buffer.cpp" />
     <ClCompile Include="sample-stream.cpp" />
     <ClCompile Include="sine-wave.cpp" />
     <ClCompile Include="wave-file.cpp" />
@@ -155,7 +155,7 @@
     <ClCompile Include="wave-sampling-stream.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="buffer.h" />
+    <ClInclude Include="bytes-buffer.h" />
     <ClInclude Include="sample-stream.h" />
     <ClInclude Include="sine-wave.h" />
     <ClInclude Include="stream.h" />

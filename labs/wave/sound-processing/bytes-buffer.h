@@ -23,14 +23,14 @@ public:
 };
 
 
-class Buffer
+class BytesBuffer
 {
 private:
     std::shared_ptr<uint8_t> m_data;
     unsigned m_start, m_size;
 
 public:
-    Buffer(std::shared_ptr<uint8_t> data, unsigned size, unsigned start = 0)
+    BytesBuffer(std::shared_ptr<uint8_t> data, unsigned size, unsigned start = 0)
         : m_data(data), m_start(start), m_size(size) { }
 
     template<typename T>
@@ -46,8 +46,8 @@ public:
         }
     }
 
-    Buffer slice(unsigned start, unsigned size) const;
-    Buffer slice(unsigned start) const;
+    BytesBuffer slice(unsigned start, unsigned size) const;
+    BytesBuffer slice(unsigned start) const;
 
     unsigned size() const { return m_size; }
     const uint8_t* data() { return m_data.get() + m_start; }
@@ -55,6 +55,6 @@ public:
     uint8_t operator [](unsigned index) const;
 };
 
-Buffer read_buffer_from_file(const std::string&);
+BytesBuffer read_buffer_from_file(const std::string&);
 
 #endif

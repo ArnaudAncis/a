@@ -1,8 +1,8 @@
-#include "buffer.h"
+#include "bytes-buffer.h"
 #include <fstream>
 
 
-Buffer Buffer::slice(unsigned start, unsigned size) const
+BytesBuffer BytesBuffer::slice(unsigned start, unsigned size) const
 {
     if (start + size > this->m_size)
     {
@@ -10,16 +10,16 @@ Buffer Buffer::slice(unsigned start, unsigned size) const
     }
     else
     {
-        return Buffer(m_data, size, m_start + start);
+        return BytesBuffer(m_data, size, m_start + start);
     }
 }
 
-Buffer Buffer::slice(unsigned start) const
+BytesBuffer BytesBuffer::slice(unsigned start) const
 {
     return slice(start, m_size - start);
 }
 
-Buffer read_buffer_from_file(const std::string& path)
+BytesBuffer read_buffer_from_file(const std::string& path)
 {
     // Open file in binary mode, start at end position
     std::ifstream in(path, std::ios::binary | std::ios::ate);
@@ -37,10 +37,10 @@ Buffer read_buffer_from_file(const std::string& path)
     in.read(reinterpret_cast<char*>(bytes.get()), size);
 
     // Return buffer
-    return Buffer(bytes, (unsigned) size);
+    return BytesBuffer(bytes, (unsigned) size);
 }
 
-uint8_t Buffer::operator [](unsigned index) const
+uint8_t BytesBuffer::operator [](unsigned index) const
 {
     if (index >= m_size)
     {

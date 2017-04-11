@@ -1,5 +1,5 @@
 #include "wave-file.h"
-#include "buffer.h"
+#include "bytes-buffer.h"
 #include <fstream>
 #include <cstdint>
 #include <memory>
@@ -41,9 +41,9 @@ namespace
     const unsigned DATA_CHUNK_ID = 0x61746164;
 
 
-    std::vector<Buffer> find_chunks(Buffer buffer)
+    std::vector<BytesBuffer> find_chunks(BytesBuffer buffer)
     {
-        std::vector<Buffer> chunks;
+        std::vector<BytesBuffer> chunks;
 
         while (buffer.size() > 0)
         {
@@ -58,7 +58,7 @@ namespace
         return chunks;
     }
 
-    BufferInterpretation<FMT_CHUNK> find_fmt_chunk(const std::vector<Buffer>& chunks)
+    BufferInterpretation<FMT_CHUNK> find_fmt_chunk(const std::vector<BytesBuffer>& chunks)
     {
         for (auto& chunk : chunks)
         {
@@ -73,7 +73,7 @@ namespace
         throw std::runtime_error("no fmt chunk found");
     }
 
-    Buffer find_data(const std::vector<Buffer>& chunks)
+    BytesBuffer find_data(const std::vector<BytesBuffer>& chunks)
     {
         for (auto& chunk : chunks)
         {

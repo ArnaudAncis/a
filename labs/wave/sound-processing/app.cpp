@@ -1,4 +1,4 @@
-#include "buffer.h"
+#include "bytes-buffer.h"
 #include "wave.h"
 #include "sine-wave.h"
 #include "wave-addition.h"
