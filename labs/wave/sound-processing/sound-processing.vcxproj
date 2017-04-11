@@ -150,6 +150,7 @@
     <ClCompile Include="buffer.cpp" />
     <ClCompile Include="sample-stream.cpp" />
     <ClCompile Include="sine-wave.cpp" />
+    <ClCompile Include="wave-file.cpp" />
     <ClCompile Include="wave-addition.cpp" />
     <ClCompile Include="wave-sampling-stream.cpp" />
   </ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="sample-stream.h" />
     <ClInclude Include="sine-wave.h" />
     <ClInclude Include="stream.h" />
+    <ClInclude Include="wave-file.h" />
     <ClInclude Include="wave-addition.h" />
     <ClInclude Include="wave-sampling-stream.h" />
     <ClInclude Include="wave.h" />
