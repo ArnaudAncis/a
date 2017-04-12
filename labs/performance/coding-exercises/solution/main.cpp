@@ -6,5 +6,10 @@
 
 int main()
 {
-    test_cache();
+    // Uncomment one test and run it
+
+    //test_branch_prediction();
+    //test_cache();
+    //test_sequential_access();
+    //test_memory_alignment();
 }

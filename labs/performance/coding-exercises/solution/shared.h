@@ -26,4 +26,17 @@ void shuffle(std::vector<T>& xs)
     std::shuffle(xs.begin(), xs.end(), std::default_random_engine());
 }
 
+template<typename T>
+std::vector<T> create_vector(unsigned size, std::function<T(unsigned)> f)
+{
+    std::vector<T> result(size);
+
+    for (unsigned i = 0; i != size; ++i)
+    {
+        result[i] = f(i);
+    }
+
+    return result;
+}
+
 #endif
