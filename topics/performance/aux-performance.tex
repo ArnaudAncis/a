@@ -1,5 +1,7 @@
 \usepackage{ucll-code}
+\usepackage{siunitx}
 \usetikzlibrary{shadows,shapes.multipart}
+
 
 \title{Performance}
 \author{Fr\'ed\'eric Vogels}
@@ -12,11 +14,10 @@
   \titlepage
 \end{frame}
 
-% \input{aux-branch-prediction.tex}
+\input{aux-branch-prediction.tex}
 \input{aux-memory-alignment.tex}
-
-
-% templates (compiletime vs runtime)
+\input{aux-cache.tex}
+\input{aux-compiler-optimisations.tex}
 
 \end{document}
 
