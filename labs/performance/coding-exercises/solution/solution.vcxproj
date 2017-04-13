@@ -163,6 +163,8 @@
     <ClCompile Include="sequential-access.cpp" />
     <ClCompile Include="shared.cpp" />
     <ClCompile Include="tail-call-optimisation.cpp" />
+    <ClCompile Include="templates.cpp" />
+    <ClCompile Include="zero-cost-abstractions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="branch-prediction.h" />
@@ -174,6 +176,8 @@
     <ClInclude Include="sequential-access.h" />
     <ClInclude Include="shared.h" />
     <ClInclude Include="tail-call-optimisation.h" />
+    <ClInclude Include="templates.h" />
+    <ClInclude Include="zero-cost-abstractions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

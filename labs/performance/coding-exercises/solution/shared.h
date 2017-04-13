@@ -9,6 +9,12 @@
 long long measure_time(std::function<void()> function);
 
 template<typename T>
+long long measure_time(std::function<T()> function, T* result)
+{
+    return measure_time([function, result]() { *result = function(); });
+}
+
+template<typename T>
 void shuffle(std::vector<T>& xs)
 {
     std::shuffle(xs.begin(), xs.end(), std::default_random_engine());

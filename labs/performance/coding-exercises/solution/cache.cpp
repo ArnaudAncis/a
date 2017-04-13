@@ -35,27 +35,44 @@ namespace
         ns[0] = result;
     }
 
-    void test(std::vector<uint64_t>& ns, unsigned block_size, unsigned repeats_per_block)
+    void test(std::vector<uint64_t>& ns, unsigned size, unsigned repeats_per_block)
     {
-        std::cout
-            << "Block size " << block_size * sizeof(uint64_t) << " bytes"
-            << ", " << repeats_per_block << " repeats" 
-            << ", " << ns.size() / block_size << " blocks"
-            << " --> " << measure_time([&]() {process(ns, block_size, repeats_per_block);}) /repeats_per_block << "ms per repeat"
-            << std::endl;
+        unsigned block_size = 8 * (1 << size);
+        auto duration = measure_time([&]() {process(ns, block_size, repeats_per_block);}) / repeats_per_block;
+
+        //std::cout
+        //    << "Block size " << block_size * sizeof(uint64_t) << " bytes"
+        //    << ", " << repeats_per_block << " repeats" 
+        //    << ", " << ns.size() / block_size << " blocks"
+        //    << " --> " << duration << "ms per repeat on average"
+        //    << std::endl;
+
+        std::cout << size << "/" << duration << std::endl;
     }
 }
 
 void test_cache()
 {
     std::vector<uint64_t> ns(268435456);
+    std::vector<int> sizes = range(1, 20);
 
-    for (auto i : std::vector<unsigned>{ 1,2,3,4,5,10,15,16,17,18,19,23,24 })
+    for (auto i : sizes)
     {
-        unsigned block_size = 8 * (1 << i);
+        test(ns, i, 1);
+    }
+    std::cout << std::endl;
+    for (auto i : sizes)
+    {
+        test(ns, i, 2);
+    }std::cout << std::endl;
 
-        test(ns, block_size, 1);
-        test(ns, block_size, 2);
-        test(ns, block_size, 4);
+    for (auto i : sizes)
+    {
+        test(ns, i, 4);
+    }
+    std::cout << std::endl;
+    for (auto i : sizes)
+    {
+        test(ns, i, 8);
     }
 }
