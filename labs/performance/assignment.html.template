@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= default_externals %>
+    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+
+    <%= Html::Generation::Quiz.setup %>
+    <style>
+      #colours {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+      
+      #colours td:first-child {
+        color: #FFF;
+        text-align: center;
+      }
+
+      #colours td {
+        padding: 5px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      input.correct {
+        background: #AFA;
+      }
+
+      input.incorrect {
+        background: #FAA
+      }
+
+      .solution {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+
+      .revealer {
+        border: 1px solid black;
+        padding: 10px;
+        width: 25%;
+        margin: 10px auto;      
+        text-align: center;
+        cursor: help;
+      }
+
+      .hint {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
+
+      .git {
+        border: 1px solid black;
+        padding: 10px;
+        width: 80%;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .explanation {
+        border: 1px solid black;
+        padding: 10px;
+        width: 75%;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Templates</div>
+    </header>
+    <div id="contents">
+      <%=
+        exercise do
+          extend SourceCodeMixin
+
+          self.source = <<-END
+            auto before = std::chrono::high_resolution_clock::now();
+            // Perform computation
+            auto after = std::chrono::high_resolution_clock::now();
+
+            auto duration_in_ms = std::chrono::duration_cast<std::chrono::milliseconds>(after - before).count();
+          END
+
+          <<-END
+            <p>
+              Find a way to measure the effect of branch prediction:
+              this will involve writing two loops that execute an <code>if</code> millions
+              of time. One loop will try to maximise the effect of branch prediction,
+              the other needs to sabotage it.
+            <p>
+            <p>
+              To thwart branch prediction, you will need to ensure
+              that the condition switches from <code>true</code> to <code>false</code>
+              in a random fashion.
+            </p>
+            <p>
+              Make sure that you measure the correct thing: if you
+              compare an <code>if (true)</code> with a
+              <code>if (random())</code>, the latter will of course
+              run much more slowly, but mostly due to the fact that generating
+              random numbers requires many times more computing
+              power than loading a <code>true</code> value into a register.
+              The subtle effect of the failing branch prediction would be drowned.
+              In other words, both loops need to execute the same
+              instructions, but on different data.
+            </p>
+            <p>
+              To perform time measurements, you can use the following code:
+            </p>
+            #{show_source_editor}
+            <p>
+              In order to get meaningful results, make sure that the benchmarks
+              runs at least a few seconds: millisecond benchmarks
+              are meaningless because "background noise" (such as the OS
+              preempting your program) will affect timings too much.
+            </p>
+            <p>
+              Also be careful that the compiler does not optimise away your code:
+              if the compiler sees your computation is never used, it might
+              ommit your code altogether from the resulting executable.
+            </p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Find a way to measure the effect of memory alignment.
+            <p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Find a way to measure the effect of the cache.
+            <p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Find a way to measure the effect of reading sequentially vs reading randomly.
+            <p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Look up on how to let the compiler generate assembly from your C++ code.
+              Write a small function that gets called. Check in the outputted assembly that the
+              function does indeed get inlined.
+            <p>
+            <p>
+              Again, you'll have to make sure the compiler does not perform other optimisations
+              (e.g. dead code elimination or compile time execution).
+            </p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Write code with dead code and check that the generated assembly does
+              indeed not contain the dead code.
+            </p>
+          END
+        end
+      %>
+
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Show that abstractions are indeed zero cost, i.e. show
+              that using a helper class does not negatively impact performance.
+            </p>
+          END
+        end
+      %>
+
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>
