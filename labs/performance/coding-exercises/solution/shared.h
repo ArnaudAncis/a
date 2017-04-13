@@ -9,18 +9,6 @@
 long long measure_time(std::function<void()> function);
 
 template<typename T>
-std::vector<T> range(T from, T to)
-{
-    std::vector<T> result(to - from);
-
-    int index = 0;
-    for (T value = from; value != to; ++value)
-        result[index++] = value;
-
-    return result;
-}
-
-template<typename T>
 void shuffle(std::vector<T>& xs)
 {
     std::shuffle(xs.begin(), xs.end(), std::default_random_engine());
@@ -37,6 +25,18 @@ std::vector<T> create_vector(unsigned size, std::function<T(unsigned)> f)
     }
 
     return result;
+}
+
+template<typename T>
+std::vector<T> range(T from, T to)
+{
+    return create_vector<T>(to - from, [=](unsigned i) { return from + i; });    
+}
+
+template<typename T>
+std::vector<T> inverse_range(T from, T to)
+{
+    return create_vector<T>(to - from, [=](unsigned i) { return to - i - 1; });
 }
 
 #endif

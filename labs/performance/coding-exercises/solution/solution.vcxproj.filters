@@ -33,6 +33,18 @@
     <ClCompile Include="cache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tail-call-optimisation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inlining.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dead-code-elimination.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="compile-time-execution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="memory-alignment.h">
@@ -48,6 +60,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tail-call-optimisation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inlining.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dead-code-elimination.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compile-time-execution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

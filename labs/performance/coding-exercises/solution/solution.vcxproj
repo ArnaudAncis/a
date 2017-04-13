@@ -100,10 +100,13 @@
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,6 +142,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,17 +155,25 @@
   <ItemGroup>
     <ClCompile Include="branch-prediction.cpp" />
     <ClCompile Include="cache.cpp" />
+    <ClCompile Include="compile-time-execution.cpp" />
+    <ClCompile Include="dead-code-elimination.cpp" />
+    <ClCompile Include="inlining.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="memory-alignment.cpp" />
     <ClCompile Include="sequential-access.cpp" />
     <ClCompile Include="shared.cpp" />
+    <ClCompile Include="tail-call-optimisation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="branch-prediction.h" />
     <ClInclude Include="cache.h" />
+    <ClInclude Include="compile-time-execution.h" />
+    <ClInclude Include="dead-code-elimination.h" />
+    <ClInclude Include="inlining.h" />
     <ClInclude Include="memory-alignment.h" />
     <ClInclude Include="sequential-access.h" />
     <ClInclude Include="shared.h" />
+    <ClInclude Include="tail-call-optimisation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
