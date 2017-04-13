@@ -206,7 +206,12 @@
           <tr>
             <td></td>
             <td><%= topic('templates', 'Templates', handouts: true) %></td>
+            <td><%= lab('templates', 'Templates') %></td>
+          </tr> 
+          <tr>
             <td></td>
+            <td><%= topic('performance', 'Performance', handouts: true) %></td>
+            <td><%= lab('performance', 'Performance') %></td>
           </tr> 
          <tr>
             <td></td>
