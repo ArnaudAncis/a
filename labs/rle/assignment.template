@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <title>PVM Assignment</title>
-    <%= default_externals %>
-    <script src="<%= Settings::SHARED_URL %>/ace/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="<%= Settings::SHARED_URL %>/source-editor.js" type="text/javascript" charset="utf-8"></script>
-    <script src="<%= Settings::SHARED_URL %>/revealer.js" type="text/javascript" charset="utf-8"></script>
+    <%= stylesheets('pvm') %>
+    <%= scripts('jquery', 'jquery-ui', 'underscore', 'ace/ace', 'source-editor', 'revealer') %>
+
     
     <%= Html::Generation::Quiz.setup %>
     <style>
