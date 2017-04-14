@@ -15,8 +15,8 @@ int main()
     // Uncomment one test and run it
 
     //test_branch_prediction();
-    //test_cache();
-    test_sequential_access();
+    test_cache();
+    //test_sequential_access();
     //test_memory_alignment();
     //test_tail_call_optimisation();
     //test_inlining();

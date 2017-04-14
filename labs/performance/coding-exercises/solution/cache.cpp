@@ -2,77 +2,79 @@
 #include "shared.h"
 #include <iostream>
 #include <vector>
+#include <memory>
 
 
 namespace
 {
-    void process(std::vector<uint64_t>& ns, unsigned block_size, unsigned reads_per_item)
+    uint64_t process_block(uint64_t* p, unsigned block_size, uint64_t repeats, const std::vector<unsigned>& indices)
     {
         uint64_t result = 0;
 
-        if (ns.size() % block_size)
+        for (uint64_t repetition = 0; repetition != repeats; ++repetition)
         {
-            std::cerr << "invalid block size" << std::endl;
-            abort();
-        }
-
-        auto block_count = ns.size() / block_size;
-
-        for (unsigned block_index = 0; block_index < block_count; ++block_index)
-        {
-            unsigned start_i = block_index * block_size;
-
-            for (unsigned k = 0; k != reads_per_item * block_size; ++k)
+            for (auto i : indices)
             {
-                unsigned i = k * (k ^ 0x395A13C5);
-                i = (k ^ (97 * k)) * i;
-                i %= block_size;
-
-                result ^= ns[start_i + i];
+                result ^= p[i];
             }
         }
 
-        ns[0] = result;
+        return result;
     }
 
-    void test(std::vector<uint64_t>& ns, unsigned size, unsigned repeats_per_block)
+    void benchmark(uint64_t* p, unsigned block_size, uint64_t n_accesses)
     {
-        unsigned block_size = 8 * (1 << size);
-        auto duration = measure_time([&]() {process(ns, block_size, repeats_per_block);}) / repeats_per_block;
+        const uint64_t repeats = n_accesses / block_size + 1;
+        uint64_t result;
+        auto indices = range<unsigned>(0, block_size);
 
-        //std::cout
-        //    << "Block size " << block_size * sizeof(uint64_t) << " bytes"
-        //    << ", " << repeats_per_block << " repeats" 
-        //    << ", " << ns.size() / block_size << " blocks"
-        //    << " --> " << duration << "ms per repeat on average"
-        //    << std::endl;
+        double sequential_time = measure_time<uint64_t>([p, block_size, repeats, &indices]() { return process_block(p, block_size, repeats, indices); }, &result);
+        shuffle(indices);
+        double random_time = measure_time<uint64_t>([p, block_size, repeats, &indices]() { return process_block(p, block_size, repeats, indices); }, &result);
 
-        std::cout << size << "/" << duration << std::endl;
+        sequential_time /= block_size * repeats;
+        random_time /= block_size * repeats;
+        sequential_time *= 1000000;
+        random_time *= 1000000;
+
+        std::cout
+            << "Block size " << block_size
+            << ", " << repeats << " repeats"
+            << ", sequential access: " << sequential_time << "ns/item"
+            << std::endl;
+
+        std::cout
+            << "Block size " << block_size
+            << ", " << repeats << " repeats"
+            << ", random access: " << random_time << "ns/item"
+            << std::endl;
+
+        std::cout << std::endl;
     }
 }
 
 void test_cache()
 {
-    std::vector<uint64_t> ns(268435456);
-    std::vector<int> sizes = range(1, 20);
+    std::unique_ptr<uint64_t[]> buffer(new uint64_t[64 * 1024 * 1024]);
+    uint64_t* p = buffer.get();
+    
+    const uint64_t n_accesses = 1000000000;
 
-    for (auto i : sizes)
-    {
-        test(ns, i, 1);
-    }
-    std::cout << std::endl;
-    for (auto i : sizes)
-    {
-        test(ns, i, 2);
-    }std::cout << std::endl;
-
-    for (auto i : sizes)
-    {
-        test(ns, i, 4);
-    }
-    std::cout << std::endl;
-    for (auto i : sizes)
-    {
-        test(ns, i, 8);
-    }
+    benchmark(p, 32, n_accesses);
+    benchmark(p, 64, n_accesses);
+    benchmark(p, 128, n_accesses);
+    benchmark(p, 256, n_accesses);
+    benchmark(p, 512, n_accesses);
+    benchmark(p, 1024, n_accesses);
+    benchmark(p, 2 * 1024, n_accesses);
+    benchmark(p, 4 * 1024, n_accesses);
+    benchmark(p, 8 * 1024, n_accesses);
+    benchmark(p, 16 * 1024, n_accesses);
+    benchmark(p, 32 * 1024, n_accesses);
+    benchmark(p, 64 * 1024, n_accesses);
+    benchmark(p, 128 * 1024, n_accesses);
+    benchmark(p, 256 * 1024, n_accesses);
+    benchmark(p, 8 * 1024 * 1024, n_accesses);
+    benchmark(p, 16 * 1024 * 1024, n_accesses);
+    benchmark(p, 32 * 1024 * 1024, n_accesses);
 }
