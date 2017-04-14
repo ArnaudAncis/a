@@ -28,7 +28,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code>.</p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -50,7 +50,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code>.</p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -78,7 +78,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code>.</p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -106,7 +106,7 @@
            self.output = '???'
 
            <<-END
-             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code>.</p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -134,7 +134,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code>.</p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -161,7 +161,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code>.</p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -187,7 +187,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code>.</p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
