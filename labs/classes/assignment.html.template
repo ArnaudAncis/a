@@ -15,12 +15,6 @@
       <div class="center-vertically">Classes</div>
     </header>
     <div id="contents">
-      <div class="message">
-        When solving a coding exercise,
-        make sure that, prior to running the tests,
-        you set student as startup project,
-        otherwise the solution will be tested.
-      </div>
       <%=
          exercise(Lib::Interpretation) do
            self.source = <<-END
