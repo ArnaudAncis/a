@@ -5,66 +5,7 @@
     <title>PVM Assignment</title>
     <%= stylesheets('pvm') %>
     <%= scripts('jquery', 'jquery-ui', 'underscore', 'ace/ace', 'source-editor', 'revealer') %>
-
-
     <%= Html::Generation::Quiz.setup %>
-    <style>
-      #colours {
-        margin-left: auto;
-        margin-right: auto;
-        width: 50%;
-      }
-
-      #colours td:first-child {
-        color: #FFF;
-        text-align: center;
-      }
-
-      #colours td {
-        padding: 5px;
-      }
-
-      input {
-        width: 100px;
-      }
-
-      input.correct {
-        background: #AFA;
-      }
-
-      input.incorrect {
-        background: #FAA
-      }
-
-      .solution {
-        border: 1px solid black;
-        padding: 10px;
-        width: 25%;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-      }
-
-      @keyframes message-animation {
-        from { color: white; }
-        to { color: black; }
-      }
-
-      .message {
-        font-size: 1.2em;
-        font-weight: bold;
-        text-align: center;
-        width: 75%;
-        margin: 100px auto;
-        padding: 20px;
-        background: #F44;
-        box-shadow: 0px 0px 50px 30px #F44;
-        animation-name: message-animation;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-      }
-    </style>
   </head>
 
   <body>
@@ -72,15 +13,6 @@
       <div class="center-vertically">Pointers</div>
     </header>
     <div id="contents">
-      <div class="message">
-        <p style="font-size: 5em; text-align: center;">
-          READ THIS FIRST
-        </p>
-        <p>
-          Some code fragments below have undefined results. If you think this is the case for a particular
-          exercise, fill in <code>???</code>.
-        </p>
-      </div>
       <%=
          exercise(Lib::Interpretation) do
            self.source = <<-END
@@ -96,7 +28,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code?</p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -118,7 +50,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code?</p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -146,7 +78,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code?</p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -174,7 +106,7 @@
            self.output = '???'
 
            <<-END
-             <p>What is the output of the following code?</p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -202,7 +134,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code?</p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -229,7 +161,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code?</p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
@@ -255,7 +187,7 @@
            END
 
            <<-END
-             <p>What is the output of the following code?</p>
+             <p>What is the output of the following code? If the code does not compile, enter <code>DNC</code>. If the code leads to undefined behaviour, answer with <code>???</code></p>
              #{show_source_editor}
              #{if input then show_input else '' end}
              #{show_output_field}
