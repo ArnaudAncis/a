@@ -6,30 +6,6 @@
     <%= stylesheets('pvm') %>
     <%= scripts('jquery', 'jquery-ui', 'underscore', 'ace/ace', 'source-editor', 'revealer') %>
     <%= Html::Generation::Quiz.setup %>
-    <style>
-      table.type-inference {
-        margin: 10px auto;
-        border-collapse: collapse;
-      }
-
-      table.type-inference tr:nth-child(1) {
-        background: #AAA;
-      }
-
-      table.type-inference th {
-        min-width: 10em;
-      }
-
-      table.type-inference td {
-        text-align: center;
-        padding: 0.2em 1em;
-      }
-
-      table.type-inference input {
-        width: 10em;
-        text-align: center;
-      }
-    </style>
   </head>
 
   <body>
