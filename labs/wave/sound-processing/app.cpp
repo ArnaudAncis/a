@@ -67,8 +67,6 @@ int main()
     //auto samples = reinterpret_cast<const uint8_t*>(data) + 8;
 
 
-
-
     //auto wave = std::make_shared<SineWave>(1, 0.5, 440);
     //auto sped_up = std::make_shared<SpeederUpper>(wave, 1.0);
     //auto sampled = std::make_shared<WaveSamplingStream>(sped_up, 44100);
