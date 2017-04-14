@@ -41,23 +41,40 @@ std::shared_ptr<Stream> from_uint8(const uint8_t* buffer, unsigned n_samples)
     return std::make_shared<SampleStream>(samples);
 }
 
-std::unique_ptr<uint8_t[]> to_uint8(const Stream& stream)
+BytesBuffer to_bytes_buffer_8bit(const Stream& stream)
 {
-    std::unique_ptr<uint8_t[]> p(new uint8_t[stream.size()]);
+    BytesBuffer buffer(stream.size());
 
     for (unsigned i = 0; i != stream.size(); ++i)
     {
-        p[i] = (uint8_t)(stream[i] * 127.5 + 127.5);
+        buffer[i] = (uint8_t)(stream[i] * 127 + 127);
     }
 
-    return p;
+    return buffer;
 }
 
+BytesBuffer to_bytes_buffer_16bit(const Stream& stream)
+{
+    BytesBuffer buffer(stream.size() * 2);
+
+    for (unsigned i = 0; i != stream.size(); ++i)
+    {
+        auto sample = stream[i];
+        int16_t sample_as_signed = (int16_t) (sample * 32767);
+        uint16_t& sample_as_unsigned = *reinterpret_cast<uint16_t*>(&sample_as_signed);
+        byte lower = sample_as_unsigned & 0x00FF;
+        byte upper = sample_as_unsigned >> 8;
+        buffer[2 * i] = lower;
+        buffer[2 * i + 1] = upper;
+    }
+
+    return buffer;
+}
 
 
 int main()
 {
-    read_wave_file("e:/temp/input.wav");
+    // read_wave_file("e:/temp/input.wav");
     
 
     //auto riff = find_chunk<RIFF_CHUNK>(buffer.get());
@@ -67,14 +84,22 @@ int main()
     //auto samples = reinterpret_cast<const uint8_t*>(data) + 8;
 
 
-    //auto wave = std::make_shared<SineWave>(1, 0.5, 440);
+    auto wave = std::make_shared<SineWave>(1, 0.9, 440);
     //auto sped_up = std::make_shared<SpeederUpper>(wave, 1.0);
-    //auto sampled = std::make_shared<WaveSamplingStream>(sped_up, 44100);
+    auto sampled = std::make_shared<WaveSamplingStream>(wave, 44100);
 
-    //// auto stream = from_uint8(samples, n_samples);
-    //auto output_samples = to_uint8(*sampled);
+    // auto stream = from_uint8(samples, n_samples);
+    auto output_samples = to_bytes_buffer_8bit(*sampled);
 
-    //write_wave("e:/temp/output.wav", output_samples.get(), sampled->size());
 
-    //std::cout << "Done!" << std::endl;
+    WAVE_DATA wave_data;
+    wave_data.bits_per_sample = 8;
+    wave_data.n_channels = 1;
+    wave_data.sample_rate = 44100;
+    wave_data.bytes = output_samples;
+
+    write_wave_file("e:/temp/output.wav", wave_data);
+    // write_wave("e:/temp/output.wav", output_samples.get(), sampled->size());
+
+    std::cout << "Done!" << std::endl;
 }

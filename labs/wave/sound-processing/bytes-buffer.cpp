@@ -25,22 +25,22 @@ BytesBuffer read_buffer_from_file(const std::string& path)
     std::ifstream in(path, std::ios::binary | std::ios::ate);
 
     // Get size of file
-    auto size = in.tellg();
+    unsigned size = (unsigned) in.tellg();
 
     // Seek to start of file
     in.seekg(0, std::ios::beg);
 
     // Create buffer
-    std::shared_ptr<uint8_t> bytes(new uint8_t[(unsigned)size], std::default_delete<uint8_t[]>());
+    BytesBuffer buffer(size);
 
     // Read file
-    in.read(reinterpret_cast<char*>(bytes.get()), size);
+    in.read(reinterpret_cast<char*>(buffer.data()), size);
 
     // Return buffer
-    return BytesBuffer(bytes, (unsigned) size);
+    return buffer;
 }
 
-uint8_t BytesBuffer::operator [](unsigned index) const
+byte& BytesBuffer::operator [](unsigned index)
 {
     if (index >= m_size)
     {
@@ -51,3 +51,24 @@ uint8_t BytesBuffer::operator [](unsigned index) const
         return m_data.get()[m_start + index];
     }
 }
+
+byte BytesBuffer::operator [](unsigned index) const
+{
+    if (index >= m_size)
+    {
+        throw std::runtime_error("index out of bounds");
+    }
+    else
+    {
+        return m_data.get()[m_start + index];
+    }
+}
+
+//BytesBuffer& BytesBuffer::operator =(const BytesBuffer& buffer)
+//{
+//    this->m_data = buffer.m_data;
+//    this->m_size = buffer.m_size;
+//    this->m_start = buffer.m_start;
+//
+//    return *this;
+//}

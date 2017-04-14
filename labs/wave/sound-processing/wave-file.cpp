@@ -1,5 +1,6 @@
 #include "wave-file.h"
 #include "bytes-buffer.h"
+#include <iostream>
 #include <fstream>
 #include <cstdint>
 #include <memory>
@@ -63,7 +64,7 @@ namespace
         for (auto& chunk : chunks)
         {
             auto header = chunk.reinterpret<CHUNK_HEADER>();
-            
+
             if (header->chunk_id == FMT_CHUNK_ID)
             {
                 return chunk.reinterpret<FMT_CHUNK>();
@@ -112,19 +113,37 @@ void read_wave_file(const std::string& filename)
     auto fmt = *fmt_chunk;
 }
 
-
-void write_wave(const std::string& filename, const uint8_t* buffer, unsigned size)
+void write_wave_file(const std::string& filename, const WAVE_DATA& wave_data)
 {
-    //std::ofstream out(filename, std::ios::binary);
+    std::ofstream out(filename, std::ios::binary);
+    
+    if (!out)
+    {
+        std::cerr << "Could not open " << filename << " for writing" << std::endl;
+        abort();
+    }
 
-    //RIFF_CHUNK riff{ chunk_id<RIFF_CHUNK>(), 4 + sizeof(FMT_CHUNK) + sizeof(DATA_CHUNK) + size, 0x45564157 };
-    //out.write(reinterpret_cast<const char*>(&riff), sizeof(RIFF_CHUNK));
+    RIFF_CHUNK riff;
+    riff.header.chunk_id = RIFF_CHUNK_ID;
+    riff.header.chunk_size = 4 + sizeof(FMT_CHUNK) + sizeof(CHUNK_HEADER) + wave_data.bytes.size();
+    riff.format = 0x45564157;
+    out.write(reinterpret_cast<const char*>(&riff), sizeof(RIFF_CHUNK));
 
-    //FMT_CHUNK fmt{ chunk_id<FMT_CHUNK>(), sizeof(FMT_CHUNK) - 8, 1, 1, 44100, 44100, 1, 8 };
-    //out.write(reinterpret_cast<const char*>(&fmt), sizeof(FMT_CHUNK));
+    FMT_CHUNK fmt;
+    fmt.header.chunk_id = FMT_CHUNK_ID;
+    fmt.header.chunk_size = sizeof(FMT_CHUNK) - 8;
+    fmt.audio_format = 1;
+    fmt.channels = wave_data.n_channels;
+    fmt.sample_rate = wave_data.sample_rate;
+    fmt.byte_rate = wave_data.n_channels * wave_data.sample_rate * wave_data.bits_per_sample / 8;
+    fmt.block_align = wave_data.n_channels * wave_data.bits_per_sample / 8;
+    fmt.bits_per_sample = (uint16_t)wave_data.bits_per_sample;
+    out.write(reinterpret_cast<const char*>(&fmt), sizeof(FMT_CHUNK));
 
-    //DATA_CHUNK data{ chunk_id<DATA_CHUNK>(), size };
-    //out.write(reinterpret_cast<const char*>(&data), sizeof(DATA_CHUNK));
+    CHUNK_HEADER data;
+    data.chunk_id = DATA_CHUNK_ID;
+    data.chunk_size = wave_data.bytes.size();
+    out.write(reinterpret_cast<const char*>(&data), sizeof(CHUNK_HEADER));
 
-    //out.write(reinterpret_cast<const char*>(buffer), size);
+    out.write(reinterpret_cast<const char*>(wave_data.bytes.data()), wave_data.bytes.size());
 }

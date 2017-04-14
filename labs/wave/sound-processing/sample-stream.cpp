@@ -16,7 +16,7 @@ SampleStream::SampleStream(const std::vector<double>&& samples)
 
 unsigned SampleStream::size() const
 {
-    return samples.size();
+    return (unsigned) samples.size();
 }
 
 double SampleStream::operator [](unsigned index) const
