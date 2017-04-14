@@ -13,9 +13,6 @@
       <div class="center-vertically">Declarations</div>
     </header>
     <div id="contents">
-      <div class="message" title="You better be reading this!">
-        Deduce what the following code does. Look things up online if necessary.
-      </div>
       <%=
          interpretation(<<-END)
            #include <iostream>
