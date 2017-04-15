@@ -1,7 +1,7 @@
 #ifndef WAV_FILE_H
 #define WAV_FILE_H
 
-#include "stream.h"
+#include "streams/stream.h"
 #include <memory>
 #include <cstdint>
 #include <string>

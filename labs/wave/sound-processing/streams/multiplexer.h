@@ -1,7 +1,7 @@
 #ifndef MULTIPLEXER_H
 #define MULTIPLEXER_H
 
-#include "wave.h"
+#include "waves/wave.h"
 #include <iostream>
 #include <memory>
 

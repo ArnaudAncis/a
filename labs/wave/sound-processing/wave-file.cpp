@@ -1,6 +1,6 @@
 #include "wave-file.h"
 #include "streams/bytes-buffer.h"
-#include "data-stream.h"
+#include "streams/data-stream.h"
 #include <iostream>
 #include <fstream>
 #include <cstdint>

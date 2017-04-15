@@ -1,4 +1,4 @@
-#include "interpolator.h"
+#include "waves/interpolator.h"
 #include <assert.h>
 
 

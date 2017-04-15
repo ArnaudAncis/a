@@ -1,4 +1,4 @@
-#include "speeder-upper.h"
+#include "waves/speeder-upper.h"
 
 
 namespace

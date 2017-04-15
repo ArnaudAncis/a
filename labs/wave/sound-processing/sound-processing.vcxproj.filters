@@ -18,46 +18,10 @@
     <ClCompile Include="app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sine-wave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sample-stream.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="wave-sampling-stream.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="wave-file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demultiplexer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="data-stream.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="interpolator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="speeder-upper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="wave-concatenation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="zero-wave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="composer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="triangle-wave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="wave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="normaliser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="streams\bytes-buffer.cpp">
@@ -66,66 +30,93 @@
     <ClCompile Include="streams\conversions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="waves\interpolator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waves\wave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waves\speeder-upper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\normaliser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\data-stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waves\sine-wave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waves\zero-wave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waves\wave-concatenation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waves\triangle-wave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waves\wave-sampling-stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="wave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sample-stream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wave-sampling-stream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sine-wave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="wave-file.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="demultiplexer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="data-stream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="interpolator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="speeder-upper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="note.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="wave-concatenation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="zero-wave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="composer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="triangle-wave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="normaliser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Catch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="multiplexer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="streams\bytes-buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="streams\conversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\demultiplexer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waves\interpolator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waves\wave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waves\speeder-upper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\normaliser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\data-stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\multiplexer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waves\sine-wave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waves\zero-wave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waves\wave-concatenation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waves\wave-sampling-stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waves\triangle-wave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

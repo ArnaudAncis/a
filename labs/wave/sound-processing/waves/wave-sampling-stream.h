@@ -1,8 +1,8 @@
 #ifndef WAVE_SAMPLING_STREAM_H
 #define WAVE_SAMPLING_STREAM_H
 
-#include "wave.h"
-#include "stream.h"
+#include "waves/wave.h"
+#include "streams/stream.h"
 #include <memory>
 
 

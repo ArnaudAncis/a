@@ -2,7 +2,7 @@
 #define DATA_STREAM_H
 
 #include "streams/bytes-buffer.h"
-#include "stream.h"
+#include "streams/stream.h"
 #include <cstdint>
 
 

@@ -1,4 +1,4 @@
-#include "triangle-wave.h"
+#include "waves/triangle-wave.h"
 #include <assert.h>
 
 

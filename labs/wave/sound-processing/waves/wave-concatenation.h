@@ -1,7 +1,7 @@
 #ifndef WAVE_CONCATENATION_H
 #define WAVE_CONCATENATION_H
 
-#include "wave.h"
+#include "waves/wave.h"
 #include <vector>
 
 

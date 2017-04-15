@@ -1,7 +1,7 @@
 #ifndef COMPOSER_H
 #define COMPOSER_H
 
-#include "wave.h"
+#include "waves/wave.h"
 #include "note.h"
 #include <vector>
 

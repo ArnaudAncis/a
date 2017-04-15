@@ -1,7 +1,7 @@
 #ifndef NORMALISER_H
 #define NORMALISER_H
 
-#include "stream.h"
+#include "streams/stream.h"
 #include <memory>
 
 

@@ -1,8 +1,8 @@
 #ifndef INTERPOLATOR_H
 #define INTERPOLATOR_H
 
-#include "stream.h"
-#include "wave.h"
+#include "streams/stream.h"
+#include "waves/wave.h"
 #include <memory>
 
 

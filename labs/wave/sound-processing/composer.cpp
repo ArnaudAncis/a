@@ -1,8 +1,8 @@
 #include "composer.h"
-#include "zero-wave.h"
-#include "sine-wave.h"
-#include "triangle-wave.h"
-#include "wave-concatenation.h"
+#include "waves/zero-wave.h"
+#include "waves/sine-wave.h"
+#include "waves/triangle-wave.h"
+#include "waves/wave-concatenation.h"
 
 
 Composer::Composer(double tempo) : m_beat_duration(60.0 / tempo), m_octave(4), m_volume(1) { }

@@ -1,4 +1,4 @@
-#include "sine-wave.h"
+#include "waves/sine-wave.h"
 #include <math.h>
 
 

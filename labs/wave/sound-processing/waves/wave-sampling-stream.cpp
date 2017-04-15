@@ -1,4 +1,4 @@
-#include "wave-sampling-stream.h"
+#include "waves/wave-sampling-stream.h"
 
 
 namespace
