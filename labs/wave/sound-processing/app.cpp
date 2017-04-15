@@ -1,3 +1,4 @@
+#ifndef TEST_BUILD
 #include "streams/bytes-buffer.h"
 #include "streams/normaliser.h"
 #include "streams/conversions.h"
@@ -106,3 +107,4 @@ int main()
 
     std::cout << "Done!" << std::endl;
 }
+#endif
