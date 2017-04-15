@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -148,16 +148,32 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="bytes-buffer.cpp" />
+    <ClCompile Include="data-stream.cpp" />
+    <ClCompile Include="demultiplexer.cpp" />
+    <ClCompile Include="double-to-int16-converter.cpp" />
+    <ClCompile Include="int16-stream-builder.cpp" />
+    <ClCompile Include="int16-stream-splitter.cpp" />
+    <ClCompile Include="int16-to-double-converter.cpp" />
+    <ClCompile Include="interpolator.cpp" />
     <ClCompile Include="sample-stream.cpp" />
     <ClCompile Include="sine-wave.cpp" />
+    <ClCompile Include="speeder-upper.cpp" />
     <ClCompile Include="wave-file.cpp" />
     <ClCompile Include="wave-addition.cpp" />
     <ClCompile Include="wave-sampling-stream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bytes-buffer.h" />
+    <ClInclude Include="data-stream.h" />
+    <ClInclude Include="demultiplexer.h" />
+    <ClInclude Include="double-to-int16-converter.h" />
+    <ClInclude Include="int16-stream-builder.h" />
+    <ClInclude Include="int16-stream-splitter.h" />
+    <ClInclude Include="int16-to-double-converter.h" />
+    <ClInclude Include="interpolator.h" />
     <ClInclude Include="sample-stream.h" />
     <ClInclude Include="sine-wave.h" />
+    <ClInclude Include="speeder-upper.h" />
     <ClInclude Include="stream.h" />
     <ClInclude Include="wave-file.h" />
     <ClInclude Include="wave-addition.h" />

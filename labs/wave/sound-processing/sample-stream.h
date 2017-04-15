@@ -5,14 +5,13 @@
 #include <vector>
 
 
-class SampleStream : public Stream
+class SampleStream : public Stream<double>
 {
 private:
     std::vector<double> samples;
 
 public:
     SampleStream(const std::vector<double>& samples);
-
     SampleStream(const std::vector<double>&& samples);
 
     unsigned size() const override;

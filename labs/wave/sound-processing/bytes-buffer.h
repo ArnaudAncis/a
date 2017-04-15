@@ -35,8 +35,6 @@ private:
     unsigned m_start, m_size;
 
 public:
-    BytesBuffer() : BytesBuffer(0) { }
-
     BytesBuffer(unsigned size)
         : m_data(new byte[(unsigned)size], std::default_delete<byte[]>()), m_start(0), m_size(size) { }
 

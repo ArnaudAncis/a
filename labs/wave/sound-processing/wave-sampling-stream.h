@@ -6,18 +6,6 @@
 #include <memory>
 
 
-class WaveSamplingStream : public Stream
-{
-private:
-    std::shared_ptr<Wave> m_wave;
-    unsigned m_sampling_rate;
-
-public:
-    WaveSamplingStream(std::shared_ptr<Wave> wave, unsigned sampling_rate);
-
-    unsigned size() const override;
-
-    double operator [](unsigned index) const override;
-};
+std::shared_ptr<Stream<double>> sample_wave(std::shared_ptr<Wave>, unsigned);
 
 #endif

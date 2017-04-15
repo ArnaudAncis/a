@@ -1,5 +1,6 @@
 #include "wave-file.h"
 #include "bytes-buffer.h"
+#include "data-stream.h"
 #include <iostream>
 #include <fstream>
 #include <cstdint>
@@ -90,11 +91,11 @@ namespace
     }
 }
 
-
-void read_wave_file(const std::string& filename)
+void read_wave_file(const std::string& filename, WAVE_DATA* wave_data)
 {
     auto buffer = read_buffer_from_file(filename);
     auto riff = buffer.template reinterpret<RIFF_CHUNK>();
+    auto f = *riff;
 
     if (riff->header.chunk_id != RIFF_CHUNK_ID)
     {
@@ -110,7 +111,11 @@ void read_wave_file(const std::string& filename)
     auto fmt_chunk = find_fmt_chunk(chunks);
     auto data = find_data(chunks);
 
-    auto fmt = *fmt_chunk;
+    // Fill in wave data
+    wave_data->bits_per_sample = fmt_chunk->bits_per_sample;
+    wave_data->n_channels = fmt_chunk->channels;
+    wave_data->sample_rate = fmt_chunk->sample_rate;
+    wave_data->stream = std::make_shared<DataStream>(data);
 }
 
 void write_wave_file(const std::string& filename, const WAVE_DATA& wave_data)
@@ -125,7 +130,7 @@ void write_wave_file(const std::string& filename, const WAVE_DATA& wave_data)
 
     RIFF_CHUNK riff;
     riff.header.chunk_id = RIFF_CHUNK_ID;
-    riff.header.chunk_size = 4 + sizeof(FMT_CHUNK) + sizeof(CHUNK_HEADER) + wave_data.bytes.size();
+    riff.header.chunk_size = 4 + sizeof(FMT_CHUNK) + sizeof(CHUNK_HEADER) + wave_data.stream->size();
     riff.format = 0x45564157;
     out.write(reinterpret_cast<const char*>(&riff), sizeof(RIFF_CHUNK));
 
@@ -142,8 +147,13 @@ void write_wave_file(const std::string& filename, const WAVE_DATA& wave_data)
 
     CHUNK_HEADER data;
     data.chunk_id = DATA_CHUNK_ID;
-    data.chunk_size = wave_data.bytes.size();
+    data.chunk_size = wave_data.stream->size();
     out.write(reinterpret_cast<const char*>(&data), sizeof(CHUNK_HEADER));
 
-    out.write(reinterpret_cast<const char*>(wave_data.bytes.data()), wave_data.bytes.size());
+    std::unique_ptr<uint8_t[]> buffer(new uint8_t[wave_data.stream->size()]);
+    for (unsigned i = 0; i != wave_data.stream->size(); ++i)
+    {
+        buffer[i] = (*wave_data.stream)[i];
+    }
+    out.write(reinterpret_cast<const char*>(buffer.get()), wave_data.stream->size());
 }

@@ -1,4 +1,5 @@
 #include "bytes-buffer.h"
+#include <iostream>
 #include <fstream>
 
 
@@ -23,6 +24,12 @@ BytesBuffer read_buffer_from_file(const std::string& path)
 {
     // Open file in binary mode, start at end position
     std::ifstream in(path, std::ios::binary | std::ios::ate);
+
+    if (!in)
+    {
+        std::cerr << "Could not open " << path << std::endl;
+        abort();
+    }
 
     // Get size of file
     unsigned size = (unsigned) in.tellg();
