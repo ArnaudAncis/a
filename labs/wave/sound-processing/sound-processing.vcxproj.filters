@@ -24,9 +24,6 @@
     <ClCompile Include="sample-stream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wave-addition.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="wave-sampling-stream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -66,6 +63,15 @@
     <ClCompile Include="zero-wave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="composer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle-wave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave.h">
@@ -81,9 +87,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sine-wave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wave-addition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="wave-file.h">
@@ -123,6 +126,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="zero-wave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="composer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle-wave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

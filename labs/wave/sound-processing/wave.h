@@ -22,4 +22,9 @@ public:
     double operator [](double t) const { return (*m_function)[t]; }
 };
 
+Wave operator +(Wave, Wave);
+Wave operator *(Wave, double);
+Wave operator *(double, Wave);
+Wave operator >> (Wave, double);
+
 #endif

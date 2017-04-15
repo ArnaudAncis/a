@@ -7,4 +7,6 @@
 
 Wave concatenate(const std::vector<Wave>&);
 
+
+
 #endif

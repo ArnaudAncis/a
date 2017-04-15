@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="bytes-buffer.cpp" />
+    <ClCompile Include="composer.cpp" />
     <ClCompile Include="data-stream.cpp" />
     <ClCompile Include="demultiplexer.cpp" />
     <ClCompile Include="double-to-int16-converter.cpp" />
@@ -158,14 +159,17 @@
     <ClCompile Include="sample-stream.cpp" />
     <ClCompile Include="sine-wave.cpp" />
     <ClCompile Include="speeder-upper.cpp" />
+    <ClCompile Include="triangle-wave.cpp" />
     <ClCompile Include="wave-concatenation.cpp" />
     <ClCompile Include="wave-file.cpp" />
-    <ClCompile Include="wave-addition.cpp" />
     <ClCompile Include="wave-sampling-stream.cpp" />
+    <ClCompile Include="wave.cpp" />
     <ClCompile Include="zero-wave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bytes-buffer.h" />
+    <ClInclude Include="composer.h" />
+    <ClInclude Include="triangle-wave.h" />
     <ClInclude Include="zero-wave.h" />
     <ClInclude Include="data-stream.h" />
     <ClInclude Include="demultiplexer.h" />
@@ -181,7 +185,6 @@
     <ClInclude Include="stream.h" />
     <ClInclude Include="wave-concatenation.h" />
     <ClInclude Include="wave-file.h" />
-    <ClInclude Include="wave-addition.h" />
     <ClInclude Include="wave-sampling-stream.h" />
     <ClInclude Include="wave.h" />
   </ItemGroup>
