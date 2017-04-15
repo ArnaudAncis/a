@@ -153,7 +153,6 @@
     <ClCompile Include="composer.cpp" />
     <ClCompile Include="data-stream.cpp" />
     <ClCompile Include="demultiplexer.cpp" />
-    <ClCompile Include="int16-to-double-converter.cpp" />
     <ClCompile Include="interpolator.cpp" />
     <ClCompile Include="normaliser.cpp" />
     <ClCompile Include="sample-stream.cpp" />
@@ -178,7 +177,6 @@
     <ClInclude Include="zero-wave.h" />
     <ClInclude Include="data-stream.h" />
     <ClInclude Include="demultiplexer.h" />
-    <ClInclude Include="int16-to-double-converter.h" />
     <ClInclude Include="interpolator.h" />
     <ClInclude Include="note.h" />
     <ClInclude Include="sample-stream.h" />

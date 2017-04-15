@@ -33,9 +33,6 @@
     <ClCompile Include="demultiplexer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="int16-to-double-converter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="data-stream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -90,9 +87,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="demultiplexer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="int16-to-double-converter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="data-stream.h">

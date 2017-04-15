@@ -5,7 +5,6 @@
 #include "sample-stream.h"
 #include "wave-file.h"
 #include "streams/conversions.h"
-#include "int16-to-double-converter.h"
 #include "interpolator.h"
 #include "speeder-upper.h"
 #include "zero-wave.h"
@@ -18,7 +17,6 @@
 #include <vector>
 #include <memory>
 #include <assert.h>
-
 
 
 Wave reverb(Wave wave, unsigned n_reverberations, double factor, double delay)

@@ -76,6 +76,25 @@ namespace
             return index % 2 == 0 ? lower : upper;
         }
     };
+
+    class Int16ToDoubleConverter : public Stream<double>
+    {
+        std::shared_ptr<Stream<int16_t>> m_stream;
+
+    public:
+        Int16ToDoubleConverter(std::shared_ptr<Stream<int16_t>> stream)
+            : m_stream(stream) { }
+
+        unsigned size() const override
+        {
+            return m_stream->size();
+        }
+
+        double operator [](unsigned index) const override
+        {
+            return (*m_stream)[index] / 32767.0;
+        }
+    };
 }
 
 std::shared_ptr<Stream<int16_t>> convert_double_to_int16_stream(std::shared_ptr<Stream<double>> stream)
@@ -93,3 +112,7 @@ std::shared_ptr<Stream<uint8_t>> convert_int16_to_uint8_stream(std::shared_ptr<S
     return std::make_shared<Int16ToUint8Converter>(stream);
 }
 
+std::shared_ptr<Stream<double>> convert_int16_to_double_stream(std::shared_ptr<Stream<int16_t>> stream)
+{
+    return std::make_shared<Int16ToDoubleConverter>(stream);
+}
