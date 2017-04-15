@@ -16,7 +16,7 @@ Composer& Composer::rest(double beats)
 
 Composer& Composer::add(Note note, double beats)
 {
-    auto wave = triangle_wave(beats * m_beat_duration, m_volume, note.frequency);
+    auto wave = sine_wave(beats * m_beat_duration, m_volume, note.frequency);
     m_waves.push_back(wave);
 
     return *this;

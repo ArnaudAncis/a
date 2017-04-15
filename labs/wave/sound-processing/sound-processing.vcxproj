@@ -103,6 +103,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +138,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,12 +149,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
-    <ClCompile Include="bytes-buffer.cpp" />
+    <ClCompile Include="streams\bytes-buffer.cpp" />
     <ClCompile Include="composer.cpp" />
     <ClCompile Include="data-stream.cpp" />
     <ClCompile Include="demultiplexer.cpp" />
-    <ClCompile Include="double-to-int16-converter.cpp" />
-    <ClCompile Include="int16-stream-builder.cpp" />
     <ClCompile Include="int16-stream-splitter.cpp" />
     <ClCompile Include="int16-to-double-converter.cpp" />
     <ClCompile Include="interpolator.cpp" />
@@ -160,6 +160,7 @@
     <ClCompile Include="sample-stream.cpp" />
     <ClCompile Include="sine-wave.cpp" />
     <ClCompile Include="speeder-upper.cpp" />
+    <ClCompile Include="streams\conversions.cpp" />
     <ClCompile Include="triangle-wave.cpp" />
     <ClCompile Include="wave-concatenation.cpp" />
     <ClCompile Include="wave-file.cpp" />
@@ -168,16 +169,16 @@
     <ClCompile Include="zero-wave.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bytes-buffer.h" />
+    <ClInclude Include="streams\bytes-buffer.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="composer.h" />
+    <ClInclude Include="multiplexer.h" />
     <ClInclude Include="normaliser.h" />
+    <ClInclude Include="streams\conversions.h" />
     <ClInclude Include="triangle-wave.h" />
     <ClInclude Include="zero-wave.h" />
     <ClInclude Include="data-stream.h" />
     <ClInclude Include="demultiplexer.h" />
-    <ClInclude Include="double-to-int16-converter.h" />
-    <ClInclude Include="int16-stream-builder.h" />
     <ClInclude Include="int16-stream-splitter.h" />
     <ClInclude Include="int16-to-double-converter.h" />
     <ClInclude Include="interpolator.h" />

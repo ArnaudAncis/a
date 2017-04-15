@@ -30,19 +30,10 @@
     <ClCompile Include="wave-file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="bytes-buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="demultiplexer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="int16-stream-builder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="int16-stream-splitter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="double-to-int16-converter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="int16-to-double-converter.cpp">
@@ -75,6 +66,12 @@
     <ClCompile Include="normaliser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="streams\bytes-buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\conversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave.h">
@@ -95,19 +92,10 @@
     <ClInclude Include="wave-file.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bytes-buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="demultiplexer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="int16-stream-builder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="int16-stream-splitter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="double-to-int16-converter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="int16-to-double-converter.h">
@@ -141,6 +129,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Catch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="multiplexer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\bytes-buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\conversions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #include "wave-file.h"
-#include "bytes-buffer.h"
+#include "streams/bytes-buffer.h"
 #include "data-stream.h"
 #include <iostream>
 #include <fstream>
