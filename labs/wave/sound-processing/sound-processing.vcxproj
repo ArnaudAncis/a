@@ -169,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bytes-buffer.h" />
+    <ClInclude Include="Catch.h" />
     <ClInclude Include="composer.h" />
     <ClInclude Include="normaliser.h" />
     <ClInclude Include="triangle-wave.h" />
