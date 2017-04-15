@@ -6,7 +6,6 @@
 #include "wave-file.h"
 #include "streams/conversions.h"
 #include "int16-to-double-converter.h"
-#include "int16-stream-splitter.h"
 #include "interpolator.h"
 #include "speeder-upper.h"
 #include "zero-wave.h"
