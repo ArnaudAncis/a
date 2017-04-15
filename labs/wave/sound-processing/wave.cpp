@@ -15,12 +15,15 @@ namespace
 
         double length() const override
         {
-            return std::min(m_first.length(), m_second.length());
+            return std::max(m_first.length(), m_second.length());
         }
 
         double operator [](double t) const override
         {
-            return (m_first[t] + m_second[t]);
+            double a = t < m_first.length() ? m_first[t] : 0;
+            double b = t < m_second.length() ? m_second[t] : 0;
+
+            return a + b;
         }
     };
 
@@ -71,6 +74,11 @@ Wave operator +(Wave a, Wave b)
     return Wave(std::make_shared<WaveAdditionFunction>(a, b));
 }
 
+Wave& operator +=(Wave a, Wave b)
+{
+    return a = a + b;
+}
+
 Wave operator *(Wave wave, double factor)
 {
     return Wave(std::make_shared<WaveMultiplicationFunction>(wave, factor));
@@ -81,7 +89,27 @@ Wave operator *(double factor, Wave wave)
     return wave * factor;
 }
 
-Wave operator >> (Wave wave, double delay)
+Wave& operator *=(Wave wave, double factor)
+{
+    return wave = wave * factor;
+}
+
+Wave operator /(Wave wave, double factor)
+{
+    return wave * (1.0 / factor);
+}
+
+Wave& operator /=(Wave wave, double factor)
+{
+    return wave = wave / factor;
+}
+
+Wave operator >>(Wave wave, double delay)
 {
     return Wave(std::make_shared<WaveDelayerFunction>(wave, delay));
+}
+
+Wave& operator >>=(Wave wave, double delay)
+{
+    return wave = (wave >> delay);
 }

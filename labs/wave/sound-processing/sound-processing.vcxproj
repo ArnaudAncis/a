@@ -156,6 +156,7 @@
     <ClCompile Include="int16-stream-splitter.cpp" />
     <ClCompile Include="int16-to-double-converter.cpp" />
     <ClCompile Include="interpolator.cpp" />
+    <ClCompile Include="normaliser.cpp" />
     <ClCompile Include="sample-stream.cpp" />
     <ClCompile Include="sine-wave.cpp" />
     <ClCompile Include="speeder-upper.cpp" />
@@ -169,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="bytes-buffer.h" />
     <ClInclude Include="composer.h" />
+    <ClInclude Include="normaliser.h" />
     <ClInclude Include="triangle-wave.h" />
     <ClInclude Include="zero-wave.h" />
     <ClInclude Include="data-stream.h" />

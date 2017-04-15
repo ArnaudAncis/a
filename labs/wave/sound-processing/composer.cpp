@@ -5,7 +5,7 @@
 #include "wave-concatenation.h"
 
 
-Composer::Composer(double tempo) : m_beat_duration(60.0 / tempo), m_octave(4), m_volume(0.5) { }
+Composer::Composer(double tempo) : m_beat_duration(60.0 / tempo), m_octave(4), m_volume(1) { }
 
 Composer& Composer::rest(double beats)
 {

@@ -1,4 +1,5 @@
 #include "double-to-int16-converter.h"
+#include <assert.h>
 
 
 namespace
@@ -18,6 +19,11 @@ namespace
 
         int16_t operator [](unsigned index) const override
         {
+            double value = (*m_stream)[index];
+
+            assert(-1 <= value);
+            assert(value <= 1);
+
             return (int16_t)((*m_stream)[index] * 32767);
         }
     };

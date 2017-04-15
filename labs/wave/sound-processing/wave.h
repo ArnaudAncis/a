@@ -23,8 +23,16 @@ public:
 };
 
 Wave operator +(Wave, Wave);
+Wave& operator +=(Wave, Wave);
+
 Wave operator *(Wave, double);
 Wave operator *(double, Wave);
-Wave operator >> (Wave, double);
+Wave& operator *=(Wave, double);
+
+Wave operator /(Wave, double);
+Wave& operator /=(Wave, double);
+
+Wave operator >>(Wave, double);
+Wave& operator >>=(Wave, double);
 
 #endif
