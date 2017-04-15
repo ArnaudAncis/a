@@ -6,6 +6,6 @@
 #include <memory>
 
 
-std::shared_ptr<Stream<double>> sample_wave(std::shared_ptr<Wave>, unsigned);
+std::shared_ptr<Stream<double>> sample_wave(Wave, unsigned);
 
 #endif

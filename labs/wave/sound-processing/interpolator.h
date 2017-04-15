@@ -6,6 +6,6 @@
 #include <memory>
 
 
-std::shared_ptr<Wave> interpolate(std::shared_ptr<Stream<double>>, unsigned);
+Wave interpolate(std::shared_ptr<Stream<double>>, unsigned);
 
 #endif

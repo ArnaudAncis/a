@@ -2,20 +2,9 @@
 #define SINE_WAVE_H
 
 #include "wave.h"
+#include <memory>
 
 
-class SineWave : public Wave
-{
-private:
-    double m_length;
-    double m_amplitude;
-    double m_frequency;
-
-public:
-    SineWave(double length, double amplitude, double frequency);
-
-    double length() const override;
-    double operator [](double t) const override;
-};
+Wave sine_wave(double length, double amplitude, double frequency);
 
 #endif

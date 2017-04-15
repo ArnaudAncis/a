@@ -60,6 +60,12 @@
     <ClCompile Include="speeder-upper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="wave-concatenation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zero-wave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave.h">
@@ -108,6 +114,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="speeder-upper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="note.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wave-concatenation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zero-wave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -158,12 +158,15 @@
     <ClCompile Include="sample-stream.cpp" />
     <ClCompile Include="sine-wave.cpp" />
     <ClCompile Include="speeder-upper.cpp" />
+    <ClCompile Include="wave-concatenation.cpp" />
     <ClCompile Include="wave-file.cpp" />
     <ClCompile Include="wave-addition.cpp" />
     <ClCompile Include="wave-sampling-stream.cpp" />
+    <ClCompile Include="zero-wave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bytes-buffer.h" />
+    <ClInclude Include="zero-wave.h" />
     <ClInclude Include="data-stream.h" />
     <ClInclude Include="demultiplexer.h" />
     <ClInclude Include="double-to-int16-converter.h" />
@@ -171,10 +174,12 @@
     <ClInclude Include="int16-stream-splitter.h" />
     <ClInclude Include="int16-to-double-converter.h" />
     <ClInclude Include="interpolator.h" />
+    <ClInclude Include="note.h" />
     <ClInclude Include="sample-stream.h" />
     <ClInclude Include="sine-wave.h" />
     <ClInclude Include="speeder-upper.h" />
     <ClInclude Include="stream.h" />
+    <ClInclude Include="wave-concatenation.h" />
     <ClInclude Include="wave-file.h" />
     <ClInclude Include="wave-addition.h" />
     <ClInclude Include="wave-sampling-stream.h" />

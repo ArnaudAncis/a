@@ -5,6 +5,6 @@
 #include <memory>
 
 
-std::shared_ptr<Wave> speed_up(std::shared_ptr<Wave>, double);
+Wave speed_up(Wave, double);
 
 #endif

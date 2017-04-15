@@ -4,13 +4,13 @@
 
 namespace
 {
-    class Interpolator : public Wave
+    class InterpolatorFunction : public WaveFunction
     {
         std::shared_ptr<Stream<double>> m_stream;
         unsigned m_sample_rate;
 
     public:
-        Interpolator(std::shared_ptr<Stream<double>> stream, unsigned sample_rate)
+        InterpolatorFunction(std::shared_ptr<Stream<double>> stream, unsigned sample_rate)
             : m_stream(stream), m_sample_rate(sample_rate) { }
 
         double length() const override
@@ -42,7 +42,7 @@ namespace
     };
 }
 
-std::shared_ptr<Wave> interpolate(std::shared_ptr<Stream<double>> samples, unsigned sample_rate)
+Wave interpolate(std::shared_ptr<Stream<double>> samples, unsigned sample_rate)
 {
-    return std::make_shared<Interpolator>(samples, sample_rate);
+    return Wave(std::make_shared<InterpolatorFunction>(samples, sample_rate));
 }
