@@ -72,6 +72,9 @@
     <ClCompile Include="tests\uint8-to-int16-conversion-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\int16-to-double-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave-file.h">
