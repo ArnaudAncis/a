@@ -216,6 +216,7 @@
     <ClCompile Include="streams\data-stream.cpp" />
     <ClCompile Include="tests\double-to-uint16-conversion-tests.cpp" />
     <ClCompile Include="tests\tests-main.cpp" />
+    <ClCompile Include="tests\uint8-to-int16-conversion-tests.cpp" />
     <ClCompile Include="waves\interpolator.cpp" />
     <ClCompile Include="streams\normaliser.cpp" />
     <ClCompile Include="waves\sine-wave.cpp" />
