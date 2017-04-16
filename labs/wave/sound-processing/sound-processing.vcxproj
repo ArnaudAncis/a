@@ -210,6 +210,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
+    <ClCompile Include="tests\int16-to-uint8-conversion-tests.cpp" />
     <ClCompile Include="streams\bytes-buffer.cpp" />
     <ClCompile Include="composer.cpp" />
     <ClCompile Include="streams\data-stream.cpp" />
