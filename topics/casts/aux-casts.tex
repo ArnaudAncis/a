@@ -86,8 +86,8 @@
 
 
 \begin{frame}
-  \frametitle{{\tt static\_cast} and {\tt dynamic\_cast}}
-  \structure{{\tt static\_cast<T>(x)}}
+  \frametitle{\texttt{static\_cast} and \texttt{dynamic\_cast}}
+  \structure{\texttt{static\_cast<T>(x)}}
   \begin{itemize}
     \item Only checked at compile time
     \item Wrong casts lead to undefined results at runtime
@@ -96,8 +96,9 @@
   \structure{{\tt dynamic\_cast<T>(x)}}
   \begin{itemize}
     \item Checked at compile \emph{and} runtime
-    \item Wrong casts give {\tt nullptr}
+    \item Wrong casts give \texttt{nullptr}
     \item Is a bit slower due to runtime checks
+    \item Only works on classes with 1+ virtual member functions
   \end{itemize}
 \end{frame}
 
