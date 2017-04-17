@@ -194,20 +194,20 @@
             <td><%= lab('smart-pointers', 'Smart Pointers') %></td>
           </tr>
           <tr>
-            <td></td>
+            <td>8</td>
             <td><%= topic('inheritance', 'Inheritance', handouts: true) %></td>
             <td><%= lab('inheritance', 'Inheritance') %></td>
           </tr>
           <tr>
-            <td></td>
-            <td><%= topic('casts', 'Casting', handouts: true) %></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
+            <td>8</td>
             <td><%= topic('templates', 'Templates', handouts: true) %></td>
             <td><%= lab('templates', 'Templates') %></td>
           </tr> 
+          <tr>
+            <td>8</td>
+            <td><%= topic('casts', 'Casting', handouts: true) %></td>
+            <td><%= lab('casts', 'Casts') %></td>
+          </tr>
           <tr>
             <td></td>
             <td><%= topic('performance', 'Performance', handouts: true) %></td>
