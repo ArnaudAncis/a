@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= stylesheets('pvm') %>
+    <%= scripts('jquery', 'jquery-ui', 'underscore', 'ace/ace', 'source-editor', 'revealer') %>
+    <%= Html::Generation::Quiz.setup %>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Templates</div>
+    </header>
+    <div id="contents">
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+                 void func() { std::cout << "foo"; }
+             };
+
+             struct Bar : public Foo
+             {
+                 void func() { std::cout << "bar"; }
+             };
+
+             struct Baz : public Foo
+             {
+                void func() { std::cout << "baz"; }
+             };
+
+             int main()
+             {
+                 Foo* p = new Bar;
+                 Bar* q = dynamic_cast<Bar*>(p);
+                 
+                 q->func();
+             }
+           END
+
+           self.output = 'DNC'
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>dynamic_cast</code> works only on polymorphic types, i.e. <code>Foo</code> needs to have at least one virtual function.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+                 virtual void func() { std::cout << "foo"; }
+             };
+
+             struct Bar : public Foo
+             {
+                 void func() override { std::cout << "bar"; }
+             };
+
+             struct Baz : public Foo
+             {
+                void func() override { std::cout << "baz"; }
+             };
+
+             int main()
+             {
+                 Foo* p = new Bar;
+                 Bar* q = dynamic_cast<Bar*>(p);
+                 
+                 q->func();
+             }
+           END
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+                 virtual void func() { std::cout << "foo"; }
+             };
+
+             struct Bar : public Foo
+             {
+                 void func() override { std::cout << "bar"; }
+             };
+
+             struct Baz : public Foo
+             {
+                void func() override { std::cout << "baz"; }
+             };
+
+             int main()
+             {
+                 Foo* p = new Bar;
+                 Baz* q = dynamic_cast<Baz*>(p);
+                 
+                 q->func();
+             }
+           END
+
+           self.output = '???'
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>q</code> is <code>nullptr</code> because <code>dynamic_cast</code>ing to the wrong type yields <code>nullptr</code>.
+                 Calling member functions on <code>nullptr</code> is undefined.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+                 virtual void func() { std::cout << "foo"; }
+             };
+
+             struct Bar : public Foo
+             {
+                 void func() override { std::cout << "bar"; }
+             };
+
+             struct Baz : public Foo
+             {
+                void func() override { std::cout << "baz"; }
+             };
+
+             int main()
+             {
+                 Foo* p = new Bar;
+                 Baz* q = static_cast<Baz*>(p);
+                 
+                 q->func();
+             }
+           END
+
+           self.output = '???'
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>static_cast</code>ing to the wrong type leads to undefined behaviour.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+
+             struct Foo
+             {
+                 virtual void func() { std::cout << "foo"; }
+             };
+
+             struct Bar : public Foo
+             {
+                 void func() override { std::cout << "bar"; }
+             };
+
+             struct Baz : public Foo
+             {
+                void func() override { std::cout << "baz"; }
+             };
+
+             int main()
+             {
+                 Bar* p = new Bar;
+                 Baz* q = static_cast<Baz*>(p);
+                 
+                 q->func();
+             }
+           END
+
+           self.output = 'DNC'
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 The compiler detects that your cast can never succeed, so rejects the <code>static_cast</code>.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <memory>
+
+             struct Foo
+             {
+                 virtual void func() { std::cout << "foo"; }
+             };
+
+             struct Bar : public Foo
+             {
+                 void func() override { std::cout << "bar"; }
+             };
+
+             struct Baz : public Foo
+             {
+                void func() override { std::cout << "baz"; }
+             };
+
+             int main()
+             {
+                 std::shared_ptr<Foo> p = std::make_shared<Baz>();
+                 
+                 p->func();
+             }
+           END
+
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Interpretation) do
+           self.source = <<-END
+             #include <iostream>
+             #include <memory>
+
+             struct Foo
+             {
+                 virtual void func() { std::cout << "foo"; }
+             };
+
+             struct Bar : public Foo
+             {
+                 void func() override { std::cout << "bar"; }
+             };
+
+             struct Baz : public Foo
+             {
+                void func() override { std::cout << "baz"; }
+             };
+
+             int main()
+             {
+                 std::shared_ptr<Baz> p = std::make_shared<Baz>();
+                 std::shared_ptr<Foo> q = std::dynamic_pointer_cast<Foo>(p);
+                 
+                 q->func();
+             }
+           END
+
+
+           <<-END
+             <p>What is the output of the following code? Enter <code>DNC</code> if the code does not compile. Enter <code>???</code> if its behaviour is undefined.</p>
+             #{show_source_editor}
+             #{if input then show_input else '' end}
+             #{show_output_field}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 The <code>dynamic_pointer_cast</code> is rather useless: it's an upcast (subtype to supertype),
+                 meaning no explicit casting needs to be done.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+        exercise do
+          <<-END
+            <p>
+              Write functions <code>is_little_endian()</code> and <code>is_big_endian()</code> that
+              determine whether the platform the code is running on is little or big endian.
+            </p>
+          END
+        end
+      %>
+             
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>
