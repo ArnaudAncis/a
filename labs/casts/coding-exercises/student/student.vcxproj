@@ -147,8 +147,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Catch.h" />
+    <ClInclude Include="instanceof\square.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="instanceof\instanceof-tests.cpp" />
+    <ClCompile Include="instanceof\square.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

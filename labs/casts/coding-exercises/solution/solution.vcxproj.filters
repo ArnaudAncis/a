@@ -27,7 +27,10 @@
     <ClCompile Include="color\color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="color\color-tests.cpp">
+    <ClCompile Include="instanceof\square.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="instanceof\instanceof-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="color\color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="instanceof\square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
