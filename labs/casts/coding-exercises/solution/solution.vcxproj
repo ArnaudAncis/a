@@ -146,12 +146,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="color\color-tests.cpp" />
+    <ClCompile Include="color\color.cpp" />
     <ClCompile Include="endianness\endianness-tests.cpp" />
     <ClCompile Include="endianness\endianness.cpp" />
     <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Catch.h" />
+    <ClInclude Include="color\color.h" />
     <ClInclude Include="endianness\endianness.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
