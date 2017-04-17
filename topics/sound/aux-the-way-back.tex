@@ -1,0 +1,44 @@
+\subsection{The Way Back}
+
+\frame{\tableofcontents[currentsubsection]}
+
+\begin{frame}
+  \frametitle{Writing WAV Files}
+  \begin{center}
+    \begin{tikzpicture}[milestone/.style={drop shadow,draw,fill=red!50,minimum height=7.5mm,minimum width=1cm,font=\tiny\scshape},
+                        link/.style={-latex,thick},
+                        arrow/.style={blue,ultra thick,-{Stealth[]}},
+                        scale=.8,transform shape]
+      \node[milestone] (wave1) {\texttt{Wave}};
+      \node[milestone] (wave2) at ($ (wave1) + (0,-2) $) {\texttt{Wave}};
+      \node[milestone] (double1) at ($ (wave1) + (3,0) $) {\texttt{Stream<double>}};
+      \node[milestone] (double2) at ($ (wave2) + (3,0) $) {\texttt{Stream<double>}};
+      \node[milestone] (double) at ($ (double1.east) ! 0.5 ! (double2.east) + (2,0) $) {\texttt{Stream<double>}};
+      \node[milestone] (int16) at ($ (double) + (2,1) $) {\texttt{Stream<int16>}};
+      \node[milestone] (uint8) at ($ (double) + (4,0) $) {\texttt{Stream<uint8>}};
+
+      \coordinate (double top entry) at ($ (double.north) ! 0.5 ! (double.north west) $);
+      \coordinate (double bottom entry) at ($ (double.south) ! 0.5 ! (double.south west) $);
+
+      \draw[link] (wave1) -- (double1);
+      \draw[link] (wave2) -- (double2);
+      \draw[link] (double1) -| (double top entry);
+      \draw[link] (double2) -| (double bottom entry);
+
+      \draw[link] (double) -- (uint8);
+
+      \draw[link] (double) |- (int16);
+      \draw[link] (int16) -| (uint8);
+    \end{tikzpicture}
+  \end{center}
+  \begin{itemize}
+    \item We also need to be able to write WAV files
+    \item The whole process needs to be reversed
+  \end{itemize}
+\end{frame}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "sound"
+%%% End:
