@@ -1,3 +1,5 @@
+#ifdef TEST_BUILD
+
 #include "Catch.h"
 #include "streams/conversions.h"
 #include "tests/testlib.h"
@@ -76,3 +78,5 @@ TEST_CASE("convert_int16_to_uint8_stream {0, -1, 32767}")
     REQUIRE((*uint8_stream)[4] == 0xFF);
     REQUIRE((*uint8_stream)[5] == 0x7F);
 }
+
+#endif

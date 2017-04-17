@@ -92,7 +92,26 @@ namespace
 
         double operator [](unsigned index) const override
         {
-            return (*m_stream)[index] / 32767.0;
+            return (1 + 2 * (*m_stream)[index]) / 65535.0;
+        }
+    };
+
+    class Uint8ToDoubleConverter : public Stream<double>
+    {
+        std::shared_ptr<Stream<uint8_t>> m_stream;
+
+    public:
+        Uint8ToDoubleConverter(std::shared_ptr<Stream<uint8_t>> stream)
+            : m_stream(stream) { }
+
+        unsigned size() const override
+        {
+            return m_stream->size();
+        }
+
+        double operator [](unsigned index) const override
+        {
+            return (*m_stream)[index] / 127.5 - 1;
         }
     };
 }
@@ -115,4 +134,9 @@ std::shared_ptr<Stream<uint8_t>> convert_int16_to_uint8_stream(std::shared_ptr<S
 std::shared_ptr<Stream<double>> convert_int16_to_double_stream(std::shared_ptr<Stream<int16_t>> stream)
 {
     return std::make_shared<Int16ToDoubleConverter>(stream);
+}
+
+std::shared_ptr<Stream<double>> convert_uint8_to_double_stream(std::shared_ptr<Stream<uint8_t>> stream)
+{
+    return std::make_shared<Uint8ToDoubleConverter>(stream);
 }

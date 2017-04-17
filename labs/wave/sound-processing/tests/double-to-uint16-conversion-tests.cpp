@@ -1,3 +1,5 @@
+#ifdef TEST_BUILD
+
 #include "Catch.h"
 #include "streams/conversions.h"
 #include "tests/testlib.h"
@@ -48,3 +50,5 @@ TEST_CASE("convert_double_to_int16_stream {0, 0, 0}")
     REQUIRE((*int16_stream)[1] == 0);
     REQUIRE((*int16_stream)[2] == 0);
 }
+
+#endif

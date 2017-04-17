@@ -12,7 +12,7 @@ namespace
 
     public:
         InterpolatorFunction(std::shared_ptr<Stream<double>> stream, unsigned sample_rate)
-            : m_stream(stream), m_sample_rate(sample_rate), m_length(stream->size() / sample_rate) { }
+            : m_stream(stream), m_sample_rate(sample_rate), m_length((stream->size() - 1) / sample_rate) { }
 
         double length() const override
         {
