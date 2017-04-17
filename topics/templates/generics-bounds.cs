@@ -7,6 +7,6 @@ class Foo<T> `\pgfmark{type bound start}`where T : IMuzzifiable`\pgfmark{type bo
   private T x;
 
   public void Frobnicate() {
-    x.`\pgfmark{muzzify start}`Muzzify`\pgfmark{muzzify end}`();
+    x.Muzzify();
   }
 }

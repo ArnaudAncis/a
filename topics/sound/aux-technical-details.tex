@@ -1,0 +1,76 @@
+\section{Technical Details}
+
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}
+  \frametitle{Implementation Goals}
+  \begin{itemize}
+    \item Our implementation will not focus on speed
+    \item We prioritise ease of implementation
+    \item Step by step approach
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Overview}
+  \begin{center}
+    \begin{tikzpicture}[milestone/.style={drop shadow,draw,fill=red!50,minimum height=7.5mm,minimum width=1cm,font=\tiny\scshape},
+                        link/.style={-latex,thick},
+                        arrow/.style={blue,ultra thick,-{Stealth[]}},
+                        scale=.8,transform shape]
+      \node[milestone] (uint8) at (0,0) {\texttt{Stream<uint8>}};
+      \node[milestone] (wave) at ($ (uint8) + (3,0) $) {\texttt{Wave}};
+
+      \foreach[count=\y from 1] \x in {0xA1,0x14,0x73,0x9C} {
+        \node[minimum width=8mm,minimum height=5mm,font=\tiny\scshape,draw,anchor=south] at ($ (uint8.north) + (0,\y*0.5) $) {\x};
+      }
+
+      \begin{scope}[xshift=2cm,yshift=1.875cm]
+        \draw (0,-1) rectangle (2,1);
+        \draw[thin] plot[domain=0:360,x=0.00555cm,y=5mm,samples=100,smooth] (\x,{sin(\x)+0.2*sin(4*\x)});
+      \end{scope}
+
+      \draw[link] (uint8) -- (wave);
+
+      \visible<1>{
+        \draw[arrow] ($ (uint8) - (0,1.5) $) -- (uint8);
+      }
+      \visible<2>{
+        \draw[arrow] ($ (wave) - (0,1.5) $) -- (wave);
+      }
+    \end{tikzpicture}
+  \end{center}
+  \begin{overprint}
+    \onslide<1>
+    \begin{itemize}
+      \item The WAV file contains raw bytes (\texttt{uint8\_t})
+      \item This is what we start with
+      \item A \texttt{Stream} is basically just a list
+            \begin{itemize}
+              \item \texttt{stream[i]} gives \texttt{i}-th byte
+            \end{itemize}
+      \item This raw format is not easy to work with
+    \end{itemize}
+    \onslide<2>
+    \begin{itemize}
+      \item We want to construct with a \texttt{Wave}
+      \item I.e.~a \texttt{double function(double)}
+      \item Much easier to work with
+      \item Multiple steps necessary to get there
+    \end{itemize}
+  \end{overprint}
+\end{frame}
+
+\input{aux-samples.tex}
+\input{aux-interpolation.tex}
+\input{aux-channels.tex}
+\input{aux-the-way-back.tex}
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "sound"
+%%% End:
