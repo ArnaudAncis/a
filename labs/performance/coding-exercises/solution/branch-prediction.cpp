@@ -9,6 +9,8 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include <string>
+#include <sstream>
 
 
 namespace
@@ -32,6 +34,39 @@ namespace
         return result;
     }
 
+    int highest_bit(unsigned mask)
+    {
+        if (mask == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            unsigned result = 0;
+
+            while (mask)
+            {
+                mask = mask >> 1;
+                ++result;
+            }
+
+            return 1 << result;
+        }
+    }
+
+    std::string pattern(unsigned mask)
+    {
+        std::stringstream ss;
+
+        unsigned imax = highest_bit(mask);
+        for (unsigned i = 0; i != imax; ++i)
+        {
+            ss << (i & mask ? 'T' : 'F');
+        }
+
+        return ss.str();
+    }
+
     void test(uint64_t max, unsigned mask)
     {
         uint64_t result;
@@ -40,26 +75,16 @@ namespace
             result = process(max, mask);
         });
 
-        std::cout << "Masking with " << mask << " up to " << max << " --> " << duration << " [" << result << "]" << std::endl;
+        std::cout << "Masking with " << mask << " [" << pattern(mask) << "] up to " << max << " --> " << duration << "ms [" << result << "]" << std::endl;
     }
 }
 
 
 void test_branch_prediction(uint64_t size)
 {
-    //test(std::vector<unsigned> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, size);
-    //test(std::vector<unsigned> { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, size);
-    //test(std::vector<unsigned> { 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 }, size);
-    //test(std::vector<unsigned> { 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0 }, size);
-    //test(std::vector<unsigned> { 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0 }, size);
-    //test(std::vector<unsigned> { 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1 }, size);
     test(size, 0);
     test(size, -1);
 
-    for (unsigned i = 0; i != 16; ++i)
-    {
-        test(size, i);
-    }
     for (unsigned i = 0; i != 16; ++i)
     {
         test(size, i);
