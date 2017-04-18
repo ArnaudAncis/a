@@ -93,6 +93,9 @@
     <ClCompile Include="streams\converters\int16-to-double-conversion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="streams\converters\int16-to-uint8-conversion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave-file.h">
@@ -162,6 +165,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="streams\converters\int16-to-double-conversion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\converters\int16-to-uint8-conversion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

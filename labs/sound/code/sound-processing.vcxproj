@@ -215,6 +215,7 @@
     <ClCompile Include="streams\converters\double-to-int16-conversion.cpp" />
     <ClCompile Include="streams\converters\double-to-uint8-conversion.cpp" />
     <ClCompile Include="streams\converters\int16-to-double-conversion.cpp" />
+    <ClCompile Include="streams\converters\int16-to-uint8-conversion.cpp" />
     <ClCompile Include="streams\data-stream.cpp" />
     <ClCompile Include="tests\double-to-int16-conversion-tests.cpp" />
     <ClCompile Include="tests\double-to-uint8-conversion-tests.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="streams\converters\double-to-int16-conversion.h" />
     <ClInclude Include="streams\converters\double-to-uint8-conversion.h" />
     <ClInclude Include="streams\converters\int16-to-double-conversion.h" />
+    <ClInclude Include="streams\converters\int16-to-uint8-conversion.h" />
     <ClInclude Include="streams\multiplexer.h" />
     <ClInclude Include="streams\normaliser.h" />
     <ClInclude Include="streams\converters\conversions.h" />
