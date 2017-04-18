@@ -149,7 +149,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>solution;.</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -164,7 +164,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);TEST_BUILD</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>solution;.</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -199,7 +199,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>solution;.</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -210,20 +210,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
-    <ClCompile Include="tests\int16-to-double-conversion-tests.cpp" />
-    <ClCompile Include="tests\int16-to-uint8-conversion-tests.cpp" />
     <ClCompile Include="streams\bytes-buffer.cpp" />
     <ClCompile Include="composer.cpp" />
+    <ClCompile Include="streams\converters\double-to-int16-conversion.cpp" />
+    <ClCompile Include="streams\converters\double-to-uint8-conversion.cpp" />
+    <ClCompile Include="streams\converters\int16-to-double-conversion.cpp" />
     <ClCompile Include="streams\data-stream.cpp" />
-    <ClCompile Include="tests\double-to-uint16-conversion-tests.cpp" />
+    <ClCompile Include="tests\double-to-int16-conversion-tests.cpp" />
+    <ClCompile Include="tests\double-to-uint8-conversion-tests.cpp" />
+    <ClCompile Include="tests\int16-to-double-conversion-tests.cpp" />
+    <ClCompile Include="tests\int16-to-uint8-conversion-tests.cpp" />
     <ClCompile Include="tests\interpolator-tests.cpp" />
     <ClCompile Include="tests\tests-main.cpp" />
+    <ClCompile Include="tests\uint8-to-double-conversion-tests.cpp" />
     <ClCompile Include="tests\uint8-to-int16-conversion-tests.cpp" />
     <ClCompile Include="waves\interpolator.cpp" />
     <ClCompile Include="streams\normaliser.cpp" />
     <ClCompile Include="waves\sine-wave.cpp" />
     <ClCompile Include="waves\speeder-upper.cpp" />
-    <ClCompile Include="streams\conversions.cpp" />
+    <ClCompile Include="streams\converters\conversions.cpp" />
     <ClCompile Include="waves\triangle-wave.cpp" />
     <ClCompile Include="waves\wave-concatenation.cpp" />
     <ClCompile Include="wave-file.cpp" />
@@ -235,9 +240,12 @@
     <ClInclude Include="streams\bytes-buffer.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="composer.h" />
+    <ClInclude Include="streams\converters\double-to-int16-conversion.h" />
+    <ClInclude Include="streams\converters\double-to-uint8-conversion.h" />
+    <ClInclude Include="streams\converters\int16-to-double-conversion.h" />
     <ClInclude Include="streams\multiplexer.h" />
     <ClInclude Include="streams\normaliser.h" />
-    <ClInclude Include="streams\conversions.h" />
+    <ClInclude Include="streams\converters\conversions.h" />
     <ClInclude Include="tests\testlib.h" />
     <ClInclude Include="waves\triangle-wave.h" />
     <ClInclude Include="waves\zero-wave.h" />

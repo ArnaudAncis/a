@@ -27,9 +27,6 @@
     <ClCompile Include="streams\bytes-buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="streams\conversions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="waves\interpolator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,22 +57,40 @@
     <ClCompile Include="waves\wave-sampling-stream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\double-to-uint16-conversion-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tests\tests-main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\int16-to-uint8-conversion-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\uint8-to-int16-conversion-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\double-to-int16-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="tests\int16-to-double-conversion-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\int16-to-uint8-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="tests\interpolator-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\double-to-uint8-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\uint8-to-double-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\converters\conversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\converters\double-to-int16-conversion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\converters\double-to-uint8-conversion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\converters\int16-to-double-conversion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,9 +108,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="streams\bytes-buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="streams\conversions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="streams\demultiplexer.h">
@@ -138,6 +150,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tests\testlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\converters\conversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\converters\double-to-int16-conversion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\converters\double-to-uint8-conversion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\converters\int16-to-double-conversion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #ifndef TEST_BUILD
 #include "streams/bytes-buffer.h"
 #include "streams/normaliser.h"
-#include "streams/conversions.h"
+#include "streams/converters/conversions.h"
 #include "streams/multiplexer.h"
 #include "waves/wave.h"
 #include "waves/sine-wave.h"
