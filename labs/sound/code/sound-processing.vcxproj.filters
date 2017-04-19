@@ -60,25 +60,7 @@
     <ClCompile Include="tests\tests-main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\uint8-to-int16-conversion-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\double-to-int16-conversion-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\int16-to-double-conversion-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\int16-to-uint8-conversion-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tests\interpolator-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\double-to-uint8-conversion-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\uint8-to-double-conversion-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="streams\converters\conversions.cpp">
@@ -100,6 +82,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="streams\converters\uint8-to-int16-conversion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\streams\converters\double-to-int16-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\streams\converters\double-to-uint8-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\streams\converters\int16-to-double-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\streams\converters\int16-to-uint8-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\streams\converters\uint8-to-double-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\streams\converters\uint8-to-int16-conversion-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\streams\multiplexer-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\streams\demultiplexer-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

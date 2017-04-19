@@ -9,7 +9,7 @@
 template<typename T>
 class ChannelStream : public Stream<T>
 {
-    std::shared_ptr<Stream<double>> m_stream;
+    std::shared_ptr<Stream<T>> m_stream;
     unsigned m_offset;
 
 public:
@@ -26,7 +26,7 @@ struct Demultiplexer
     std::shared_ptr<Stream<T>> left_channel, right_channel;
 
     Demultiplexer(std::shared_ptr<Stream<T>> stream)
-        : left_channel(std::make_shared<ChannelStream>(stream, 0)), right_channel(std::make_shared<ChannelStream>(stream, 1)) { }
+        : left_channel(std::make_shared<ChannelStream<T>>(stream, 0)), right_channel(std::make_shared<ChannelStream<T>>(stream, 1)) { }
 };
 
 #endif
