@@ -153,6 +153,12 @@
     <ClCompile Include="waves\reverb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="solution\waves\reverb-solution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\waves\reverb-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave-file.h">
@@ -255,6 +261,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="waves\reverb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solution\waves\reverb-solution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
