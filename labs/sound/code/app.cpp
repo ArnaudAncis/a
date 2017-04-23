@@ -12,6 +12,7 @@
 #include "waves/interpolator.h"
 #include "waves/speeder-upper.h"
 #include "waves/zero-wave.h"
+#include "waves/reverb.h"
 #include "wave-file.h"
 #include "note.h"
 #include "composer.h"
@@ -21,24 +22,11 @@
 #include <assert.h>
 
 
-Wave reverb(Wave wave, unsigned n_reverberations, double factor, double delay)
-{
-    Wave result = zero_wave(0);
-
-    for (unsigned i = 0; i != n_reverberations; ++i)
-    {
-        Wave reverberation = (wave * pow(factor, i)) >> (i * delay);
-        result = result + reverberation;
-    }
-
-    return result;
-}
-
 void bach_mono()
 {
     WAVE_DATA wave_data;
 
-    auto wf = wave_factory(triangle_wave);
+    auto wf = wave_factory(square_wave);
     auto result_wave = treble(wf) + bass(wf);
 
     auto double_samples = normalise(sample_wave(result_wave, 44100));

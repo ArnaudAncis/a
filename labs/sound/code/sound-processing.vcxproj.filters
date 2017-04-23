@@ -144,6 +144,15 @@
     <ClCompile Include="solution\waves\wave-concatenation-solution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\waves\speeder-upper-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="solution\waves\speeder-upper-solution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="waves\reverb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave-file.h">
@@ -240,6 +249,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="solution\waves\wave-concatenation-solution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solution\waves\speeder-upper-solution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waves\reverb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
