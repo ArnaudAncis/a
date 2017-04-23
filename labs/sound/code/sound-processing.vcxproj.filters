@@ -138,6 +138,12 @@
     <ClCompile Include="solution\waves\square-wave-solution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\waves\wave-concatenation-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="solution\waves\wave-concatenation-solution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave-file.h">
@@ -231,6 +237,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="solution\waves\square-wave-solution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solution\waves\wave-concatenation-solution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
