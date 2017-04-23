@@ -13,7 +13,7 @@ namespace
 
     public:
         TriangleWaveFunction(double length, double amplitude, double frequency)
-            : m_length(length), m_amplitude(amplitude), m_period(1/frequency) { }
+            : m_length(length), m_amplitude(amplitude), m_period(1 / frequency) { }
 
         double length() const override
         {
@@ -29,13 +29,13 @@ namespace
 
             if (t < 0.25)
             {
-                return (t / 0.25)* m_amplitude;
+                return (t / 0.25) * m_amplitude;
             }
             else if (t < 0.75)
             {
                 t -= 0.25;
 
-                return (t * 2 - 1) * m_amplitude;
+                return (1 - 4 * t) * m_amplitude;
             }
             else
             {

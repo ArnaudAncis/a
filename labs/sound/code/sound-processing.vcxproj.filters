@@ -129,6 +129,15 @@
     <ClCompile Include="tests\waves\wave-sampling-stream-solution-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="waves\square-wave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\waves\square-wave-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="solution\waves\square-wave-solution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave-file.h">
@@ -216,6 +225,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="solution\waves\wave-sampling-stream-solution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="waves\square-wave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solution\waves\square-wave-solution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

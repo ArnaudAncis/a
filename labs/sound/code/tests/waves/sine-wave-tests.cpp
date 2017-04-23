@@ -13,6 +13,21 @@ TEST_CASE("Length of sine wave of length 5s")
     REQUIRE(wave.length() == Approx(5));
 }
 
+TEST_CASE("Manual sampling sine wave with frequency 1 and amplitude 1")
+{
+    const double length = 10;
+    const double amplitude = 1;
+    const double frequency = 1;
+
+    auto wave = sine_wave(length, amplitude, frequency);
+
+    CHECK(wave[0.0] == Approx(0));
+    CHECK(wave[0.25] == Approx(1));
+    CHECK(wave[0.5] == Approx(0));
+    CHECK(wave[0.75] == Approx(-1));
+    CHECK(wave[1.0] == Approx(0));
+}
+
 TEST_CASE("Sampling sine wave with frequency 1 and amplitude 1")
 {
     const double length = 10;

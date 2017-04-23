@@ -29,13 +29,13 @@ namespace
 
             if (t < 0.25)
             {
-                return (t / 0.25)* m_amplitude;
+                return (t / 0.25) * m_amplitude;
             }
             else if (t < 0.75)
             {
                 t -= 0.25;
 
-                return (t * 2 - 1) * m_amplitude;
+                return (1 - 4 * t) * m_amplitude;
             }
             else
             {
