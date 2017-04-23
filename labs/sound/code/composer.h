@@ -4,7 +4,34 @@
 #include "waves/wave.h"
 #include "note.h"
 #include <vector>
+#include <functional>
 
+
+class WaveFactory
+{
+public:
+    virtual Wave create(double length, double amplitude, double frequency) = 0;
+};
+
+class ConcreteWaveFactory : public WaveFactory
+{
+private:
+    std::function<Wave(double, double, double)> m_factory_function;
+
+public:
+    ConcreteWaveFactory(std::function<Wave(double, double, double)> factory_function)
+        : m_factory_function(factory_function) { }
+
+    Wave create(double length, double amplitude, double frequency) override
+    {
+        return m_factory_function(length, amplitude, frequency);
+    }
+};
+
+inline std::shared_ptr<WaveFactory> wave_factory(std::function<Wave(double, double, double)> factory_function)
+{
+    return std::make_shared<ConcreteWaveFactory>(factory_function);
+}
 
 class Composer
 {
@@ -12,9 +39,10 @@ class Composer
     double m_beat_duration;
     int m_octave;
     double m_volume;
+    std::shared_ptr<WaveFactory> m_wave_factory;
 
 public:
-    Composer(double tempo);
+    Composer(double tempo, std::shared_ptr<WaveFactory> wave_factory);
 
     Composer& rest(double beats);
     Composer& add(Note note, double beats);
@@ -75,7 +103,7 @@ public:
     void clear();
 };
 
-Wave treble();
-Wave bass();
+Wave treble(std::shared_ptr<WaveFactory>);
+Wave bass(std::shared_ptr<WaveFactory>);
 
 #endif

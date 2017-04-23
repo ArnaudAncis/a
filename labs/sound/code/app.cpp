@@ -5,6 +5,8 @@
 #include "streams/multiplexer.h"
 #include "waves/wave.h"
 #include "waves/sine-wave.h"
+#include "waves/square-wave.h"
+#include "waves/triangle-wave.h"
 #include "waves/wave-sampling-stream.h"
 #include "waves/wave-concatenation.h"
 #include "waves/interpolator.h"
@@ -36,7 +38,8 @@ void bach_mono()
 {
     WAVE_DATA wave_data;
 
-    auto result_wave = treble() + bass();
+    auto wf = wave_factory(triangle_wave);
+    auto result_wave = treble(wf) + bass(wf);
 
     auto double_samples = normalise(sample_wave(result_wave, 44100));
     auto int16_samples = convert_double_to_int16_stream(double_samples);
@@ -54,8 +57,9 @@ void bach_stereo()
 {
     WAVE_DATA wave_data;
 
-    auto result_left = treble();
-    auto result_right = bass();
+    auto wf = wave_factory(sine_wave);
+    auto result_left = treble(wf);
+    auto result_right = bass(wf);
 
     auto double_samples_left = normalise(sample_wave(result_left, 44100));
     auto double_samples_right = normalise(sample_wave(result_right, 44100));
@@ -141,9 +145,9 @@ void convert_16bit_file()
 
 int main()
 {
-    // bach_mono();
+    bach_mono();
     // bach_stereo();
-    convert_16bit_file();
+    // convert_16bit_file();
 
     std::cout << "Done!" << std::endl;
 }

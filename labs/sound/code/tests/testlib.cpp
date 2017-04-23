@@ -1,3 +1,5 @@
+#ifdef TEST_BUILD
+
 #include "tests/testlib.h"
 #include "Catch.h"
 
@@ -11,3 +13,5 @@ void check_equal_waves(Wave a, Wave b, double dt)
         CHECK(a[t] == Approx(b[t]));
     }
 }
+
+#endif
