@@ -2,7 +2,7 @@
 #include "Catch.h"
 
 
-void check_same_wave(Wave a, Wave b, double dt)
+void check_equal_waves(Wave a, Wave b, double dt)
 {
     REQUIRE(a.length() == Approx(b.length()));
     

@@ -212,6 +212,7 @@
     <ClCompile Include="app.cpp" />
     <ClCompile Include="solution\waves\sine-wave-solution.cpp" />
     <ClCompile Include="solution\waves\triangle-wave-solution.cpp" />
+    <ClCompile Include="solution\waves\wave-sampling-stream-solution.cpp" />
     <ClCompile Include="tests\testlib.cpp" />
     <ClCompile Include="tests\waves\sine-wave-tests.cpp" />
     <ClCompile Include="streams\bytes-buffer.cpp" />
@@ -234,6 +235,7 @@
     <ClCompile Include="tests\streams\converters\uint8-to-double-conversion-tests.cpp" />
     <ClCompile Include="tests\streams\converters\uint8-to-int16-conversion-tests.cpp" />
     <ClCompile Include="tests\waves\triangle-wave-tests.cpp" />
+    <ClCompile Include="tests\waves\wave-sampling-stream-solution-tests.cpp" />
     <ClCompile Include="waves\interpolator.cpp" />
     <ClCompile Include="streams\normaliser.cpp" />
     <ClCompile Include="waves\sine-wave.cpp" />
@@ -249,6 +251,7 @@
   <ItemGroup>
     <ClInclude Include="solution\waves\sine-wave-solution.h" />
     <ClInclude Include="solution\waves\triangle-wave-solution.h" />
+    <ClInclude Include="solution\waves\wave-sampling-stream-solution.h" />
     <ClInclude Include="streams\bytes-buffer.h" />
     <ClInclude Include="Catch.h" />
     <ClInclude Include="composer.h" />

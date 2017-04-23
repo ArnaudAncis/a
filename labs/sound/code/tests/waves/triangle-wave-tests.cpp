@@ -22,7 +22,7 @@ TEST_CASE("Sampling triangle wave with frequency 1 and amplitude 1")
     auto expected = solution::triangle_wave(length, amplitude, frequency);
     auto wave = triangle_wave(length, amplitude, frequency);
 
-    check_same_wave(expected, wave);
+    check_equal_waves(expected, wave);
 }
 
 TEST_CASE("Sampling triangle wave with frequency 1 and amplitude 2")
@@ -34,7 +34,7 @@ TEST_CASE("Sampling triangle wave with frequency 1 and amplitude 2")
     auto expected = solution::triangle_wave(length, amplitude, frequency);
     auto wave = triangle_wave(length, amplitude, frequency);
 
-    check_same_wave(expected, wave);
+    check_equal_waves(expected, wave);
 }
 
 TEST_CASE("Sampling triangle wave with frequency 2 and amplitude 1")
@@ -46,7 +46,7 @@ TEST_CASE("Sampling triangle wave with frequency 2 and amplitude 1")
     auto expected = solution::triangle_wave(length, amplitude, frequency);
     auto wave = triangle_wave(length, amplitude, frequency);
 
-    check_same_wave(expected, wave);
+    check_equal_waves(expected, wave);
 }
 
 TEST_CASE("Sampling triangle wave with frequency 4 and amplitude 6")
@@ -58,7 +58,7 @@ TEST_CASE("Sampling triangle wave with frequency 4 and amplitude 6")
     auto expected = solution::triangle_wave(length, amplitude, frequency);
     auto wave = triangle_wave(length, amplitude, frequency);
 
-    check_same_wave(expected, wave);
+    check_equal_waves(expected, wave);
 }
 
 #endif

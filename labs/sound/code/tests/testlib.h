@@ -21,7 +21,7 @@ public:
 
     unsigned size() const override
     {
-        return (unsigned) m_elements.size();
+        return (unsigned)m_elements.size();
     }
 
     T operator [](unsigned i) const override
@@ -30,6 +30,18 @@ public:
     }
 };
 
-void check_same_wave(Wave a, Wave b, double dt = 0.05);
+void check_equal_waves(Wave a, Wave b, double dt = 0.05);
+
+template<typename T>
+void check_equal_streams(std::shared_ptr<Stream<T>> p, std::shared_ptr<Stream<T>> q)
+{
+    REQUIRE(p->size() == q->size());
+    
+    auto imax = p->size();
+    for (unsigned i = 0; i != imax; ++i)
+    {
+        CHECK((*p)[i] == (*q)[i]);
+    }
+}
 
 #endif
