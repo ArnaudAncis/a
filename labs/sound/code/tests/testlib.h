@@ -2,6 +2,7 @@
 #define TESTLIB_H
 
 #include "streams/stream.h"
+#include "waves/wave.h"
 #include <memory>
 #include <vector>
 
@@ -28,5 +29,7 @@ public:
         return m_elements[i];
     }
 };
+
+void check_same_wave(Wave a, Wave b, double dt = 0.05);
 
 #endif

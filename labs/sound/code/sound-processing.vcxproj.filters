@@ -60,9 +60,6 @@
     <ClCompile Include="tests\tests-main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\interpolator-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="streams\converters\conversions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -106,6 +103,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\streams\demultiplexer-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\waves\interpolator-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\waves\sine-wave-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="solution\waves\sine-wave-solution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\testlib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\waves\triangle-wave-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="solution\waves\triangle-wave-solution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -186,6 +201,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="streams\converters\uint8-to-int16-conversion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solution\waves\sine-wave-solution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solution\waves\triangle-wave-solution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
