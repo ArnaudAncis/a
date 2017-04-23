@@ -22,7 +22,7 @@
 #include <assert.h>
 
 
-void bach_mono()
+void melody_mono()
 {
     WAVE_DATA wave_data;
 
@@ -41,7 +41,7 @@ void bach_mono()
     write_wave_file("e:/temp/wave/output.wav", wave_data);
 }
 
-void bach_stereo()
+void melody_stereo()
 {
     WAVE_DATA wave_data;
 
@@ -133,8 +133,8 @@ void convert_16bit_file()
 
 int main()
 {
-    bach_mono();
-    // bach_stereo();
+    melody_mono();
+    // melody_stereo();
     // convert_16bit_file();
 
     std::cout << "Done!" << std::endl;
