@@ -339,7 +339,7 @@
 \begin{frame}
   \frametitle{Quantising Information: Example}
   \begin{itemize}
-    \item Five exam
+    \item Five exams
     \item Three possible outcomes: Pass/Tolerable/Intolerable
   \end{itemize}
   \vskip5mm
@@ -357,7 +357,7 @@
   \begin{itemize}
     \item If you have $N$ ibits of information\dots
     \item \dots you will minimally need $N$ bits of storage
-    \item (Lossless) Compression = only using $N$ bits of storage
+    \item (Lossless) Compression = trying to using minimal amount of bits necessary
   \end{itemize}
 \end{frame}
 
@@ -393,8 +393,8 @@
   \frametitle{Infinite Compression}
   \begin{itemize}
     \item Say you invent a new compression algorithm ``zop''
-    \item Say it compressed any $N$ bits file to a $N-1$ bits file.
-    \item Any file can then be compressed to $1$ bit.
+    \item Say it compressed any $N$ bits file to a $N-1$ bits file
+    \item Any file can then be compressed to $1$ bit
     \item How can you reconstruct a movie/music/data based on one single bit?
   \end{itemize}
   \begin{center}
@@ -468,7 +468,7 @@
   \begin{itemize}
     \item To better understand zip, we develop our own small compression algorithm
     \item We will first focus on compressing ``familiar'' data
-    \item We have ``knowledge'' about this data
+    \item We have knowledge about this data
     \item We can use this knowledge to compress the data
     \item We then see if we can generalise this principe and use
           it on all kinds of data
@@ -485,7 +485,7 @@
     \item We're trying to find a way to save on bits
     \item We notice that {\tt q} is often followed by {\tt u}
     \item Our compression algorithm would replace {\tt qu} by simply {\tt q}
-    \item Our decompression algorithm would add a {\tt } after each {\tt q}
+    \item Our decompression algorithm would add a {\tt u} after each {\tt q}
   \end{itemize}
 \end{frame}
 
@@ -501,7 +501,7 @@
     Qand qelq'un qitte apr\`es qarante qestions
   \end{center}
   \vskip5mm
-  \structure{Adding {\tt} after each {\tt q}}
+  \structure{Adding {\tt u} after each {\tt q}}
   \begin{center}
     Quand quelqu'un quitte apr\`es quarante questions
   \end{center}
