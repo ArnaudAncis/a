@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= stylesheets('pvm') %>
+    <%= scripts('jquery', 'jquery-ui', 'underscore', 'ace/ace', 'source-editor', 'revealer') %>
+    <%= Html::Generation::Quiz.setup %>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Compression</div>
+    </header>
+    <div id="contents">
+      <%=
+         exercise(Lib::Numerical) do
+           <<-END
+             <p>What is 1 + 1?</p>
+             #{show_input_field(2, 0)}
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 <code>qux</code> is called with type parameter <code>T = Foo</code>, so <code>qux&lt;Foo&gt;()</code>
+                 will create a <code>Foo</code> object.
+               </p>
+             </div>
+           END
+         end
+      %>
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>
