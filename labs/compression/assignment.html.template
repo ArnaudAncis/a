@@ -15,15 +15,25 @@
     <div id="contents">
       <%=
          exercise(Lib::Numerical) do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             struct Date
+             {
+               int day, month;
+             };
+           END
+
            <<-END
-             <p>What is 1 + 1?</p>
-             #{show_input_field(2, 0)}
-             <div data-revealer="Show explanation" class="explanation">
-               <p>
-                 <code>qux</code> is called with type parameter <code>T = Foo</code>, so <code>qux&lt;Foo&gt;()</code>
-                 will create a <code>Foo</code> object.
-               </p>
-             </div>
+             #{show_source_editor}
+             <p>
+               If I wish to use the struct above, how many bits are used per object?  (Assuming 32 bit platform)
+             </p>
+             #{show_input_field(64, 0)}
+             <p>
+               How many ibits are necessary to encode a date of the year (assuming 366 days per year).
+             </p>
+             #{show_input_field(8.5157, 0.1)}
            END
          end
       %>
