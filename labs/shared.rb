@@ -156,7 +156,7 @@ module Lib
     include Contracts::TypeChecking
     
     def show_input_field(expected, delta)
-      %{<p>Output: #{Quiz.validated_input { numerical(expected, delta) }}</p>}
+      %{<p>Answer: #{Quiz.validated_input { numerical(expected, delta) }}</p>}
     end
   end
 end
