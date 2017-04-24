@@ -683,9 +683,7 @@
 \begin{frame}
   \frametitle{``Measuring'' Tree}
   \begin{itemize}
-    \item Given a tree\dots
-    \item \dots we know how often each byte occurs
-    \item \dots we know how many bits are used for each byte
+    \item Given a tree, we know how many bits each letter requires
     \item We can compute how long the compressed file would be
     \item This is exactly what we want to minimise
     \item Approach to finding optimal tree:
@@ -701,10 +699,9 @@
 \begin{frame}
   \frametitle{Building Huffman Tree}
   \begin{itemize}
-    \item Creates a leaf node for each byte
-    \item Each node has a weight
-    \item The weight of a leaf node equals the frequency of the byte
-    \item Repeat until one node left:
+    \item Create a leaf node for each byte
+    \item Each node has a weight equal to the frequency of this byte
+    \item Repeat until there is one node left:
           \begin{itemize}
             \item Take the two nodes with the least weight
             \item Join them in a new node
@@ -742,6 +739,11 @@
       }
     \end{tikzpicture}
   \end{center}
+  \visible<2>{
+    \begin{center}
+      Ordered by weight
+    \end{center}
+  }
 \end{frame}
 
 \begin{frame}
