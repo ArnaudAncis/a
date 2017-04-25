@@ -10,12 +10,201 @@
 
   <body>
     <header>
-      <div class="center-vertically">Templates</div>
+      <div class="center-vertically">Performance</div>
     </header>
     <div id="contents">
       <%=
+         exercise(Lib::Numerical) do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             struct Date
+             {
+               uint32_t day, month, year;
+             };
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>
+               How many bytes does a <code>Date</code> object occupy in memory, taking into account memory alignment? #{show_input_field(12, 0)}
+             </p>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Numerical) do
+           extend SourceCodeMixin
+           extend MemoryLayoutMixin
+
+           self.source = <<-END
+             struct Date
+             {
+               uint8_t day, month;
+               int32_t year;
+             };
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>
+               How many bytes does a <code>Date</code> object occupy in memory, taking into account memory alignment? #{show_input_field(8, 0)}
+             </p>
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 The memory layout can be visualised as follows:
+               </p>
+               #{memory_layout(1,2,0,0,3,3,3,3)}
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Numerical) do
+           extend SourceCodeMixin
+           extend MemoryLayoutMixin
+
+           self.source = <<-END
+             struct Foo
+             {
+               uint16_t x;
+               uint8_t y;
+             };
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>
+               How many bytes does a <code>Foo</code> object occupy in memory, taking into account memory alignment? #{show_input_field(4, 0)}
+             </p>
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 The memory layout can be visualised as follows:
+               </p>
+               #{memory_layout(1,1,2,0)}
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Numerical) do
+           extend SourceCodeMixin
+           extend MemoryLayoutMixin
+
+           self.source = <<-END
+             struct Foo
+             {
+               uint32_t x;
+               uint64_t y;
+               int8_t   z;
+             };
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>
+               How many bytes does a <code>Foo</code> object occupy in memory, taking into account memory alignment? #{show_input_field(24, 0)}
+             </p>
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 The memory layout can be visualised as follows:
+               </p>
+               #{memory_layout(1,1,1,1,0,0,0,0,2,2,2,2,2,2,2,2,3,0,0,0,0,0,0,0)}
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Numerical) do
+           extend SourceCodeMixin
+           extend MemoryLayoutMixin
+
+           self.source = <<-END
+             struct Foo
+             {
+               uint8_t x, y, z;
+             };
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>
+               How many bytes does a <code>Foo</code> object occupy in memory, taking into account memory alignment? #{show_input_field(3, 0)}
+             </p>
+             <div data-revealer="Show explanation" class="explanation">
+               <p>
+                 The memory layout can be visualised as follows:
+               </p>
+               #{memory_layout(1,2,3)}
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             struct Foo
+             {
+               uint8_t x;
+               uint16_t y;
+               uint8_t z;
+             };
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>
+               Reorder the member variables so that a <code>Foo</code> object requires a minimal amount of memory. Memory alignment must still be respected.
+             </p>
+             <div data-revealer="Solution" class="explanation">
+               <p>
+                 Using order <code>x</code>, <code>y</code> and <code>z</code>, a <code>Foo</code> requires 6 bytes.
+                 Using order <code>x</code>, <code>z</code> and <code>y</code>, a <code>Foo</code> requires 4 bytes.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
+         exercise do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             struct Foo
+             {
+                uint64_t a;
+                uint16_t b;
+                uint32_t c;
+                uint64_t d;
+             };
+           END
+
+           <<-END
+             #{show_source_editor}
+             <p>
+               Reorder the member variables so that a <code>Foo</code> object requires a minimal amount of memory. Memory alignment must still be respected.
+             </p>
+             <div data-revealer="Solution" class="explanation">
+               <p>
+                 Using order <code>a d c b</code> gives a size of 8+8+4+2+2 = 24.
+               </p>
+             </div>
+           END
+         end
+      %>
+
+      <%=
         exercise do
           extend SourceCodeMixin
+
 
           self.source = <<-END
             auto before = std::chrono::high_resolution_clock::now();
