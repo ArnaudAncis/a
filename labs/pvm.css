@@ -191,3 +191,36 @@ table.type-inference input {
   width: 10em;
   text-align: center;
 }
+
+table.memory-layout {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table.memory-layout td {
+  width: 1em;
+  height: 1em;
+  border: 1px solid black;
+}
+
+table.memory-layout td.byte0 {
+  background: #DDD;
+}
+
+table.memory-layout td.byte1 {
+  background: #FAA;
+}
+
+table.memory-layout td.byte2 {
+  background: #AFA;
+}
+
+table.memory-layout td.byte3 {
+  background: #AAF;
+}
+
+table.memory-layout td.byte4 {
+  background: #AFF;
+}
