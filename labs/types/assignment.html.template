@@ -77,29 +77,6 @@
       <%=
          exercise(Lib::TypeInference) do
            self.source = <<-END
-             void foo()
-             {
-               auto a = 5.0;
-               auto b = &a;
-               auto c = &b;
-               auto d = &c;
-             }
-           END
-
-           <<-END
-             #{show_source_editor}
-             <p>What are the types of the following expressions?</p>
-             #{ask_type_of_table( [ 'a', 'double' ],
-                                  [ 'b', 'double*' ],
-                                  [ 'c', 'double**' ],
-                                  [ 'd', 'double***' ] )}
-           END
-         end
-      %>
-
-      <%=
-         exercise(Lib::TypeInference) do
-           self.source = <<-END
              void foo(int** xs)
              {
                auto a = xs[0];
