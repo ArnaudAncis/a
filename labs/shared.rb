@@ -36,6 +36,16 @@ module SourceCodeMixin
   end
 end
 
+module MemoryLayoutMixin
+  def memory_layout(*args)
+    tds = args.map do |arg|
+      %{<td class="byte#{arg}" />}
+    end.join('')
+
+    %{<table class="memory-layout"><tbody><tr>#{tds}</tr></tbody></table>}
+  end
+end
+
 module SolutionMixin
   def solution_link(filename)
     typecheck do
@@ -132,6 +142,7 @@ module Lib
       %{<p>Output: #{Quiz.validated_input { verbatim out }}</p>}
     end
   end
+
 
   class TypeInference < Exercise
     include Contracts::TypeChecking
