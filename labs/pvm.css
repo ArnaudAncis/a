@@ -110,117 +110,117 @@ div.code {
 }
 
 .fullscreen .fullscreen-editor {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10000;
-  height: auto!important;
-  width: auto!important;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    height: auto!important;
+    width: auto!important;
 }
 
-.fullsreen {
-  overflow: hidden;
+.fullscreen {
+    overflow: hidden;
 }
 
 input {
-  width: 100px;
+    width: 100px;
 }
 
 input.correct {
-  background: #AFA;
+    background: #AFA;
 }
 
 input.incorrect {
-  background: #FAA
+    background: #FAA;
 }
 
 .revealer {
-  border: 1px solid black;
-  padding: 10px;
-  width: 25%;
-  margin: 20px auto;
-  text-align: center;
-  cursor: help;
-  box-shadow: 10px 10px 5px #AAA;
+    border: 1px solid black;
+    padding: 10px;
+    width: 25%;
+    margin: 20px auto;
+    text-align: center;
+    cursor: help;
+    box-shadow: 10px 10px 5px #AAA;
 }
 
 .explanation {
-  border: 1px solid black;
-  box-shadow: 5px 5px 5px #AAA;
-  padding: 10px;
-  width: 90%;
-  margin: 10px auto;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px #AAA;
+    padding: 10px;
+    width: 90%;
+    margin: 10px auto;
 }
 
 .message {
-  font-size: 1.2em;
-  font-weight: bold;
-  text-align: center;
-  width: 75%;
-  margin: 100px auto;
-  padding: 20px;
-  background: #F44;
-  box-shadow: 0px 0px 50px 30px #F44;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    width: 75%;
+    margin: 100px auto;
+    padding: 20px;
+    background: #F44;
+    box-shadow: 0px 0px 50px 30px #F44;
 }
 
 .quiz-feedback.hidden {
-  display: none;
+    display: none;
 }
 
 table.type-inference {
-  margin: 10px auto;
-  border-collapse: collapse;
+    margin: 10px auto;
+    border-collapse: collapse;
 }
 
 table.type-inference tr:nth-child(1) {
-  background: #AAA;
+    background: #AAA;
 }
 
 table.type-inference th {
-  min-width: 10em;
+    min-width: 10em;
 }
 
 table.type-inference td {
-  text-align: center;
-  padding: 0.2em 1em;
+    text-align: center;
+    padding: 0.2em 1em;
 }
 
 table.type-inference input {
-  width: 10em;
-  text-align: center;
+    width: 10em;
+    text-align: center;
 }
 
 table.memory-layout {
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid black;
-  border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    border-collapse: collapse;
 }
 
 table.memory-layout td {
-  width: 1em;
-  height: 1em;
-  border: 1px solid black;
+    width: 1em;
+    height: 1em;
+    border: 1px solid black;
 }
 
 table.memory-layout td.byte0 {
-  background: #DDD;
+    background: #DDD;
 }
 
 table.memory-layout td.byte1 {
-  background: #FAA;
+    background: #FAA;
 }
 
 table.memory-layout td.byte2 {
-  background: #AFA;
+    background: #AFA;
 }
 
 table.memory-layout td.byte3 {
-  background: #AAF;
+    background: #AAF;
 }
 
 table.memory-layout td.byte4 {
-  background: #AFF;
+    background: #AFF;
 }
