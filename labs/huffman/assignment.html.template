@@ -6,6 +6,26 @@
     <%= stylesheets('pvm') %>
     <%= scripts('jquery', 'jquery-ui', 'underscore', 'ace/ace', 'source-editor', 'revealer') %>
     <%= Html::Generation::Quiz.setup %>
+    <style>
+      table.codebook {
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: collapse;
+      }
+
+      table.codebook td {
+        text-align: center;
+      }
+
+      table.codebook th {
+        padding: 0em 1em;
+      }
+
+      table.codebook tr {
+        border-top: 1px black solid;
+        border-bottom: 1px black solid;
+      }
+    </style>
   </head>
 
   <body>
@@ -51,24 +71,45 @@
       %>
       <%=
          exercise(Lib::Numerical) do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             11101110100100100111001111010100000011011111010001110001010100101001110001101101100100011101011111110010111000001001101111011001111010110101001111011011001110000001110101111111001011100000110010101101111010
+           END
+         
            <<-END
+             <table class="codebook">
+               <tbody>
+                 <tr>
+                   <th>Character</th><th>Encoding</th>
+                 </tr>
+                 <tr><td>space</td><td><code>00</code></td></tr>
+                 <tr><td><code>,</code></td><td><code>110101</code></td></tr>
+                 <tr><td><code>a</code></td><td><code>110100</code></td></tr>
+                 <tr><td><code>d</code></td><td><code>11100</code></td></tr>
+                 <tr><td><code>e</code></td><td><code>010</code></td></tr>
+                 <tr><td><code>f</code></td><td><code>110111</code></td></tr>
+                 <tr><td><code>g</code></td><td><code>110110</code></td></tr>
+                 <tr><td><code>h</code></td><td><code>0111</code></td></tr>
+                 <tr><td><code>i</code></td><td><code>1011</code></td></tr>
+                 <tr><td><code>l</code></td><td><code>11001</code></td></tr>
+                 <tr><td><code>m</code></td><td><code>110001</code></td></tr>
+                 <tr><td><code>n</code></td><td><code>0110</code></td></tr>
+                 <tr><td><code>o</code></td><td><code>1111</code></td></tr>
+                 <tr><td><code>r</code></td><td><code>1001</code></td></tr>
+                 <tr><td><code>s</code></td><td><code>1000</code></td></tr>
+                 <tr><td><code>t</code></td><td><code>1010</code></td></tr>
+                 <tr><td><code>w</code></td><td><code>11101</code></td></tr>
+                 <tr><td><code>y</code></td><td><code>110000</code></td></tr>
+               </tbody>
+             </table>
              <p>
-               Given 
+               Given the Huffman encoding above, decode the following:
              </p>
-             <ul>
-               <li>
-                 <code>ab</code>: #{show_input_field(2, 0)} bits
-               </li>
-               <li>
-                 <code>abab</code>: #{show_input_field(4, 0)} bits
-               </li>
-               <li>
-                 <code>abcabc</code>: #{show_input_field(10, 0)} bits
-               </li>
-               <li>
-                 <code>aabaaababaaccbd</code>: #{show_input_field(25, 0)} bits
-               </li>
-             </ul>
+             #{show_source_editor}
+             <p>
+               Decoding: #{Quiz.validated_input { verbatim 'war does not determine who is right, only who is left' }}
+             </p>
            END
          end
       %>

@@ -6,14 +6,8 @@
 #include <sstream>
 
 
-void encode()
+FrequencyTable<char> build_frequency_table(const std::string& string)
 {
-    std::cout << "Enter a string: ";
-
-    std::string string;
-    std::cin >> string;
-    std::cout << std::endl;
-
     FrequencyTable<char> ft = count(string);
 
     std::cout << "Frequencies" << std::endl;
@@ -21,9 +15,14 @@ void encode()
     {
         std::cout << c << " " << ft[c] << std::endl;
     }
+
     std::cout << std::endl;
 
-    auto tree = build_tree(ft);
+    return ft;
+}
+
+std::map<char, Bits> build_code_book(std::shared_ptr<HuffmanTree<char>> tree)
+{
     auto codes = tree->extract_codes();
 
     std::cout << "Codes" << std::endl;
@@ -33,18 +32,32 @@ void encode()
     }
     std::cout << std::endl;
 
+    return codes;
+}
+
+void encode(const std::string& string, std::map<char, Bits> codes)
+{
     Bits encoding;
     for (auto c : string)
     {
         encoding.concatenate(codes[c]);
     }
 
+    std::cout << "Original string: " << string << std::endl;
     std::cout << "Encoding: " << encoding << std::endl;
     std::cout << "Length: " << encoding.size() << std::endl;
+}
+
+void encode(const std::string& string)
+{
+    auto ft = build_frequency_table(string);
+    auto tree = build_tree(ft);
+    auto codes = build_code_book(tree);
+    encode(string, codes);
 }
 
 
 int main()
 {
-    encode();
+    encode("blablabla");
 }
