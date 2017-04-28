@@ -12,6 +12,23 @@ class FrequencyTable
     std::map<T, F> m_table;
 
 public:
+    void set(const T& t, F frequency)
+    {
+        auto it = m_table.find(t);
+
+        if (frequency == 0)
+        {
+            if (it != m_table.end())
+            {
+                m_table.erase(it);
+            }
+        }
+        else
+        {
+            it.second = frequency;
+        }
+    }
+
     void count(const T& t)
     {
         auto it = m_table.find(t);

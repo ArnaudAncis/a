@@ -6,20 +6,7 @@
 #include <sstream>
 
 
-std::string show(const std::vector<bool>& bits)
-{
-    std::stringstream ss;
-
-    for (auto bit : bits)
-    {
-        ss << bit ? "1" : "0";
-    }
-
-    return ss.str();
-}
-
-
-int main()
+void encode()
 {
     std::cout << "Enter a string: ";
 
@@ -42,18 +29,22 @@ int main()
     std::cout << "Codes" << std::endl;
     for (auto it : codes)
     {
-        std::cout << it.first << " " << show(it.second) << std::endl;
+        std::cout << it.first << " " << it.second << std::endl;
     }
     std::cout << std::endl;
 
-    std::vector<bool> encoding;
+    Bits encoding;
     for (auto c : string)
     {
-        for (auto bit : codes[c])
-        {
-            encoding.push_back(bit);
-        }
+        encoding.concatenate(codes[c]);
     }
 
-    std::cout << "Encoding: " << show(encoding) << std::endl;
+    std::cout << "Encoding: " << encoding << std::endl;
+    std::cout << "Length: " << encoding.size() << std::endl;
+}
+
+
+int main()
+{
+    encode();
 }

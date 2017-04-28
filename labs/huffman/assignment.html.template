@@ -1,0 +1,83 @@
+!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVM Assignment</title>
+    <%= stylesheets('pvm') %>
+    <%= scripts('jquery', 'jquery-ui', 'underscore', 'ace/ace', 'source-editor', 'revealer') %>
+    <%= Html::Generation::Quiz.setup %>
+  </head>
+
+  <body>
+    <header>
+      <div class="center-vertically">Huffman</div>
+    </header>
+    <div id="contents">
+      <p>
+        Since there's generally more than one way to build the Huffman tree, it is rather
+        difficult to provide you with automatically validated exercises. The only
+        guarantee is that in the end, all Huffman encoding of a specific string
+        will count the same amount of bits.
+      </p>
+      <p> 
+        To allow you to practice at will, a Huffman implementation has been included in the repository,
+        in the same folder as this html. You can use it to verify your solutions to your own exercises.
+      </p>
+      <p>
+        Below are a few exercises, but the validation is rather limited.
+      </p>
+      <%=
+         exercise(Lib::Numerical) do
+           <<-END
+             <p>
+               Compute the Huffman encoding of the given strings and enter how many bits the encoding counts.
+             </p>
+             <ul>
+               <li>
+                 <code>ab</code>: #{show_input_field(2, 0)} bits
+               </li>
+               <li>
+                 <code>abab</code>: #{show_input_field(4, 0)} bits
+               </li>
+               <li>
+                 <code>abcabc</code>: #{show_input_field(10, 0)} bits
+               </li>
+               <li>
+                 <code>aabaaababaaccbd</code>: #{show_input_field(25, 0)} bits
+               </li>
+             </ul>
+           END
+         end
+      %>
+      <%=
+         exercise(Lib::Numerical) do
+           <<-END
+             <p>
+               Given 
+             </p>
+             <ul>
+               <li>
+                 <code>ab</code>: #{show_input_field(2, 0)} bits
+               </li>
+               <li>
+                 <code>abab</code>: #{show_input_field(4, 0)} bits
+               </li>
+               <li>
+                 <code>abcabc</code>: #{show_input_field(10, 0)} bits
+               </li>
+               <li>
+                 <code>aabaaababaaccbd</code>: #{show_input_field(25, 0)} bits
+               </li>
+             </ul>
+           END
+         end
+      %>
+    </div>
+  </body>
+
+  <script>
+    Quiz.formatQuizzes();
+    SourceEditor.initialize();
+    Revealer.initialize();
+  </script>
+</html>
