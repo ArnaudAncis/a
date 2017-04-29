@@ -224,3 +224,18 @@ table.memory-layout td.byte3 {
 table.memory-layout td.byte4 {
     background: #AFF;
 }
+
+table.lz77 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.lz77.decoding {
+    border-collapse: collapse;
+}
+
+table.lz77.decoding td {
+    width: 5em;
+    border: 1px solid black;
+    text-align: center;
+}

@@ -170,6 +170,40 @@ module Lib
       %{#{Quiz.validated_input { numerical(expected, delta) }} &plusmn; #{delta}}
     end
   end
+
+  class LZ77 < Exercise
+    include Contracts::TypeChecking
+    
+    def lz77_encoding(triplets)
+      rows = triplets.map do |triplet|        
+        distance = Quiz.validated_input { numerical(triplet[0], 0) }
+        length = Quiz.validated_input { numerical(triplet[1], 0) }
+        datum = Quiz.validated_input { verbatim(triplet[2]) }
+
+        %{<tr><td>#{distance}</td><td>#{length}</td><td>#{datum}</td></tr>}
+      end.join('')
+
+      %{<table class="lz77 encoding"><tbody>#{rows}</tbody></table>}
+    end
+
+    def lz77_decoding(triplets)
+      rows = triplets.map do |triplet|        
+        distance, length, datum = triplet
+
+        %{<tr><td>#{distance}</td><td>#{length}</td><td>#{datum}</td></tr>}
+      end.join('')
+
+      %{<table class="lz77 decoding"><tbody>#{rows}</tbody></table>}
+    end
+    
+    def numeric_field(expected, delta=0)
+      %{#{Quiz.validated_input { numerical(expected, delta) }}}
+    end
+
+    def text_field(expected)
+      Quiz.validated_input { verbatim(expected) }
+    end
+  end
 end
 
 
