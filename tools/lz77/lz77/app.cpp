@@ -2,16 +2,16 @@
 
 #include "lz77.h"
 #include <iostream>
-#include <vector>
-
 
 
 int main()
 {
-    std::string a = "abc";
-    std::string b = "abcd";
+    auto triplets = encode(8, 8, "abababababab");
     
-
+    for (auto& triplet : triplets)
+    {
+        std::cout << triplet << std::endl;
+    }
 }
 
 #endif

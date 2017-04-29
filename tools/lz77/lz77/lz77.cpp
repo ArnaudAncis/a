@@ -1,6 +1,8 @@
 #include "lz77.h"
 #include <algorithm>
 #include <assert.h>
+#include <sstream>
+#include <vector>
 
 
 unsigned match_length(const std::string& history, const std::string& future)
@@ -56,8 +58,48 @@ std::vector<triplet> encode(unsigned max_distance, unsigned max_length, const st
         triplet t{ distance, length, string[index + length] };
         result.push_back(t);
 
+        assert(t.distance <= max_distance);
+        assert(t.length <= max_length);
+
         index += length + 1;
     }
 
     return result;
+}
+
+std::ostream& operator <<(std::ostream& out, const triplet& t)
+{
+    return out << "[" << t.distance << ", " << t.length << ", '" << t.datum << "']";
+}
+
+std::string decode(const std::vector<triplet>& triplets)
+{
+    std::vector<char> result;
+
+    unsigned index = 0;
+    for (auto& triplet : triplets)
+    {
+        for (unsigned i = 0; i != triplet.length; ++i)
+        {
+            result.push_back(result[index - triplet.distance + i]);
+        }
+
+        result.push_back(triplet.datum);
+
+        index += triplet.length + 1;
+    }
+
+    std::stringstream ss;
+
+    for (auto c : result)
+    {
+        ss << c;
+    }
+
+    return ss.str();
+}
+
+bool triplet::operator ==(const triplet& t) const
+{
+    return this->datum == t.datum && this->distance == t.distance && this->length == t.length;
 }
