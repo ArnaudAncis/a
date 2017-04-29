@@ -1,5 +1,6 @@
 #include "waves/reverb.h"
 #include "waves/zero-wave.h"
+#include <math.h>
 
 
 Wave reverb(Wave wave, unsigned n_reverberations, double factor, double delay)
