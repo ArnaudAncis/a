@@ -6,7 +6,7 @@
 
 int main()
 {
-    auto triplets = encode(8, 8, "abababababab");
+    auto triplets = encode(100, 100, "aaabaabaabaabaabc");
     
     for (auto& triplet : triplets)
     {
