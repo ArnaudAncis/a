@@ -1,5 +1,6 @@
 #include "solution/waves/triangle-wave-solution.h"
 #include <assert.h>
+#include <cmath>
 
 
 namespace
