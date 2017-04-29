@@ -4,3 +4,4 @@
 temp*.cpp
 *-output.txt
 .vs
+x64
