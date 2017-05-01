@@ -144,9 +144,9 @@
             \begin{center} \ttfamily
               sample = byte1 | (byte2 << 8) 
             \end{center}
-      \item Convert $[0,255]$ to $[-1,1]$
+      \item Convert $[-32768,32767]$ to $[-1,1]$
             \begin{center} \ttfamily
-              sample / 32768.0
+              (1 + 2 * sample) / 65535.0
             \end{center}
     \end{itemize}
   \end{overprint}
