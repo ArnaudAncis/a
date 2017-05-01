@@ -6,6 +6,10 @@
     <%= stylesheets('pvm') %>
     <%= scripts('jquery', 'jquery-ui', 'underscore', 'ace/ace', 'source-editor', 'revealer') %>
     <%= Html::Generation::Quiz.setup %>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>    
     <style>
       section.question {
         width: 90%;
@@ -22,27 +26,112 @@
     </header>
     <div id="contents">
       <section>
-        <h1>Foo</h1>
-        Bla
+        <h1>Producing Simple Sounds</h1>
+        <p>
+          First, let Visual Studio's Solution Explorer show all files by click on the correspondig toolbar button. This allows you to organise your source files more easily.
+        </p>
+        <p>
+          Examine the file <code>wave.cpp</code>. First, let us define what we mean by wave: A wave $w$ is a continuous function with domain $[0, \textrm{duration})$, meaning
+          you can ask for its value at some position $t$ for every $0 \leq t &lt; \textrm{duration}$. We use waves to represent sound. A wave's duration corresponds
+          to the duration of the sound.
+          For example, silence for 5 seconds is represented using
+          \[ w(t) = 0 \qquad \mathrm{dom}(w) = [0, 5) \]
+        </p>
+        <p>
+          Take your time to understand the design. There are two classes involved: <code>Wave</code> and <code>WaveFunction</code>.
+          <code>WaveFunction</code> is an abstract class whose subclasses will contain the actual wave-computing code,
+          whereas <code>Wave</code> is just a wrapper around <code>WaveFunction</code>.
+          There are two reasons for this design:
+        </p>
+        <ul>
+          <li>
+            Since <code>WaveFunction</code> is an abstract class, we need to access <code>WaveFunction</code> objects
+            through pointers/references/smart pointers. Because we'd rather ignore memory management issues, we opt for <code>shared_ptr</code>, meaning
+            we would have to write <code>std::shared_ptr&lt;WaveFunction&gt;</code> each time we worked with waves. To avoid this,
+            the <code>Wave</code> class was introduced which holds a <code>std::shared_ptr&lt;WaveFunction&gt;</code>.
+            This means that we can pass around simple <code>Wave</code> objects around without having to use pointers.
+            <%= Html::Generation.source_editor(<<-END)
+                std::shared_ptr<WaveFunction> func(std::shared_ptr<WaveFunction> wave)
+                {
+                    double x = (*wave)[0];
+                }
+
+                // becomes
+
+                Wave func(Wave wave)
+                {
+                    double x = wave[0];
+                }
+                END
+            %>
+          </li>          
+          <li>
+            Having a separate <code>Wave</code> class allows us to overload operators, e.g. we will be able to add waves using the syntax <code>w1 + w2</code>.
+          </li>
+        </ul>
         <%=
           exercise do
-            <<-END
-              <p>
-                You are given a small hierarchy: superclass <code>Shape</code> and subclasses <code>Square</code> and <code>Circle</code>.
-              </p>
-              <ul>
-                <li>
-                  Write a function <code>bool is_square(const Shape*)</code> that returns <code>true</code> if the given object is a <code>Square</code>, <code>false</code> otherwise.
-                </li>
-                <li>
-                  Write a template function <code>is_instance_of</code> that allows to check for arbitrary <code>Shape</code> subclasses. E.g. <code>is_instance_of&lt;Circle&gt;(obj)</code>
-                  should return <code>true</code> if <code>obj</code> is a <code>Circle</code>, <code>false</code> otherwise.
-                </li>
-              </ul>
-              <p>
-                The rests expects to find this extra functionality in <code>square.h</code> and <code>square.cpp</code>; therefore, no need to create new files.
-              <p>
-            END
+           <<-END
+             <p>
+               Before you start: The "silent sound" is implemented in <code>zero-wave.cpp</code>, you can use it as guidance for this exercise.
+             </p>
+             <p>
+               Implement the sine wave:
+             </p>
+             <ul>
+               <li>
+                 Create two files <code>waves/sine-wave.h</code> and <code>waves/sine-wave.cpp</code>.
+               </li>
+               <li>
+                 Define the class <code>SineWaveFunction</code> in <code>sine-wave.cpp</code>. Do <em>not</em> put a declaration for
+                 this class in <code>sine-wave.h</code> as we do not wish to make this class public.
+               </li>
+               <li>
+                 The <code>SineWaveFunction</code> constructor takes three parameters:
+                 <ul>
+                   <li>
+                     <code>double duration</code>
+                   </li>
+                   <li>
+                     <code>double amplitude</code>
+                   </li>
+                   <li>
+                     <code>double frequency</code>
+                   </li>
+                 </ul>
+                 Their values are stored in corresponding member variables.
+               </li>
+               <li>
+                 The <code>operator []</code> member function should compute the following:
+                 \\[
+                   \\textrm{amplitude} \\cdot \\sin(2 \\cdot \\pi \\cdot \\textrm{frequency} \\cdot t)
+                 \\]
+               </li>
+               <li>
+                 The only thing about sine waves we wish to expose is a factory method.
+                 In <code>sine-wave.cpp</code>, add a <em>definition</em> for
+                 a function <code>sine_wave</code> that creates a <code>SineWaveFunction</code> object
+                 and wraps it in a <code>Wave</code> object. The factory function takes the same
+                 parameters as <code>SineWaveFunction</code>'s constructor.
+                 In <code>sine-wave.h</code>, add a <em>declaration</em> for <code>sine_wave</code>.
+               </li>
+             </ul>
+             <p>
+               Run the tests as follow:
+             </p>
+             <ul>
+               <li>
+                 In Visual Studio's toolbar, pick "Testing" instead of "Debug" from the dropdown control.
+               </li>
+               <li>
+                 In the Solution Explorer, right-click on <code>tests/waves/sine-wave-tests.cpp</code> and select
+                 Include In Project.
+               </li>
+               <li>
+                 Press CTRL+F5 to run the tests. Make sure all compile and pass.
+               </li>
+             </ul>
+           END
           end
         %>
       </section>
