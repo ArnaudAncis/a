@@ -7,9 +7,6 @@
 
 int main()
 {
-    // melody_mono();
-    // melody_stereo();
-    // convert_16bit_file();
 
     std::cout << "Done!" << std::endl;
 }
