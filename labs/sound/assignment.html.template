@@ -12,11 +12,16 @@
     <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>    
     <style>
       section.question {
-        width: 90%;
+        width: 80%;
         margin-left: auto;
         margin-right: auto;
+        border: 1px solid black;
+        margin-top: 1em;
       }
-      
+
+      section.question h1 {
+        margin: 0px;
+      }
     </style>
   </head>
 
@@ -115,6 +120,9 @@
                  parameters as <code>SineWaveFunction</code>'s constructor.
                  In <code>sine-wave.h</code>, add a <em>declaration</em> for <code>sine_wave</code>.
                </li>
+               <li>
+                 Add <code>#include "waves/sine-wave.h"</code> to <code>wave/waves.h</code>.
+               </li>
              </ul>
              <p>
                Run the tests as follow:
@@ -134,8 +142,220 @@
            END
           end
         %>
-      </section>
 
+        <p>
+          Take a look at the <code>Stream&lt;T&gt;</code> class. Its instances
+          are very similar to arrays, i.e. they have a certain number of elements
+          which can be accessed through indexing.
+        </p>
+        <p>
+          Note that contrary to <code>Wave</code>s, we have not defined a separate wrapper class,
+          meaning you'll have to work with <code>std::shared_ptr&lt;Stream&gt;</code>s.
+        </p>
+        <%=
+          exercise do
+           <<-END
+             <p>
+               Implement the <code>WaveSamplingStream</code> class. This class must,
+               given a <code>Wave</code>, sample it N times per second (= sampling rate). For example,
+               say you are given the wave function $w(t) = t$ with duration 3, then sampling it
+               at 2 samples per second gives the stream <code>0, 0.5, 1, 1.5, 2, 2.5</code>.
+             </p>
+             <ul>
+               <li>
+                 Put all code in the files <code>waves/wave-sampling-stream.cpp</code> and <code>waves/wave-sampling-stream.h</code>.
+               </li>
+               <li>                 
+                 The constructor takes a <code>Wave</code> and an <code>unsigned sampling_rate</code>.
+               </li>
+               <li>
+                 The stream's size equals the wave's duration times the sample rate.
+               </li>
+               <li>
+                 The $i$-th sample equals
+                 \\[
+                   w(i / N)
+                 \\]
+                 where $w$ is the wave and $N$ the sampling rate.
+               </li>
+               <li>
+                 Keep the <code>WaveSamplingStream</code> class's declaration private by
+                 putting it in the <code>.cpp</code> file and making no mention
+                 of it in the header file.
+               </li>
+               <li>
+                 Create a factory function <code>sample_wave</code> that is exposed to the outside world.
+                 It takes a <code>Wave</code> and a <code>sampling rate</code>, and returns
+                 a <code>std::shared_ptr&lt;Stream&lt;double&gt;&gt;</code>.
+               </li>
+               <li>
+                 Add <code>#include "waves/wave-sampling-stream.h"</code> to <code>waves/waves.h</code>.
+               </li>
+               <li>
+                 Run the tests.
+               </li>
+             </ul>
+             <p>
+               You can take a look at <code>streams/data-stream.cpp</code> and <code>streams/data-stream.h</code> for guidance.
+             </p>
+           END
+          end
+        %>
+        <p>
+          <code>SineWave</code> represents a sound you can play. <code>WaveSamplingStream</code> samples this sounds.
+          Only one step remains: we need to convert these samples, which are currently <code>double</code>,
+          to integers. The simplest way to achieve this is to convert them to 8 bit integers:
+          simple code at the expense of sound quality.
+        </p>
+        <%=
+          exercise do
+           <<-END
+             <p>
+               Implement the <code>DoubleToUint8Converter</code> class. This class must,
+               given a <code>Stream&lt;double&gt;</code>, convert each <code>double</code> $x_i$ in this stream
+               to an <code>uint8</code> $y_i$ using the following formula:
+               \\[ y_i = x_i * 127.5 + 127.5 \\]
+             </p>
+             <ul>
+               <li>
+                 Put all code in the files <code>streams/converters/double-to-uint8-conversion.cpp</code> and <code>streams/converters/double-to-uint8-conversion.h</code>.
+               </li>
+               <li>                 
+                 The constructor takes a <code>std::shared_ptr&lt;Stream&lt;double&gt;&gt;</code>.
+               </li>
+               <li>
+                 Like before, keep the class's declaration private by
+                 putting it in the <code>.cpp</code> file and making no mention
+                 of it in the header file.
+               </li>
+               <li>
+                 Create a factory function <code>convert_double_to_uint8_stream</code> that is exposed to the outside world.
+                 It takes a <code>Wave</code> and a <code>std::shared_ptr&lt;Stream&lt;double&gt;&gt;</code>, and returns
+                 a <code>std::shared_ptr&lt;Stream&lt;uint8_t&gt;&gt;</code>.
+               </li>
+               <li>
+                 Add <code>#include "streams/converters/double-to-uint8-conversion.h"</code> to <code>streams/converters/conversions.h</code>.
+               </li>
+               <li>
+                 Run the tests.
+               </li>
+             </ul>
+           END
+          end
+        %>
+        <p>
+          All that remains is to put the pieces together.
+        </p>
+        <%=
+          exercise do
+           <<-END
+             <p>
+               Open <code>app.cpp</code> and add the following to the <code>main</code> function.
+             </p>
+             <ul>
+               <li>
+                 Create a new sine wave with duration 1, amplitude 1 and frequency 440.
+               </li>
+               <li>
+                 Sample it at 44100Hz. This yields a <code>Stream&lt;double&gt;</code>.
+               </li>
+               <li>
+                 Convert this <code>Stream&lt;double&gt;</code> to <code>Stream&lt;uint8_t&gt;</code>.
+               </li>
+               <li>
+                 Create a <code>WAVE_DATA</code> object. Initialise its fields.
+               </li>
+               <li>
+                 Call write_wave_file to write the data to file.
+               </li>
+               <li>
+                 Switch back to debug build (instead of testing), run your application and listen to the result.
+               </li>
+             </ul>
+           END
+          end
+        %>
+      </section>
+      <section>
+        <h1>Extensions</h1>
+        <p>
+          Many extensions are possible. Below are a few possibilities for which there are tests and/or solutions.
+        </p>
+        <%=
+          exercise do
+           <<-END
+             <p>
+               Add support for 16 bit samples.
+             </p>
+             <ul>
+               <li>
+                 Write <code>DoubleToInt16Converter</code> in the same vein as <code>DoubleToUint8Converter</code>,
+                 but using the formula
+                 \\[ y_i = x_9 * 32767.5 - 0.5 \\]
+                 This gives you a <code>Stream&lt;int16&gt;</code>.
+               </li>
+               <li>
+                 This <code>Stream&lt;int16_t&gt;</code> needs to be transformed into a <code>Stream&lt;uint8_t&gt;</code>.
+                 Write <code>Int16ToUint8Converter</code> which breaks up 16 bit ints to 8 bit ints using the following code:
+                 #{Html::Generation.source_editor(<<-END)
+                     unsigned i = index / 2;
+                     int16_t item = (*m_stream)[i];
+                     uint16_t& unsigned_item = *reinterpret_cast<uint16_t*>(&item);
+                     uint8_t lower = unsigned_item & 0xFF;
+                     uint8_t upper = unsigned_item >> 8;
+
+                     return index % 2 == 0 ? lower : upper;                     
+                   END
+                  }
+               </li>
+             </ul>
+           END
+          end
+        %>
+
+        <%=
+          exercise do
+           <<-END
+             <p>
+               Add support for stereo sound.
+             </p>
+             <ul>
+               <li>
+                 Create a template class <code>Multiplexer&lt;T&gt;</code>. A <code>Multiplexer&lt;T&gt;</code> <code>m</code> receives
+                 two <code>Stream&lt;T&gt;</code>s <code>a</code> and <code>b</code> and multiplexes them into a single <code>Stream&lt;T&gt;</code>:
+                 \\[
+                   m_i = \\left\\{
+                           \\begin{array}{lr}
+                             a_{i/2} & i\\textrm{ is even} \\\\
+                             b_{(i-1)/2} & i\\textrm{ is odd} \\\\
+                           \\end{array}
+                         \\right.
+                 \\]
+               </li>
+             </ul>
+           END
+          end
+        %>
+
+        <%=
+          exercise do
+           <<-END
+             <p>
+               You need to make sure amplitudes never go outside the range $[-1, 1]$ when you're converting it to a <code>Stream&lt;int16_t&gt;</code> or
+               <code>Stream&lt;uint8_t&gt;</code>, otherwise you will end up with overflows and unpleasant sounds.
+               Create a normaliser that, given a <code>Stream&lt;double&gt;</code>, looks for the maximum absolute value in the stream and
+               then divides each value in the stream by that maximum.
+             </p>
+             <p>
+               For example, say the <code>Stream&lt;double&gt;</code> contains the values <code>0.5, 2, -1.5, 0.4</code>.
+               The greatest absolute value is 2. Dividing each sample by 2 ensures that all of the samples
+               are in the range $[-1, 1]$.
+             </p>
+           END
+          end
+        %>
+
+      </section>
     </div>
   </body>
 
