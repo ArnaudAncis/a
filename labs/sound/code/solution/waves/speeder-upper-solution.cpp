@@ -13,7 +13,7 @@ namespace
         SpeederUpperFunction(Wave wave, double factor)
             : m_wave(wave), m_factor(factor) { }
 
-        double length() const override { return m_wave.length() / m_factor; }
+        double duration() const override { return m_wave.duration() / m_factor; }
 
         double operator [](double t) const override
         {

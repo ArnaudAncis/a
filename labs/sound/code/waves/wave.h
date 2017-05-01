@@ -7,7 +7,7 @@
 class WaveFunction
 {
 public:
-    virtual double length() const = 0;
+    virtual double duration() const = 0;
     virtual double operator [](double) const = 0;
 };
 
@@ -18,7 +18,7 @@ class Wave
 public:
     Wave(std::shared_ptr<WaveFunction> function) : m_function(function) { }
 
-    double length() const { return m_function->length(); }
+    double duration() const { return m_function->duration(); }
     double operator [](double t) const { return (*m_function)[t]; }
 };
 

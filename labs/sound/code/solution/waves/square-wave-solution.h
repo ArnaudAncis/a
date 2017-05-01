@@ -6,7 +6,7 @@
 
 namespace solution
 {
-    Wave square_wave(double length, double amplitude, double frequency);
+    Wave square_wave(double duration, double amplitude, double frequency);
 }
 
 #endif

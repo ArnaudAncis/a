@@ -13,15 +13,15 @@ namespace
         WaveAdditionFunction(Wave first, Wave second)
             : m_first(first), m_second(second) { }
 
-        double length() const override
+        double duration() const override
         {
-            return std::max(m_first.length(), m_second.length());
+            return std::max(m_first.duration(), m_second.duration());
         }
 
         double operator [](double t) const override
         {
-            double a = t < m_first.length() ? m_first[t] : 0;
-            double b = t < m_second.length() ? m_second[t] : 0;
+            double a = t < m_first.duration() ? m_first[t] : 0;
+            double b = t < m_second.duration() ? m_second[t] : 0;
 
             return a + b;
         }
@@ -36,9 +36,9 @@ namespace
         WaveMultiplicationFunction(Wave wave, double factor)
             : m_wave(wave), m_factor(factor) { }
 
-        double length() const override
+        double duration() const override
         {
-            return m_wave.length();
+            return m_wave.duration();
         }
 
         double operator [](double t) const override
@@ -56,9 +56,9 @@ namespace
         WaveDelayerFunction(Wave wave, double delay)
             : m_wave(wave), m_delay(delay) { }
 
-        double length() const override
+        double duration() const override
         {
-            return m_wave.length() + m_delay;
+            return m_wave.duration() + m_delay;
         }
 
         double operator [](double t) const override

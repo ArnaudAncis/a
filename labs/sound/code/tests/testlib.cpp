@@ -6,9 +6,9 @@
 
 void check_equal_waves(Wave a, Wave b, double dt)
 {
-    REQUIRE(a.length() == Approx(b.length()));
+    REQUIRE(a.duration() == Approx(b.duration()));
     
-    for (double t = 0; t < a.length(); t += dt)
+    for (double t = 0; t < a.duration(); t += dt)
     {
         CHECK(a[t] == Approx(b[t]));
     }

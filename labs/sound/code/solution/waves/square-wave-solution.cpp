@@ -7,17 +7,17 @@ namespace
     class SquareWaveFunction : public WaveFunction
     {
     private:
-        double m_length;
+        double m_duration;
         double m_amplitude;
         double m_frequency;
 
     public:
-        SquareWaveFunction(double length, double amplitude, double frequency)
-            : m_length(length), m_amplitude(amplitude), m_frequency(frequency) { }
+        SquareWaveFunction(double duration, double amplitude, double frequency)
+            : m_duration(duration), m_amplitude(amplitude), m_frequency(frequency) { }
 
-        double length() const override
+        double duration() const override
         {
-            return m_length;
+            return m_duration;
         }
 
         double operator [](double t) const override
@@ -36,7 +36,7 @@ namespace
     };
 }
 
-Wave solution::square_wave(double length, double amplitude, double frequency)
+Wave solution::square_wave(double duration, double amplitude, double frequency)
 {
-    return Wave(std::make_shared<SquareWaveFunction>(length, amplitude, frequency));
+    return Wave(std::make_shared<SquareWaveFunction>(duration, amplitude, frequency));
 }

@@ -1,4 +1,4 @@
-#include "composer.h"
+#include "music/composer.h"
 #include "waves/zero-wave.h"
 #include "waves/wave-concatenation.h"
 

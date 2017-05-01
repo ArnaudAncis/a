@@ -5,14 +5,14 @@ namespace
 {
     class ZeroWaveFunction : public WaveFunction
     {
-        double m_length;
+        double m_duration;
 
     public:
-        ZeroWaveFunction(double length) : m_length(length) { }
+        ZeroWaveFunction(double duration) : m_duration(duration) { }
 
-        double length() const override
+        double duration() const override
         {
-            return m_length;
+            return m_duration;
         }
 
         double operator [](double t) const override
@@ -22,7 +22,7 @@ namespace
     };
 }
 
-Wave zero_wave(double length)
+Wave zero_wave(double duration)
 {
-    return Wave(std::make_shared<ZeroWaveFunction>(length));
+    return Wave(std::make_shared<ZeroWaveFunction>(duration));
 }

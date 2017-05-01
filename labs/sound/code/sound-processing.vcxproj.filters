@@ -21,40 +21,16 @@
     <ClCompile Include="wave-file.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="composer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="streams\bytes-buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="waves\interpolator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="waves\wave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="waves\speeder-upper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="streams\normaliser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="streams\data-stream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="waves\sine-wave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="waves\zero-wave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="waves\wave-concatenation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="waves\triangle-wave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="waves\wave-sampling-stream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\tests-main.cpp">
@@ -105,19 +81,10 @@
     <ClCompile Include="tests\streams\demultiplexer-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\waves\interpolator-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\waves\sine-wave-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="solution\waves\sine-wave-solution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\testlib.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\waves\triangle-wave-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="solution\waves\triangle-wave-solution.cpp">
@@ -126,48 +93,24 @@
     <ClCompile Include="solution\waves\wave-sampling-stream-solution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\waves\wave-sampling-stream-solution-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="waves\square-wave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\waves\square-wave-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="solution\waves\square-wave-solution.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\waves\wave-concatenation-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="solution\waves\wave-concatenation-solution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\waves\speeder-upper-tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="solution\waves\speeder-upper-solution.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="waves\reverb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="solution\waves\reverb-solution.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\waves\reverb-tests.cpp">
+    <ClCompile Include="streams\data-stream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave-file.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="note.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="composer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Catch.h">
@@ -176,43 +119,16 @@
     <ClInclude Include="streams\bytes-buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="streams\demultiplexer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="streams\stream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="waves\interpolator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="waves\wave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="waves\speeder-upper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="streams\normaliser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="streams\data-stream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="streams\multiplexer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="waves\sine-wave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="waves\zero-wave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="waves\wave-concatenation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="waves\wave-sampling-stream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="waves\triangle-wave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tests\testlib.h">
@@ -248,9 +164,6 @@
     <ClInclude Include="solution\waves\wave-sampling-stream-solution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="waves\square-wave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="solution\waves\square-wave-solution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -260,10 +173,16 @@
     <ClInclude Include="solution\waves\speeder-upper-solution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="waves\reverb.h">
+    <ClInclude Include="solution\waves\reverb-solution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="solution\waves\reverb-solution.h">
+    <ClInclude Include="waves\waves.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\streams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="streams\data-stream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

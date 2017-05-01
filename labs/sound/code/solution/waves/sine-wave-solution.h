@@ -6,7 +6,7 @@
 
 namespace solution
 {
-    Wave sine_wave(double length, double amplitude, double frequency);
+    Wave sine_wave(double duration, double amplitude, double frequency);
 }
 
 #endif

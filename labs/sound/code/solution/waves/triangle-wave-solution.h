@@ -6,7 +6,7 @@
 
 namespace solution
 {
-    Wave triangle_wave(double length, double amplitude, double frequency);
+    Wave triangle_wave(double duration, double amplitude, double frequency);
 }
 
 #endif
