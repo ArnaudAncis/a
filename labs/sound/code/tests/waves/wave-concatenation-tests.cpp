@@ -1,48 +1,38 @@
 #ifdef TEST_BUILD
 
 #include "Catch.h"
-#include "solution/waves/sine-wave-solution.h"
 #include "waves/wave-concatenation.h"
-#include "solution/waves/wave-concatenation-solution.h"
 #include "tests/testlib.h"
 
 
-auto sine_wave = solution::sine_wave;
-
-TEST_CASE("Wave concatenation of { sine_wave(1,1,1), sine_wave(1,2,1) }")
+TEST_CASE("Wave concatenation of 2 waves")
 {
-    std::vector<Wave> waves = { sine_wave(1,1,1), sine_wave(1,2,1) };
-    auto expected = solution::concatenate(waves);
-    auto actual = concatenate(waves);
+    auto w1 = constant_wave(1, 1);
+    auto w2 = constant_wave(1, 2);
+    std::vector<Wave> waves = { w1, w2 };
+    auto c = concatenate(waves);
 
-    check_equal_waves(expected, actual);
+    REQUIRE(c.duration() == Approx(2));
+    CHECK(c[0] == Approx(1));
+    CHECK(c[0.999] == Approx(1));
+    CHECK(c[1.001] == Approx(2));
+    CHECK(c[1.999] == Approx(2));
 }
 
-TEST_CASE("Wave concatenation of { sine_wave(1,1,1), sine_wave(1,1,2) }")
+TEST_CASE("Wave concatenation of 3 waves")
 {
-    std::vector<Wave> waves = { sine_wave(1,1,1), sine_wave(1,1,2) };
-    auto expected = solution::concatenate(waves);
-    auto actual = concatenate(waves);
+    auto w1 = constant_wave(1, 1);
+    auto w2 = constant_wave(1, 2);
+    auto w3 = constant_wave(1, 3);
+    std::vector<Wave> waves = { w1, w2, w3 };
+    auto c = concatenate(waves);
 
-    check_equal_waves(expected, actual);
-}
-
-TEST_CASE("Wave concatenation of { sine_wave(1,1,1), sine_wave(2,2,2) }")
-{
-    std::vector<Wave> waves = { sine_wave(1,1,1), sine_wave(2,2,2) };
-    auto expected = solution::concatenate(waves);
-    auto actual = concatenate(waves);
-
-    check_equal_waves(expected, actual);
-}
-
-TEST_CASE("Wave concatenation of { sine_wave(1,1,1), sine_wave(2,2,2), sine_wave(3,3,3) }")
-{
-    std::vector<Wave> waves = { sine_wave(1,1,1), sine_wave(2,2,2), sine_wave(3,3,3) };
-    auto expected = solution::concatenate(waves);
-    auto actual = concatenate(waves);
-
-    check_equal_waves(expected, actual);
+    REQUIRE(c.duration() == Approx(3));
+    CHECK(c[0] == Approx(1));
+    CHECK(c[0.999] == Approx(1));
+    CHECK(c[1.001] == Approx(2));
+    CHECK(c[1.999] == Approx(2));
+    CHECK(c[2.001] == Approx(3));
 }
 
 #endif

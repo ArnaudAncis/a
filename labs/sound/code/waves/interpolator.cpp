@@ -22,7 +22,7 @@ namespace
         double operator [](double t) const override
         {
             assert(0 <= t);
-            assert(t < length());
+            assert(t < duration());
 
             unsigned i = (unsigned)(t * m_sample_rate);
             unsigned j = i + 1;

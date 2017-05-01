@@ -1,7 +1,7 @@
 #ifdef TEST_BUILD
 
 #include "Catch.h"
-#include "streams/converters/conversions.h"
+#include "streams/converters/int16-to-uint8-conversion.h"
 #include "tests/testlib.h"
 
 

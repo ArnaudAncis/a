@@ -4,11 +4,12 @@
 #include "waves/interpolator.h"
 #include "tests/testlib.h"
 
+
 TEST_CASE("interpolator {0, 0} with sample rate 1")
 {
     auto wave = interpolate(STREAM(double, 0, 0), 1);
 
-    REQUIRE(wave.length() == Approx(1));
+    REQUIRE(wave.duration() == Approx(1));
     REQUIRE(wave[0] == Approx(0));
     REQUIRE(wave[0.1] == Approx(0));
     REQUIRE(wave[0.2] == Approx(0));
@@ -26,7 +27,7 @@ TEST_CASE("interpolator {0, 0, 0} with sample rate 2")
 {
     auto wave = interpolate(STREAM(double, 0, 0, 0), 2);
 
-    REQUIRE(wave.length() == Approx(1));
+    REQUIRE(wave.duration() == Approx(1));
     REQUIRE(wave[0] == Approx(0));
     REQUIRE(wave[0.1] == Approx(0));
     REQUIRE(wave[0.2] == Approx(0));
@@ -44,7 +45,7 @@ TEST_CASE("interpolator {0, 1} with sample rate 1")
 {
     auto wave = interpolate(STREAM(double, 0, 1), 1);
 
-    REQUIRE(wave.length() == Approx(1));
+    REQUIRE(wave.duration() == Approx(1));
     REQUIRE(wave[0] == Approx(0));
     REQUIRE(wave[0.1] == Approx(0.1));
     REQUIRE(wave[0.2] == Approx(0.2));
@@ -62,7 +63,7 @@ TEST_CASE("interpolator {0, 1, 0} with sample rate 1")
 {
     auto wave = interpolate(STREAM(double, 0, 1, 0), 1);
 
-    REQUIRE(wave.length() == Approx(2));
+    REQUIRE(wave.duration() == Approx(2));
     REQUIRE(wave[0] == Approx(0));
     REQUIRE(wave[0.1] == Approx(0.1));
     REQUIRE(wave[0.2] == Approx(0.2));
@@ -84,7 +85,7 @@ TEST_CASE("interpolator {1, 0} with sample rate 1")
 {
     auto wave = interpolate(STREAM(double, 1, 0), 1);
 
-    REQUIRE(wave.length() == Approx(1));
+    REQUIRE(wave.duration() == Approx(1));
     REQUIRE(wave[0] == Approx(1));
     REQUIRE(wave[0.1] == Approx(1 - 0.1));
     REQUIRE(wave[0.2] == Approx(1 - 0.2));

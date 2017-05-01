@@ -32,6 +32,10 @@ public:
 
 void check_equal_waves(Wave a, Wave b, double dt = 0.05);
 
+Wave constant_wave(double duration, double constant);
+
+Wave linear_wave(double duration, double m, double q);
+
 template<typename T>
 void check_equal_streams(std::shared_ptr<Stream<T>> p, std::shared_ptr<Stream<T>> q)
 {

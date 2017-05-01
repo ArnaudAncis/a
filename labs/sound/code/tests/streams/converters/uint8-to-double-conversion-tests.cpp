@@ -1,7 +1,7 @@
 #ifdef TEST_BUILD
 
 #include "Catch.h"
-#include "streams/converters/conversions.h"
+#include "streams/converters/uint8-to-double-conversion.h"
 #include "tests/testlib.h"
 
 

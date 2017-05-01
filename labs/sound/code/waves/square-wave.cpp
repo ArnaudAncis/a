@@ -26,11 +26,11 @@ namespace
 
             if (m < 0.5)
             {
-                return 1;
+                return m_amplitude;
             }
             else
             {
-                return -1;
+                return -m_amplitude;
             }
         }
     };
