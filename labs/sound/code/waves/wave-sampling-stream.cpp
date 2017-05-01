@@ -15,7 +15,7 @@ namespace
 
         unsigned size() const override
         {
-            return (unsigned)(m_wave.length() * m_sampling_rate);
+            return (unsigned)(m_wave.duration() * m_sampling_rate);
         }
 
         double operator [](unsigned index) const override

@@ -6,29 +6,29 @@ namespace
     class WaveConcatenationFunction : public WaveFunction
     {
         std::vector<Wave> m_waves;
-        double m_length;
+        double m_duration;
 
     public:
-        WaveConcatenationFunction(const std::vector<Wave>& waves) : m_waves(waves), m_length(0)
+        WaveConcatenationFunction(const std::vector<Wave>& waves) : m_waves(waves), m_duration(0)
         {
             for (auto& wave : m_waves)
             {
-                m_length += wave.length();
+                m_duration += wave.duration();
             }
         }
 
-        double length() const override
+        double duration() const override
         {
-            return m_length;
+            return m_duration;
         }
 
         double operator [](double t) const
         {
             unsigned index = 0;
 
-            while (t >= m_waves[index].length())
+            while (t >= m_waves[index].duration())
             {
-                t -= m_waves[index].length();
+                t -= m_waves[index].duration();
                 ++index;
             }
 

@@ -8,15 +8,15 @@ namespace
     {
         std::shared_ptr<Stream<double>> m_stream;
         unsigned m_sample_rate;
-        double m_length;
+        double m_duration;
 
     public:
         InterpolatorFunction(std::shared_ptr<Stream<double>> stream, unsigned sample_rate)
-            : m_stream(stream), m_sample_rate(sample_rate), m_length((stream->size() - 1) / sample_rate) { }
+            : m_stream(stream), m_sample_rate(sample_rate), m_duration((stream->size() - 1) / sample_rate) { }
 
-        double length() const override
+        double duration() const override
         {
-            return m_length;
+            return m_duration;
         }
 
         double operator [](double t) const override

@@ -8,17 +8,17 @@ namespace
     class TriangleWaveFunction : public WaveFunction
     {
     private:
-        double m_length;
+        double m_duration;
         double m_amplitude;
         double m_period;
 
     public:
-        TriangleWaveFunction(double length, double amplitude, double frequency)
-            : m_length(length), m_amplitude(amplitude), m_period(1/frequency) { }
+        TriangleWaveFunction(double duration, double amplitude, double frequency)
+            : m_duration(duration), m_amplitude(amplitude), m_period(1/frequency) { }
 
-        double length() const override
+        double duration() const override
         {
-            return m_length;
+            return m_duration;
         }
 
         double operator [](double t) const override
