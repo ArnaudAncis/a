@@ -103,6 +103,7 @@ public:
     void clear();
 };
 
+// A melody
 Wave treble(std::shared_ptr<WaveFactory>);
 Wave bass(std::shared_ptr<WaveFactory>);
 

@@ -285,6 +285,17 @@
           exercise do
            <<-END
              <p>
+               Old games did not produce sine waves but instead made use of other waveforms, such as
+               triangle, sawtooth and square shapes. Implement these <code>Wave</code>s and
+               listen to the difference.
+             </p>
+           END
+          end
+        %>
+        <%=
+          exercise do
+           <<-END
+             <p>
                Add support for 16 bit samples.
              </p>
              <ul>
@@ -350,6 +361,54 @@
                For example, say the <code>Stream&lt;double&gt;</code> contains the values <code>0.5, 2, -1.5, 0.4</code>.
                The greatest absolute value is 2. Dividing each sample by 2 ensures that all of the samples
                are in the range $[-1, 1]$.
+             </p>
+           END
+          end
+        %>
+
+        <%=
+          exercise do
+           <<-END
+             <p>
+               You can read WAV files using <code>read_wave_file</code>. This will give you a <code>WAVE_DATA</code> result.
+               Next, you will have to the the reverse of the first exercises:
+             </p>
+             <ul>
+               <li>
+                 Instead of multiplexing, you will need to demultiplex: given one <code>Stream&lt;T&gt;</code>,
+                 exact two <code>Stream&lt;T&gt;</code> from it. This is only necessary if you're dealing with stereo sound.
+               </li>
+               <li>
+                 If <code>WAVE_DATA</code> tells you that the samples are 16 bit, you will need a
+                 <code>Uint8ToInt16Converter</code>.
+               </li>
+               <li>
+                 You will need to convert integer samples to floating point samples: either
+                 <code>Uint8ToDoubleConverter</code> or <code>Int16ToDoubleConverter</code> will be required.
+               </li>
+               <li>
+                 The inverse operation of sampling is interpolation.
+               </li>
+             </ul>
+           END
+          end
+        %>
+
+        <%=
+          exercise do
+           <<-END
+             <p>
+               Reverberations.
+             </p>
+           END
+          end
+        %>
+
+        <%=
+          exercise do
+           <<-END
+             <p>
+               Music composer.
              </p>
            END
           end

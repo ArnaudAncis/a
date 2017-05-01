@@ -1,2 +1,2 @@
-#include "wave.h"
-#include "zero-wave.h"
+#include "waves/wave.h"
+#include "waves/zero-wave.h"
