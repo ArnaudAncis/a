@@ -93,6 +93,9 @@
     <ClCompile Include="solution\examples.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="solution\streams\normaliser-solution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wave-file.h">
@@ -147,6 +150,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="streams\data-stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solution\streams\normaliser-solution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solution\streams\demultiplexer-solution.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solution\streams\multiplexer-solution.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

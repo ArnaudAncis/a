@@ -211,6 +211,7 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="solution\examples.cpp" />
+    <ClCompile Include="solution\streams\normaliser-solution.cpp" />
     <ClCompile Include="solution\waves\reverb-solution.cpp" />
     <ClCompile Include="solution\waves\sine-wave-solution.cpp" />
     <ClCompile Include="solution\waves\speeder-upper-solution.cpp" />
@@ -237,6 +238,9 @@
     <ClCompile Include="waves\zero-wave.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="solution\streams\demultiplexer-solution.h" />
+    <ClInclude Include="solution\streams\multiplexer-solution.h" />
+    <ClInclude Include="solution\streams\normaliser-solution.h" />
     <ClInclude Include="solution\waves\reverb-solution.h" />
     <ClInclude Include="solution\waves\sine-wave-solution.h" />
     <ClInclude Include="solution\waves\speeder-upper-solution.h" />

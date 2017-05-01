@@ -1,4 +1,4 @@
-#include "streams/normaliser.h"
+#include "solution/streams/normaliser-solution.h"
 #include <algorithm>
 #include <limits>
 #include <cmath>
@@ -28,7 +28,7 @@ namespace
     };
 }
 
-std::shared_ptr<Stream<double>> normalise(std::shared_ptr<Stream<double>> stream, double maximum)
+std::shared_ptr<Stream<double>> solution::normalise(std::shared_ptr<Stream<double>> stream, double maximum)
 {
     double lowest = std::numeric_limits<double>::infinity();
     double highest = -std::numeric_limits<double>::infinity();
