@@ -163,7 +163,6 @@
     <ClCompile Include="sequential-access.cpp" />
     <ClCompile Include="shared.cpp" />
     <ClCompile Include="tail-call-optimisation.cpp" />
-    <ClCompile Include="templates.cpp" />
     <ClCompile Include="zero-cost-abstractions.cpp" />
   </ItemGroup>
   <ItemGroup>
