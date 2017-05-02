@@ -201,6 +201,12 @@
          end
       %>
 
+      <div class="message">
+        For the coding exercises below, make sure you enable optimisations by choosing Release in the dropdown
+        control at the top of your screen (assuming you are using Visual Studio.) By default, this dropdown
+        control shows Debug.
+      </div>
+
       <%=
         exercise do
           extend SourceCodeMixin
