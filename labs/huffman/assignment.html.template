@@ -88,7 +88,7 @@
                each with frequency 2. This means you can represent each pair using
                one bit, for example <code>AB</code> as <code>0</code>
                and <code>BA</code> as <code>1</code>, resulting
-               in <code>1010</code> as final Huffman encoding.
+               in <code>0101</code> as final Huffman encoding.
              </p>
              <p>
                Perform the same calculations as in the previous exercise,
