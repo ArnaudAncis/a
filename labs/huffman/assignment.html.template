@@ -115,12 +115,6 @@
          end
       %>
 
-
-
-Original string: youtu.be/dQw4w9WgXcQ
-Encoding: 
-Length: 82
-
       <%=
          exercise(Lib::Numerical) do
            extend SourceCodeMixin
@@ -160,6 +154,51 @@ Length: 82
              #{show_source_editor}
              <p>
                Decoding: #{Quiz.validated_input { verbatim 'as if I would give it away so easily' }}
+             </p>
+           END
+         end
+      %>
+
+      <%=
+         exercise(Lib::Numerical) do
+           extend SourceCodeMixin
+
+           self.source = <<-END
+             011111011000010000010011111111110100011000110101110001101010111011100110110010101001
+           END
+         
+           <<-END
+             <table class="codebook">
+               <tbody>
+                 <tr>
+                   <th>Character</th><th>Encoding</th>
+                 </tr>
+                  <tr><td><code>.</code></tr><tr><td><code>1001</code></td></tr>
+                  <tr><td><code>/</code></tr><tr><td><code>1000</code></td></tr>
+                  <tr><td><code>5</code></tr><tr><td><code>1011</code></td></tr>
+                  <tr><td><code>9</code></tr><tr><td><code>1010</code></td></tr>
+                  <tr><td><code>D</code></tr><tr><td><code>11101</code></td></tr>
+                  <tr><td><code>J</code></tr><tr><td><code>11100</code></td></tr>
+                  <tr><td><code>M</code></tr><tr><td><code>001</code></td></tr>
+                  <tr><td><code>b</code></tr><tr><td><code>11111</code></td></tr>
+                  <tr><td><code>e</code></tr><tr><td><code>11110</code></td></tr>
+                  <tr><td><code>h</code></tr><tr><td><code>11001</code></td></tr>
+                  <tr><td><code>l</code></tr><tr><td><code>11000</code></td></tr>
+                  <tr><td><code>o</code></tr><tr><td><code>11011</code></td></tr>
+                  <tr><td><code>r</code></tr><tr><td><code>11010</code></td></tr>
+                  <tr><td><code>s</code></tr><tr><td><code>0101</code></td></tr>
+                  <tr><td><code>t</code></tr><tr><td><code>0100</code></td></tr>
+                  <tr><td><code>u</code></tr><tr><td><code>000</code></td></tr>
+                  <tr><td><code>y</code></tr><tr><td><code>0111</code></td></tr>
+                  <tr><td><code>z</code></tr><tr><td><code>0110</code></td></tr>
+               </tbody>
+             </table>
+             <p>
+               Given the Huffman encoding above, decode the following:
+             </p>
+             #{show_source_editor}
+             <p>
+               Decoding: #{Quiz.validated_input { verbatim 'sorry, you have to deserve it' }}
              </p>
            END
          end
