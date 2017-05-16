@@ -40,8 +40,8 @@
         will count the same amount of bits.
       </p>
       <p> 
-        To allow you to practice at will, a Huffman implementation has been included in the repository,
-        in the same folder as this html. You can use it to verify your solutions to your own exercises.
+        To allow you to practice at will, a Huffman implementation has been included in the Git repository,
+        in the same folder as this html (<code>/labs/huffman/code</code>). You can use it to verify your solutions to your own exercises.
       </p>
       <p>
         Below are a few exercises, but the validation is rather limited.
