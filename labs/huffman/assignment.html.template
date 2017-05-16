@@ -65,6 +65,50 @@
                <li>
                  <code>aabaaababaaccbd</code>: #{show_input_field(25, 0)} bits
                </li>
+               <li>
+                 <code>abacadadbcbadabcabcabdadaabccc</code>: #{show_input_field(60, 0)} bits
+               </li>
+               <li>
+                 <code>AaaAAaaAAaaAAaaAAaaA</code>: #{show_input_field(20, 0)} bits
+               </li>
+             </ul>
+           END
+         end
+      %>
+      <%=
+         exercise(Lib::Numerical) do
+           <<-END
+             <p>
+               Huffman does not need to work on a per-byte basis. For example,
+               you can take pairs of bytes as "units of data". Say
+               your input data is <code>ABBAABBA</code>. Grouping
+               these characters into pairs yields <code>AB BA AB BA</code>.
+               There are only two different pairs: <code>AB</code> and <code>BA</code>,
+               each with frequency 2. This means you can represent each pair using
+               one bit, for example <code>AB</code> as <code>0</code>
+               and <code>BA</code> as <code>1</code>, resulting
+               in <code>1010</code> as final Huffman encoding.
+             </p>
+             <p>
+               Perform the same calculations as in the previous exercise,
+               but with different "units of data".             
+             </p>
+             <ul>
+               <li>
+                 <code>abba</code>, group size = 2 bytes: #{show_input_field(2, 0)} bits
+               </li>
+               <li>
+                 <code>abcxyzabcxyz</code>, group size = 3 bytes: #{show_input_field(4, 0)} bits
+               </li>
+               <li>
+                 <code>abaababb</code>, group size = 2 bytes: #{show_input_field(8, 0)} bits
+               </li>
+               <li>
+                 <code>73NVZ073NVNVtsNV737373Z0737373</code>, group size = 2 bytes: #{show_input_field(25, 0)} bits
+               </li>
+               <li>
+                 <code>4;#710LMNVWH4;#VWHVWH4;#4;#4;#VWH4;#4;#LMN4;#</code>, group size = 3 bytes: #{show_input_field(25, 0)} bits
+               </li>
              </ul>
            END
          end
