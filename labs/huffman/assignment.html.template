@@ -1,3 +1,4 @@
+
 !DOCTYPE html>
 <html>
   <head>
@@ -113,12 +114,19 @@
            END
          end
       %>
+
+
+
+Original string: youtu.be/dQw4w9WgXcQ
+Encoding: 
+Length: 82
+
       <%=
          exercise(Lib::Numerical) do
            extend SourceCodeMixin
 
            self.source = <<-END
-             11101110100100100111001111010100000011011111010001110001010100101001110001101101100100011101011111110010111000001001101111011001111010110101001111011011001110000001110101111111001011100000110010101101111010
+             0100110100000101000100111111110001000110010010111011011101011101110111110011110001
            END
          
            <<-END
@@ -127,24 +135,23 @@
                  <tr>
                    <th>Character</th><th>Encoding</th>
                  </tr>
-                 <tr><td>space</td><td><code>00</code></td></tr>
-                 <tr><td><code>,</code></td><td><code>110101</code></td></tr>
-                 <tr><td><code>a</code></td><td><code>110100</code></td></tr>
-                 <tr><td><code>d</code></td><td><code>11100</code></td></tr>
-                 <tr><td><code>e</code></td><td><code>010</code></td></tr>
-                 <tr><td><code>f</code></td><td><code>110111</code></td></tr>
-                 <tr><td><code>g</code></td><td><code>110110</code></td></tr>
-                 <tr><td><code>h</code></td><td><code>0111</code></td></tr>
-                 <tr><td><code>i</code></td><td><code>1011</code></td></tr>
-                 <tr><td><code>l</code></td><td><code>11001</code></td></tr>
-                 <tr><td><code>m</code></td><td><code>110001</code></td></tr>
-                 <tr><td><code>n</code></td><td><code>0110</code></td></tr>
-                 <tr><td><code>o</code></td><td><code>1111</code></td></tr>
-                 <tr><td><code>r</code></td><td><code>1001</code></td></tr>
-                 <tr><td><code>s</code></td><td><code>1000</code></td></tr>
-                 <tr><td><code>t</code></td><td><code>1010</code></td></tr>
-                 <tr><td><code>w</code></td><td><code>11101</code></td></tr>
-                 <tr><td><code>y</code></td><td><code>110000</code></td></tr>
+                 <tr><td><code>.</code></td><td><code>1001</code></td></tr>
+                 <tr><td><code>/</code></td><td><code>1000</code></td></tr>
+                 <tr><td><code>4</code></td><td><code>1011</code></td></tr>
+                 <tr><td><code>9</code></td><td><code>1010</code></td></tr>
+                 <tr><td><code>Q</code></td><td><code>001</code></td></tr>
+                 <tr><td><code>W</code></td><td><code>11101</code></td></tr>
+                 <tr><td><code>X</code></td><td><code>11100</code></td></tr>
+                 <tr><td><code>b</code></td><td><code>11111</code></td></tr>
+                 <tr><td><code>c</code></td><td><code>11110</code></td></tr>
+                 <tr><td><code>d</code></td><td><code>11001</code></td></tr>
+                 <tr><td><code>e</code></td><td><code>11000</code></td></tr>
+                 <tr><td><code>g</code></td><td><code>11011</code></td></tr>
+                 <tr><td><code>o</code></td><td><code>11010</code></td></tr>
+                 <tr><td><code>t</code></td><td><code>0101</code></td></tr>
+                 <tr><td><code>u</code></td><td><code>000</code></td></tr>
+                 <tr><td><code>w</code></td><td><code>011</code></td></tr>
+                 <tr><td><code>y</code></td><td><code>0100</code></td></tr>
                </tbody>
              </table>
              <p>
@@ -152,7 +159,7 @@
              </p>
              #{show_source_editor}
              <p>
-               Decoding: #{Quiz.validated_input { verbatim 'war does not determine who is right, only who is left' }}
+               Decoding: #{Quiz.validated_input { verbatim 'as if I would give it away so easily' }}
              </p>
            END
          end
