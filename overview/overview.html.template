@@ -240,7 +240,7 @@
           </tr>
           <tr>
             <td>10</td>
-            <td><%= topic('compression-lz77', 'Compression: LZ77', handouts: true) %></td>
+            <td><%= topic('compression-lz77', 'Compression: LZ77', handouts: true) %> (Updated!)</td>
             <td><%= lab('lz77', 'LZ77 compression') %></td>
           </tr>
           <tr>
