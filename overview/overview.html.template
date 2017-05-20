@@ -246,7 +246,7 @@
           <tr>
             <td>11</td>
             <td><%= topic('sound', 'Sound', handouts: true) %></td>
-            <td><%= lab('sound', 'sound') %></td>
+            <td><%= lab('sound', 'Sound') %></td>
           </tr>
         </ul>
       </section>
