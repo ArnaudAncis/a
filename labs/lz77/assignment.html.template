@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -40,7 +40,7 @@
          exercise(Lib::LZ77) do
            <<-END
              <p>
-               Apply LZ77 (max length = 8, max distance = 8, operating on bytes) to compress the following string:
+               Apply LZ77 (max length = 7, max distance = 7, operating on bytes) to compress the following string:
                <code>a</code>
              </p>
              #{lz77_encoding [ [0, 0, 'a'] ]}
@@ -54,7 +54,7 @@
          exercise(Lib::LZ77) do
            <<-END
              <p>
-               Apply LZ77 (max length = 4, max distance = 4, operating on bytes) to compress the following string:
+               Apply LZ77 (max length = 3, max distance = 3, operating on bytes) to compress the following string:
                <code>a</code>
              </p>
              #{lz77_encoding [ [0, 0, 'a'] ]}
@@ -68,7 +68,7 @@
          exercise(Lib::LZ77) do
            <<-END
              <p>
-               Apply LZ77 (max length = 8, max distance = 8, operating on bytes) to compress the following string:
+               Apply LZ77 (max length = 7, max distance = 7, operating on bytes) to compress the following string:
                <code>aa</code>
              </p>
              #{lz77_encoding [ [0, 0, 'a'], [0, 0, 'a'] ]}
@@ -82,7 +82,7 @@
          exercise(Lib::LZ77) do
            <<-END
              <p>
-               Apply LZ77 (max length = 8, max distance = 8, operating on bytes) to compress the following string:
+               Apply LZ77 (max length = 7, max distance = 7, operating on bytes) to compress the following string:
                <code>aaa</code>
              </p>
              #{lz77_encoding [
@@ -99,7 +99,7 @@
          exercise(Lib::LZ77) do
            <<-END
              <p>
-               Apply LZ77 (max length = 16, max distance = 16, operating on bytes) to compress the following string:
+               Apply LZ77 (max length = 15, max distance = 15, operating on bytes) to compress the following string:
                <code>aaa</code>
              </p>
              #{lz77_encoding [
@@ -116,7 +116,7 @@
          exercise(Lib::LZ77) do
            <<-END
              <p>
-               Apply LZ77 (max length = 8, max distance = 8, operating on bytes) to compress the following string:
+               Apply LZ77 (max length = 7, max distance = 7, operating on bytes) to compress the following string:
                <code>ababc</code>
              </p>
              #{lz77_encoding [
@@ -134,7 +134,7 @@
          exercise(Lib::LZ77) do
            <<-END
              <p>
-               Apply LZ77 (max length = 8, max distance = 8, operating on bytes) to compress the following string:
+               Apply LZ77 (max length = 7, max distance = 7, operating on bytes) to compress the following string:
                <code>ababababc</code>
              </p>
              #{lz77_encoding [
@@ -152,7 +152,7 @@
          exercise(Lib::LZ77) do
            <<-END
              <p>
-               Apply LZ77 (max length = 8, max distance = 3, operating on bytes) to compress the following string:
+               Apply LZ77 (max length = 7, max distance = 3, operating on bytes) to compress the following string:
                <code>ababababc</code>
              </p>
              #{lz77_encoding [
@@ -162,7 +162,7 @@
                                [2, 2, 'c']
                              ]}
              <p>
-               How many storage bits are required? #{numeric_field( (3+3+8) * 4 )}
+               How many storage bits are required? #{numeric_field( (3+2+8) * 4 )}
              </p>
            END
          end
@@ -171,7 +171,7 @@
          exercise(Lib::LZ77) do
            <<-END
              <p>
-               Apply LZ77 (max length = 128, max distance = 128) to compress the following string:
+               Apply LZ77 (max length = 127, max distance = 127) to compress the following string:
                <code>wubba lubba dub dub</code>
              </p>
              #{lz77_encoding [
