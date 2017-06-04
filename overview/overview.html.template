@@ -69,10 +69,13 @@
         <table class="center" id="link-table">
           <tbody>
             <tr class="header">
-              <td colspan="2">Reference</td>
+              <td colspan="2">Exam</td>
             </tr>
             <tr>
-              <th><a href="reference/full-edition.pdf">Full Edition</a></th>
+              <td><a href="exams/sample-exam-without-solution.pdf">Without Solutions</a></td>
+            </tr>
+            <tr>
+              <td><a href="exams/sample-exam-with-solution.pdf">With Solutions</a></td>
             </tr>
           </tbody>
         </table>
@@ -247,6 +250,11 @@
             <td>11</td>
             <td><%= topic('sound', 'Sound', handouts: true) %></td>
             <td><%= lab('sound', 'Sound') %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><%= lab('extra', 'Extra') %></td>
           </tr>
         </ul>
       </section>
