@@ -48,7 +48,7 @@ public class RPNBuilder {
         return this;
     }
 
-    public Expression result() {
+    public Expression build() {
         return stack.peek();
     }
 }
