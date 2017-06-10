@@ -4,7 +4,7 @@ public:
 };
 
 int count(int max,
-          const Predicate<int>* predicate) {
+          const Predicate* predicate) {
     int result = 0;
 
     for (int i = 0; i != max; ++i)
