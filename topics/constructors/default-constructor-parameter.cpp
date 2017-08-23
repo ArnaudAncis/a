@@ -7,3 +7,4 @@ void bar(Foo f) { }
 
 Foo foo;
 bar(foo); // Call by value, copies foo
+          // therefore prints C

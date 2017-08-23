@@ -9,4 +9,4 @@ Foo bar() {
 }
 
 // bar's return value gets copied to x
-Foo x = bar();
+Foo x = bar(); // Prints C
