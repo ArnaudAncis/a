@@ -5,4 +5,4 @@ std::vector<int> ns;
 std::vector<int>* ns = new std:vector<int>();
 
 // On heap, shorter notation
-auto ns = new std:vector<int>;
+auto ns = new std::vector<int>;
