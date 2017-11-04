@@ -1,23 +1,17 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{pvm}[11/1/2016]
+\ProvidesPackage{pvm}[2017/02/12]
 
 \RequirePackage{tikz}
 \RequirePackage{url}
-\RequirePackage{ucll-code}
 
 \usetikzlibrary{calc,math}
 
 \ProcessOptions\relax
+\LoadClass{ucll-slides}
+
+\coursename{PVM}
 
 \newcommand{\cpp}{C{\tt ++}}
-
-\setbeamertemplate{title page}{%
-  \begin{center}
-    PVM \\[5mm]
-    {\sc\Huge \inserttitle}
-  \end{center}
-}
-
 \newcommand{\cake}{\ensuremath{(\pi)}}
 
 \newcommand{\notrealcpp}{

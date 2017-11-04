@@ -1,5 +1,11 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ucll-slides}[16/05/2014]
+\ProvidesClass{ucll-slides}[2016/05/21]
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
+
+\ProcessOptions\relax
+
+
 \LoadClass{beamer}
 
 \RequirePackage{graphicx}
@@ -18,49 +24,19 @@
 \usetikzlibrary{shadows,calc,shapes}
 
 
+\newcommand{\coursename}[1]{
+  \newcommand{\ucll@slides@coursename}{#1}
+}
+
+
 \mode<presentation>
-\usetheme[height=.75cm]{Singapore}
+\usetheme[height=.75cm,compress]{Singapore}
+% \setbeamertemplate{mini frames}{}
 % \setbeamertemplate{background canvas}[vertical shading][top=blue!10,bottom=blue!30]
 
 \institute[UCLL]{UC Leuven Limburg}
 % \logo{\includegraphics[height=0.5cm]{../ucll-logo.png}}
 
-
-% Code formatting
-\pgfkeys{
-  /ucll/code/.cd,
-  frame/.code=\lstset{frame=#1},
-  font size/.code=\lstset{basicstyle={\ttfamily #1}},
-  width/.initial=.8\linewidth,
-  language/.code=\lstset{language=#1},
-  show lines/.code=\lstset{showlines},
-  title/.code=\lstset{title=#1},
-}
-
-\lstset{language=c++,morekeywords={override},escapeinside=\`\`,basicstyle=\ttfamily,frame=lines}
-
-% \code[pgfkeys]{filename}
-\newcommand{\code}[2][]{
-  {
-    \pgfkeys{/ucll/code/.cd,#1}
-    \begin{center}
-      \pgfkeys{/ucll/code/width/.get=\code@width}
-      \begin{minipage}{\code@width}
-        \lstinputlisting{#2}
-      \end{minipage}
-    \end{center}
-  }
-}
-
-\newcommand{\inlinecode}[2][]{
-  {
-    \pgfkeys{/ucll/code/.cd,#1}
-    \pgfkeys{/ucll/code/width/.get=\width}
-    \begin{minipage}{\width}
-      \lstinputlisting{#2}
-    \end{minipage}
-  }
-}
 
 
 % Tikz related commands
@@ -78,7 +54,12 @@
 
 \setbeamertemplate{title page}{%
   \begin{center}
-    PVM \\[5mm]
+    {\sc\ucll@slides@coursename} \\
+    {
+      \newlength{\ucll@slides@coursenamewidth}
+      \settowidth{\ucll@slides@coursenamewidth}{\sc\ucll@slides@coursename}
+      \rule[10pt]{1.4\ucll@slides@coursenamewidth}{1pt} \\
+    }
     {\sc\Huge \inserttitle}
   \end{center}
 }

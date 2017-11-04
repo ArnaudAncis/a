@@ -312,7 +312,7 @@ class SharedContext
         file = file + '.js'
       end
 
-      url = Environment2.relative_path_from_cwd_to file
+      url = Environment2.relative_path_from_cwd_to "www/#{file}"
     end
 
     %{<script src="#{url}" type="text/javascript" charset="utf-8"></script>}
@@ -329,14 +329,8 @@ class SharedContext
     end.join("\n")
   end
 
-  def default_externals
-    css = %{<link rel="stylesheet" href="#{::Settings::SHARED_URL}/ucll.css">}
-
-    "#{css}\n#{scripts('jquery', 'jquery-ui', 'underscore')}"
-  end
-
   def css_link(basename = 'ucll')
-    url = Environment2.relative_path_from_cwd_to "#{basename}.css"
+    url = Environment2.relative_path_from_cwd_to "www/#{basename}.css"
     
     %{<link rel="stylesheet" href="#{url}">}
   end

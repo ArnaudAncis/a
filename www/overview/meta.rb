@@ -13,13 +13,17 @@ class Context
       assert(name: string, description: string)
     end
 
-    if not File.directory? "../topics/#{name}"
+    path = Environment2.git_root + "www/topics/#{name}"
+
+    if not File.directory? path
     then abort "ERROR: No directory #{name}"
     end
 
-    slides_link = %{<a href="topics/#{name}.pdf">#{description}</a>}
+    url = Environment2.relative_path_from_cwd_to path
+    
+    slides_link = %{<a href="#{url}/#{name}.pdf">#{description}</a>}
     handout_link = if handouts
-                   then %{ <a class="handout" href="topics/#{name}-handouts.pdf">(handouts)</a>}
+                   then %{ <a class="handout" href="#{url}/#{name}-handouts.pdf">(handouts)</a>}
                    else ''
                    end
     

@@ -9,6 +9,4 @@ meta_object do
   def remote_directory
     Pathname.new '/www/pvm'
   end
-
-  uploadable 'pvm.css', 'revealer.js', 'source-editor.js', 'html.js', 'quiz.js'
 end
