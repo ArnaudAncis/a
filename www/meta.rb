@@ -53,9 +53,9 @@ meta_object do
 
   inherit_remote_directory
 
-  bind( { :overview => template(input: 'overview.html.template', context: Context.new) } )
+  bind( { :index => template(input: 'index.html.template', context: Context.new) } )
   
-  uploadable 'pvm.css', 'revealer.js', 'source-editor.js', 'html.js', 'quiz.js', 'overview.html'
+  uploadable 'pvm.css', 'revealer.js', 'source-editor.js', 'html.js', 'quiz.js', 'index.html'
 
   quick_recursive_all
 end
