@@ -1,6 +1,6 @@
 require 'Contracts'
 require 'Html'
-require 'Environment'
+require 'Environment2'
 
 module Quiz
   extend Html::Generation::Quiz
@@ -62,7 +62,7 @@ module GitMixin
       assert(target: string)
     end
 
-    relative_path = Environment.relative_to_git_root( Pathname.new(target).expand_path )
+    relative_path = Environment2.relative_to_git_root( Pathname.new(target).expand_path )
 
     %{<div class="git">Git-repo path: #{relative_path}</div>}
   end
@@ -312,7 +312,7 @@ class SharedContext
         file = file + '.js'
       end
 
-      url = "/#{file}"
+      url = Environment2.relative_path_from_cwd_to file
     end
 
     %{<script src="#{url}" type="text/javascript" charset="utf-8"></script>}
@@ -336,7 +336,9 @@ class SharedContext
   end
 
   def css_link(basename = 'ucll')
-    %{<link rel="stylesheet" href="#{::Settings::SHARED_URL}/#{basename}.css">}
+    url = Environment2.relative_path_from_cwd_to "#{basename}.css"
+    
+    %{<link rel="stylesheet" href="#{url}">}
   end
 
   def stylesheets(*css_files)
