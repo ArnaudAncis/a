@@ -12,7 +12,4 @@ meta_object do
   inherit_remote_directory 'labs'
 
   quick_recursive_all
-
-  register_transfer( Pathname.new('pvm.css').expand_path,
-                     Pathname.new('/var/www/courses/shared/pvm.css') )
 end

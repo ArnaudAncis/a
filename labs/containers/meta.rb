@@ -7,6 +7,7 @@ require 'Upload2'
 require 'Html'
 require 'Environment'
 require 'pathname'
+require 'Shortcuts'
 require '../shared.rb'
 
 
@@ -17,7 +18,6 @@ end
 
 class Context < SharedContext
   include Contracts::TypeChecking
-  include Html::Generation
 end
 
 
@@ -25,12 +25,14 @@ meta_object do
   extend MetaData2
   extend Template2::Actions
   extend Upload2::Actions
+  extend Shortcuts::Actions
 
   def remote_directory
     world.parent.remote_directory + Pathname.pwd.basename.to_s
   end
 
   bind( { :html => template(input: 'assignment.html.template', context: Context.new) } )
+  quick_all :html
   
   uploadable('assignment.html')
 end

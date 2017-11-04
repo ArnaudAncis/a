@@ -290,4 +290,58 @@ class SharedContext
     </section>
     END
   end
+
+
+  # Adds single script declaration
+  def script(file)
+    typecheck do
+      assert(file: string)
+    end
+
+    case file
+    when 'jquery'
+      url = 'https://code.jquery.com/jquery-3.2.1.min.js'
+    when 'jquery-ui'
+      url = 'https://code.jquery.com/ui/1.12.0/jquery-ui.min.js'
+    when 'ace/ace'
+      url = 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.8/ace.js'
+    when 'underscore'
+      url = 'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'
+    else
+      unless file.end_with? '.js'
+        file = file + '.js'
+      end
+
+      url = "/#{file}"
+    end
+
+    %{<script src="#{url}" type="text/javascript" charset="utf-8"></script>}
+  end
+
+  # Adds multiple script declarations
+  def scripts(*files)
+    typecheck do
+      assert(files: array(string))
+    end
+
+    files.map do |file|
+      script file
+    end.join("\n")
+  end
+
+  def default_externals
+    css = %{<link rel="stylesheet" href="#{::Settings::SHARED_URL}/ucll.css">}
+
+    "#{css}\n#{scripts('jquery', 'jquery-ui', 'underscore')}"
+  end
+
+  def css_link(basename = 'ucll')
+    %{<link rel="stylesheet" href="#{::Settings::SHARED_URL}/#{basename}.css">}
+  end
+
+  def stylesheets(*css_files)
+    css_files.map do |css_file|
+      css_link(css_file)
+    end.join("\n")
+  end
 end
