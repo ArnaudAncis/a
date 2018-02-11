@@ -20,7 +20,7 @@ class Context
     then abort "ERROR: No topic directory #{name}"
     end
 
-    url = "topics/#{name}"
+    url = "topics"
     
     slides_link = %{<a href="#{url}/#{name}.pdf">#{description}</a>}
     handout_link = if handouts
