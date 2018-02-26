@@ -4,7 +4,7 @@ int* min(int* p, int* q, int* r)
 {
     int a = *p, b = *q, c = *r;
     
-    if (a <= b && b <= c)
+    if (a <= b && a <= c)
     {
         return p;
     }
