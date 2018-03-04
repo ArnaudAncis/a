@@ -64,7 +64,8 @@ linked_list* longest(linked_list* xs, linked_list* ys)
         q = (*q).next;
     }
 
-    return p ? xs : ys;
+    if ( p == nullptr && q == nullptr ) return nullptr;
+    else return p ? xs : ys;
 }
 
 /*
