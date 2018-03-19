@@ -1,12 +1,12 @@
-require 'MetaData'
-require 'Upload'
+require 'MetaData2'
+require 'Upload2'
 
 
 meta_object do
-  extend MetaData::Actions
-  extend Upload::Mixin
+  extend MetaData2
+  extend Upload2::Actions
 
   def remote_directory
-    Pathname.new '/var/www/courses/pvm'
+    Pathname.new '/www/pvm'
   end
 end
