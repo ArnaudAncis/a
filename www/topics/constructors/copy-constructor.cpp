@@ -2,5 +2,5 @@ class Foo
 {
 public:
     // Copy constructor
-    C(const Foo&);
+    Foo(const Foo&);
 };
