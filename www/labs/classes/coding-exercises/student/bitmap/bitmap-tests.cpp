@@ -24,7 +24,7 @@ TEST_CASE("Bitmap width on const Bitmap")
 
 TEST_CASE("Bitmap height on const Bitmap")
 {
-    Bitmap bitmap(10, 20);
+    const Bitmap bitmap(10, 20);
 
     REQUIRE(bitmap.height() == 20);
 }
