@@ -339,7 +339,7 @@
                  It is important to keep <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, etc.
                  consistent with <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, etc. respectively.
                  The compiler does not care, but you might value your life: keep in mind that you
-                 have to assume your code will be maintained by a homicidable maniac.
+                 have to assume your code will be maintained by a homicidal maniac.
                </p>
                <p>
                  C# takes a more sensible approach: in this language, you are only allowed to overload <code>+</code>, <code>-</code>, etc.
